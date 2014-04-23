@@ -15,12 +15,10 @@ bool Trash::init() {
 		{
 			return false;
 		}
-	float size=2;
-	float speed=4;
+	size=1;	//default values
+	speed=4;
 	const CCSize scrSize = Utils::sreensSize();
-	posx = Utils::getRandomXPos();
 	this->setDisplayFrame(Utils::getRandomTrash());
-	this->setPosition(ccp(posx,1.1*scrSize.height));
 	return true;
 }
 
@@ -30,9 +28,10 @@ Trash* Trash::create(float speed,float size){
 			trsh->speed = speed;
 			trsh->size = size;
 			trsh->setScale(size);
+			trsh->setPosition(ccp(Utils::getRandomXPos(),Utils::getBeginHeight(trsh)));
 			CCRepeatForever *repeat = CCRepeatForever::create(
 				CCRotateBy::create(1, 360));
 			trsh->runAction(repeat);
-			trsh->runAction(CCMoveTo::create(speed, ccp(trsh->posx,-0.1*scrSize.height)));
+			trsh->runAction(CCMoveTo::create(speed, ccp(trsh->getPositionX(),Utils::getEndHeight(trsh))));
 			return trsh;
 }

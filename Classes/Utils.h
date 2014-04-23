@@ -16,6 +16,7 @@ class Utils {
 public:
 	static const int trashAmount = 5;
 	cocos2d::CCLayer* layer;
+
 	static int getRandValue(int min,int max);
 	static float getRandValueF(int min,int max);
 	static cocos2d::CCSpriteFrame* getRandomTrash();
@@ -23,6 +24,10 @@ public:
 	static cocos2d::CCSize sreensSize();
 	static void scaleToFitScreen(cocos2d::CCSprite* input);
 	static void prepareBackgroundImg(cocos2d::CCSprite* input);
+	static float getEndHeight(cocos2d::CCSprite *input);
+	static float getBeginHeight(cocos2d::CCSprite *input);
+	static float cleanView(cocos2d::CCLayer*);
+	static bool isVisible(cocos2d::CCSprite*);
 };
 
 #endif /* UTILS_H_ */

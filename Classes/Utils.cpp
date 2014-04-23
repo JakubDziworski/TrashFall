@@ -45,5 +45,47 @@ float Utils::getRandValueF(int min,int max){
 	CCLOG(str->getCString());
 	return x;
 }
+float Utils::getEndHeight(cocos2d::CCSprite *input){
+	const float sizeX = input->getContentSize().width*input->getScale();
+	const float sizeY = input->getContentSize().height*input->getScale();
+	if (sizeY > sizeX)
+		return -(sizeY / 1.5f);
+	else
+		return -(sizeX / 1.5f);
+}
 
+float Utils::getBeginHeight(cocos2d::CCSprite *input){
+	const float sizeX = input->getContentSize().width*input->getScale();
+	const float sizeY = input->getContentSize().height*input->getScale();
+	if (sizeY > sizeX)
+		return Utils::sreensSize().height+sizeY/2.0f;
+	else
+		return Utils::sreensSize().height+sizeX/2.0f;
+}
+float Utils::cleanView(CCLayer *inputLayer){
+	int j=0;
+	CCArray* array = inputLayer->getChildren();
+	for(int i = 0; i < array->count(); i++) {
+	    		Trash *trash = (Trash *)array->objectAtIndex(i);
+	    		if(!Utils::isVisible(trash)){
+	    			inputLayer->removeChild(trash,true);
+	    			j++;
+	    		}
+	}
+	CCLOG("clened up %d trashes",j);
+}
+bool Utils::isVisible(CCSprite *inputSprite){
+	if(!dynamic_cast<Trash*>(inputSprite)) return true;
+	if(inputSprite->getPositionY() < 0) return false;
+	else return true;
+
+//	CCPoint location = inputSprite->getPosition();
+//	CCSize spriteSize(inputSprite->getContentSize().width*inputSprite->getScale(),
+//			inputSprite->getContentSize().height*inputSprite->getScale());
+//	CCRect screenRect(0,0,Utils::sreensSize().width,Utils::sreensSize().height);
+//	CCRect objRect(location.x,location.y,spriteSize.width,spriteSize.height);
+//	if(CCRect::CCRectIntersectsRect(screenRect,objRect))
+//		return true;
+//	else return false;
+}
 

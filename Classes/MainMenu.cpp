@@ -12,6 +12,7 @@
 using namespace cocos2d;
 using namespace CocosDenshion;
 
+
 bool MainMenu::init(){
 	 if ( !CCLayer::init() )
 	    {
@@ -40,7 +41,7 @@ bool MainMenu::init(){
 	 	 	 	 menu->alignItemsVertically();
 			     menu->setPosition(ccp(posx,posy));
 			     this->addChild(menu,2);
-			     this->schedule(schedule_selector(MainMenu::genFallingTrash),2);
+			     this->schedule(schedule_selector(MainMenu::genFallingTrash),1);
 			     return true;
 }
 CCScene* MainMenu::scene(){
@@ -52,6 +53,7 @@ CCScene* MainMenu::scene(){
 }
 void MainMenu::playGame(){
 	SimpleAudioEngine::sharedEngine()->playEffect("buttonClick.wav");
+	Utils::cleanView(this);
 	//CCDirector::sharedDirector()->replaceScene(Game::scene);
 }
 
@@ -60,10 +62,6 @@ void MainMenu::keyBackClicked() {
 //CCDirector::sharedDirector()->end();
 }
 void MainMenu::genFallingTrash(float dt){
-//
-//	Trash *trash = ;
-	CCLOG("CGHYH");
-	//this->addChild(Trash::create());
-	this->addChild(Trash::create(Utils::getRandValueF(1,6),Utils::getRandValueF(0,2)),Utils::getRandValue(1,3));
-	//trash->startMovement();
+	Trash *obj = Trash::create((Utils::getRandValueF(1,6),Utils::getRandValueF(0,4)),Utils::getRandValue(1,3));
+	this->addChild(obj);
 }
