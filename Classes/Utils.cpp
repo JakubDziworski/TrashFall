@@ -27,7 +27,6 @@ void Utils::prepareBackgroundImg(CCSprite* input){
 cocos2d::CCSpriteFrame* Utils::getRandomTrash(){
 	const int trashID = rand()%(Utils::trashAmount)+1;
 	CCString *trashName = CCString::createWithFormat("trash%d.png",trashID);
-	CCLOG(trashName->getCString());
 	return CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName(trashName->getCString());
 }
 float Utils::getRandomXPos(){
@@ -36,18 +35,15 @@ float Utils::getRandomXPos(){
 int Utils::getRandValue(int min,int max){
 	return rand()%(max-min+1)+min;
 }
-float Utils::getRandValueF(int min,int max){
-	const float mnoznik= 1000;
-	max*=mnoznik;
-	min*=mnoznik;
-	float x= (float)(rand()%(max-min+1)+min)/mnoznik;
-	CCString *str = CCString::stringWithFormat("%.2f\n",x);
-	CCLOG(str->getCString());
-	return x;
+float Utils::getRandValueF(float a,float b){
+	float random = ((float) rand()) / (float) RAND_MAX;
+	    float diff = b - a;
+	    float r = random * diff;
+	    return a + r;
 }
 float Utils::getEndHeight(cocos2d::CCSprite *input){
-	const float sizeX = input->getContentSize().width*input->getScale();
-	const float sizeY = input->getContentSize().height*input->getScale();
+	const float sizeX = input->getContentSize().width;
+	const float sizeY = input->getContentSize().height;
 	if (sizeY > sizeX)
 		return -(sizeY / 1.5f);
 	else
@@ -55,8 +51,8 @@ float Utils::getEndHeight(cocos2d::CCSprite *input){
 }
 
 float Utils::getBeginHeight(cocos2d::CCSprite *input){
-	const float sizeX = input->getContentSize().width*input->getScale();
-	const float sizeY = input->getContentSize().height*input->getScale();
+	const float sizeX = input->getContentSize().width;
+	const float sizeY = input->getContentSize().height;
 	if (sizeY > sizeX)
 		return Utils::sreensSize().height+sizeY/2.0f;
 	else
@@ -72,7 +68,7 @@ float Utils::cleanView(CCLayer *inputLayer){
 	    			j++;
 	    		}
 	}
-	CCLOG("clened up %d trashes",j);
+	CCLOG("clened up %d trashes, all Trahes: %d",j,array->count());
 }
 bool Utils::isVisible(CCSprite *inputSprite){
 	if(!dynamic_cast<Trash*>(inputSprite)) return true;

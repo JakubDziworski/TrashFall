@@ -18,7 +18,7 @@ public:
 	cocos2d::CCLayer* layer;
 
 	static int getRandValue(int min,int max);
-	static float getRandValueF(int min,int max);
+	static float getRandValueF(float a,float b);
 	static cocos2d::CCSpriteFrame* getRandomTrash();
 	static float getRandomXPos();
 	static cocos2d::CCSize sreensSize();

@@ -14,6 +14,7 @@ public:
 	void playGame();
 	void exitGame();
 	void genFallingTrash(float dt);
+	void cleaner(float dt);
 	LAYER_CREATE_FUNC(MainMenu);
 };
 
