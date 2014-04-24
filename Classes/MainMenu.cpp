@@ -4,11 +4,12 @@
  *  Created on: 22-04-2014
  *      Author: Jakub
  */
-//#define COCOS2D_DEBUG 2
+#define COCOS2D_DEBUG 2
 #include "MainMenu.h"
 #include "SimpleAudioEngine.h"
 #include "Trash.h"
 #include "Game.h"
+#include "Constants.h"
 
 using namespace cocos2d;
 using namespace CocosDenshion;
@@ -39,9 +40,10 @@ bool MainMenu::init(){
 	 CCSprite *exitbtnoff = CCSprite::createWithSpriteFrameName("exit_off.png");
 	 CCMenuItemSprite *playBtn = CCMenuItemSprite::create(playbtnon,playbtnoff,this,menu_selector(MainMenu::playGame));
 	 CCMenuItemSprite *exitBtn = CCMenuItemSprite::create(exitbtnon,exitbtnoff,this,menu_selector(MainMenu::keyBackClicked));
+	 Utils::scaleButton(playBtn,mainMenubuttonRatio);
+	 Utils::scaleButton(exitBtn,mainMenubuttonRatio);
 	 CCMenu *menu = CCMenu::create(playBtn,exitBtn,NULL);
-	 	 	 	 menu->alignItemsVertically();
-			     menu->setPosition(ccp(posx,posy));
+			     menu->alignItemsVertically();
 			     this->addChild(menu,3);
 			     this->addChild(bg,-1);
 			     //latajace w tle gowna
@@ -64,10 +66,9 @@ void MainMenu::playGame(){
 
 void MainMenu::keyBackClicked() {
 	SimpleAudioEngine::sharedEngine()->playEffect("buttonClick2.mp3");
-//CCDirector::sharedDirector()->end();
+	CCDirector::sharedDirector()->end();
 }
 void MainMenu::genFallingTrash(float dt){
-	CCLOG("time = %.2f\n",dt);
 	Trash *obj = Trash::create(Utils::getRandValueF(3,6),Utils::getRandValueF(2,6));
 	this->addChild(obj,Utils::getRandValue(1,3));
 }

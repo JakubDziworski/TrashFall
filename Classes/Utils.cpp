@@ -93,8 +93,17 @@ HUD* Utils::getHUD(){
 	return (HUD*)CCDirector::sharedDirector()->getRunningScene()->getChildByTag(TAG_HUD);
 	else return NULL;
 }
-void Utils::scaleSprite(CCSprite *sprite,float additional){
-	float expectedRatio = Utils::sreensSize().height/spriteRatio;
+void Utils::scaleSprite(CCSprite *sprite,float ratioo,float additional,bool wid){
+	float expectedRatio = Utils::sreensSize().height/ratioo;
 	float mnoznik  = expectedRatio/sprite->getContentSize().height;
+	if(wid){
+		expectedRatio = Utils::sreensSize().width/ratioo;
+		mnoznik = expectedRatio/sprite->getContentSize().width;
+	}
 	sprite->setScale(mnoznik*additional);
+}
+void Utils::scaleButton(CCMenuItemSprite *sprite,float ratioo){
+	const float expectedRatio = Utils::sreensSize().width/ratioo;
+	const float mnoznik = expectedRatio/sprite->getContentSize().width;
+	sprite->setScale(mnoznik);
 }

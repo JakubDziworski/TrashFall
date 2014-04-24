@@ -31,7 +31,8 @@ public:
 	static void cleanView(cocos2d::CCLayer*,bool checkForTrashes);
 	static bool isVisible(cocos2d::CCSprite*,bool checkForTrashes);
 	static void setDifficulty(float& spd,float tim,float& atonc);
-	static void scaleSprite(cocos2d::CCSprite *sprite,float additional=1);
+	static void scaleSprite(cocos2d::CCSprite *sprite,float ratioo,float additional=1,bool wid=false);
+	static void scaleButton(cocos2d::CCMenuItemSprite *sprite,float ratioo);
 };
 
 #endif /* UTILS_H_ */
