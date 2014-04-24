@@ -69,20 +69,23 @@ float Utils::cleanView(CCLayer *inputLayer){
 	    			j++;
 	    		}
 	}
-	CCLOG("clened up %d trashes, all Trahes: %d",j,array->count());
+	CCLOG("clened up %d trashes.Remainig Trahes: %d",j,array->count());
 }
 bool Utils::isVisible(CCSprite *inputSprite){
 	if(!dynamic_cast<Trash*>(inputSprite)) return true;
 	if(inputSprite->getPositionY() < 0) return false;
 	else return true;
 }
-void Utils::setDifficulty(float& speed,float timeEl,int& atO){
+void Utils::setDifficulty(float& speed,float timeEl,float& atO){
 	for(int i=0;i<diffNumber;i++){
-		if(timeEl > difficulties[i].timeElapse){
+		CCLOG("timenormal = %.2f\n, timeexpect = %.2f\n",timeEl,difficulties[i].timeElapse);
+		if(timeEl >= difficulties[i].timeElapse){
+			CCLOG("Chosen level %d",i);
 			speed = difficulties[i].speed;
 			atO = difficulties[i].atOnce;
 			break;
 		}
+
 	}
 }
 

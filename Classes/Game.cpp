@@ -15,10 +15,12 @@ bool Game::init() {
 	}
 	CCSprite *bg = CCSprite::create("Background.png");
 	Utils::prepareBackgroundImg(bg);
-	currentTime=0;
+	currentTimee=0;
+	resettedTime=0;
 	mSpeed=4;
 	spread=1;
-	this->schedule(schedule_selector(Game::genFallingTrashes),1);
+	Utils::setDifficulty(mSpeed,currentTimee,atOnce);
+	this->schedule(schedule_selector(Game::genFallingTrashes));
 	this->schedule(schedule_selector(Game::cleaner),5);
 	return true;
 }
@@ -31,14 +33,15 @@ CCScene* Game::scene() {
 	return scene;
 }
 void Game::genFallingTrashes(float dt){
-	currentTime+=dt;
-	Utils::setDifficulty(mSpeed,currentTime,atOnce);
+	currentTimee+=dt;
+	resettedTime+=dt;
+	if(resettedTime<(10/atOnce)) return;
+	resettedTime = 0;
+	Utils::setDifficulty(mSpeed,currentTimee,atOnce);
 	spread=mSpeed/4.0f;
-	CCLOG("time = %.2f\n",currentTime);
-	for(int i=0;i<atOnce;i++){
+	CCLOG("time = %.2f\n",currentTimee);
 	Trash *obj = Trash::create(Utils::getRandValueF(mSpeed,mSpeed+spread),3);
 	this->addChild(obj,Utils::getRandValue(1,3));
-	}
 }
 void Game::cleaner(float dt){
 	Utils::cleanView(this);

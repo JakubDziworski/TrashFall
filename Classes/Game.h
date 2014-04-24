@@ -12,9 +12,10 @@
 
 class Game: public cocos2d::CCLayer {
 	float mSpeed;
-	int atOnce;
+	float atOnce;
 	float spread;
-	float currentTime;
+	float currentTimee;
+	float resettedTime;
 public:
 //		void tick();
 		virtual bool init();
