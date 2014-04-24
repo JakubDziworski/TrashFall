@@ -43,8 +43,8 @@ float Utils::getRandValueF(float a,float b){
 	    return a + r;
 }
 float Utils::getEndHeight(cocos2d::CCSprite *input){
-	const float sizeX = input->getContentSize().width;
-	const float sizeY = input->getContentSize().height;
+	const float sizeX = input->getContentSize().width*input->getScale();
+	const float sizeY = input->getContentSize().height*input->getScale();
 	if (sizeY > sizeX)
 		return -(sizeY / 1.5f);
 	else
@@ -52,12 +52,12 @@ float Utils::getEndHeight(cocos2d::CCSprite *input){
 }
 
 float Utils::getBeginHeight(cocos2d::CCSprite *input){
-	const float sizeX = input->getContentSize().width;
-	const float sizeY = input->getContentSize().height;
+	const float sizeX = input->getContentSize().width*input->getScale();
+	const float sizeY = input->getContentSize().height*input->getScale();
 	if (sizeY > sizeX)
 		return Utils::sreensSize().height+sizeY/2.0f;
 	else
-		return Utils::sreensSize().height+sizeX/2.0f;
+		return Utils::sreensSize().height/2+sizeY/2.0f;
 }
 float Utils::cleanView(CCLayer *inputLayer){
 	int j=0;
@@ -78,9 +78,7 @@ bool Utils::isVisible(CCSprite *inputSprite){
 }
 void Utils::setDifficulty(float& speed,float timeEl,float& atO){
 	for(int i=0;i<diffNumber;i++){
-		CCLOG("timenormal = %.2f\n, timeexpect = %.2f\n",timeEl,difficulties[i].timeElapse);
 		if(timeEl >= difficulties[i].timeElapse){
-			CCLOG("Chosen level %d",i);
 			speed = difficulties[i].speed;
 			atO = difficulties[i].atOnce;
 			break;

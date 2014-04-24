@@ -20,6 +20,7 @@ bool Game::init() {
 	mSpeed=4;
 	spread=1;
 	Utils::setDifficulty(mSpeed,currentTimee,atOnce);
+	this->addChild(bg);
 	this->schedule(schedule_selector(Game::genFallingTrashes));
 	this->schedule(schedule_selector(Game::cleaner),5);
 	return true;
@@ -40,7 +41,7 @@ void Game::genFallingTrashes(float dt){
 	Utils::setDifficulty(mSpeed,currentTimee,atOnce);
 	spread=mSpeed/4.0f;
 	CCLOG("time = %.2f\n",currentTimee);
-	Trash *obj = Trash::create(Utils::getRandValueF(mSpeed,mSpeed+spread),3);
+	Trash *obj = Trash::create(Utils::getRandValueF(mSpeed,mSpeed+spread),Utils::getRandValueF(0,2));
 	this->addChild(obj,Utils::getRandValue(1,3));
 }
 void Game::cleaner(float dt){
