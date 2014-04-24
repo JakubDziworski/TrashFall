@@ -13,11 +13,11 @@ bool Game::init() {
 	if (!CCLayer::init()) {
 		return false;
 	}
-	currentTime=0;
-	maxSpeed = 4;
-	rozstaw = 1;
 	CCSprite *bg = CCSprite::create("Background.png");
 	Utils::prepareBackgroundImg(bg);
+	currentTime=0;
+	mSpeed=4;
+	spread=1;
 	this->schedule(schedule_selector(Game::genFallingTrashes),1);
 	this->schedule(schedule_selector(Game::cleaner),5);
 	return true;
@@ -33,16 +33,16 @@ CCScene* Game::scene() {
 void Game::genFallingTrashes(float dt){
 	currentTime+=dt;
 	CCLOG("totime = %2f.\n",currentTime);
-	maxSpeed = 4;
-	if(currentTime>5)maxSpeed = 3;
-	else if(currentTime>8)maxSpeed = 1.5f;
-	else if(currentTime>12)maxSpeed = 1;
-	else if(currentTime>15)maxSpeed = 0.5f;
-	rozstaw=maxSpeed/4;
+	if(currentTime>15) mSpeed = 0.5f;
+	else if(currentTime>12) mSpeed = 1;
+	else if(currentTime>8) mSpeed = 1.5f;
+	else if(currentTime>5)mSpeed = 3;
+	else mSpeed = 4;
+	spread=mSpeed/4.0f;
 
 //	CCLOG("%.2f\n",Utils::getRandValueF(maxSpeed,maxSpeed+rozstaw));
-	Trash *obj = Trash::create((3,(Utils::getRandValueF(maxSpeed,maxSpeed+rozstaw))),Utils::getRandValue(1,3));
-	this->addChild(obj);
+	Trash *obj = Trash::create(Utils::getRandValueF(mSpeed,mSpeed+spread),3);
+	this->addChild(obj,Utils::getRandValue(1,3));
 }
 void Game::cleaner(float dt){
 	Utils::cleanView(this);

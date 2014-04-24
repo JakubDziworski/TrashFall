@@ -11,7 +11,8 @@
 #include "cocos2d.h"
 
 class Game: public cocos2d::CCLayer {
-	float totTime,maxSpeed,rozstaw;
+	float mSpeed;
+	float spread;
 	float currentTime;
 public:
 //		void tick();

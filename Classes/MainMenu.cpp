@@ -67,8 +67,8 @@ void MainMenu::keyBackClicked() {
 }
 void MainMenu::genFallingTrash(float dt){
 	CCLOG("time = %.2f\n",dt);
-	Trash *obj = Trash::create((Utils::getRandValueF(1,6),Utils::getRandValueF(0,4)),Utils::getRandValue(1,3));
-	this->addChild(obj);
+	Trash *obj = Trash::create(Utils::getRandValueF(3,6),Utils::getRandValueF(0,4));
+	this->addChild(obj,Utils::getRandValue(1,3));
 }
 void MainMenu::cleaner(float dt){
 	Utils::cleanView(this);
