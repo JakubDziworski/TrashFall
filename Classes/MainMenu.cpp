@@ -22,6 +22,7 @@ bool MainMenu::init(){
 	    }
 	 this->setKeypadEnabled(true);
 	 //sounds
+	  CCLOG("udalo sie wyjsc z mainmenu init");
 	 const float posx = CCDirector::sharedDirector()->getWinSize().width/2;
 	 const float posy = CCDirector::sharedDirector()->getWinSize().height/2;
 	 SimpleAudioEngine::sharedEngine()->stopBackgroundMusic();
@@ -50,6 +51,7 @@ bool MainMenu::init(){
 			     this->schedule(schedule_selector(MainMenu::genFallingTrash),1);
 			     this->schedule(schedule_selector(MainMenu::cleaner),10);
 			     return true;
+
 }
 CCScene* MainMenu::scene(){
 	 CCScene *scene = CCScene::create();

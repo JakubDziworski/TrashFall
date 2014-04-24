@@ -10,6 +10,7 @@
 #include "Utils.h"
 #include "Constants.h"
 #include "SimpleAudioEngine.h"
+#include "Background.h"
 
 using namespace CocosDenshion;
 
@@ -34,14 +35,11 @@ bool Game::init() {
 }
 CCScene* Game::scene() {
 	CCScene *scene = CCScene::create();
-	CCSprite *bg = CCSprite::create("Background.png");
-	Utils::prepareBackgroundImg(bg);
 	scene->setTag(TAG_GAMESCENE);
 	Game *layer = Game::create();
 	HUD *hud = HUD::create();
-	CCLayer *backgroundLayer = CCLayer::create();
-	backgroundLayer->addChild(bg);
-	scene->addChild(backgroundLayer,-1,TAG_BACKGROUND);
+	Background *bgLayer = Background::create();
+	scene->addChild(bgLayer,-1,TAG_BACKGROUND);
 	scene->addChild(layer,0,TAG_GAMELayer);
 	scene->addChild(hud,1,TAG_HUD);
 	return scene;

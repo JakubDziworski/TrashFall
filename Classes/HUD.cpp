@@ -37,12 +37,7 @@ bool HUD::init() {
 	this->schedule(schedule_selector(HUD::animateText));
 	return true;
 }
-CCScene* HUD::scene() {
-	CCScene *scene = CCScene::create();
-	HUD *layer = HUD::create();
-	scene->addChild(layer);
-	return scene;
-}
+
 void HUD::addToScore(int value){
 	score+=value;
 	scoreLabel->setString(CCString::createWithFormat("%d",score)->getCString());

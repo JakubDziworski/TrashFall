@@ -107,3 +107,13 @@ void Utils::scaleButton(CCMenuItemSprite *sprite,float ratioo){
 	const float mnoznik = expectedRatio/sprite->getContentSize().width;
 	sprite->setScale(mnoznik);
 }
+void Utils::setSpritePositionRelativetoMyPhone(CCSprite *sprite,float Xpos,float Ypos){
+	const CCSize tmpSize = Utils::sreensSize();
+	CCLOG("screensize = %.2f\n",tmpSize.width);
+	const float scrnw = tmpSize.width;
+	const float scrnh = tmpSize.height;
+	const float wRatio = Xpos/768.0;
+	const float hRatio = Ypos/1184.0;
+	sprite->setPositionX(wRatio*scrnw);
+	sprite->setPositionY(hRatio*scrnh);
+}

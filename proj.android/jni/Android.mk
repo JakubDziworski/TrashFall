@@ -14,7 +14,8 @@ LOCAL_SRC_FILES := helloworld/main.cpp \
 				  ../../Classes/Utils.cpp \
 				  ../../Classes/Trash.cpp \
 				  ../../Classes/Game.cpp \
-				  ../../Classes/HUD.cpp
+				  ../../Classes/HUD.cpp \
+				  ../../Classes/Background.cpp 
 
 
                    

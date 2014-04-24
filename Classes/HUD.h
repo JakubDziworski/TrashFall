@@ -25,7 +25,6 @@ private:
 	int score;
 public:
 			virtual bool init();
-			static cocos2d::CCScene* scene();
 			void addToScore(int value);
 	 	//	virtual void keyBackClicked();
 			LAYER_CREATE_FUNC(HUD);
