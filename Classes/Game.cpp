@@ -32,17 +32,13 @@ CCScene* Game::scene() {
 }
 void Game::genFallingTrashes(float dt){
 	currentTime+=dt;
-	CCLOG("totime = %2f.\n",currentTime);
-	if(currentTime>15) mSpeed = 0.5f;
-	else if(currentTime>12) mSpeed = 1;
-	else if(currentTime>8) mSpeed = 1.5f;
-	else if(currentTime>5)mSpeed = 3;
-	else mSpeed = 4;
+	Utils::setDifficulty(mSpeed,currentTime,atOnce);
 	spread=mSpeed/4.0f;
-
-//	CCLOG("%.2f\n",Utils::getRandValueF(maxSpeed,maxSpeed+rozstaw));
+	CCLOG("time = %.2f\n",currentTime);
+	for(int i=0;i<atOnce;i++){
 	Trash *obj = Trash::create(Utils::getRandValueF(mSpeed,mSpeed+spread),3);
 	this->addChild(obj,Utils::getRandValue(1,3));
+	}
 }
 void Game::cleaner(float dt){
 	Utils::cleanView(this);

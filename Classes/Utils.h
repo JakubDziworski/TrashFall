@@ -28,6 +28,7 @@ public:
 	static float getBeginHeight(cocos2d::CCSprite *input);
 	static float cleanView(cocos2d::CCLayer*);
 	static bool isVisible(cocos2d::CCSprite*);
+	static void setDifficulty(float& spd,float tim,int& atonc);
 };
 
 #endif /* UTILS_H_ */

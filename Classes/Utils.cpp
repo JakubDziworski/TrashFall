@@ -7,6 +7,7 @@
 #define COCOS2D_DEBUG 2
 #include "Utils.h"
 #include "Trash.h"
+#include "Constants.h"
 
 using namespace cocos2d;
 CCSize Utils::sreensSize(){
@@ -74,14 +75,14 @@ bool Utils::isVisible(CCSprite *inputSprite){
 	if(!dynamic_cast<Trash*>(inputSprite)) return true;
 	if(inputSprite->getPositionY() < 0) return false;
 	else return true;
-
-//	CCPoint location = inputSprite->getPosition();
-//	CCSize spriteSize(inputSprite->getContentSize().width*inputSprite->getScale(),
-//			inputSprite->getContentSize().height*inputSprite->getScale());
-//	CCRect screenRect(0,0,Utils::sreensSize().width,Utils::sreensSize().height);
-//	CCRect objRect(location.x,location.y,spriteSize.width,spriteSize.height);
-//	if(CCRect::CCRectIntersectsRect(screenRect,objRect))
-//		return true;
-//	else return false;
+}
+void Utils::setDifficulty(float& speed,float timeEl,int& atO){
+	for(int i=0;i<diffNumber;i++){
+		if(timeEl > difficulties[i].timeElapse){
+			speed = difficulties[i].speed;
+			atO = difficulties[i].atOnce;
+			break;
+		}
+	}
 }
 
