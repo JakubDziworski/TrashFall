@@ -57,7 +57,7 @@ float Utils::getBeginHeight(cocos2d::CCSprite *input){
 	if (sizeY > sizeX)
 		return Utils::sreensSize().height+sizeY/2.0f;
 	else
-		return Utils::sreensSize().height/2+sizeY/2.0f;
+		return Utils::sreensSize().height+sizeX/2.0f;
 }
 float Utils::cleanView(CCLayer *inputLayer){
 	int j=0;
@@ -86,4 +86,8 @@ void Utils::setDifficulty(float& speed,float timeEl,float& atO){
 
 	}
 }
-
+HUD* Utils::getHUD(){
+	if(CCDirector::sharedDirector()->getRunningScene()->getTag() == TAG_GAMESCENE)
+	return (HUD*)CCDirector::sharedDirector()->getRunningScene()->getChildByTag(TAG_HUD);
+	else return NULL;
+}

@@ -20,6 +20,7 @@ public:
 //		void tick();
 		virtual bool init();
 		static cocos2d::CCScene* scene();
+		void ccTouchesMoved(cocos2d::CCSet *pTouches,cocos2d::CCEvent *pEvent);
 //		virtual void keyBackClicked();
 //		void playGame();
 //		void exitGame();

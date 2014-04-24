@@ -8,19 +8,26 @@
 #include "Game.h"
 #include "Trash.h"
 #include "Utils.h"
+#include "Constants.h"
+#include "SimpleAudioEngine.h"
+
+using namespace CocosDenshion;
+
 using namespace cocos2d;
 bool Game::init() {
 	if (!CCLayer::init()) {
 		return false;
 	}
-	CCSprite *bg = CCSprite::create("Background.png");
-	Utils::prepareBackgroundImg(bg);
+	//CCSprite *bg = CCSprite::create("Background.png");
+//	Utils::prepareBackgroundImg(bg);
 	currentTimee=0;
 	resettedTime=0;
 	mSpeed=4;
 	spread=1;
+	SimpleAudioEngine::sharedEngine()->playBackgroundMusic("inGame.mp3",true);
 	Utils::setDifficulty(mSpeed,currentTimee,atOnce);
-	this->addChild(bg);
+	//this->addChild(bg);
+	this->setTouchEnabled(true);
 	this->schedule(schedule_selector(Game::genFallingTrashes));
 	this->schedule(schedule_selector(Game::cleaner),5);
 	return true;
@@ -28,9 +35,11 @@ bool Game::init() {
 CCScene* Game::scene() {
 
 	CCScene *scene = CCScene::create();
-	Game *layer;
-	layer = Game::create();
-	scene->addChild(layer);
+	scene->setTag(TAG_GAMESCENE);
+	Game *layer = Game::create();
+	HUD *hud = HUD::create();
+	scene->addChild(hud,0,TAG_HUD);
+	scene->addChild(layer,1,TAG_GAMELayer);
 	return scene;
 }
 void Game::genFallingTrashes(float dt){
@@ -40,11 +49,25 @@ void Game::genFallingTrashes(float dt){
 	resettedTime = 0;
 	Utils::setDifficulty(mSpeed,currentTimee,atOnce);
 	spread=mSpeed/4.0f;
-	CCLOG("time = %.2f\n",currentTimee);
-	Trash *obj = Trash::create(Utils::getRandValueF(mSpeed,mSpeed+spread),Utils::getRandValueF(0,2));
+	//CCLOG("time = %.2f\n",currentTimee);
+	Trash *obj = Trash::create(Utils::getRandValueF(mSpeed,mSpeed+spread),Utils::getRandValueF(1,3));
 	this->addChild(obj,Utils::getRandValue(1,3));
 }
 void Game::cleaner(float dt){
 	Utils::cleanView(this);
 }
-
+void Game::ccTouchesMoved(cocos2d::CCSet *pTouches,cocos2d::CCEvent *pEvent){
+	if(this->getChildren() == NULL) return;
+	CCTouch *touch = (CCTouch*)pTouches->anyObject();
+	CCPoint location = touch->locationInView();
+	location = CCDirector::sharedDirector()->convertToGL(location);
+	CCArray *arr = this->getChildren();
+	arr->retain();
+	for(int i=0;i<arr->count();i++){
+		Trash *trsh = (Trash*) arr->objectAtIndex(i);
+		if(CCRect::CCRectContainsPoint(trsh->boundingBox(),location)){
+			this->removeChild(trsh,true);
+			Utils::getHUD()->addToScore(1);
+		}
+	}
+}

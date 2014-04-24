@@ -27,6 +27,7 @@ bool MainMenu::init(){
 	 SimpleAudioEngine::sharedEngine()->preloadEffect("buttonClick.wav");
 	 SimpleAudioEngine::sharedEngine()->preloadEffect("buttonClick2.mp3");
 	 SimpleAudioEngine::sharedEngine()->preloadBackgroundMusic("mainMenu.mp3");
+	 SimpleAudioEngine::sharedEngine()->preloadBackgroundMusic("inGame.mp3");
 	 SimpleAudioEngine::sharedEngine()->playBackgroundMusic("mainMenu.mp3",true);
 	 CCSpriteFrameCache::sharedSpriteFrameCache()->addSpriteFramesWithFile("Buttons.plist");
 	 CCSpriteFrameCache::sharedSpriteFrameCache()->addSpriteFramesWithFile("trashes.plist");

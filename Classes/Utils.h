@@ -12,11 +12,12 @@
 #include <string>
 #include <sstream>
 #include "cocos2d.h"
+#include "HUD.h"
 class Utils {
 public:
 	static const int trashAmount = 5;
 	cocos2d::CCLayer* layer;
-
+	static HUD* getHUD();
 	static int getRandValue(int min,int max);
 	static float getRandValueF(float a,float b);
 	static cocos2d::CCSpriteFrame* getRandomTrash();
