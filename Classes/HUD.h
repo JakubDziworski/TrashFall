@@ -13,6 +13,7 @@
 class HUD: public cocos2d::CCLayer {
 private:
 	cocos2d::CCLabelTTF* scoreLabel;
+	cocos2d::CCLabelTTF* scoreShadow;
 	int score;
 public:
 			virtual bool init();

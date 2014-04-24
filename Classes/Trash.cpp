@@ -26,7 +26,7 @@ Trash* Trash::create(float speedd,float sizee){
 			Trash *trsh = Trash::create();
 			CCSize scrSize = Utils::sreensSize();
 			const int angle = Utils::getRandValue(-360,360);
-			Utils::scaleSprite(trsh,sizee);
+			Utils::scaleSprite(trsh,spriteRatio,sizee);
 			trsh->speed = speedd;
 			trsh->size = sizee;
 			trsh->setPosition(ccp(Utils::getRandomXPos(),Utils::getBeginHeight(trsh)));

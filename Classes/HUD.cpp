@@ -16,11 +16,18 @@ bool HUD::init() {
 	}
 	score =0;
 	scoreLabel = CCLabelTTF::create("SCORE:0",FONT_MAIN,75);
-	scoreLabel->setColor(ccColor3B{0,0,0});
+	scoreShadow = CCLabelTTF::create("SCORE:0",FONT_MAIN,75);
+	scoreShadow->setColor(ccColor3B{0,0,0});
 	scoreLabel->setAnchorPoint(ccp(0,1));
-	this->setTouchEnabled(true);
+	scoreShadow->setAnchorPoint(ccp(0,1));
+	Utils::scaleSprite(scoreLabel,scoreLabelRatio,1,true);
+	Utils::scaleSprite(scoreLabel,scoreLabelRatio,1,true);
 	scoreLabel->setPosition(ccp(5,Utils::sreensSize().height-5));
+	scoreShadow->setPositionY(scoreLabel->getPositionY()-3);
+	scoreShadow->setPositionX(scoreLabel->getPositionX()-3);
+	this->addChild(scoreShadow,-2);
 	this->addChild(scoreLabel,-1);
+	this->setTouchEnabled(true);
 	return true;
 }
 CCScene* HUD::scene() {
@@ -32,4 +39,5 @@ CCScene* HUD::scene() {
 void HUD::addToScore(int value){
 	score+=value;
 	scoreLabel->setString(CCString::createWithFormat("SCORE:%d",score)->getCString());
+	scoreShadow->setString(scoreLabel->getString());
 }

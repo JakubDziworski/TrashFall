@@ -19,12 +19,6 @@ private:
 public:
 	virtual bool init();
 	static Trash* create(float speed,float size);
-//	void stop();
-//	void reset();
-//	void start();
-//	void wasTapped();
-//	bool getIsUp();
-//	void stopEarly();
 	LAYER_CREATE_FUNC (Trash);
 };
 
