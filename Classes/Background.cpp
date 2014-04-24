@@ -23,7 +23,7 @@ bool Background::init(){
 	 chmurka[0] = CCSprite::createWithSpriteFrameName("chmurka1.png");
 	chmurka[1] = CCSprite::createWithSpriteFrameName("chmurka2.png");
 	chmurka[2] = CCSprite::createWithSpriteFrameName("chmurka3.png");
-	CCSprite *buzka = CCSprite::createWithSpriteFrameName("sunFace_00001.png");
+	buzka = CCSprite::createWithSpriteFrameName("sunFace_00001.png");
 	Utils::scaleSprite(chmurka[0],3.76f,1,true);
 	Utils::scaleSprite(chmurka[1],4.9f,1,true);
 	Utils::scaleSprite(chmurka[2],2.35f,1,true);
@@ -63,5 +63,11 @@ void Background::moveChmurkiRandom(float dt){
 	else
 		posY = chmurka[i]->getPositionY() + Utils::getRandValue(0, 22);
 	chmurka[i]->runAction(CCMoveTo::create(3, ccp(posX,posY)));
+}
+
+void Background::updateMisses(int missesAmount){
+	CCLOG("sunFace_%05d.png",missesAmount);
+	CCString *name = CCString::createWithFormat("sunFace_%05d.png",missesAmount);
+	buzka->setDisplayFrame(CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName(name->getCString()));
 }
 

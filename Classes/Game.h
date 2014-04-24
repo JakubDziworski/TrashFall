@@ -16,8 +16,10 @@ class Game: public cocos2d::CCLayer {
 	float spread;
 	float currentTimee;
 	float resettedTime;
+	int missedAmount;
 public:
 //		void tick();
+		void missed();
 		virtual bool init();
 		static cocos2d::CCScene* scene();
 		void ccTouchesMoved(cocos2d::CCSet *pTouches,cocos2d::CCEvent *pEvent);

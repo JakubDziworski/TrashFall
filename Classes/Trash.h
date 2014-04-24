@@ -15,9 +15,11 @@ private:
 	float size;
 	float speed;
 	float posx;
+	float endposY;
 	cocos2d::CCSize scrSize;
 public:
 	virtual bool init();
+	void checkIfFallen(float dt);
 	static Trash* create(float speed,float size);
 	LAYER_CREATE_FUNC (Trash);
 };

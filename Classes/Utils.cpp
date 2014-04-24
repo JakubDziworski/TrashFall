@@ -93,6 +93,16 @@ HUD* Utils::getHUD(){
 	return (HUD*)CCDirector::sharedDirector()->getRunningScene()->getChildByTag(TAG_HUD);
 	else return NULL;
 }
+Background* Utils::getBackground(){
+	if(CCDirector::sharedDirector()->getRunningScene()->getTag() == TAG_GAMESCENE)
+		return (Background*)CCDirector::sharedDirector()->getRunningScene()->getChildByTag(TAG_BACKGROUND);
+		else return NULL;
+}
+Game* Utils::getGame(){
+	if(CCDirector::sharedDirector()->getRunningScene()->getTag() == TAG_GAMESCENE)
+			return (Game*)CCDirector::sharedDirector()->getRunningScene()->getChildByTag(TAG_GAMELayer);
+			else return NULL;
+}
 void Utils::scaleSprite(CCSprite *sprite,float ratioo,float additional,bool wid){
 	float expectedRatio = Utils::sreensSize().height/ratioo;
 	float mnoznik  = expectedRatio/sprite->getContentSize().height;

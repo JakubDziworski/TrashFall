@@ -71,8 +71,8 @@ void MainMenu::keyBackClicked() {
 	CCDirector::sharedDirector()->end();
 }
 void MainMenu::genFallingTrash(float dt){
-	Trash *obj = Trash::create(Utils::getRandValueF(3,6),Utils::getRandValueF(2,6));
-	this->addChild(obj,Utils::getRandValue(1,3));
+	//Trash *obj = Trash::create(Utils::getRandValueF(3,6),Utils::getRandValueF(2,6));
+	//this->addChild(obj,Utils::getRandValue(1,3));
 }
 void MainMenu::cleaner(float dt){
 	Utils::cleanView(this,true);

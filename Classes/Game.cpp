@@ -20,8 +20,7 @@ bool Game::init() {
 		return false;
 	}
 	//BACKGROUND
-
-
+	missedAmount = 0;
 	currentTimee=0;
 	resettedTime=0;
 	mSpeed=4;
@@ -52,7 +51,6 @@ void Game::genFallingTrashes(float dt){
 	Utils::setDifficulty(mSpeed,currentTimee,atOnce);
 	spread=mSpeed/4.0f;
 	//CCLOG("time = %.2f\n",currentTimee);
-
 	Trash *obj = Trash::create(Utils::getRandValueF(mSpeed,mSpeed+spread),Utils::getRandValueF(1,5));
 	CCLOG("%.2f\n",obj->getContentSize().height*obj->getScale());
 	CCLOG("%.2f\n",Utils::sreensSize().height);
@@ -60,6 +58,10 @@ void Game::genFallingTrashes(float dt){
 }
 void Game::cleaner(float dt){
 	Utils::cleanView(this,true);
+}
+void Game::missed(){
+	missedAmount++;
+	Utils::getBackground()->updateMisses(missedAmount);
 }
 void Game::ccTouchesMoved(cocos2d::CCSet *pTouches,cocos2d::CCEvent *pEvent){
 	if(this->getChildren() == NULL) return;

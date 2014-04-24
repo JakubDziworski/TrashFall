@@ -20,6 +20,7 @@ private:
 	float timeToWait;
 public:
 			virtual bool init();
+			void updateMisses(int);
 			LAYER_CREATE_FUNC(Background);
 			void moveChmurkiRandom(float dt);
 };
