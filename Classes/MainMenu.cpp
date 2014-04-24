@@ -42,8 +42,8 @@ bool MainMenu::init(){
 	 CCMenu *menu = CCMenu::create(playBtn,exitBtn,NULL);
 	 	 	 	 menu->alignItemsVertically();
 			     menu->setPosition(ccp(posx,posy));
-			     this->addChild(bg,0);
 			     this->addChild(menu,3);
+			     this->addChild(bg,-1);
 			     //latajace w tle gowna
 			     this->schedule(schedule_selector(MainMenu::genFallingTrash),1);
 			     this->schedule(schedule_selector(MainMenu::cleaner),10);
@@ -58,7 +58,7 @@ CCScene* MainMenu::scene(){
 }
 void MainMenu::playGame(){
 	SimpleAudioEngine::sharedEngine()->playEffect("buttonClick.wav");
-	Utils::cleanView(this);
+	Utils::cleanView(this,true);
 	CCDirector::sharedDirector()->replaceScene(Game::scene());
 }
 
@@ -68,9 +68,9 @@ void MainMenu::keyBackClicked() {
 }
 void MainMenu::genFallingTrash(float dt){
 	CCLOG("time = %.2f\n",dt);
-	Trash *obj = Trash::create(Utils::getRandValueF(3,6),Utils::getRandValueF(0,4));
+	Trash *obj = Trash::create(Utils::getRandValueF(3,6),Utils::getRandValueF(2,6));
 	this->addChild(obj,Utils::getRandValue(1,3));
 }
 void MainMenu::cleaner(float dt){
-	Utils::cleanView(this);
+	Utils::cleanView(this,true);
 }

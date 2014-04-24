@@ -27,9 +27,11 @@ public:
 	static void prepareBackgroundImg(cocos2d::CCSprite* input);
 	static float getEndHeight(cocos2d::CCSprite *input);
 	static float getBeginHeight(cocos2d::CCSprite *input);
-	static float cleanView(cocos2d::CCLayer*);
-	static bool isVisible(cocos2d::CCSprite*);
+	static void cleanView(cocos2d::CCLayer*);
+	static void cleanView(cocos2d::CCLayer*,bool checkForTrashes);
+	static bool isVisible(cocos2d::CCSprite*,bool checkForTrashes);
 	static void setDifficulty(float& spd,float tim,float& atonc);
+	static void scaleSprite(cocos2d::CCSprite *sprite,float additional=1);
 };
 
 #endif /* UTILS_H_ */

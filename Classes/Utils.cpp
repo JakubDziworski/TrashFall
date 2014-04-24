@@ -59,19 +59,20 @@ float Utils::getBeginHeight(cocos2d::CCSprite *input){
 	else
 		return Utils::sreensSize().height+sizeX/2.0f;
 }
-float Utils::cleanView(CCLayer *inputLayer){
+void Utils::cleanView(CCLayer *inputLayer,bool checkForTrashes){
 	int j=0;
 	CCArray* array = inputLayer->getChildren();
 	for(int i = 0; i < array->count(); i++) {
 	    		Trash *trash = (Trash *)array->objectAtIndex(i);
-	    		if(!Utils::isVisible(trash)){
+	    		if(!Utils::isVisible(trash,checkForTrashes)){
 	    			inputLayer->removeChild(trash,true);
 	    			j++;
 	    		}
 	}
 	CCLOG("clened up %d trashes.Remainig Trahes: %d",j,array->count());
 }
-bool Utils::isVisible(CCSprite *inputSprite){
+bool Utils::isVisible(CCSprite *inputSprite,bool checkForTrashes){
+	if(checkForTrashes)
 	if(!dynamic_cast<Trash*>(inputSprite)) return true;
 	if(inputSprite->getPositionY() < 0) return false;
 	else return true;
@@ -81,6 +82,7 @@ void Utils::setDifficulty(float& speed,float timeEl,float& atO){
 		if(timeEl >= difficulties[i].timeElapse){
 			speed = difficulties[i].speed;
 			atO = difficulties[i].atOnce;
+			CCLOG("difficulty : %d",i);
 			break;
 		}
 
@@ -90,4 +92,9 @@ HUD* Utils::getHUD(){
 	if(CCDirector::sharedDirector()->getRunningScene()->getTag() == TAG_GAMESCENE)
 	return (HUD*)CCDirector::sharedDirector()->getRunningScene()->getChildByTag(TAG_HUD);
 	else return NULL;
+}
+void Utils::scaleSprite(CCSprite *sprite,float additional){
+	float expectedRatio = Utils::sreensSize().height/spriteRatio;
+	float mnoznik  = expectedRatio/sprite->getContentSize().height;
+	sprite->setScale(mnoznik*additional);
 }

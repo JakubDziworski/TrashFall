@@ -6,10 +6,11 @@ struct difficulty{
 	const float timeElapse;
 	const float atOnce;	//per 10 seconds
 };
-
+const float spriteRatio = 15;	//normalnie jeden sprite jest wysokosci 1/15 ekranu
 const float rotationDuration = 0.5f;
 #define FONT_MAIN "TrashCinemaBB.ttf"
 typedef enum{
+	TAG_BACKGROUND,
 	TAG_HUD,
 	TAG_GAMELayer,
 	TAG_GAMESCENE

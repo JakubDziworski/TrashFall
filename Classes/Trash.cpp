@@ -26,9 +26,9 @@ Trash* Trash::create(float speedd,float sizee){
 			Trash *trsh = Trash::create();
 			CCSize scrSize = Utils::sreensSize();
 			const int angle = Utils::getRandValue(-360,360);
+			Utils::scaleSprite(trsh,sizee);
 			trsh->speed = speedd;
 			trsh->size = sizee;
-			trsh->setScale(sizee);
 			trsh->setPosition(ccp(Utils::getRandomXPos(),Utils::getBeginHeight(trsh)));
 			CCRepeatForever *repeat = CCRepeatForever::create(
 			CCRotateBy::create(rotationDuration, angle));

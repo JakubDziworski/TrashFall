@@ -15,15 +15,12 @@ bool HUD::init() {
 		return false;
 	}
 	score =0;
-	CCSprite *bg = CCSprite::create("Background.png");
-	Utils::prepareBackgroundImg(bg);
-	this->addChild(bg,-1);
 	scoreLabel = CCLabelTTF::create("SCORE:0",FONT_MAIN,75);
 	scoreLabel->setColor(ccColor3B{0,0,0});
 	scoreLabel->setAnchorPoint(ccp(0,1));
 	this->setTouchEnabled(true);
 	scoreLabel->setPosition(ccp(5,Utils::sreensSize().height-5));
-	this->addChild(scoreLabel);
+	this->addChild(scoreLabel,-1);
 	return true;
 }
 CCScene* HUD::scene() {

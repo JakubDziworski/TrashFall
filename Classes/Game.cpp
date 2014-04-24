@@ -18,28 +18,32 @@ bool Game::init() {
 	if (!CCLayer::init()) {
 		return false;
 	}
-	//CCSprite *bg = CCSprite::create("Background.png");
-//	Utils::prepareBackgroundImg(bg);
+	//BACKGROUND
+
+
 	currentTimee=0;
 	resettedTime=0;
 	mSpeed=4;
 	spread=1;
 	SimpleAudioEngine::sharedEngine()->playBackgroundMusic("inGame.mp3",true);
 	Utils::setDifficulty(mSpeed,currentTimee,atOnce);
-	//this->addChild(bg);
 	this->setTouchEnabled(true);
 	this->schedule(schedule_selector(Game::genFallingTrashes));
 	this->schedule(schedule_selector(Game::cleaner),5);
 	return true;
 }
 CCScene* Game::scene() {
-
 	CCScene *scene = CCScene::create();
+	CCSprite *bg = CCSprite::create("Background.png");
+	Utils::prepareBackgroundImg(bg);
 	scene->setTag(TAG_GAMESCENE);
 	Game *layer = Game::create();
 	HUD *hud = HUD::create();
-	scene->addChild(hud,0,TAG_HUD);
-	scene->addChild(layer,1,TAG_GAMELayer);
+	CCLayer *backgroundLayer = CCLayer::create();
+	backgroundLayer->addChild(bg);
+	scene->addChild(backgroundLayer,-1,TAG_BACKGROUND);
+	scene->addChild(layer,0,TAG_GAMELayer);
+	scene->addChild(hud,1,TAG_HUD);
 	return scene;
 }
 void Game::genFallingTrashes(float dt){
@@ -50,11 +54,14 @@ void Game::genFallingTrashes(float dt){
 	Utils::setDifficulty(mSpeed,currentTimee,atOnce);
 	spread=mSpeed/4.0f;
 	//CCLOG("time = %.2f\n",currentTimee);
-	Trash *obj = Trash::create(Utils::getRandValueF(mSpeed,mSpeed+spread),Utils::getRandValueF(1,3));
+
+	Trash *obj = Trash::create(Utils::getRandValueF(mSpeed,mSpeed+spread),Utils::getRandValueF(1,5));
+	CCLOG("%.2f\n",obj->getContentSize().height*obj->getScale());
+	CCLOG("%.2f\n",Utils::sreensSize().height);
 	this->addChild(obj,Utils::getRandValue(1,3));
 }
 void Game::cleaner(float dt){
-	Utils::cleanView(this);
+	Utils::cleanView(this,true);
 }
 void Game::ccTouchesMoved(cocos2d::CCSet *pTouches,cocos2d::CCEvent *pEvent){
 	if(this->getChildren() == NULL) return;
@@ -66,6 +73,7 @@ void Game::ccTouchesMoved(cocos2d::CCSet *pTouches,cocos2d::CCEvent *pEvent){
 	for(int i=0;i<arr->count();i++){
 		Trash *trsh = (Trash*) arr->objectAtIndex(i);
 		if(CCRect::CCRectContainsPoint(trsh->boundingBox(),location)){
+			SimpleAudioEngine::sharedEngine()->playEffect("buttonClick2.mp3");
 			this->removeChild(trsh,true);
 			Utils::getHUD()->addToScore(1);
 		}
