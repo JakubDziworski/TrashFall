@@ -85,7 +85,6 @@ void Utils::setDifficulty(float& speed,float timeEl,float& atO){
 			CCLOG("difficulty : %d",i);
 			break;
 		}
-
 	}
 }
 HUD* Utils::getHUD(){
@@ -134,4 +133,12 @@ void Utils::setSpritePositionRelativetoMyPhone(CCSprite *sprite,float Xpos,float
 }
 int Utils::getScaledFontSize(int fontsize){
 	return fontsize*768/Utils::sreensSize().width;
+}
+CCPoint Utils::getCorrectPosition(float xRatio,float yRatio){
+	return ccp(CCDirector::sharedDirector()->getWinSize().width * xRatio,
+			CCDirector::sharedDirector()->getWinSize().height * yRatio);
+}
+float Utils::getcorrectValue(float input,bool width){
+	if(width) return input*CCDirector::sharedDirector()->getWinSize().width;
+	return input*CCDirector::sharedDirector()->getWinSize().height;
 }

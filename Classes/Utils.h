@@ -41,5 +41,7 @@ public:
 	static void scaleButton(cocos2d::CCMenuItemSprite *sprite,float ratioo);
 	static void setSpritePositionRelativetoMyPhone(cocos2d::CCSprite *sprite,float Xpos,float Ypos);
 	static int getScaledFontSize(int fontsize);
+	static cocos2d::CCPoint getCorrectPosition(float xRatio,float yRatio);
+	float Utils::getcorrectValue(float input,bool width=false);
 };
 #endif /* UTILS_H_ */

@@ -21,8 +21,8 @@ bool Pause::init(){
 	CCMenuItemSprite *resumeBtn = CCMenuItemSprite::create(resumeOn,resumeOff,this,menu_selector(Pause::toggle));
 	Utils::scaleButton(resumeBtn,2);
 	CCMenu *menu = CCMenu::create(resumeBtn,NULL);
-	pause->setPosition(ccp(384,1000));
-	menu->setPosition(ccp(384,586));
+	pause->setPosition(Utils::getCorrectPosition(0.5,0.8));
+	menu->setPosition(Utils::getCorrectPosition(0.5,0.5));
 	paused = false;
 	this->setVisible(false);
 	this->addChild(menu);
