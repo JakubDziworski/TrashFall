@@ -24,7 +24,7 @@ SpriteWithText* SpriteWithText::createWithSpriteFrameNamee(const char *pszSprite
 		return nowy;
 }
 void SpriteWithText::setText(const char *inputText,ccColor3B color){
-	label = CCLabelTTF::create(inputText,FONT_MAIN,Utils::getScaledFontSize(this->getContentSize().height));
+	label = CCLabelTTF::create(inputText,FONT_MAIN,this->getContentSize().height);
 	//Utils::getScaledFontSize(this->getContentSize().height/2)
 	label->setColor(color);
 	label->setPosition(ccp(this->getContentSize().width/2,this->getContentSize().height/2));

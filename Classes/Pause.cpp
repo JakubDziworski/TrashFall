@@ -15,11 +15,12 @@ bool Pause::init(){
 	if (!CCLayer::init()) {
 		return false;
 	}
-	SpriteWithText *pause = SpriteWithText::createWithSpriteFrameNamee("onButton.png","PAUSED",ccColor3B{0,0,0});
+	SpriteWithText *pause = SpriteWithText::createWithSpriteFrameNamee("onButton.png","PAUSED",ccColor3B{255,255,255});
 	CCSprite *resumeOn = CCSprite::createWithSpriteFrameName("onPaused.png");
 	CCSprite *resumeOff = CCSprite::createWithSpriteFrameName("offPaused.png");
 	CCMenuItemSprite *resumeBtn = CCMenuItemSprite::create(resumeOn,resumeOff,this,menu_selector(Pause::toggle));
 	Utils::scaleButton(resumeBtn,2);
+	Utils::scaleSprite(pause,1.1,1,true);
 	CCMenu *menu = CCMenu::create(resumeBtn,NULL);
 	pause->setPosition(Utils::getCorrectPosition(0.5,0.8));
 	menu->setPosition(Utils::getCorrectPosition(0.5,0.5));
