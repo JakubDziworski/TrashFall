@@ -27,9 +27,11 @@ bool HUD::init() {
 	scoreShadow->setAnchorPoint(ccp(0,1));
 	Utils::scaleSprite(scoreLabel,scoreLabelRatio,1,true);
 	Utils::scaleSprite(scoreShadow,scoreLabelRatio,1,true);
-	scoreLabel->setPosition(ccp(5,Utils::sreensSize().height-5));
-	scoreShadow->setPositionY(scoreLabel->getPositionY()-3);
-	scoreShadow->setPositionX(scoreLabel->getPositionX()-3);
+	const float margin = Utils::getcorrectValue(0.015,true);
+	const float shadowOffset = Utils::getcorrectValue(0.006,true);
+	scoreLabel->setPosition(ccp(margin,Utils::sreensSize().height-margin));
+	scoreShadow->setPositionY(scoreLabel->getPositionY()-shadowOffset);
+	scoreShadow->setPositionX(scoreLabel->getPositionX()-shadowOffset);
 	regularScale = scoreLabel->getScale();
 	this->addChild(scoreShadow,-2);
 	this->addChild(scoreLabel,-1);

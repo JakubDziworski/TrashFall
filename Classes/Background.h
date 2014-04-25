@@ -16,12 +16,15 @@ private:
 	cocos2d::CCSprite *chmurka[3];
 	cocos2d::CCSprite *buzka;
 	cocos2d::CCPoint orignalchmuraPos[3];
+	float maxmovementChmurki;
+	float beginAnimTime;
 	float currentTim;
 	float timeToWait;
 public:
 			virtual bool init();
 			void updateMisses(int);
 			LAYER_CREATE_FUNC(Background);
+			void beginAnimation();
 			void moveChmurkiRandom(float dt);
 };
 #endif /* BACKGROUND_H_ */
