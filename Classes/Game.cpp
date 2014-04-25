@@ -28,6 +28,7 @@ bool Game::init() {
 	SimpleAudioEngine::sharedEngine()->playBackgroundMusic("inGame.mp3",true);
 	Utils::setDifficulty(mSpeed,currentTimee,atOnce);
 	this->setTouchEnabled(true);
+	this->setKeypadEnabled(true);
 	this->schedule(schedule_selector(Game::genFallingTrashes));
 	this->schedule(schedule_selector(Game::cleaner),5);
 	return true;
@@ -37,10 +38,13 @@ CCScene* Game::scene() {
 	scene->setTag(TAG_GAMESCENE);
 	Game *layer = Game::create();
 	HUD *hud = HUD::create();
+	CCLOG("created pause");
+	Pause *pause = Pause::create();
 	Background *bgLayer = Background::create();
 	scene->addChild(bgLayer,-1,TAG_BACKGROUND);
 	scene->addChild(layer,0,TAG_GAMELayer);
 	scene->addChild(hud,1,TAG_HUD);
+	scene->addChild(pause,3,TAG_PAUSE);
 	return scene;
 }
 void Game::genFallingTrashes(float dt){
@@ -78,4 +82,7 @@ void Game::ccTouchesMoved(cocos2d::CCSet *pTouches,cocos2d::CCEvent *pEvent){
 			Utils::getHUD()->addToScore(1);
 		}
 	}
+}
+void Game::keyBackClicked() {
+	Utils::getPause()->toggle();
 }

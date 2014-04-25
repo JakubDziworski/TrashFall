@@ -12,6 +12,7 @@
 #include <string>
 #include <sstream>
 #include "cocos2d.h"
+#include "Pause.h"
 #include "HUD.h"
 #include "Game.h"
 #include "Background.h"
@@ -21,6 +22,7 @@ public:
 	cocos2d::CCLayer* layer;
 	static HUD* getHUD();
 	static Game* getGame();
+	static Pause* getPause();
 	static Background* getBackground();
 	static int getRandValue(int min,int max);
 	static float getRandValueF(float a,float b);

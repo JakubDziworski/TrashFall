@@ -9,9 +9,14 @@
 #define PAUSE_H_
 
 #include "cocos2d.h"
+#include "SpriteWithText.h"
 
 class Pause: public cocos2d::CCLayer {
+private:
+	bool paused;
+public:
 	virtual bool init();
+	void toggle();
 	LAYER_CREATE_FUNC(Pause);
 };
 

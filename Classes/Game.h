@@ -27,6 +27,7 @@ public:
 //		void playGame();
 //		void exitGame();
  		void genFallingTrashes(float dt);
+ 		virtual void keyBackClicked();
 		void cleaner(float dt);
 		LAYER_CREATE_FUNC(Game);
 };

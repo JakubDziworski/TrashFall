@@ -16,7 +16,8 @@ LOCAL_SRC_FILES := helloworld/main.cpp \
 				  ../../Classes/Game.cpp \
 				  ../../Classes/HUD.cpp \
 				  ../../Classes/Background.cpp \
-				  ../../Classes/SpriteWithText.cpp
+				  ../../Classes/SpriteWithText.cpp \
+				  ../../Classes/Pause.cpp
 
 
                    
