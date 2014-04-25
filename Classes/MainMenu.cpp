@@ -10,6 +10,7 @@
 #include "Trash.h"
 #include "Game.h"
 #include "Constants.h"
+#include "SpriteWithText.h"
 
 using namespace cocos2d;
 using namespace CocosDenshion;
@@ -35,10 +36,10 @@ bool MainMenu::init(){
 	 CCSpriteFrameCache::sharedSpriteFrameCache()->addSpriteFramesWithFile("trashes.plist");
 	 CCSprite *bg = CCSprite::create("Background.png");
 	 Utils::prepareBackgroundImg(bg);
-	 CCSprite *playbtnoff = CCSprite::createWithSpriteFrameName("play_of.png");
-	 CCSprite *playbtnon = CCSprite::createWithSpriteFrameName("play_on.png");
-	 CCSprite *exitbtnon = CCSprite::createWithSpriteFrameName("exit_on.png");
-	 CCSprite *exitbtnoff = CCSprite::createWithSpriteFrameName("exit_off.png");
+	 SpriteWithText *playbtnon = SpriteWithText::createWithSpriteFrameNamee("onButton.png","PLAY",ccColor3B{0,0,0});
+	 SpriteWithText *playbtnoff = SpriteWithText::createWithSpriteFrameNamee("offButton.png","PLAY",ccColor3B{0,0,0});
+	 SpriteWithText *exitbtnoff = SpriteWithText::createWithSpriteFrameNamee("offButton.png","EXIT",ccColor3B{0,0,0});
+	 SpriteWithText *exitbtnon = SpriteWithText::createWithSpriteFrameNamee("onButton.png","EXIT",ccColor3B{0,0,0});
 	 CCMenuItemSprite *playBtn = CCMenuItemSprite::create(playbtnon,playbtnoff,this,menu_selector(MainMenu::playGame));
 	 CCMenuItemSprite *exitBtn = CCMenuItemSprite::create(exitbtnon,exitbtnoff,this,menu_selector(MainMenu::keyBackClicked));
 	 Utils::scaleButton(playBtn,mainMenubuttonRatio);

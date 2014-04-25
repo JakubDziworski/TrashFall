@@ -20,8 +20,8 @@ bool HUD::init() {
 	decr = 255;
 	animate = false;
 	extraAnim = false;
-	scoreLabel = CCLabelTTF::create("0",FONT_MAIN,75);
-	scoreShadow = CCLabelTTF::create("0",FONT_MAIN,75);
+	scoreLabel = CCLabelTTF::create("0",FONT_MAIN,Utils::getScaledFontSize(75));
+	scoreShadow = CCLabelTTF::create("0",FONT_MAIN,Utils::getScaledFontSize(75));
 	scoreShadow->setColor(ccColor3B{0,0,0});
 	scoreLabel->setAnchorPoint(ccp(0,1));
 	scoreShadow->setAnchorPoint(ccp(0,1));
@@ -63,7 +63,6 @@ void HUD::animateText(float dt){
 		animateReset();
 		return;
 	}
-
 	dx = 254.0*(2.0*dt/animationStop);
 	if(animationTime < animationStop/2 && decr > dx+1){
 		decr-=dx;

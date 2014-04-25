@@ -8,6 +8,7 @@
 #include "Background.h"
 #include "Utils.h"
 #include "Constants.h"
+#include "SpriteWithText.h"
 using namespace cocos2d;
 bool Background::init(){
 	if (!CCLayer::init()) {
@@ -19,8 +20,8 @@ bool Background::init(){
 	CCSprite *bg = CCSprite::create("Background.png");
 	Utils::prepareBackgroundImg(bg);
 	CCSpriteFrameCache::sharedSpriteFrameCache()->addSpriteFramesWithFile("backgroundImages.plist");
-	 sun = CCSprite::createWithSpriteFrameName("Sun.png");
-	 chmurka[0] = CCSprite::createWithSpriteFrameName("chmurka1.png");
+	sun = CCSprite::createWithSpriteFrameName("Sun.png");
+	chmurka[0] = CCSprite::createWithSpriteFrameName("chmurka1.png");
 	chmurka[1] = CCSprite::createWithSpriteFrameName("chmurka2.png");
 	chmurka[2] = CCSprite::createWithSpriteFrameName("chmurka3.png");
 	buzka = CCSprite::createWithSpriteFrameName("sunFace_00001.png");

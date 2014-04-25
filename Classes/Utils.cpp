@@ -127,3 +127,6 @@ void Utils::setSpritePositionRelativetoMyPhone(CCSprite *sprite,float Xpos,float
 	sprite->setPositionX(wRatio*scrnw);
 	sprite->setPositionY(hRatio*scrnh);
 }
+int Utils::getScaledFontSize(int fontsize){
+	return fontsize*768/Utils::sreensSize().width;
+}
