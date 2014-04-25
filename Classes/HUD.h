@@ -30,6 +30,7 @@ public:
 			LAYER_CREATE_FUNC(HUD);
 			void animateText(float dt);
 			void animateReset();
+			int getScore(){return score;}
 
 };
 

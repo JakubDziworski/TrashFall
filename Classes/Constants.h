@@ -16,7 +16,8 @@ typedef enum{
 	TAG_HUD,
 	TAG_GAMELayer,
 	TAG_GAMESCENE,
-	TAG_PAUSE
+	TAG_PAUSE,
+	TAG_GAMEOVER
 } tags;
 const int diffNumber = 6;
 const difficulty LVL1  = {6,0,4};

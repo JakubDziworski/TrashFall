@@ -11,7 +11,7 @@
 #include "Constants.h"
 #include "SimpleAudioEngine.h"
 #include "Background.h"
-
+#include "GameOver.h"
 using namespace CocosDenshion;
 
 using namespace cocos2d;
@@ -41,10 +41,12 @@ CCScene* Game::scene() {
 	CCLOG("created pause");
 	Pause *pause = Pause::create();
 	Background *bgLayer = Background::create();
+	GameOver *gover = GameOver::create();
 	scene->addChild(bgLayer,-1,TAG_BACKGROUND);
 	scene->addChild(layer,0,TAG_GAMELayer);
 	scene->addChild(hud,1,TAG_HUD);
 	scene->addChild(pause,3,TAG_PAUSE);
+	scene->addChild(gover,4,TAG_GAMEOVER);
 	return scene;
 }
 void Game::genFallingTrashes(float dt){
@@ -64,8 +66,11 @@ void Game::cleaner(float dt){
 	Utils::cleanView(this,true);
 }
 void Game::missed(){
-	missedAmount++;
-	Utils::getBackground()->updateMisses(missedAmount);
+	pauseSchedulerAndActions();
+	GameOver *g = Utils::getGameOver();
+	g->trigger(Utils::getHUD()->getScore(),200);
+	//missedAmount++;
+	//Utils::getBackground()->updateMisses(missedAmount);
 }
 void Game::ccTouchesMoved(cocos2d::CCSet *pTouches,cocos2d::CCEvent *pEvent){
 	if(this->getChildren() == NULL) return;

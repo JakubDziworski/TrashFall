@@ -107,6 +107,11 @@ Pause* Utils::getPause(){
 			return (Pause*)CCDirector::sharedDirector()->getRunningScene()->getChildByTag(TAG_PAUSE);
 			else return NULL;
 }
+GameOver* Utils::getGameOver(){
+	if(CCDirector::sharedDirector()->getRunningScene()->getTag() == TAG_GAMESCENE)
+				return (GameOver*)CCDirector::sharedDirector()->getRunningScene()->getChildByTag(TAG_GAMEOVER);
+				else return NULL;
+}
 void Utils::scaleSprite(CCSprite *sprite,float ratioo,float additional,bool wid){
 	float expectedRatio = Utils::sreensSize().height/ratioo;
 	float mnoznik  = expectedRatio/sprite->getContentSize().height;

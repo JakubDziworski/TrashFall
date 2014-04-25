@@ -16,6 +16,7 @@
 #include "HUD.h"
 #include "Game.h"
 #include "Background.h"
+#include "GameOver.h"
 class Utils {
 public:
 	static const int trashAmount = 5;
@@ -23,6 +24,7 @@ public:
 	static HUD* getHUD();
 	static Game* getGame();
 	static Pause* getPause();
+	static GameOver* getGameOver();
 	static Background* getBackground();
 	static int getRandValue(int min,int max);
 	static float getRandValueF(float a,float b);
