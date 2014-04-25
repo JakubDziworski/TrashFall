@@ -66,11 +66,15 @@ void Game::cleaner(float dt){
 	Utils::cleanView(this,true);
 }
 void Game::missed(){
-	pauseSchedulerAndActions();
-	GameOver *g = Utils::getGameOver();
-	g->trigger(Utils::getHUD()->getScore(),200);
-	//missedAmount++;
-	//Utils::getBackground()->updateMisses(missedAmount);
+	missedAmount++;
+	if(missedAmount>21){
+		pauseSchedulerAndActions();
+		this->setTouchEnabled(false);
+		GameOver *g = Utils::getGameOver();
+		g->trigger(Utils::getHUD()->getScore(),200);
+		return;
+	}
+	Utils::getBackground()->updateMisses(missedAmount);
 }
 void Game::ccTouchesMoved(cocos2d::CCSet *pTouches,cocos2d::CCEvent *pEvent){
 	if(this->getChildren() == NULL) return;

@@ -7,6 +7,7 @@
 
 #include "GameOver.h"
 #include "Utils.h"
+#include "Constants.h"
 using namespace cocos2d;
 bool GameOver::init(){
 	if (!CCLayer::init()) {
@@ -17,35 +18,33 @@ bool GameOver::init(){
 void GameOver::trigger(int scorr,int bestt){
 	curScore = scorr;
 	bestScore = bestt;
+	CCLabelTTF *GAMEOVER = CCLabelTTF::create("GAME OVER",FONT_MAIN,Utils::getScaledFontSize(125));
+	GAMEOVER->setColor(ccColor3B {255,15,15});
 	CCString *tmpCurrScoreStr = CCString::createWithFormat("SCORE:%d",curScore);
 	CCString *tmpbestScoreStr = CCString::createWithFormat("BEST:%d",bestScore);
-			CCString *tmpNewRecotd = CCString::createWithFormat("NEW RECORD:%d",curScore);
-			scoreBoardBg = CCSprite::create("scoreBoardBG.png");
-			currentScore = SpriteWithText::createWithSpriteFrameNamee("offButton.png",tmpCurrScoreStr->getCString(),ccColor3B{0,0,0});
-			highScore = SpriteWithText::createWithSpriteFrameNamee("offButton.png",tmpbestScoreStr->getCString(),ccColor3B{0,0,0});
-			newScoreSet = SpriteWithText::createWithSpriteFrameNamee("offButton.png",tmpNewRecotd->getCString(),ccColor3B{255,30,30});
-			CCSprite *carryOn = CCSprite::createWithSpriteFrameName("onPaused.png");
+	CCString *tmpNewRecotd = CCString::createWithFormat("NEW RECORD:%d",curScore);
+	scoreBoardBg = CCSprite::create("scoreBoardBG.png");
+	CCLabelTTF *currscor= CCLabelTTF::create(tmpCurrScoreStr->getCString(),FONT_MAIN,Utils::getScaledFontSize(75));
+	CCLabelTTF *bestScoree = CCLabelTTF::create(tmpbestScoreStr->getCString(),FONT_MAIN,Utils::getScaledFontSize(75));
+				//menu
+				CCSprite *carryOn = CCSprite::createWithSpriteFrameName("onPaused.png");
 				CCSprite *carryOff = CCSprite::createWithSpriteFrameName("offPaused.png");
 				CCMenuItemSprite *carryOnBtn = CCMenuItemSprite::create(carryOn,carryOff,this,menu_selector(GameOver::playGame));
 				Utils::scaleButton(carryOnBtn,4);
 				CCMenu *menu = CCMenu::create(carryOnBtn,NULL);
 			Utils::scaleSprite(scoreBoardBg,1.1,1,true);
-			Utils::scaleSprite(currentScore,1.1,1,true);
-			Utils::scaleSprite(highScore,1.1,1,true);
-			Utils::scaleSprite(newScoreSet,1.1,1,true);
-
-
-			menu->setPosition(Utils::getCorrectPosition(0.5,0.5));
-			const float bgHeight = carryOnBtn->getContentSize().height*carryOnBtn->getScaleY();
-			const float offset = bgHeight/4+Utils::getcorrectValue(bgHeight/16,false);
-			float pos=Utils::getcorrectValue(0.5+(bgHeight/2-bgHeight/16-offset/2)/Utils::sreensSize().height,false);
 			scoreBoardBg->setPosition(Utils::getCorrectPosition(0.5,0.5));
-			currentScore->setPosition(ccp(Utils::getcorrectValue(0.5),pos));
-			pos+=offset;
-			highScore->setPosition(ccp(Utils::getcorrectValue(0.5),pos));
-			pos+=offset;
-			menu->setPosition(Utils::getcorrectValue(0.5),pos);
+			GAMEOVER->setPosition(Utils::getCorrectPosition(0.5,0.65));
+			currscor->setPosition(Utils::getCorrectPosition(0.5,0.55));
+			bestScoree->setPosition(Utils::getCorrectPosition(0.5,0.5));
+			menu->setPosition(Utils::getCorrectPosition(0.5,0.35));
 			this->addChild(scoreBoardBg,-1);
-			this->addChild(highScore);
-			this->addChild(currentScore);
+			this->addChild(GAMEOVER);
+			this->addChild(currscor);
+			this->addChild(bestScoree);
+			this->addChild(menu);
+}
+
+void GameOver::playGame(){
+		CCDirector::sharedDirector()->replaceScene(Game::scene());
 }

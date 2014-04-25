@@ -22,7 +22,7 @@ private:
 public:
 	virtual bool init();
 	void trigger(int scorr,int bestt);
-	void playGame(){}
+	void playGame();
 	LAYER_CREATE_FUNC(GameOver);
 };
 
