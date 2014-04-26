@@ -32,7 +32,6 @@ bool Game::init() {
 	this->setTouchEnabled(true);
 	this->setKeypadEnabled(true);
 	this->schedule(schedule_selector(Game::genFallingTrashes));
-	this->schedule(schedule_selector(Game::cleaner),5);
 	return true;
 }
 CCScene* Game::scene() {
@@ -61,12 +60,10 @@ void Game::genFallingTrashes(float dt){
 	spread=mSpeed/4.0f;
 	//CCLOG("time = %.2f\n",currentTimee);
 	Trash *obj = Trash::create(Utils::getRandValueF(mSpeed,mSpeed+spread),Utils::getRandValueF(1,4),monitorFallen);
+	obj->setAutoCheckMissesPoints(true);
 	CCLOG("%.2f\n",obj->getContentSize().height*obj->getScale());
 	CCLOG("%.2f\n",Utils::sreensSize().height);
 	this->addChild(obj,Utils::getRandValue(1,3));
-}
-void Game::cleaner(float dt){
-	Utils::cleanView(this,true);
 }
 void Game::missed(){
 	if(!monitorFallen) return;

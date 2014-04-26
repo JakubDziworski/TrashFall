@@ -2,6 +2,8 @@ to do - wyjscie
 to do - dzwieki (gdy zdobedziemy duzo i przyciski)
 touch
 podmienic placholdery trashy
-score
 przyciski systemowe
 bug z dotykaniem
+acjhievments 
+loading screen
+poziom trudnosci

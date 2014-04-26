@@ -18,10 +18,10 @@ private:
 	float speed;
 	float posx;
 	float endposY;
-	bool  checkFallen;
+	bool  autoCheckMissesPoints;
 	cocos2d::CCSize scrSize;
 public:
-	void setCheckFallen(bool input);
+	void setAutoCheckMissesPoints(bool input);
 	virtual bool init();
 	void checkIfFallen(float dt);
 	static Trash* create(float speed,float size,float rotTime=rotationDuration);

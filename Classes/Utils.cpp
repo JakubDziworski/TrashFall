@@ -46,9 +46,9 @@ float Utils::getEndHeight(cocos2d::CCSprite *input){
 	const float sizeX = input->getContentSize().width*input->getScale();
 	const float sizeY = input->getContentSize().height*input->getScale();
 	if (sizeY > sizeX)
-		return -(sizeY / 1.5f);
+		return -(sizeY/2 );
 	else
-		return -(sizeX / 1.5f);
+		return -(sizeX /2);
 }
 
 float Utils::getBeginHeight(cocos2d::CCSprite *input){
@@ -58,24 +58,6 @@ float Utils::getBeginHeight(cocos2d::CCSprite *input){
 		return Utils::sreensSize().height+sizeY/2.0f;
 	else
 		return Utils::sreensSize().height+sizeX/2.0f;
-}
-void Utils::cleanView(CCLayer *inputLayer,bool checkForTrashes){
-	int j=0;
-	CCArray* array = inputLayer->getChildren();
-	for(int i = 0; i < array->count(); i++) {
-	    		Trash *trash = (Trash *)array->objectAtIndex(i);
-	    		if(!Utils::isVisible(trash,checkForTrashes)){
-	    			inputLayer->removeChild(trash,true);
-	    			j++;
-	    		}
-	}
-	CCLOG("clened up %d trashes.Remainig Trahes: %d",j,array->count());
-}
-bool Utils::isVisible(CCSprite *inputSprite,bool checkForTrashes){
-	if(checkForTrashes)
-	if(!dynamic_cast<Trash*>(inputSprite)) return true;
-	if(inputSprite->getPositionY() < 0) return false;
-	else return true;
 }
 void Utils::setDifficulty(float& speed,float timeEl,float& atO){
 	for(int i=0;i<diffNumber;i++){
@@ -125,16 +107,6 @@ void Utils::scaleButton(CCMenuItemSprite *sprite,float ratioo){
 	const float expectedRatio = Utils::sreensSize().width/ratioo;
 	const float mnoznik = expectedRatio/sprite->getContentSize().width;
 	sprite->setScale(mnoznik);
-}
-void Utils::setSpritePositionRelativetoMyPhone(CCSprite *sprite,float Xpos,float Ypos){
-	const CCSize tmpSize = Utils::sreensSize();
-	CCLOG("screensize = %.2f\n",tmpSize.width);
-	const float scrnw = tmpSize.width;
-	const float scrnh = tmpSize.height;
-	const float wRatio = Xpos/768.0;
-	const float hRatio = Ypos/1184.0;
-	sprite->setPositionX(wRatio*scrnw);
-	sprite->setPositionY(hRatio*scrnh);
 }
 int Utils::getScaledFontSize(int fontsize){
 	return fontsize*Utils::sreensSize().width/768;

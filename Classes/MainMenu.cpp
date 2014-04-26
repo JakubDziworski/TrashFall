@@ -46,12 +46,9 @@ bool MainMenu::init(){
 			     menu->alignItemsVertically();
 			     this->addChild(menu,3);
 			     this->addChild(bg,-1);
-
-
 			     //latajace w tle gowna
 			     genFallingTrash(0.1);
 			     this->schedule(schedule_selector(MainMenu::genFallingTrash),4.5);
-			     this->schedule(schedule_selector(MainMenu::cleaner),10);
 			     return true;
 
 }
@@ -64,7 +61,6 @@ CCScene* MainMenu::scene(){
 }
 void MainMenu::playGame(){
 	SimpleAudioEngine::sharedEngine()->playEffect("buttonClick.wav");
-	Utils::cleanView(this,true);
 	CCDirector::sharedDirector()->replaceScene(Game::scene());
 }
 
@@ -74,9 +70,5 @@ void MainMenu::keyBackClicked() {
 }
 void MainMenu::genFallingTrash(float dt){
 	Trash *obj = Trash::create(Utils::getRandValueF(4,8),Utils::getRandValueF(2,4),3);
-	obj->setCheckFallen(false);
 	this->addChild(obj,Utils::getRandValue(1,3));
-}
-void MainMenu::cleaner(float dt){
-	Utils::cleanView(this,true);
 }

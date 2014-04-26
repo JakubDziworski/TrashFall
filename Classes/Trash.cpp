@@ -19,8 +19,7 @@ bool Trash::init() {
 		}
 	//default values, later overriden if create used
 	this->setDisplayFrame(Utils::getRandomTrash());
-	endposY = Utils::getEndHeight(this);
-	checkFallen=true;
+	autoCheckMissesPoints=false;
 	return true;
 }
 
@@ -32,6 +31,7 @@ Trash* Trash::create(float speedd,float sizee,float rotTime){
 			Utils::scaleSprite(trsh,spriteRatio,sizee);
 			trsh->speed = speedd;
 			trsh->size = sizee;
+			trsh->endposY = Utils::getEndHeight(trsh);
 			trsh->setPosition(ccp(Utils::getRandomXPos(),Utils::getBeginHeight(trsh)));
 			CCMoveTo *act = CCMoveTo::create(trsh->speed, ccp(trsh->getPositionX(),Utils::getEndHeight(trsh)));
 			act->setTag(1);
@@ -45,12 +45,11 @@ Trash* Trash::create(float speedd,float sizee,float rotTime){
 }
 
 void Trash::checkIfFallen(float dt){
-	if(!checkFallen) return;
 	if(this->getPositionY() <= endposY+1){
-	Utils::getGame()->missed();
+	if(autoCheckMissesPoints) Utils::getGame()->missed();
 	this->removeFromParentAndCleanup(true);
 	}
 }
-void Trash::setCheckFallen(bool input){
-	checkFallen = input;
+void Trash::setAutoCheckMissesPoints(bool input){
+	autoCheckMissesPoints = input;
 }
