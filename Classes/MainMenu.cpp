@@ -11,7 +11,6 @@
 #include "Game.h"
 #include "Constants.h"
 #include "SpriteWithText.h"
-
 using namespace cocos2d;
 using namespace CocosDenshion;
 
@@ -23,7 +22,6 @@ bool MainMenu::init(){
 	    }
 	 this->setKeypadEnabled(true);
 	 //sounds
-	  CCLOG("udalo sie wyjsc z mainmenu init");
 	 const float posx = CCDirector::sharedDirector()->getWinSize().width/2;
 	 const float posy = CCDirector::sharedDirector()->getWinSize().height/2;
 	 SimpleAudioEngine::sharedEngine()->stopBackgroundMusic();
@@ -48,6 +46,8 @@ bool MainMenu::init(){
 			     menu->alignItemsVertically();
 			     this->addChild(menu,3);
 			     this->addChild(bg,-1);
+
+
 			     //latajace w tle gowna
 			     genFallingTrash(0.1);
 			     this->schedule(schedule_selector(MainMenu::genFallingTrash),4.5);

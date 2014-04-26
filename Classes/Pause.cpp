@@ -8,6 +8,7 @@
 #include "Pause.h"
 #include "Utils.h"
 #include "SimpleAudioEngine.h"
+#include "MainMenu.h"
 using namespace CocosDenshion;
 using namespace cocos2d;
 
@@ -16,17 +17,24 @@ bool Pause::init(){
 		return false;
 	}
 	SpriteWithText *pause = SpriteWithText::createWithSpriteFrameNamee("onButton.png","PAUSED",ccColor3B{0,0,0});
+	SpriteWithText *mainMenuOn = SpriteWithText::createWithSpriteFrameNamee("onButton.png","MENU",ccColor3B{0,0,0});
+	SpriteWithText *mainMenuOff = SpriteWithText::createWithSpriteFrameNamee("offButton.png","MENU",ccColor3B{0,0,0});
 	CCSprite *resumeOn = CCSprite::createWithSpriteFrameName("onPaused.png");
 	CCSprite *resumeOff = CCSprite::createWithSpriteFrameName("offPaused.png");
 	CCMenuItemSprite *resumeBtn = CCMenuItemSprite::create(resumeOn,resumeOff,this,menu_selector(Pause::toggle));
+	CCMenuItemSprite *mainMenuBtn = CCMenuItemSprite::create(mainMenuOn,mainMenuOff,this,menu_selector(Pause::goToMainMenu));
 	Utils::scaleButton(resumeBtn,2);
+	Utils::scaleButton(mainMenuBtn,1.7);
 	Utils::scaleSprite(pause,1.1,1,true);
-	CCMenu *menu = CCMenu::create(resumeBtn,NULL);
+	CCMenu *menuContinue = CCMenu::create(resumeBtn,NULL);
+	CCMenu *menuMainMenu = CCMenu::create(mainMenuBtn,NULL);
 	pause->setPosition(Utils::getCorrectPosition(0.5,0.8));
-	menu->setPosition(Utils::getCorrectPosition(0.5,0.5));
+	menuContinue->setPosition(Utils::getCorrectPosition(0.5,0.5));
+	menuMainMenu->setPosition(Utils::getCorrectPosition(0.5,0.3));
 	paused = false;
 	this->setVisible(false);
-	this->addChild(menu);
+	this->addChild(menuMainMenu);
+	this->addChild(menuContinue);
 	this->addChild(pause);
 	return true;
 }
@@ -52,3 +60,6 @@ void Pause::toggle(){
 	}
 }
 
+void Pause::goToMainMenu(){
+	CCDirector::sharedDirector()->replaceScene(MainMenu::scene());
+}

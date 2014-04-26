@@ -4,10 +4,23 @@
     <dict>
         <key>frames</key>
         <dict>
+            <key>emptySpace.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{722,516},{718,172}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{718,172}}</string>
+                <key>sourceSize</key>
+                <string>{718,172}</string>
+            </dict>
             <key>offButton.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{2,748},{718,172}}</string>
+                <string>{{2,516},{718,172}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -20,11 +33,11 @@
             <key>offPaused.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{516,2},{570,512}}</string>
+                <string>{{1146,2},{570,512}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
-                <true/>
+                <false/>
                 <key>sourceColorRect</key>
                 <string>{{0,0},{570,512}}</string>
                 <key>sourceSize</key>
@@ -33,11 +46,11 @@
             <key>onButton.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{2,574},{718,172}}</string>
+                <string>{{1718,2},{718,172}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
-                <false/>
+                <true/>
                 <key>sourceColorRect</key>
                 <string>{{0,0},{718,172}}</string>
                 <key>sourceSize</key>
@@ -46,11 +59,24 @@
             <key>onPaused.png</key>
             <dict>
                 <key>frame</key>
+                <string>{{574,2},{570,512}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{570,512}}</string>
+                <key>sourceSize</key>
+                <string>{570,512}</string>
+            </dict>
+            <key>scoreBoardBG.png</key>
+            <dict>
+                <key>frame</key>
                 <string>{{2,2},{570,512}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
-                <true/>
+                <false/>
                 <key>sourceColorRect</key>
                 <string>{{0,0},{570,512}}</string>
                 <key>sourceSize</key>
@@ -64,9 +90,9 @@
             <key>realTextureFileName</key>
             <string>Buttons.png</string>
             <key>size</key>
-            <string>{1030,922}</string>
+            <string>{1892,722}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:fd6f7e887e93fa8c7c6c3233fd46f00e:1e6f1893bf69bf59e7cdb0824b8a7938:49b6939ab344b99a0a11fe0530bc9ec0$</string>
+            <string>$TexturePacker:SmartUpdate:eab39175c6723d7a8514e61152d697c1:55b8f21121a4b4481c5cd30221f4318a:49b6939ab344b99a0a11fe0530bc9ec0$</string>
             <key>textureFileName</key>
             <string>Buttons.png</string>
         </dict>

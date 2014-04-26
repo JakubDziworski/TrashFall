@@ -17,6 +17,7 @@ private:
 public:
 	virtual bool init();
 	void toggle();
+	void goToMainMenu();
 	LAYER_CREATE_FUNC(Pause);
 };
 

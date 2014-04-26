@@ -39,13 +39,13 @@ void GameOver::trigger(int scorr,int bestt){
 					CCMenuItemSprite *carryOnBtn = CCMenuItemSprite::create(carryOn,carryOff,this,menu_selector(GameOver::playGame));
 					Utils::scaleButton(carryOnBtn,4);
 					CCMenu *menu = CCMenu::create(carryOnBtn,NULL);
-					menu->setPosition(Utils::getCorrectPosition(0.5,0.35));
+					menu->setPosition(Utils::getCorrectPosition(0.5,0.37));
 	this->addChild(scoreBoardBg,-1);
 	this->addChild(GAMEOVER);
 	this->addChild(menu);
 	if(scorr > bestScore){
 		CCString *tmpNewRecotd = CCString::createWithFormat("NEW RECORD:%d",curScore);
-		CCLabelTTF *newRecord= CCLabelTTF::create(tmpNewRecotd->getCString(),FONT_MAIN,Utils::getScaledFontSize(100));
+		CCLabelTTF *newRecord= CCLabelTTF::create(tmpNewRecotd->getCString(),FONT_MAIN,Utils::getScaledFontSize(75));
 		newRecord->setColor(ccColor3B{255,15,15});
 		newRecord->setPosition(Utils::getCorrectPosition(0.5,0.5));
 		this->addChild(newRecord);
