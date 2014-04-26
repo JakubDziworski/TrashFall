@@ -25,6 +25,7 @@ bool Game::init() {
 	resettedTime=0;
 	mSpeed=4;
 	spread=1;
+	fingerDown = false;
 	SimpleAudioEngine::sharedEngine()->playBackgroundMusic("inGame.mp3",true);
 	Utils::setDifficulty(mSpeed,currentTimee,atOnce);
 	this->setTouchEnabled(true);
@@ -52,12 +53,13 @@ CCScene* Game::scene() {
 void Game::genFallingTrashes(float dt){
 	currentTimee+=dt;
 	resettedTime+=dt;
+	if(fingerDown) touchTime += dt;
 	if(resettedTime<(10/atOnce)) return;
 	resettedTime = 0;
 	Utils::setDifficulty(mSpeed,currentTimee,atOnce);
 	spread=mSpeed/4.0f;
 	//CCLOG("time = %.2f\n",currentTimee);
-	Trash *obj = Trash::create(Utils::getRandValueF(mSpeed,mSpeed+spread),Utils::getRandValueF(1,5));
+	Trash *obj = Trash::create(Utils::getRandValueF(mSpeed,mSpeed+spread),Utils::getRandValueF(1,4));
 	CCLOG("%.2f\n",obj->getContentSize().height*obj->getScale());
 	CCLOG("%.2f\n",Utils::sreensSize().height);
 	this->addChild(obj,Utils::getRandValue(1,3));
@@ -68,15 +70,15 @@ void Game::cleaner(float dt){
 void Game::missed(){
 	missedAmount++;
 	if(missedAmount>21){
-		pauseSchedulerAndActions();
-		this->setTouchEnabled(false);
-		GameOver *g = Utils::getGameOver();
-		g->trigger(Utils::getHUD()->getScore(),200);
+		Utils::getGameOver()->trigger(Utils::getHUD()->getScore(),200);
 		return;
 	}
 	Utils::getBackground()->updateMisses(missedAmount);
 }
 void Game::ccTouchesMoved(cocos2d::CCSet *pTouches,cocos2d::CCEvent *pEvent){
+	if(pTouches->count()>1) return;
+	CCLOG("CZAS DOTKNIECIA = %2f.\n",touchTime);
+	if(touchTime > maxTouchTime) return;
 	if(this->getChildren() == NULL) return;
 	CCTouch *touch = (CCTouch*)pTouches->anyObject();
 	CCPoint location = touch->locationInView();
@@ -91,6 +93,17 @@ void Game::ccTouchesMoved(cocos2d::CCSet *pTouches,cocos2d::CCEvent *pEvent){
 			Utils::getHUD()->addToScore(1);
 		}
 	}
+}
+void Game::ccTouchesBegan(cocos2d::CCSet *pTouches,cocos2d::CCEvent *pEvent){
+	if(pTouches->count()>1) return;
+	CCLOG("ROZPOCZETO DOTKNIECIE");
+	fingerDown=true;
+	ccTouchesMoved(pTouches,pEvent);
+}
+void Game::ccTouchesEnded(cocos2d::CCSet *pTouches,cocos2d::CCEvent * pEvent){
+	if(pTouches->count()>1) return;
+	fingerDown = false;
+	touchTime=0;
 }
 void Game::keyBackClicked() {
 	Utils::getPause()->toggle();

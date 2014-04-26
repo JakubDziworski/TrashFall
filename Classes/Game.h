@@ -16,6 +16,8 @@ class Game: public cocos2d::CCLayer {
 	float spread;
 	float currentTimee;
 	float resettedTime;
+	float touchTime;
+	bool  fingerDown;
 	int missedAmount;
 public:
 //		void tick();
@@ -23,9 +25,8 @@ public:
 		virtual bool init();
 		static cocos2d::CCScene* scene();
 		void ccTouchesMoved(cocos2d::CCSet *pTouches,cocos2d::CCEvent *pEvent);
-//		virtual void keyBackClicked();
-//		void playGame();
-//		void exitGame();
+		void ccTouchesBegan(cocos2d::CCSet *pTouches,cocos2d::CCEvent *pEvent);
+		void ccTouchesEnded(cocos2d::CCSet *pTouches,cocos2d::CCEvent * pEvent);
  		void genFallingTrashes(float dt);
  		virtual void keyBackClicked();
 		void cleaner(float dt);

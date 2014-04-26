@@ -15,7 +15,7 @@ bool Pause::init(){
 	if (!CCLayer::init()) {
 		return false;
 	}
-	SpriteWithText *pause = SpriteWithText::createWithSpriteFrameNamee("onButton.png","PAUSED",ccColor3B{255,255,255});
+	SpriteWithText *pause = SpriteWithText::createWithSpriteFrameNamee("onButton.png","PAUSED",ccColor3B{0,0,0});
 	CCSprite *resumeOn = CCSprite::createWithSpriteFrameName("onPaused.png");
 	CCSprite *resumeOff = CCSprite::createWithSpriteFrameName("offPaused.png");
 	CCMenuItemSprite *resumeBtn = CCMenuItemSprite::create(resumeOn,resumeOff,this,menu_selector(Pause::toggle));

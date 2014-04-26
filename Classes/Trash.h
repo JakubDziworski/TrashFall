@@ -8,7 +8,9 @@
 #ifndef TRASH_H_
 #define TRASH_H_
 
+
 #include "cocos2d.h"
+#include "Constants.h"
 
 class Trash: public cocos2d::CCSprite {
 private:
@@ -16,11 +18,13 @@ private:
 	float speed;
 	float posx;
 	float endposY;
+	bool  checkFallen;
 	cocos2d::CCSize scrSize;
 public:
+	void setCheckFallen(bool input);
 	virtual bool init();
 	void checkIfFallen(float dt);
-	static Trash* create(float speed,float size);
+	static Trash* create(float speed,float size,float rotTime=rotationDuration);
 	LAYER_CREATE_FUNC (Trash);
 };
 

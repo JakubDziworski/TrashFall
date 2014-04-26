@@ -36,10 +36,10 @@ bool MainMenu::init(){
 	 CCSpriteFrameCache::sharedSpriteFrameCache()->addSpriteFramesWithFile("trashes.plist");
 	 CCSprite *bg = CCSprite::create("Background.png");
 	 Utils::prepareBackgroundImg(bg);
-	 SpriteWithText *playbtnon = SpriteWithText::createWithSpriteFrameNamee("onButton.png","PLAY",ccColor3B{255,255,255});
-	 SpriteWithText *playbtnoff = SpriteWithText::createWithSpriteFrameNamee("offButton.png","PLAY",ccColor3B{255,255,255});
-	 SpriteWithText *exitbtnoff = SpriteWithText::createWithSpriteFrameNamee("offButton.png","EXIT",ccColor3B{255,255,255});
-	 SpriteWithText *exitbtnon = SpriteWithText::createWithSpriteFrameNamee("onButton.png","EXIT",ccColor3B{255,255,255});
+	 SpriteWithText *playbtnon = SpriteWithText::createWithSpriteFrameNamee("onButton.png","PLAY",ccColor3B{0,0,0});
+	 SpriteWithText *playbtnoff = SpriteWithText::createWithSpriteFrameNamee("offButton.png","PLAY",ccColor3B{0,0,0});
+	 SpriteWithText *exitbtnoff = SpriteWithText::createWithSpriteFrameNamee("offButton.png","EXIT",ccColor3B{0,0,0});
+	 SpriteWithText *exitbtnon = SpriteWithText::createWithSpriteFrameNamee("onButton.png","EXIT",ccColor3B{0,0,0});
 	 CCMenuItemSprite *playBtn = CCMenuItemSprite::create(playbtnon,playbtnoff,this,menu_selector(MainMenu::playGame));
 	 CCMenuItemSprite *exitBtn = CCMenuItemSprite::create(exitbtnon,exitbtnoff,this,menu_selector(MainMenu::keyBackClicked));
 	 Utils::scaleButton(playBtn,mainMenubuttonRatio);
@@ -49,7 +49,8 @@ bool MainMenu::init(){
 			     this->addChild(menu,3);
 			     this->addChild(bg,-1);
 			     //latajace w tle gowna
-			     this->schedule(schedule_selector(MainMenu::genFallingTrash),1);
+			     genFallingTrash(0.1);
+			     this->schedule(schedule_selector(MainMenu::genFallingTrash),4.5);
 			     this->schedule(schedule_selector(MainMenu::cleaner),10);
 			     return true;
 
@@ -72,8 +73,9 @@ void MainMenu::keyBackClicked() {
 	CCDirector::sharedDirector()->end();
 }
 void MainMenu::genFallingTrash(float dt){
-	//Trash *obj = Trash::create(Utils::getRandValueF(3,6),Utils::getRandValueF(2,6));
-	//this->addChild(obj,Utils::getRandValue(1,3));
+	Trash *obj = Trash::create(Utils::getRandValueF(4,8),Utils::getRandValueF(2,4),3);
+	obj->setCheckFallen(false);
+	this->addChild(obj,Utils::getRandValue(1,3));
 }
 void MainMenu::cleaner(float dt){
 	Utils::cleanView(this,true);

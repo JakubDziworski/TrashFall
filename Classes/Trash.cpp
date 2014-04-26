@@ -20,10 +20,11 @@ bool Trash::init() {
 	//default values, later overriden if create used
 	this->setDisplayFrame(Utils::getRandomTrash());
 	endposY = Utils::getEndHeight(this);
+	checkFallen=true;
 	return true;
 }
 
-Trash* Trash::create(float speedd,float sizee){
+Trash* Trash::create(float speedd,float sizee,float rotTime){
 
 			Trash *trsh = Trash::create();
 			CCSize scrSize = Utils::sreensSize();
@@ -35,7 +36,7 @@ Trash* Trash::create(float speedd,float sizee){
 			CCMoveTo *act = CCMoveTo::create(trsh->speed, ccp(trsh->getPositionX(),Utils::getEndHeight(trsh)));
 			act->setTag(1);
 			CCRepeatForever *repeat = CCRepeatForever::create(
-			CCRotateBy::create(rotationDuration, angle));
+			CCRotateBy::create(rotTime, angle));
 			trsh->runAction(repeat);
 			trsh->runAction(act);
 			trsh->schedule(schedule_selector(Trash::checkIfFallen));
@@ -44,8 +45,12 @@ Trash* Trash::create(float speedd,float sizee){
 }
 
 void Trash::checkIfFallen(float dt){
+	if(!checkFallen) return;
 	if(this->getPositionY() <= endposY+1){
 	Utils::getGame()->missed();
 	this->removeFromParentAndCleanup(true);
 	}
+}
+void Trash::setCheckFallen(bool input){
+	checkFallen = input;
 }

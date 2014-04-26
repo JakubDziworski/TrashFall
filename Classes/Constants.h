@@ -1,4 +1,6 @@
 
+#ifndef CONSTANTS_H_
+#define CONSTANTS_H_
 
 struct difficulty{
 	//difficulty(float is,float it,int at) : speed(is),timeElapse(it),atOnce(at){}
@@ -6,10 +8,11 @@ struct difficulty{
 	const float timeElapse;
 	const float atOnce;	//per 10 seconds
 };
-const float spriteRatio = 10;	//normalnie jeden sprite jest wysokosci 1/10 ekranu
+const float spriteRatio = 8;	//normalnie jeden sprite jest wysokosci 1/10 ekranu
 const float mainMenubuttonRatio = 1.1f;
 const float rotationDuration = 0.5f;
 const float scoreLabelRatio = 9;
+const float maxTouchTime = 0.35f;
 #define FONT_MAIN "TrashCinemaBB.ttf"
 typedef enum{
 	TAG_BACKGROUND,
@@ -27,3 +30,5 @@ const difficulty LVL4 =  {2,20,10};
 const difficulty LVL5 =  {1.3f,26,12};
 const difficulty LVL6 =  {0.8,35,25};
 const difficulty difficulties[6]  ={LVL6,LVL5,LVL4,LVL3,LVL2,LVL1};
+
+#endif

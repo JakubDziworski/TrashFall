@@ -8,6 +8,7 @@
 #include "GameOver.h"
 #include "Utils.h"
 #include "Constants.h"
+#include "MainMenu.h"
 using namespace cocos2d;
 bool GameOver::init(){
 	if (!CCLayer::init()) {
@@ -43,8 +44,18 @@ void GameOver::trigger(int scorr,int bestt){
 			this->addChild(currscor);
 			this->addChild(bestScoree);
 			this->addChild(menu);
+
+	//
+			Game *g = Utils::getGame();
+			g->pauseSchedulerAndActions();
+			g->setKeypadEnabled(false);
+			this->setKeypadEnabled(true);
+			g->setTouchEnabled(false);
 }
 
 void GameOver::playGame(){
 		CCDirector::sharedDirector()->replaceScene(Game::scene());
+}
+void GameOver::keyBackClicked() {
+	CCDirector::sharedDirector()->replaceScene(MainMenu::scene());
 }

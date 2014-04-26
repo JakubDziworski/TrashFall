@@ -23,6 +23,7 @@ public:
 	virtual bool init();
 	void trigger(int scorr,int bestt);
 	void playGame();
+	void keyBackClicked();
 	LAYER_CREATE_FUNC(GameOver);
 };
 
