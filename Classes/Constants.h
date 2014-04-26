@@ -2,6 +2,8 @@
 #ifndef CONSTANTS_H_
 #define CONSTANTS_H_
 
+
+
 struct difficulty{
 	//difficulty(float is,float it,int at) : speed(is),timeElapse(it),atOnce(at){}
 	const float speed;
@@ -14,6 +16,7 @@ const float rotationDuration = 0.5f;
 const float scoreLabelRatio = 9;
 const float maxTouchTime = 0.35f;
 #define FONT_MAIN "TrashCinemaBB.ttf"
+#define HIGH_SCORE "highscore"
 typedef enum{
 	TAG_BACKGROUND,
 	TAG_HUD,

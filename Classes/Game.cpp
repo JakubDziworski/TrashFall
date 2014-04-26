@@ -26,6 +26,7 @@ bool Game::init() {
 	mSpeed=4;
 	spread=1;
 	fingerDown = false;
+	monitorFallen = true;
 	SimpleAudioEngine::sharedEngine()->playBackgroundMusic("inGame.mp3",true);
 	Utils::setDifficulty(mSpeed,currentTimee,atOnce);
 	this->setTouchEnabled(true);
@@ -59,7 +60,7 @@ void Game::genFallingTrashes(float dt){
 	Utils::setDifficulty(mSpeed,currentTimee,atOnce);
 	spread=mSpeed/4.0f;
 	//CCLOG("time = %.2f\n",currentTimee);
-	Trash *obj = Trash::create(Utils::getRandValueF(mSpeed,mSpeed+spread),Utils::getRandValueF(1,4));
+	Trash *obj = Trash::create(Utils::getRandValueF(mSpeed,mSpeed+spread),Utils::getRandValueF(1,4),monitorFallen);
 	CCLOG("%.2f\n",obj->getContentSize().height*obj->getScale());
 	CCLOG("%.2f\n",Utils::sreensSize().height);
 	this->addChild(obj,Utils::getRandValue(1,3));
@@ -68,8 +69,10 @@ void Game::cleaner(float dt){
 	Utils::cleanView(this,true);
 }
 void Game::missed(){
+	if(!monitorFallen) return;
 	missedAmount++;
 	if(missedAmount>21){
+		monitorFallen = false;
 		Utils::getGameOver()->trigger(Utils::getHUD()->getScore(),200);
 		return;
 	}
@@ -77,7 +80,6 @@ void Game::missed(){
 }
 void Game::ccTouchesMoved(cocos2d::CCSet *pTouches,cocos2d::CCEvent *pEvent){
 	if(pTouches->count()>1) return;
-	CCLOG("CZAS DOTKNIECIA = %2f.\n",touchTime);
 	if(touchTime > maxTouchTime) return;
 	if(this->getChildren() == NULL) return;
 	CCTouch *touch = (CCTouch*)pTouches->anyObject();

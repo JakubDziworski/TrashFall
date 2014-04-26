@@ -18,6 +18,7 @@ class Game: public cocos2d::CCLayer {
 	float resettedTime;
 	float touchTime;
 	bool  fingerDown;
+	bool monitorFallen;
 	int missedAmount;
 public:
 //		void tick();
