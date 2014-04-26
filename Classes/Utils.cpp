@@ -94,7 +94,7 @@ GameOver* Utils::getGameOver(){
 				return (GameOver*)CCDirector::sharedDirector()->getRunningScene()->getChildByTag(TAG_GAMEOVER);
 				else return NULL;
 }
-void Utils::scaleSprite(CCSprite *sprite,float ratioo,float additional,bool wid){
+void Utils::scaleSprite(CCNode *sprite,float ratioo,float additional,bool wid){
 	float expectedRatio = Utils::sreensSize().height/ratioo;
 	float mnoznik  = expectedRatio/sprite->getContentSize().height;
 	if(wid){

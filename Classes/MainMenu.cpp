@@ -11,6 +11,8 @@
 #include "Game.h"
 #include "Constants.h"
 #include "SpriteWithText.h"
+#include "AchievmentPopUp.h"
+
 using namespace cocos2d;
 using namespace CocosDenshion;
 
@@ -44,7 +46,11 @@ bool MainMenu::init(){
 	 Utils::scaleButton(exitBtn,mainMenubuttonRatio);
 	 CCMenu *menu = CCMenu::create(playBtn,exitBtn,NULL);
 			     menu->alignItemsVertically();
+
+			     AchievmentPopUp *pop = AchievmentPopUp::createWithSpriteFrameNameee("offButton.png","offPaused.png","MILESTONE 100",ccColor3B{0,0,0});
+			     pop->activate();
 			     this->addChild(menu,3);
+			     this->addChild(pop,4);
 			     this->addChild(bg,-1);
 			     //latajace w tle gowna
 			     genFallingTrash(0.1);
@@ -60,8 +66,12 @@ CCScene* MainMenu::scene(){
 	 return scene;
 }
 void MainMenu::playGame(){
-	SimpleAudioEngine::sharedEngine()->playEffect("buttonClick.wav");
-	CCDirector::sharedDirector()->replaceScene(Game::scene());
+	AchievmentPopUp *pop = AchievmentPopUp::createWithSpriteFrameNameee("offButton.png","offPaused.png","MILESTONE 100",ccColor3B{0,0,0});
+				     pop->activate();
+				     this->addChild(pop,4);
+
+	//SimpleAudioEngine::sharedEngine()->playEffect("buttonClick.wav");
+	//CCDirector::sharedDirector()->replaceScene(Game::scene());
 }
 
 void MainMenu::keyBackClicked() {
@@ -69,6 +79,7 @@ void MainMenu::keyBackClicked() {
 	CCDirector::sharedDirector()->end();
 }
 void MainMenu::genFallingTrash(float dt){
+
 	Trash *obj = Trash::create(Utils::getRandValueF(4,8),Utils::getRandValueF(2,4),3);
 	this->addChild(obj,Utils::getRandValue(1,3));
 }

@@ -18,7 +18,8 @@ LOCAL_SRC_FILES := helloworld/main.cpp \
 				  ../../Classes/Background.cpp \
 				  ../../Classes/SpriteWithText.cpp \
 				  ../../Classes/Pause.cpp \
-				  ../../Classes/GameOver.cpp
+				  ../../Classes/GameOver.cpp \
+				  ../../Classes/AchievmentPopUp.cpp
 
                    
 LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../Classes                   
