@@ -8,6 +8,7 @@
 #include "HUD.h"
 #include "Constants.h"
 #include "Utils.h"
+#include "AchievmentPopUp.h"
 using namespace cocos2d;
 
 bool HUD::init() {
@@ -40,7 +41,7 @@ bool HUD::init() {
 	return true;
 }
 
-void HUD::addToScore(int value){
+void HUD::addToScore(int value,int nomisses){
 	score+=value;
 	scoreLabel->setString(CCString::createWithFormat("%d",score)->getCString());
 	scoreShadow->setString(scoreLabel->getString());
@@ -53,6 +54,24 @@ void HUD::addToScore(int value){
 	if(score%20 == 0){
 		scaleStop = 10;
 	}
+	AchievmentPopUp *achivscr=NULL;
+	AchievmentPopUp *achivsingl = NULL;
+	if (nomisses == 10)		achivscr = AchievmentPopUp::createWithSpriteFrameNameee(ACH_10_SINGLE,ccColor3B{0,0,0});
+	else if (nomisses == 20)achivscr = AchievmentPopUp::createWithSpriteFrameNameee(ACH_20_SINGLE,ccColor3B{0,0,0});
+	else if (nomisses == 50)achivscr = AchievmentPopUp::createWithSpriteFrameNameee(ACH_50_SINGLE,ccColor3B{0,0,0});
+	else if (nomisses == 100)achivscr = AchievmentPopUp::createWithSpriteFrameNameee(ACH_100_SINGLE,ccColor3B{0,0,0});
+	else if (nomisses == 150)achivscr= AchievmentPopUp::createWithSpriteFrameNameee(ACH_150_SINGLE,ccColor3B{0,0,0});
+	else if (nomisses == 250)achivscr= AchievmentPopUp::createWithSpriteFrameNameee(ACH_250_SINGLE,ccColor3B{0,0,0});
+	if (score == 50)   		achivsingl= AchievmentPopUp::createWithSpriteFrameNameee(ACH_50,ccColor3B{0,0,0});
+	else if (score == 100)  achivsingl = AchievmentPopUp::createWithSpriteFrameNameee(ACH_100,ccColor3B{0,0,0});
+	else if (score == 250)  achivsingl = AchievmentPopUp::createWithSpriteFrameNameee(ACH_250,ccColor3B{0,0,0});
+	else if (score == 500)  achivsingl = AchievmentPopUp::createWithSpriteFrameNameee(ACH_500,ccColor3B{0,0,0});
+	else if (score == 1000) achivsingl = AchievmentPopUp::createWithSpriteFrameNameee(ACH_1000,ccColor3B{0,0,0});
+	else if (score == 2000) achivsingl = AchievmentPopUp::createWithSpriteFrameNameee(ACH_2000,ccColor3B{0,0,0});
+	CCLOG("B4");
+	if(achivscr !=NULL) {CCLOG("NOMISSES = %d",nomisses);Utils::getBackground()->addChild(achivscr); achivscr->activate();}
+	if(achivsingl != NULL) {CCLOG("SCORE = %d",score);Utils::getBackground()->addChild(achivsingl); achivsingl->activate();}
+	CCLOG("AFTERA");
 
 }
 void HUD::animateText(float dt){

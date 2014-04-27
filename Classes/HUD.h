@@ -25,7 +25,7 @@ private:
 	int score;
 public:
 			virtual bool init();
-			void addToScore(int value);
+			void addToScore(int value,int nomisses);
 	 	//	virtual void keyBackClicked();
 			LAYER_CREATE_FUNC(HUD);
 			void animateText(float dt);

@@ -17,6 +17,24 @@ const float scoreLabelRatio = 9;
 const float maxTouchTime = 0.35f;
 #define FONT_MAIN "TrashCinemaBB.ttf"
 #define HIGH_SCORE "highscore"
+//achievments
+
+#define ACH_50 "BEGGINER COLLECTOR"
+#define ACH_100 "INTERMEDIATE COLLECTOR"
+#define ACH_250 "ADVANCED COLLECTOR"
+#define ACH_500 "PRO COLLECTOR"
+#define ACH_1000 "EXPERT COLLECTOR"
+#define ACH_2000 "MASTER COLLECTOR"
+
+#define ACH_10_SINGLE "CORRECTNESS"
+#define ACH_20_SINGLE "FLAWLESSNESS"
+#define ACH_50_SINGLE "CAREFULLNESS"
+#define ACH_100_SINGLE "FAULTLESSNESS"
+#define ACH_150_SINGLE "PERFECTION"
+#define ACH_250_SINGLE "ACCURACY MASTER"
+
+
+
 typedef enum{
 	TAG_BACKGROUND,
 	TAG_HUD,

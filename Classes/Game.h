@@ -20,6 +20,7 @@ class Game: public cocos2d::CCLayer {
 	bool  fingerDown;
 	bool monitorFallen;
 	int missedAmount;
+	int notMissed;
 public:
 //		void tick();
 		void missed();

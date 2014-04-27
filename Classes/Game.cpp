@@ -20,6 +20,7 @@ bool Game::init() {
 		return false;
 	}
 	//BACKGROUND
+	notMissed=0;
 	missedAmount = 0;
 	currentTimee=0;
 	resettedTime=0;
@@ -67,6 +68,7 @@ void Game::genFallingTrashes(float dt){
 }
 void Game::missed(){
 	if(!monitorFallen) return;
+	notMissed=0;
 	missedAmount++;
 	if(missedAmount>21){
 		monitorFallen = false;
@@ -89,7 +91,8 @@ void Game::ccTouchesMoved(cocos2d::CCSet *pTouches,cocos2d::CCEvent *pEvent){
 		if(CCRect::CCRectContainsPoint(trsh->boundingBox(),location)){
 			SimpleAudioEngine::sharedEngine()->playEffect("buttonClick2.mp3");
 			this->removeChild(trsh,true);
-			Utils::getHUD()->addToScore(1);
+			notMissed++;
+			Utils::getHUD()->addToScore(1,notMissed);
 		}
 	}
 }
