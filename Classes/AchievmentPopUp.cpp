@@ -15,6 +15,7 @@ bool AchievmentPopUp::initWithParams(const char *pszSpriteFrameName,const char *
 			pszSpriteFrameName, inputText, color);
 	currTime=0;
 	scaleFactor=0;
+	achvName = CCString::create(inputText);
 	const float popWidth = popup->getContentSize().width;
 	const float popHeight = popup->getContentSize().height;
 	CCSprite *addItionalIMG = CCSprite::createWithSpriteFrameName(
@@ -28,21 +29,27 @@ bool AchievmentPopUp::initWithParams(const char *pszSpriteFrameName,const char *
 	oczekiwanyfact = 0.9*Utils::sreensSize().width/popup->getContentSize().width;
 	return true;
 }
-AchievmentPopUp* AchievmentPopUp::createWithSpriteFrameNameee(const char *pszSpriteFrameName,const char *additionalImgFrameName,const char *inputText,cocos2d::ccColor3B color){
+AchievmentPopUp* AchievmentPopUp::createWithSpriteFrameNameee(const char *inputText,cocos2d::ccColor3B color,const char *pszSpriteFrameName,const char *additionalImgFrameName){
 	AchievmentPopUp *achv = new AchievmentPopUp();
 	achv->initWithParams(pszSpriteFrameName,additionalImgFrameName,inputText,color);
 	achv->autorelease();
 	return achv;
 }
 void AchievmentPopUp::activate(){
+	if(CCUserDefault::sharedUserDefault()->getIntegerForKey(achvName->getCString(),0) != 0){
+		this->removeFromParentAndCleanup(true);
+		return;
+	}
+	CCUserDefault::sharedUserDefault()->setIntegerForKey(achvName->getCString(),1);
 	this->setScale(scaleFactor);
-	this->setPosition(Utils::getCorrectPosition(0.5,0.5));
-	//Utils::getBackground()->addChild(this);
+	this->setPosition(Utils::getCorrectPosition(0.5,0.9));
+	//Utils::getBackground()->addChild(this,4);
 	this->schedule(schedule_selector(AchievmentPopUp::animate));
 }
 void AchievmentPopUp::animate(float dt){
 	if(currTime>endTime + animTime){
 			this->removeFromParentAndCleanup(true);
+			return;
 		}
 	currTime+=dt;
 		if(currTime<animTime){

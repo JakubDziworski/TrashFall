@@ -47,10 +47,10 @@ bool MainMenu::init(){
 	 CCMenu *menu = CCMenu::create(playBtn,exitBtn,NULL);
 			     menu->alignItemsVertically();
 
-			     AchievmentPopUp *pop = AchievmentPopUp::createWithSpriteFrameNameee("offButton.png","offPaused.png","MILESTONE 100",ccColor3B{0,0,0});
-			     pop->activate();
+			    // AchievmentPopUp *pop = AchievmentPopUp::createWithSpriteFrameNameee("offButton.png","offPaused.png","MILESTONE 100",ccColor3B{0,0,0});
+			     //pop->activate();
 			     this->addChild(menu,3);
-			     this->addChild(pop,4);
+			    // this->addChild(pop,4);
 			     this->addChild(bg,-1);
 			     //latajace w tle gowna
 			     genFallingTrash(0.1);
@@ -66,12 +66,12 @@ CCScene* MainMenu::scene(){
 	 return scene;
 }
 void MainMenu::playGame(){
-	AchievmentPopUp *pop = AchievmentPopUp::createWithSpriteFrameNameee("offButton.png","offPaused.png","MILESTONE 100",ccColor3B{0,0,0});
-				     pop->activate();
-				     this->addChild(pop,4);
-
-	//SimpleAudioEngine::sharedEngine()->playEffect("buttonClick.wav");
-	//CCDirector::sharedDirector()->replaceScene(Game::scene());
+//	AchievmentPopUp *pop = AchievmentPopUp::createWithSpriteFrameNameee("MILESTONE 100",ccColor3B{0,0,0});
+//				     pop->activate();
+//				     this->addChild(pop,4);
+	CCUserDefault::sharedUserDefault()->flush();
+	SimpleAudioEngine::sharedEngine()->playEffect("buttonClick.wav");
+	CCDirector::sharedDirector()->replaceScene(Game::scene());
 }
 
 void MainMenu::keyBackClicked() {
