@@ -66,9 +66,6 @@ CCScene* MainMenu::scene(){
 	 return scene;
 }
 void MainMenu::playGame(){
-//	AchievmentPopUp *pop = AchievmentPopUp::createWithSpriteFrameNameee("MILESTONE 100",ccColor3B{0,0,0});
-//				     pop->activate();
-//				     this->addChild(pop,4);
 	CCUserDefault::sharedUserDefault()->flush();
 	SimpleAudioEngine::sharedEngine()->playEffect("buttonClick.wav");
 	CCDirector::sharedDirector()->replaceScene(Game::scene());

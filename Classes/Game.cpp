@@ -11,6 +11,7 @@
 #include "Constants.h"
 #include "SimpleAudioEngine.h"
 #include "Background.h"
+#include "AchvDisplayer.h"
 #include "GameOver.h"
 using namespace CocosDenshion;
 
@@ -44,11 +45,13 @@ CCScene* Game::scene() {
 	Pause *pause = Pause::create();
 	Background *bgLayer = Background::create();
 	GameOver *gover = GameOver::create();
+	AchvDisplayer *achivdispl = AchvDisplayer::create();
 	scene->addChild(bgLayer,-1,TAG_BACKGROUND);
 	scene->addChild(layer,0,TAG_GAMELayer);
 	scene->addChild(hud,1,TAG_HUD);
 	scene->addChild(pause,3,TAG_PAUSE);
 	scene->addChild(gover,4,TAG_GAMEOVER);
+	scene->addChild(achivdispl);
 	return scene;
 }
 void Game::genFallingTrashes(float dt){
