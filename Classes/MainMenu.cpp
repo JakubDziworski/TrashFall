@@ -12,6 +12,7 @@
 #include "Constants.h"
 #include "SpriteWithText.h"
 #include "AchievmentPopUp.h"
+#include "AchievmentDisplayer.h"
 
 using namespace cocos2d;
 using namespace CocosDenshion;
@@ -66,6 +67,7 @@ CCScene* MainMenu::scene(){
 	 return scene;
 }
 void MainMenu::playGame(){
+	CCLOG("started menu");
 //	AchievmentPopUp *pop = AchievmentPopUp::createWithSpriteFrameNameee("MILESTONE 100",ccColor3B{0,0,0});
 //				     pop->activate();
 //				     this->addChild(pop,4);

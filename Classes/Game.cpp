@@ -11,6 +11,7 @@
 #include "Constants.h"
 #include "SimpleAudioEngine.h"
 #include "Background.h"
+#include "AchievmentDisplayer.h"
 #include "GameOver.h"
 using namespace CocosDenshion;
 
@@ -37,6 +38,8 @@ bool Game::init() {
 }
 CCScene* Game::scene() {
 	CCScene *scene = CCScene::create();
+	AchievmentDisplayer *achvList=AchievmentDisplayer::create();
+	scene->addChild(achvList,6);
 	scene->setTag(TAG_GAMESCENE);
 	Game *layer = Game::create();
 	HUD *hud = HUD::create();

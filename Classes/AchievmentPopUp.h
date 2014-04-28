@@ -17,11 +17,13 @@ class AchievmentPopUp: public cocos2d::CCNode {
 	float currTime;
 	float oczekiwanyfact;
 	float scaleFactor;
+	SpriteWithText *mainSprite;
 	cocos2d::CCString *achvName;
 	public:
 		bool initWithParams(const char *pszSpriteFrameName,const char *additionalImgFrameName,const char *inputText,cocos2d::ccColor3B color);
-		static AchievmentPopUp* createWithSpriteFrameNameee(const char *inputText,cocos2d::ccColor3B color,const char *pszSpriteFrameName="offButton.png",const char *additionalImgFrameName="trophy.png");
+		static AchievmentPopUp* createWithSpriteFrameNameee(const char *inputText,cocos2d::ccColor3B color=cocos2d::ccColor3B{0,0,0},const char *pszSpriteFrameName="offButton.png",const char *additionalImgFrameName="trophy.png");
 		void activate();
+		void verifyCollectedandChange();
 		void animate(float dt);
 };
 

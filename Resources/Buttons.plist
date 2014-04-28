@@ -4,10 +4,10 @@
     <dict>
         <key>frames</key>
         <dict>
-            <key>offButton.png</key>
+            <key>greyButton.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{722,516},{718,172}}</string>
+                <string>{{2,1544},{718,172}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -17,10 +17,36 @@
                 <key>sourceSize</key>
                 <string>{718,172}</string>
             </dict>
+            <key>greyTrophy.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{260,1718},{256,230}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{256,230}}</string>
+                <key>sourceSize</key>
+                <string>{256,230}</string>
+            </dict>
+            <key>offButton.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{574,722},{718,172}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <true/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{718,172}}</string>
+                <key>sourceSize</key>
+                <string>{718,172}</string>
+            </dict>
             <key>offPaused.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{1146,2},{570,512}}</string>
+                <string>{{2,1030},{570,512}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -33,11 +59,11 @@
             <key>onButton.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{2,516},{718,172}}</string>
+                <string>{{574,2},{718,172}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
-                <false/>
+                <true/>
                 <key>sourceColorRect</key>
                 <string>{{0,0},{718,172}}</string>
                 <key>sourceSize</key>
@@ -46,7 +72,7 @@
             <key>onPaused.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{574,2},{570,512}}</string>
+                <string>{{2,516},{570,512}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -72,11 +98,11 @@
             <key>trophy.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{1718,2},{256,230}}</string>
+                <string>{{2,1718},{256,230}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
-                <true/>
+                <false/>
                 <key>sourceColorRect</key>
                 <string>{{0,0},{256,230}}</string>
                 <key>sourceSize</key>
@@ -90,9 +116,9 @@
             <key>realTextureFileName</key>
             <string>Buttons.png</string>
             <key>size</key>
-            <string>{1950,690}</string>
+            <string>{748,1950}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:e0662717c8ad733dfcfe45a1cc4f878a:507b13c8016c43ff9ccf9366deff9b71:49b6939ab344b99a0a11fe0530bc9ec0$</string>
+            <string>$TexturePacker:SmartUpdate:670d229c181bd158631ccc1f797e1c6e:df0cd05dfd6c2778d2335b755b0e62d6:49b6939ab344b99a0a11fe0530bc9ec0$</string>
             <key>textureFileName</key>
             <string>Buttons.png</string>
         </dict>

@@ -8,6 +8,9 @@ acjhievments
 loading screen
 poziom trudnosci
 
+z³e dotkniêcie powoduje prezgrywanie szybsze
+PAUZA PO WYLACZENIU
+
 ACHIEVMENTY:
 50
 100

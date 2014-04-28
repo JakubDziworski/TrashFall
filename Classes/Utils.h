@@ -45,5 +45,7 @@ public:
 	static int getScaledFontSize(int fontsize);
 	static cocos2d::CCPoint getCorrectPosition(float xRatio,float yRatio);
 	static float getcorrectValue(float input,bool width=false);
+	static const char* getAchvName(const char*);
+	static const char* getAchvDescr(const char*);
 };
 #endif /* UTILS_H_ */

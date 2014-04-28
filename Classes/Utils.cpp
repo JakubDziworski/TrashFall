@@ -8,6 +8,7 @@
 #include "Utils.h"
 #include "Trash.h"
 #include "Constants.h"
+#include <string.h>
 
 using namespace cocos2d;
 CCSize Utils::sreensSize(){
@@ -118,4 +119,18 @@ CCPoint Utils::getCorrectPosition(float xRatio,float yRatio){
 float Utils::getcorrectValue(float input,bool width){
 	if(width) return input*CCDirector::sharedDirector()->getWinSize().width;
 	return input*CCDirector::sharedDirector()->getWinSize().height;
+}
+const char* Utils::getAchvName(const char* input){
+		int end =0;
+		for (end; input[end] != ','; end++)CCLOG("end %c",input[end]);
+		std::string str = CCString::create(input)->m_sString.substr(0,end);
+		return str.c_str();
+}
+const char* Utils::getAchvDescr(const char* input){
+	int start = 0;
+	int end =0;
+	for (start; input[start] != ','; start++);
+	for (end = start; input[end] != '\0'; end++);
+	std::string str = CCString::create(input)->m_sString.substr(start+1,end);
+	return str.c_str();
 }
