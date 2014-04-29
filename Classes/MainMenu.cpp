@@ -53,11 +53,10 @@ bool MainMenu::init(){
 	 Utils::scaleButton(exitBtn,mainMenubuttonRatio);
 	 menu = CCMenu::create(playBtn,exitBtn,achvBtn,NULL);
 			     menu->alignItemsVertically();
-			    // AchievmentPopUp *pop = AchievmentPopUp::createWithSpriteFrameNameee("offButton.png","offPaused.png","MILESTONE 100",ccColor3B{0,0,0});
-			     //pop->activate();
 			     this->addChild(menu,3);
-			    // this->addChild(pop,4);
 			     this->addChild(bg,-1);
+			     achvDisplayer = AchvDisplayer::create();
+			     this->addChild(achvDisplayer,6);
 			     //latajace w tle gowna
 			     genFallingTrash(0.1);
 			     this->schedule(schedule_selector(MainMenu::genFallingTrash),4.5);
@@ -66,10 +65,8 @@ bool MainMenu::init(){
 CCScene* MainMenu::scene(){
 	 CCScene *scene = CCScene::create();
 	 MainMenu *layer;
-	 AchvDisplayer *achvDisplayer = AchvDisplayer::create();
 	 layer = MainMenu::create();
 	 scene->addChild(layer,1);
-	 scene->addChild(achvDisplayer,1,TAG_ACHVDISPLAYER);
 	 return scene;
 }
 void MainMenu::playGame(){
@@ -86,18 +83,18 @@ void MainMenu::genFallingTrash(float dt){
 	this->addChild(obj,Utils::getRandValue(1,3));
 }
 void MainMenu::ShowAchievments(){
-	Utils::getAchvDisplayer()->start();
+	achvDisplayer->start();
 }
 void MainMenu::disableTouch(){
+	CCLOG("TOUCH DISABLED");
 	this->setTouchEnabled(false);
 	this->setKeypadEnabled(false);
 	menu->setTouchEnabled(false);
 	menu->setKeypadEnabled(false);
-	CCLOG("TOUCH DISABLED");
 }
 void MainMenu::enableTouch(){
+	CCLOG("TOUCH ENABLED");
 	this->setTouchEnabled(true);
 	this->setKeypadEnabled(true);
 	menu->setTouchEnabled(true);
-	CCLOG("TOUCH ENABLED");
 }

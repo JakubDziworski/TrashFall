@@ -9,6 +9,7 @@
 class MainMenu : public ITouchDisablable {
 private:
 	cocos2d::CCMenu *menu;
+	AchvDisplayer *achvDisplayer;
 public:
 	void tick();
 	virtual bool init();

@@ -17,6 +17,7 @@
 using namespace cocos2d;
 
 bool AchievmentPopUp::initWithParams(const char *pszSpriteFrameName,const char *additionalImgFrameName,const char *inputText,cocos2d::ccColor3B color){
+	CCLOG("w AchievmentPopUp::initWithParams %s",inputText);
 	baseBg = SpriteWithText::createWithSpriteFrameNamee(
 			pszSpriteFrameName, inputText, color);
 	achvName = CCString::create(inputText);
@@ -27,6 +28,7 @@ bool AchievmentPopUp::initWithParams(const char *pszSpriteFrameName,const char *
 	return true;
 }
 AchievmentPopUp* AchievmentPopUp::createWithSpriteFrameNameee(const char *inputText,CCUserDefault *savedDat,cocos2d::ccColor3B color,const char *pszSpriteFrameName,const char *additionalImgFrameName){
+	CCLOG("w AchievmentPopUp::createWithSpriteFrameNameee %s",inputText);
 	AchievmentPopUp *achv = new AchievmentPopUp();
 	achv->savedData = savedDat;
 	achv->initWithParams(pszSpriteFrameName,additionalImgFrameName,inputText,color);
