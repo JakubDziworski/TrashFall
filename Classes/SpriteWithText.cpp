@@ -32,6 +32,6 @@ void SpriteWithText::setText(const char *inputText,ccColor3B color){
 }
 void SpriteWithText::setachivmentStyle(const char *text){
 	label->setFontSize(this->getContentSize().height/4);
-	label->setPositionX(label->getPositionX()+this->getContentSize().width/8*this->getScaleX());
+	//label->setPositionX(label->getPositionX()+this->getContentSize().width/8*this->getScaleX());
 	label->setString(text);
 }

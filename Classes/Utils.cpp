@@ -120,11 +120,11 @@ float Utils::getcorrectValue(float input,bool width){
 	if(width) return input*CCDirector::sharedDirector()->getWinSize().width;
 	return input*CCDirector::sharedDirector()->getWinSize().height;
 }
-std::string Utils::getAchvDescr(std::string input){
+std::string Utils::getAchvName(std::string input){
 	unsigned pos = input.find(",");
 	return input.substr(0,pos);
 }
-std::string Utils::getAchvName(std::string input){
+std::string Utils::getAchvDescr(std::string input){
 	unsigned pos = input.find(",");
 	return input.substr(pos+1);
 }

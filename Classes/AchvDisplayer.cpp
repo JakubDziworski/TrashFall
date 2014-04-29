@@ -6,12 +6,13 @@
  */
 #define COCOS2D_DEBUG 2
 #include "AchvDisplayer.h"
-#include "SpriteWithText.h"
+#include "AchievmentPopUp.h"
 #include "Utils.h"
 #include "AchvList.h"
 #include <vector>
 #include <string.h>
 #include "Constants.h"
+
 using namespace cocos2d;
 
 bool AchvDisplayer::init(){
@@ -39,20 +40,18 @@ bool AchvDisplayer::init(){
 	achievmentsNames.push_back(ACH_20_SINGLE);
 	achievmentsNames.push_back(ACH_50_SINGLE);
 	achievmentsNames.push_back(ACH_100_SINGLE);
-	achievmentsNames.push_back(NOWY);
-
 	//
 	for(int i=0;i<achievmentsNames.size();i++){
-		SpriteWithText *record;
+		AchievmentPopUp *record;
 		if(baza->getIntegerForKey(achievmentsNames[i].c_str(),0) != 0){
 			CCString *str = CCString::create(Utils::getAchvName(achievmentsNames[i]));
 			CCString *toput = CCString::createWithFormat("ACHIEVMENT %s UNLOCKED",str->getCString());
-			record = SpriteWithText::createWithSpriteFrameNamee("offButton.png",toput->getCString(),ccColor3B{0,0,0});
+			record = AchievmentPopUp::createWithSpriteFrameNameee(toput->getCString());
 		}
 		else{
 			CCString *str = CCString::create(Utils::getAchvName(achievmentsNames[i]));
 			CCString *toput = CCString::createWithFormat("ACHIEVMENT '%s' LOCKED",str->getCString());
-			record = SpriteWithText::createWithSpriteFrameNamee("onButton.png",toput->getCString(),ccColor3B{0,0,0});
+			record = AchievmentPopUp::createWithSpriteFrameNameee(toput->getCString());
 		}
 		record->setPosition(ccp(posX,posY));
 		this->addChild(record);
