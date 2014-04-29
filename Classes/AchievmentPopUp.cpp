@@ -34,13 +34,11 @@ AchievmentPopUp* AchievmentPopUp::createWithSpriteFrameNameee(const char *inputT
 	return achv;
 }
 void AchievmentPopUp::activate(){
-//	if(isCollected()){
-//		this->removeFromParentAndCleanup(true);
-//		return;
-//	}
-	if(CCUserDefault::sharedUserDefault()->getBoolForKey(Utils::getAchvTag(achvName->getCString()).c_str(),false) == true){this->removeFromParentAndCleanup(true);
-	return;}
-	CCUserDefault::sharedUserDefault()->setBoolForKey(Utils::getAchvTag(achvName->getCString()).c_str(),true);
+	if(isCollected()){
+		this->removeFromParentAndCleanup(true);
+		return;
+	}
+	savedData->setBoolForKey(Utils::getAchvTag(achvName->getCString()).c_str(),true);
 	CCLOG("ZAPISYWANIE");
 	currTime=0;
 	first=false;second=false;third=false;forth=false;
@@ -57,10 +55,9 @@ void AchievmentPopUp::activate(){
 }
 void AchievmentPopUp::activateForListing(){
 	CCString *toDisplay;
-	if(CCUserDefault::sharedUserDefault()->getBoolForKey(Utils::getAchvTag(achvName->getCString()).c_str()) == true){
-		CCLOG("ZJAEBISCIEI SKOLEKTOWACJONWAE");
+	if(isCollected()){
 		baseBg->setDisplayFrame(CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("onCollected.png"));
-		toDisplay= CCString::createWithFormat("ACHIEVMENT '%s' UNLOCKED\n%s",Utils::getAchvName(achvName->getCString()).c_str(),Utils::getAchvDescr(achvName->getCString()).c_str());
+		toDisplay= CCString::createWithFormat("ACHIEVMENT '%s' UNLOCKED\n(%s)",Utils::getAchvName(achvName->getCString()).c_str(),Utils::getAchvDescr(achvName->getCString()).c_str());
 	}
 	else {
 		baseBg->setDisplayFrame(CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("offCollected.png"));
@@ -99,7 +96,6 @@ void AchievmentPopUp::animate(float dt){
 	}
 }
 bool AchievmentPopUp::isCollected(){
-	CCLOG("record %s has value %d",Utils::getAchvTag(achvName->getCString()).c_str(),savedData->getIntegerForKey(achvName->getCString()));
-	if(CCUserDefault::sharedUserDefault()->getIntegerForKey(Utils::getAchvTag(achvName->getCString()).c_str(),0) == 1) return true;
+	if(savedData->getBoolForKey(Utils::getAchvTag(achvName->getCString()).c_str(),false) == true) return true;
 	return false;
 }

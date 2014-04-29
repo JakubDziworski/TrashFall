@@ -71,7 +71,6 @@ void MainMenu::playGame(){
 }
 
 void MainMenu::keyBackClicked() {
-	CCUserDefault::sharedUserDefault()->setIntegerForKey("exited",1);
 	SimpleAudioEngine::sharedEngine()->playEffect("buttonClick2.mp3");
 	CCDirector::sharedDirector()->end();
 }
