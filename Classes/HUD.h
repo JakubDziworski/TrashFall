@@ -8,6 +8,7 @@
 #ifndef HUD_H_
 #define HUD_H_
 #define animationStop 0.5f
+#include "Background.h"
 #include "cocos2d.h"
 
 class HUD: public cocos2d::CCLayer {
@@ -23,6 +24,8 @@ private:
 	bool extraAnim;
 	int decr;
 	int score;
+	Background *bg;
+	cocos2d::CCUserDefault *savedData;
 public:
 			virtual bool init();
 			void addToScore(int value,int nomisses);

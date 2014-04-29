@@ -22,6 +22,8 @@ bool HUD::init() {
 	decr = 255;
 	animate = false;
 	extraAnim = false;
+	savedData = CCUserDefault::sharedUserDefault();
+	bg = Utils::getBackground();
 	scoreLabel = CCLabelTTF::create("0",FONT_MAIN,Utils::getScaledFontSize(75));
 	scoreShadow = CCLabelTTF::create("0",FONT_MAIN,Utils::getScaledFontSize(75));
 	scoreShadow->setColor(ccColor3B{0,0,0});
@@ -57,22 +59,20 @@ void HUD::addToScore(int value,int nomisses){
 	}
 	AchievmentPopUp *achivscr=NULL;
 	AchievmentPopUp *achivsingl = NULL;
-	if (nomisses == 10)		achivscr = AchievmentPopUp::createWithSpriteFrameNameee(ACH_10_SINGLE.c_str());
-	else if (nomisses == 20)achivscr = AchievmentPopUp::createWithSpriteFrameNameee(ACH_20_SINGLE.c_str());
-	else if (nomisses == 50)achivscr = AchievmentPopUp::createWithSpriteFrameNameee(ACH_50_SINGLE.c_str());
-	else if (nomisses == 100)achivscr = AchievmentPopUp::createWithSpriteFrameNameee(ACH_100_SINGLE.c_str());
-	else if (nomisses == 150)achivscr= AchievmentPopUp::createWithSpriteFrameNameee(ACH_150_SINGLE.c_str());
-	else if (nomisses == 250)achivscr= AchievmentPopUp::createWithSpriteFrameNameee(ACH_250_SINGLE.c_str());
-	if (score == 50)   		achivsingl= AchievmentPopUp::createWithSpriteFrameNameee(ACH_50.c_str());
-	else if (score == 100)  achivsingl = AchievmentPopUp::createWithSpriteFrameNameee(ACH_100.c_str());
-	else if (score == 250)  achivsingl = AchievmentPopUp::createWithSpriteFrameNameee(ACH_250.c_str());
-	else if (score == 500)  achivsingl = AchievmentPopUp::createWithSpriteFrameNameee(ACH_500.c_str());
-	else if (score == 1000) achivsingl = AchievmentPopUp::createWithSpriteFrameNameee(ACH_1000.c_str());
-	else if (score == 2000) achivsingl = AchievmentPopUp::createWithSpriteFrameNameee(ACH_2000.c_str());
-	CCLOG("B4");
-	if(achivscr !=NULL) {CCLOG("NOMISSES = %d",nomisses);Utils::getBackground()->addChild(achivscr); achivscr->activate();}
-	if(achivsingl != NULL) {CCLOG("SCORE = %d",score);Utils::getBackground()->addChild(achivsingl); achivsingl->activate();}
-	CCLOG("AFTERA");
+	if (nomisses == 10)		achivscr = AchievmentPopUp::createWithSpriteFrameNameee(ACH_10_SINGLE.c_str(),savedData);
+	else if (nomisses == 20)achivscr = AchievmentPopUp::createWithSpriteFrameNameee(ACH_20_SINGLE.c_str(),savedData);
+	else if (nomisses == 50)achivscr = AchievmentPopUp::createWithSpriteFrameNameee(ACH_50_SINGLE.c_str(),savedData);
+	else if (nomisses == 100)achivscr = AchievmentPopUp::createWithSpriteFrameNameee(ACH_100_SINGLE.c_str(),savedData);
+	else if (nomisses == 150)achivscr= AchievmentPopUp::createWithSpriteFrameNameee(ACH_150_SINGLE.c_str(),savedData);
+	else if (nomisses == 250)achivscr= AchievmentPopUp::createWithSpriteFrameNameee(ACH_250_SINGLE.c_str(),savedData);
+	if (score == 50)   		achivsingl= AchievmentPopUp::createWithSpriteFrameNameee(ACH_50.c_str(),savedData);
+	else if (score == 100)  achivsingl = AchievmentPopUp::createWithSpriteFrameNameee(ACH_100.c_str(),savedData);
+	else if (score == 250)  achivsingl = AchievmentPopUp::createWithSpriteFrameNameee(ACH_250.c_str(),savedData);
+	else if (score == 500)  achivsingl = AchievmentPopUp::createWithSpriteFrameNameee(ACH_500.c_str(),savedData);
+	else if (score == 1000) achivsingl = AchievmentPopUp::createWithSpriteFrameNameee(ACH_1000.c_str(),savedData);
+	else if (score == 2000) achivsingl = AchievmentPopUp::createWithSpriteFrameNameee(ACH_2000.c_str(),savedData);
+	if(achivscr !=NULL) {bg->addChild(achivscr,1); achivscr->activate();}
+	if(achivsingl != NULL) {bg->addChild(achivsingl,1); achivsingl->activate();}
 
 }
 void HUD::animateText(float dt){

@@ -17,35 +17,56 @@
 using namespace cocos2d;
 
 bool AchievmentPopUp::initWithParams(const char *pszSpriteFrameName,const char *additionalImgFrameName,const char *inputText,cocos2d::ccColor3B color){
-	SpriteWithText *popup = SpriteWithText::createWithSpriteFrameNamee(
+	baseBg = SpriteWithText::createWithSpriteFrameNamee(
 			pszSpriteFrameName, inputText, color);
-	currTime=0;
-	first=false;second=false;third=false;forth=false;
-	r1=true;r2=true;r3=true;r4=true;
 	achvName = CCString::create(inputText);
-	const float popWidth = popup->getContentSize().width;
-	const float popHeight = popup->getContentSize().height;
-	CCString *toDisplay = CCString::createWithFormat("ACHIEVMENT UNLOCKED!\n%s",Utils::getAchvName(inputText).c_str());
-	popup->setachivmentStyle(toDisplay->getCString());
-	this->addChild(popup);
-	this->setScale(0.77*Utils::sreensSize().width/popup->getContentSize().width);
+	//baseBg->setTextSize(5);
+	const float popWidth = baseBg->getContentSize().width;
+	const float popHeight = baseBg->getContentSize().height;
+	this->addChild(baseBg);
+	this->setScale(0.77*Utils::sreensSize().width/baseBg->getContentSize().width);
 	return true;
 }
-AchievmentPopUp* AchievmentPopUp::createWithSpriteFrameNameee(const char *inputText,cocos2d::ccColor3B color,const char *pszSpriteFrameName,const char *additionalImgFrameName){
+AchievmentPopUp* AchievmentPopUp::createWithSpriteFrameNameee(const char *inputText,CCUserDefault *savedDat,cocos2d::ccColor3B color,const char *pszSpriteFrameName,const char *additionalImgFrameName){
 	AchievmentPopUp *achv = new AchievmentPopUp();
+	achv->savedData = savedDat;
 	achv->initWithParams(pszSpriteFrameName,additionalImgFrameName,inputText,color);
 	achv->autorelease();
 	return achv;
 }
 void AchievmentPopUp::activate(){
-	if(CCUserDefault::sharedUserDefault()->getIntegerForKey(achvName->getCString(),0) != 0){
+	if(!isCollected()){
 		this->removeFromParentAndCleanup(true);
 		return;
 	}
-	CCUserDefault::sharedUserDefault()->setIntegerForKey(achvName->getCString(),1);
+	savedData->setIntegerForKey(achvName->getCString(),1);
+	currTime=0;
+	first=false;second=false;third=false;forth=false;
+	r1=true;r2=true;r3=true;r4=true;
+	CCString *toDisplay = CCString::createWithFormat("ACHIEVMENT UNLOCKED!\n%s",Utils::getAchvName(achvName->getCString()).c_str());
+	baseBg->setTextSize(this->getContentSize().height/4);
+	baseBg->setTextString(toDisplay->getCString());
 	this->setPosition(Utils::getCorrectPosition(beginPosX,posY));
-	//Utils::getBackground()->addChild(this,4);
 	this->schedule(schedule_selector(AchievmentPopUp::animate));
+}
+void AchievmentPopUp::activateForListing(){
+	CCLOG("1");
+	CCLOG("2");
+	CCString *toDisplay;
+	if(isCollected()){
+		CCLOG("3");
+		baseBg->setDisplayFrame(CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("onCollected.png"));
+		CCLOG("4");
+		toDisplay= CCString::createWithFormat("ACHIEVMENT '%s' UNLOCKED\n%s",Utils::getAchvName(achvName->getCString()).c_str(),Utils::getAchvDescr(achvName->getCString()).c_str());
+	}
+	else {
+		baseBg->setDisplayFrame(CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("offCollected.png"));
+		toDisplay= CCString::createWithFormat("%s \n TO UNLOCK THIS ACHIEVMENT",Utils::getAchvDescr(achvName->getCString()).c_str());
+	}
+	CCLOG("5");
+	baseBg->setTextString(toDisplay->getCString());
+	//baseBg->setTextSize(this->getContentSize().height/5);
+	CCLOG("6");
 }
 void AchievmentPopUp::animate(float dt){
 	currTime += dt;
@@ -75,4 +96,8 @@ void AchievmentPopUp::animate(float dt){
 		forth = true;
 		r4=false;
 	}
+}
+bool AchievmentPopUp::isCollected(){
+	if(savedData->getIntegerForKey(achvName->getCString()) != 0) return true;
+	return false;
 }
