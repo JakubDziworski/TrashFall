@@ -26,6 +26,7 @@ void Utils::prepareBackgroundImg(CCSprite* input){
 	input->setPosition(ccp(size.width/2,size.height/2));
 	Utils::scaleToFitScreen(input);
 }
+
 cocos2d::CCSpriteFrame* Utils::getRandomTrash(){
 	const int trashID = rand()%(Utils::trashAmount)+1;
 	CCString *trashName = CCString::createWithFormat("trash%d.png",trashID);
@@ -127,4 +128,7 @@ std::string Utils::getAchvName(std::string input){
 std::string Utils::getAchvDescr(std::string input){
 	unsigned pos = input.find(",");
 	return input.substr(pos+1);
+}
+std::string Utils::getAchvTag(std::string input){
+	return input.substr(0,3);
 }

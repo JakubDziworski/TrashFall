@@ -44,14 +44,10 @@ bool AchvDisplayer::init(){
 	for(int i=0;i<achievmentsNames.size();i++){
 		AchievmentPopUp *record;
 		if(baza->getIntegerForKey(achievmentsNames[i].c_str(),0) != 0){
-			CCString *str = CCString::create(Utils::getAchvName(achievmentsNames[i]));
-			CCString *toput = CCString::createWithFormat("ACHIEVMENT %s UNLOCKED",str->getCString());
-			record = AchievmentPopUp::createWithSpriteFrameNameee(toput->getCString(),baza);
+			record = AchievmentPopUp::createWithSpriteFrameNameee(achievmentsNames[i].c_str(),baza);
 		}
 		else{
-			CCString *str = CCString::create(Utils::getAchvName(achievmentsNames[i]));
-			CCString *toput = CCString::createWithFormat("ACHIEVMENT '%s' LOCKED",str->getCString());
-			record = AchievmentPopUp::createWithSpriteFrameNameee(toput->getCString(),baza);
+			record = AchievmentPopUp::createWithSpriteFrameNameee(achievmentsNames[i].c_str(),baza);
 		}
 		record->setPosition(ccp(posX,posY));
 		record->activateForListing();

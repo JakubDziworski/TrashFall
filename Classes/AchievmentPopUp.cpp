@@ -34,13 +34,14 @@ AchievmentPopUp* AchievmentPopUp::createWithSpriteFrameNameee(const char *inputT
 	return achv;
 }
 void AchievmentPopUp::activate(){
-	if(isCollected()){
-		this->removeFromParentAndCleanup(true);
-		return;
-	}
-	CCLOG("error1");
-	savedData->setIntegerForKey(achvName->getCString(),1);
-	CCLOG("error1");
+//	if(isCollected()){
+//		this->removeFromParentAndCleanup(true);
+//		return;
+//	}
+	if(CCUserDefault::sharedUserDefault()->getBoolForKey(Utils::getAchvTag(achvName->getCString()).c_str(),false) == true){this->removeFromParentAndCleanup(true);
+	return;}
+	CCUserDefault::sharedUserDefault()->setBoolForKey(Utils::getAchvTag(achvName->getCString()).c_str(),true);
+	CCLOG("ZAPISYWANIE");
 	currTime=0;
 	first=false;second=false;third=false;forth=false;
 	r1=true;r2=true;r3=true;r4=true;
@@ -55,10 +56,9 @@ void AchievmentPopUp::activate(){
 	CCLOG("error1");
 }
 void AchievmentPopUp::activateForListing(){
-	CCLOG("1");
-	CCLOG("2");
 	CCString *toDisplay;
-	if(isCollected()){
+	if(CCUserDefault::sharedUserDefault()->getBoolForKey(Utils::getAchvTag(achvName->getCString()).c_str()) == true){
+		CCLOG("ZJAEBISCIEI SKOLEKTOWACJONWAE");
 		baseBg->setDisplayFrame(CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("onCollected.png"));
 		toDisplay= CCString::createWithFormat("ACHIEVMENT '%s' UNLOCKED\n%s",Utils::getAchvName(achvName->getCString()).c_str(),Utils::getAchvDescr(achvName->getCString()).c_str());
 	}
@@ -66,10 +66,8 @@ void AchievmentPopUp::activateForListing(){
 		baseBg->setDisplayFrame(CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("offCollected.png"));
 		toDisplay= CCString::createWithFormat("%s \n TO UNLOCK THIS ACHIEVMENT",Utils::getAchvDescr(achvName->getCString()).c_str());
 	}
-	CCLOG("5");
 	baseBg->setTextString(toDisplay->getCString());
 	baseBg->setTextSize(baseBg->getContentSize().height/6);
-	CCLOG("6");
 }
 void AchievmentPopUp::animate(float dt){
 	currTime += dt;
@@ -101,6 +99,7 @@ void AchievmentPopUp::animate(float dt){
 	}
 }
 bool AchievmentPopUp::isCollected(){
-	if(savedData->getIntegerForKey(achvName->getCString()) != 0) return true;
+	CCLOG("record %s has value %d",Utils::getAchvTag(achvName->getCString()).c_str(),savedData->getIntegerForKey(achvName->getCString()));
+	if(CCUserDefault::sharedUserDefault()->getIntegerForKey(Utils::getAchvTag(achvName->getCString()).c_str(),0) == 1) return true;
 	return false;
 }
