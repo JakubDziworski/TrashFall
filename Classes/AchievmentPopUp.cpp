@@ -22,7 +22,6 @@ bool AchievmentPopUp::initWithParams(const char *pszSpriteFrameName,const char *
 	achvName = CCString::create(inputText);
 	const float popWidth = baseBg->getContentSize().width;
 	const float popHeight = baseBg->getContentSize().height;
-	baseBg->setTextSize(15);
 	this->addChild(baseBg);
 	this->setScale(0.77*Utils::sreensSize().width/baseBg->getContentSize().width);
 	return true;
@@ -35,7 +34,6 @@ AchievmentPopUp* AchievmentPopUp::createWithSpriteFrameNameee(const char *inputT
 	return achv;
 }
 void AchievmentPopUp::activate(){
-	CCLOG("iscollected");
 	if(isCollected()){
 		this->removeFromParentAndCleanup(true);
 		return;
@@ -61,9 +59,7 @@ void AchievmentPopUp::activateForListing(){
 	CCLOG("2");
 	CCString *toDisplay;
 	if(isCollected()){
-		CCLOG("3");
 		baseBg->setDisplayFrame(CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("onCollected.png"));
-		CCLOG("4");
 		toDisplay= CCString::createWithFormat("ACHIEVMENT '%s' UNLOCKED\n%s",Utils::getAchvName(achvName->getCString()).c_str(),Utils::getAchvDescr(achvName->getCString()).c_str());
 	}
 	else {
