@@ -12,6 +12,8 @@
 #include "Constants.h"
 #include "SpriteWithText.h"
 #include "AchievmentPopUp.h"
+#include "AchvDisplayer.h"
+
 
 using namespace cocos2d;
 using namespace CocosDenshion;
@@ -40,13 +42,17 @@ bool MainMenu::init(){
 	 SpriteWithText *playbtnoff = SpriteWithText::createWithSpriteFrameNamee("offButton.png","PLAY",ccColor3B{0,0,0});
 	 SpriteWithText *exitbtnoff = SpriteWithText::createWithSpriteFrameNamee("offButton.png","EXIT",ccColor3B{0,0,0});
 	 SpriteWithText *exitbtnon = SpriteWithText::createWithSpriteFrameNamee("onButton.png","EXIT",ccColor3B{0,0,0});
+	 SpriteWithText *achievmentsButtonOn = SpriteWithText::createWithSpriteFrameNamee("onButton.png","REWARDS",ccColor3B{0,0,0});
+	 SpriteWithText *achievmentsButtonOff = SpriteWithText::createWithSpriteFrameNamee("offButton.png","REWARDS",ccColor3B{0,0,0});
 	 CCMenuItemSprite *playBtn = CCMenuItemSprite::create(playbtnon,playbtnoff,this,menu_selector(MainMenu::playGame));
 	 CCMenuItemSprite *exitBtn = CCMenuItemSprite::create(exitbtnon,exitbtnoff,this,menu_selector(MainMenu::keyBackClicked));
+	 CCMenuItemSprite *achvBtn = CCMenuItemSprite::create(achievmentsButtonOn,achievmentsButtonOff,this,menu_selector(MainMenu::ShowAchievments));
+//?
+	 Utils::scaleButton(achvBtn,mainMenubuttonRatio);
 	 Utils::scaleButton(playBtn,mainMenubuttonRatio);
 	 Utils::scaleButton(exitBtn,mainMenubuttonRatio);
-	 CCMenu *menu = CCMenu::create(playBtn,exitBtn,NULL);
+	 menu = CCMenu::create(playBtn,exitBtn,achvBtn,NULL);
 			     menu->alignItemsVertically();
-
 			    // AchievmentPopUp *pop = AchievmentPopUp::createWithSpriteFrameNameee("offButton.png","offPaused.png","MILESTONE 100",ccColor3B{0,0,0});
 			     //pop->activate();
 			     this->addChild(menu,3);
@@ -56,13 +62,14 @@ bool MainMenu::init(){
 			     genFallingTrash(0.1);
 			     this->schedule(schedule_selector(MainMenu::genFallingTrash),4.5);
 			     return true;
-
 }
 CCScene* MainMenu::scene(){
 	 CCScene *scene = CCScene::create();
 	 MainMenu *layer;
+	 AchvDisplayer *achvDisplayer = AchvDisplayer::create();
 	 layer = MainMenu::create();
-	 scene->addChild(layer);
+	 scene->addChild(layer,1);
+	 scene->addChild(achvDisplayer,1,TAG_ACHVDISPLAYER);
 	 return scene;
 }
 void MainMenu::playGame(){
@@ -75,7 +82,22 @@ void MainMenu::keyBackClicked() {
 	CCDirector::sharedDirector()->end();
 }
 void MainMenu::genFallingTrash(float dt){
-
 	Trash *obj = Trash::create(Utils::getRandValueF(4,8),Utils::getRandValueF(2,4),3);
 	this->addChild(obj,Utils::getRandValue(1,3));
+}
+void MainMenu::ShowAchievments(){
+	Utils::getAchvDisplayer()->start();
+}
+void MainMenu::disableTouch(){
+	this->setTouchEnabled(false);
+	this->setKeypadEnabled(false);
+	menu->setTouchEnabled(false);
+	menu->setKeypadEnabled(false);
+	CCLOG("TOUCH DISABLED");
+}
+void MainMenu::enableTouch(){
+	this->setTouchEnabled(true);
+	this->setKeypadEnabled(true);
+	menu->setTouchEnabled(true);
+	CCLOG("TOUCH ENABLED");
 }

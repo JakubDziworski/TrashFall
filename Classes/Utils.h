@@ -16,6 +16,7 @@
 #include "HUD.h"
 #include "Game.h"
 #include "Background.h"
+#include "AchvDisplayer.h"
 #include "GameOver.h"
 class Utils {
 public:
@@ -26,6 +27,7 @@ public:
 	static Pause* getPause();
 	static GameOver* getGameOver();
 	static Background* getBackground();
+	static AchvDisplayer* getAchvDisplayer();
 	static int getRandValue(int min,int max);
 	static float getRandValueF(float a,float b);
 	static cocos2d::CCSpriteFrame* getRandomTrash();

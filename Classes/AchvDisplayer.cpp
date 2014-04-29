@@ -9,6 +9,7 @@
 #include "AchievmentPopUp.h"
 #include "Utils.h"
 #include "AchvList.h"
+#include "ITouchDisablable.h"
 #include <vector>
 #include <string.h>
 #include "Constants.h"
@@ -19,16 +20,7 @@ bool AchvDisplayer::init(){
 	if (!CCLayer::init()) {
 			return false;
 		}
-	plane = CCNode::create();
-	CCUserDefault *baza = CCUserDefault::sharedUserDefault();
-	const float offset =CCSprite::createWithSpriteFrameName("offButton.png")->getContentSize().height+Utils::getcorrectValue(0.005, false);
-	posY = Utils::getcorrectValue(0.9);
-	const float posX = Utils::getcorrectValue(0.5, true);
-
-	CCArray *achievmenty = CCArray::create();
-	std::vector<std::string> achievmentsNames;
-	//calkowite
-
+	baza = CCUserDefault::sharedUserDefault();
 	achievmentsNames.push_back(ACH_50);
 	achievmentsNames.push_back(ACH_100);
 	achievmentsNames.push_back(ACH_250);
@@ -40,35 +32,20 @@ bool AchvDisplayer::init(){
 	achievmentsNames.push_back(ACH_20_SINGLE);
 	achievmentsNames.push_back(ACH_50_SINGLE);
 	achievmentsNames.push_back(ACH_100_SINGLE);
-	//
-	for(int i=0;i<achievmentsNames.size();i++){
-		AchievmentPopUp *record;
-		if(baza->getIntegerForKey(achievmentsNames[i].c_str(),0) != 0){
-			record = AchievmentPopUp::createWithSpriteFrameNameee(achievmentsNames[i].c_str(),baza);
-		}
-		else{
-			record = AchievmentPopUp::createWithSpriteFrameNameee(achievmentsNames[i].c_str(),baza);
-		}
-		record->setPosition(ccp(posX,posY));
-		record->activateForListing();
-		plane->addChild(record);
-		posY-=offset;
-		achievmenty->addObject(record);
-		CCLOG("ADDED %s",achievmentsNames[i].c_str());
-	}
-	this->setTouchEnabled(true);
-	this->addChild(plane);
+	achievmentsNames.push_back(ACH_250_SINGLE);
+	achievmentsNames.push_back(ACH_150_SINGLE);
+	achievmentsNames.push_back(ACH_250_SINGLE);
 	return true;
 }
 void AchvDisplayer::ccTouchesMoved(cocos2d::CCSet *pTouches,cocos2d::CCEvent *pEvent){
 	CCTouch *touch = (CCTouch*)pTouches->anyObject();
 	CCPoint location = touch->locationInView();
 	location = CCDirector::sharedDirector()->convertToGL(location);
-	endPos = location.y;
-	const float absodleglosc = abs(startPos - endPos);
-	const float odleglosc = endPos - startPos;
+	endposss = location.y;
+	const float absodleglosc = abs(startPos - endposss);
+	const float odleglosc = endposss - startPos;
 	if(absodleglosc > 5){
-		startPos = endPos;
+		startPos = endposss;
 		plane->setPositionY(verifyendPoint(plane->getPositionY()+odleglosc));
 	}
 }
@@ -82,10 +59,9 @@ void AchvDisplayer::ccTouchesEnded(cocos2d::CCSet *pTouches,cocos2d::CCEvent * p
 	CCTouch *touch = (CCTouch*)pTouches->anyObject();
 		CCPoint location = touch->locationInView();
 		location = CCDirector::sharedDirector()->convertToGL(location);
-
-		endPos = location.y;
-		const float absodleglosc = abs(startPos - endPos);
-			const float odleglosc = endPos - startPos;
+		endposss = location.y;
+		const float absodleglosc = abs(startPos - endposss);
+			const float odleglosc = endposss - startPos;
 			if(absodleglosc > 5){
 				plane->setPositionY(verifyendPoint(plane->getPositionY()+odleglosc));
 			}
@@ -93,7 +69,38 @@ void AchvDisplayer::ccTouchesEnded(cocos2d::CCSet *pTouches,cocos2d::CCEvent * p
 }
 float AchvDisplayer::verifyendPoint(float input){
 	if(input < -margin) return -margin;
-	if(input > -posY) return -posY;
+	if(input > -posYY) return -posYY;
 	return input;
 }
-
+void AchvDisplayer::start(){
+		plane = CCNode::create();
+		const float offset =CCSprite::createWithSpriteFrameName("offButton.png")->getContentSize().height;
+		posYY = Utils::getcorrectValue(0.9);
+		const float posX = Utils::getcorrectValue(0.5, true);
+		for(int i=0;i<achievmentsNames.size();i++){
+			AchievmentPopUp *record;
+			record = AchievmentPopUp::createWithSpriteFrameNameee(achievmentsNames[i].c_str(),baza);
+			record->setPosition(ccp(posX,posYY));
+			record->activateForListing();
+			plane->addChild(record);
+			posYY-=offset;
+			CCLOG("ADDED %s",achievmentsNames[i].c_str());
+		}
+		ITouchDisablable* parent = (ITouchDisablable*) this->getParent();
+		parent->disableTouch();
+		this->setTouchEnabled(true);
+		this->setKeypadEnabled(true);
+		this->setVisible(true);
+		this->addChild(plane);
+}
+void AchvDisplayer::end(){
+	ITouchDisablable* parent = (ITouchDisablable*)this->getParent();
+	parent->enableTouch();
+	this->setTouchEnabled(false);
+	this->setKeypadEnabled(false);
+	this->setVisible(false);
+	this->removeFromParentAndCleanup(true);
+}
+void AchvDisplayer::keyBackClicked(){
+	end();
+}

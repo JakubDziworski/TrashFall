@@ -3,9 +3,12 @@
 #define MAINMENU_H_
 
 #include "Utils.h"
+#include "ITouchDisablable.h"
 #include "cocos2d.h"
 
-class MainMenu : public cocos2d::CCLayer {
+class MainMenu : public ITouchDisablable {
+private:
+	cocos2d::CCMenu *menu;
 public:
 	void tick();
 	virtual bool init();
@@ -15,6 +18,9 @@ public:
 	void exitGame();
 	void genFallingTrash(float dt);
 	void cleaner(float dt);
+	void ShowAchievments();
+	virtual void disableTouch();
+	virtual void enableTouch();
 	LAYER_CREATE_FUNC(MainMenu);
 };
 

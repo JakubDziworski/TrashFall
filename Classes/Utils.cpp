@@ -7,6 +7,7 @@
 #define COCOS2D_DEBUG 2
 #include "Utils.h"
 #include "Trash.h"
+#include "AchvDisplayer.h"
 #include <string.h>
 #include "Constants.h"
 
@@ -95,6 +96,9 @@ GameOver* Utils::getGameOver(){
 	if(CCDirector::sharedDirector()->getRunningScene()->getTag() == TAG_GAMESCENE)
 				return (GameOver*)CCDirector::sharedDirector()->getRunningScene()->getChildByTag(TAG_GAMEOVER);
 				else return NULL;
+}
+AchvDisplayer* Utils::getAchvDisplayer(){
+				return (AchvDisplayer*)CCDirector::sharedDirector()->getRunningScene()->getChildByTag(TAG_ACHVDISPLAYER);
 }
 void Utils::scaleSprite(CCNode *sprite,float ratioo,float additional,bool wid){
 	float expectedRatio = Utils::sreensSize().height/ratioo;

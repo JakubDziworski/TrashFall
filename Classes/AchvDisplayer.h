@@ -8,21 +8,25 @@
 #ifndef ACHVDISPLAYER_H_
 #define ACHVDISPLAYER_H_
 #define margin 60
+#include <vector>
 #include "cocos2d.h"
 
 class AchvDisplayer:public cocos2d::CCLayer {
 	cocos2d::CCNode* plane;
 	float startPos;
-	float endPos;
-	float posY;
-
+	float endposss;
+	float posYY;
+	cocos2d::CCUserDefault *baza;
+	std::vector<std::string> achievmentsNames;
 public:
-				void ccTouchesMoved(cocos2d::CCSet *pTouches,cocos2d::CCEvent *pEvent);
-				void ccTouchesBegan(cocos2d::CCSet *pTouches,cocos2d::CCEvent *pEvent);
-				void ccTouchesEnded(cocos2d::CCSet *pTouches,cocos2d::CCEvent * pEvent);
-				float verifyendPoint(float);
-				virtual bool init();
-				LAYER_CREATE_FUNC(AchvDisplayer);
+	void ccTouchesMoved(cocos2d::CCSet *pTouches, cocos2d::CCEvent *pEvent);
+	void ccTouchesBegan(cocos2d::CCSet *pTouches, cocos2d::CCEvent *pEvent);
+	void ccTouchesEnded(cocos2d::CCSet *pTouches, cocos2d::CCEvent * pEvent);
+	float verifyendPoint(float);
+	void start();
+	void end();
+	virtual void keyBackClicked();
+	virtual bool init();LAYER_CREATE_FUNC(AchvDisplayer);
 };
 
 #endif /* ACHVDISPLAYER_H_ */

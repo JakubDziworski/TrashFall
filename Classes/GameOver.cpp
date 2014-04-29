@@ -9,6 +9,7 @@
 #include "Utils.h"
 #include "Constants.h"
 #include "MainMenu.h"
+#include "ITouchDisablable.h"
 using namespace cocos2d;
 bool GameOver::init(){
 	if (!CCLayer::init()) {
