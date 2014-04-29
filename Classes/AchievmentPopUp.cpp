@@ -16,6 +16,9 @@
 
 using namespace cocos2d;
 
+float AchievmentPopUp::getHeight(){
+	return baseBg->getContentSize().height*this->getScale();
+}
 bool AchievmentPopUp::initWithParams(const char *pszSpriteFrameName,const char *additionalImgFrameName,const char *inputText,cocos2d::ccColor3B color){
 	CCLOG("w AchievmentPopUp::initWithParams %s",inputText);
 	baseBg = SpriteWithText::createWithSpriteFrameNamee(
@@ -97,6 +100,57 @@ void AchievmentPopUp::animate(float dt){
 		r4=false;
 	}
 }
+void AchievmentPopUp::startAnimIn(){
+	currTime=0;
+	mystaticYpos=this->getPositionY()/Utils::sreensSize().height;
+	mystaticEndpos=0.5;
+	first=false;second=false;third=false;forth=false;
+	r1=true;r2=true;r3=false;r4=false;
+	this->setPosition(Utils::getCorrectPosition(beginPosX,mystaticYpos));
+	this->schedule(schedule_selector(AchievmentPopUp::animateIn));
+}
+void AchievmentPopUp::startAnimOut(){
+	currTime=0;
+	first=false;second=false;third=false;forth=false;
+	r1=false;r2=false;r3=true;r4=true;
+	this->schedule(schedule_selector(AchievmentPopUp::animateOut));
+}
+void AchievmentPopUp::animateIn(float dt){
+	if (currTime > animTime) return;
+	CCLOG("time = %f x=%f,y=%f",currTime,this->getPositionX(),this->getPositionY());
+	currTime += dt;
+	if(first) {this->runAction(CCMoveTo::create(animTime/2.0,Utils::getCorrectPosition(mystaticEndpos-0.4f,mystaticYpos)));first = false;}
+	if(second) {this->runAction(CCMoveTo::create(animTime/2.0,Utils::getCorrectPosition(mystaticEndpos,mystaticYpos)));second = false;}
+	if (currTime < animTime / 2.0 && r1){
+			first = true;
+			r1=false;
+		}
+		else if (currTime >= animTime / 2.0 && r2)
+		{
+			second = true;
+			r2=false;
+		}
+}
+void AchievmentPopUp::animateOut(float dt){
+	if (currTime > animTime){
+		this->unscheduleAllSelectors();
+		return;
+	}
+	CCLOG("time = %f x=%f,y=%f",currTime,this->getPositionX(),this->getPositionY());
+	currTime += dt;
+	if(third) {this->runAction(CCMoveTo::create(animTime/2.0,Utils::getCorrectPosition(mystaticEndpos-0.2f,mystaticYpos)));third = false;}
+	if(forth) {this->runAction(CCMoveTo::create(animTime/2.0,Utils::getCorrectPosition(beginPosX,mystaticYpos)));forth = false;}
+	if (currTime < animTime / 2.0 && r3){
+			third = true;
+			r3=false;
+		}
+
+	else if (currTime > animTime /2.0 && r4){
+			forth = true;
+			r4=false;
+		}
+}
+
 bool AchievmentPopUp::isCollected(){
 	if(savedData->getBoolForKey(Utils::getAchvTag(achvName->getCString()).c_str(),false) == true) return true;
 	return false;

@@ -18,6 +18,8 @@ class AchvDisplayer:public cocos2d::CCLayer {
 	float posYY;
 	cocos2d::CCUserDefault *baza;
 	std::vector<std::string> achievmentsNames;
+	cocos2d::CCArray* children;
+	int j;
 public:
 	void ccTouchesMoved(cocos2d::CCSet *pTouches, cocos2d::CCEvent *pEvent);
 	void ccTouchesBegan(cocos2d::CCSet *pTouches, cocos2d::CCEvent *pEvent);
@@ -26,6 +28,8 @@ public:
 	void start();
 	void end();
 	virtual void keyBackClicked();
+	void jedenPoDrugim(float dt);
+	void jedenPoDrugimIN(float dt);
 	virtual bool init();LAYER_CREATE_FUNC(AchvDisplayer);
 };
 

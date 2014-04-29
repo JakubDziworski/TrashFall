@@ -71,7 +71,7 @@ CCScene* MainMenu::scene(){
 }
 void MainMenu::playGame(){
 	SimpleAudioEngine::sharedEngine()->playEffect("buttonClick.wav");
-	CCDirector::sharedDirector()->replaceScene(Game::scene());
+	CCDirector::sharedDirector()->pushScene(Game::scene());
 }
 
 void MainMenu::keyBackClicked() {

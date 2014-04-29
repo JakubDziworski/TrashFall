@@ -38,7 +38,8 @@ bool AchvDisplayer::init(){
 	achievmentsNames.push_back(ACH_250_SINGLE);
 
 	plane = CCNode::create();
-			const float offset =CCSprite::createWithSpriteFrameName("offButton.png")->getContentSize().height;
+			const float offset=AchievmentPopUp::createWithSpriteFrameNameee(achievmentsNames[0].c_str(),baza)->getHeight()+Utils::getcorrectValue(0.02,false);
+			CCLOG("%f",offset);
 			posYY = Utils::getcorrectValue(0.9);
 			const float posX = Utils::getcorrectValue(0.5, true);
 			for(int i=0;i<achievmentsNames.size();i++){
@@ -52,6 +53,7 @@ bool AchvDisplayer::init(){
 				CCLOG("ADDED %s",achievmentsNames[i].c_str());
 			}
 	this->addChild(plane);
+	children = plane->getChildren();
 	this->setVisible(false);
 	return true;
 }
@@ -95,14 +97,27 @@ void AchvDisplayer::start(){
 		this->setTouchEnabled(true);
 		this->setKeypadEnabled(true);
 		this->setVisible(true);
+		j=0;
+		this->schedule(schedule_selector(AchvDisplayer::jedenPoDrugimIN),0.03f,children->count()-1,0.2f);
 }
 void AchvDisplayer::end(){
 	ITouchDisablable* parent = (ITouchDisablable*) this->getParent();
 	parent->enableTouch();
 	this->setTouchEnabled(false);
 	this->setKeypadEnabled(false);
-	this->setVisible(false);
+	j=0;
+	this->schedule(schedule_selector(AchvDisplayer::jedenPoDrugim),0.03f,children->count()-1,0.2f);
 }
 void AchvDisplayer::keyBackClicked(){
 	end();
+}
+void AchvDisplayer::jedenPoDrugim(float dt){
+	AchievmentPopUp* popup = (AchievmentPopUp*) children->objectAtIndex(j);
+	popup->startAnimOut();
+	j++;
+}
+void AchvDisplayer::jedenPoDrugimIN(float dt){
+	AchievmentPopUp* popup = (AchievmentPopUp*) children->objectAtIndex(j);
+	popup->startAnimIn();
+	j++;
 }

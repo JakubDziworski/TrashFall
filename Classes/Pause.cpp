@@ -61,5 +61,5 @@ void Pause::toggle(){
 }
 
 void Pause::goToMainMenu(){
-	CCDirector::sharedDirector()->replaceScene(MainMenu::scene());
+	CCDirector::sharedDirector()->popScene();
 }
