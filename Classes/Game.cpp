@@ -42,17 +42,16 @@ CCScene* Game::scene() {
 	scene->setTag(TAG_GAMESCENE);
 	Game *layer = Game::create();
 	HUD *hud = HUD::create();
-	CCLOG("created pause");
 	Pause *pause = Pause::create();
 	Background *bgLayer = Background::create();
 	GameOver *gover = GameOver::create();
-	AchvDisplayer *achivdispl = AchvDisplayer::create();
+	//AchvDisplayer *achivdispl = AchvDisplayer::create();
 	scene->addChild(bgLayer,-1,TAG_BACKGROUND);
 	scene->addChild(layer,0,TAG_GAMELayer);
 	scene->addChild(hud,1,TAG_HUD);
 	scene->addChild(pause,3,TAG_PAUSE);
 	scene->addChild(gover,4,TAG_GAMEOVER);
-	scene->addChild(achivdispl);
+//	scene->addChild(achivdispl);
 	return scene;
 }
 void Game::genFallingTrashes(float dt){
@@ -63,11 +62,8 @@ void Game::genFallingTrashes(float dt){
 	resettedTime = 0;
 	Utils::setDifficulty(mSpeed,currentTimee,atOnce);
 	spread=mSpeed/4.0f;
-	//CCLOG("time = %.2f\n",currentTimee);
 	Trash *obj = Trash::create(Utils::getRandValueF(mSpeed,mSpeed+spread),Utils::getRandValueF(1,4),monitorFallen);
 	obj->setAutoCheckMissesPoints(true);
-	CCLOG("%.2f\n",obj->getContentSize().height*obj->getScale());
-	CCLOG("%.2f\n",Utils::sreensSize().height);
 	this->addChild(obj,Utils::getRandValue(1,3));
 }
 void Game::missed(){
@@ -102,7 +98,6 @@ void Game::ccTouchesMoved(cocos2d::CCSet *pTouches,cocos2d::CCEvent *pEvent){
 }
 void Game::ccTouchesBegan(cocos2d::CCSet *pTouches,cocos2d::CCEvent *pEvent){
 	if(pTouches->count()>1) return;
-	CCLOG("ROZPOCZETO DOTKNIECIE");
 	fingerDown=true;
 	ccTouchesMoved(pTouches,pEvent);
 }

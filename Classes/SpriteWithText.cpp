@@ -31,7 +31,6 @@ void SpriteWithText::setText(const char *inputText,ccColor3B color){
 	this->addChild(label);
 }
 void SpriteWithText::setTextSize(float wielkosc){
-	CCLOG("cuj");
 	label->setFontSize(wielkosc);
 }
 void SpriteWithText::setTextString(const char *txt){

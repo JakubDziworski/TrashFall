@@ -20,9 +20,9 @@ bool AchievmentPopUp::initWithParams(const char *pszSpriteFrameName,const char *
 	baseBg = SpriteWithText::createWithSpriteFrameNamee(
 			pszSpriteFrameName, inputText, color);
 	achvName = CCString::create(inputText);
-	//baseBg->setTextSize(5);
 	const float popWidth = baseBg->getContentSize().width;
 	const float popHeight = baseBg->getContentSize().height;
+	baseBg->setTextSize(15);
 	this->addChild(baseBg);
 	this->setScale(0.77*Utils::sreensSize().width/baseBg->getContentSize().width);
 	return true;
@@ -35,19 +35,26 @@ AchievmentPopUp* AchievmentPopUp::createWithSpriteFrameNameee(const char *inputT
 	return achv;
 }
 void AchievmentPopUp::activate(){
-	if(!isCollected()){
+	CCLOG("iscollected");
+	if(isCollected()){
 		this->removeFromParentAndCleanup(true);
 		return;
 	}
+	CCLOG("error1");
 	savedData->setIntegerForKey(achvName->getCString(),1);
+	CCLOG("error1");
 	currTime=0;
 	first=false;second=false;third=false;forth=false;
 	r1=true;r2=true;r3=true;r4=true;
 	CCString *toDisplay = CCString::createWithFormat("ACHIEVMENT UNLOCKED!\n%s",Utils::getAchvName(achvName->getCString()).c_str());
-	baseBg->setTextSize(this->getContentSize().height/4);
+	CCLOG("error1");
+	baseBg->setTextSize(baseBg->getContentSize().height/5);
 	baseBg->setTextString(toDisplay->getCString());
+	CCLOG("error1");
 	this->setPosition(Utils::getCorrectPosition(beginPosX,posY));
+	CCLOG("error1");
 	this->schedule(schedule_selector(AchievmentPopUp::animate));
+	CCLOG("error1");
 }
 void AchievmentPopUp::activateForListing(){
 	CCLOG("1");
@@ -65,7 +72,7 @@ void AchievmentPopUp::activateForListing(){
 	}
 	CCLOG("5");
 	baseBg->setTextString(toDisplay->getCString());
-	//baseBg->setTextSize(this->getContentSize().height/5);
+	baseBg->setTextSize(baseBg->getContentSize().height/6);
 	CCLOG("6");
 }
 void AchievmentPopUp::animate(float dt){

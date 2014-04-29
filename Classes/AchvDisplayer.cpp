@@ -20,7 +20,6 @@ bool AchvDisplayer::init(){
 			return false;
 		}
 	plane = CCNode::create();
-	this->setTouchEnabled(true);
 	CCUserDefault *baza = CCUserDefault::sharedUserDefault();
 	const float offset =CCSprite::createWithSpriteFrameName("offButton.png")->getContentSize().height+Utils::getcorrectValue(0.005, false);
 	posY = Utils::getcorrectValue(0.9);
@@ -61,6 +60,7 @@ bool AchvDisplayer::init(){
 		achievmenty->addObject(record);
 		CCLOG("ADDED %s",achievmentsNames[i].c_str());
 	}
+	this->setTouchEnabled(true);
 	this->addChild(plane);
 	return true;
 }

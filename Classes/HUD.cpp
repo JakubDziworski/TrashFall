@@ -59,7 +59,7 @@ void HUD::addToScore(int value,int nomisses){
 	}
 	AchievmentPopUp *achivscr=NULL;
 	AchievmentPopUp *achivsingl = NULL;
-	if (nomisses == 10)		achivscr = AchievmentPopUp::createWithSpriteFrameNameee(ACH_10_SINGLE.c_str(),savedData);
+	if (nomisses == 2)		achivscr = AchievmentPopUp::createWithSpriteFrameNameee(ACH_10_SINGLE.c_str(),savedData);
 	else if (nomisses == 20)achivscr = AchievmentPopUp::createWithSpriteFrameNameee(ACH_20_SINGLE.c_str(),savedData);
 	else if (nomisses == 50)achivscr = AchievmentPopUp::createWithSpriteFrameNameee(ACH_50_SINGLE.c_str(),savedData);
 	else if (nomisses == 100)achivscr = AchievmentPopUp::createWithSpriteFrameNameee(ACH_100_SINGLE.c_str(),savedData);
@@ -71,8 +71,8 @@ void HUD::addToScore(int value,int nomisses){
 	else if (score == 500)  achivsingl = AchievmentPopUp::createWithSpriteFrameNameee(ACH_500.c_str(),savedData);
 	else if (score == 1000) achivsingl = AchievmentPopUp::createWithSpriteFrameNameee(ACH_1000.c_str(),savedData);
 	else if (score == 2000) achivsingl = AchievmentPopUp::createWithSpriteFrameNameee(ACH_2000.c_str(),savedData);
-	if(achivscr !=NULL) {bg->addChild(achivscr,1); achivscr->activate();}
-	if(achivsingl != NULL) {bg->addChild(achivsingl,1); achivsingl->activate();}
+	if(achivscr !=NULL) {CCLOG("hudrror1");Utils::getBackground()->addChild(achivscr);CCLOG("hudrror2"); achivscr->activate();CCLOG("hudrror3");}
+	if(achivsingl != NULL) {CCLOG("hudrror11");Utils::getBackground()->addChild(achivsingl); CCLOG("hudrror3");achivsingl->activate();CCLOG("hudrror4");}
 
 }
 void HUD::animateText(float dt){
