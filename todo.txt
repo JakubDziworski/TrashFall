@@ -4,9 +4,13 @@ touch
 podmienic placholdery trashy
 przyciski systemowe
 bug z dotykaniem
-acjhievments 
 loading screen
 poziom trudnosci
+stats:
+zebrane
+celnosc
+sesje zakonczone
+
 
 ACHIEVMENTY:
 50

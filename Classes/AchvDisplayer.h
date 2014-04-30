@@ -32,7 +32,8 @@ public:
 	virtual void keyBackClicked();
 	void jedenPoDrugim(float dt);
 	void jedenPoDrugimIN(float dt);
-	virtual bool init();LAYER_CREATE_FUNC(AchvDisplayer);
+	virtual bool init();
+	LAYER_CREATE_FUNC(AchvDisplayer);
 };
 
 #endif /* ACHVDISPLAYER_H_ */

@@ -57,6 +57,7 @@ bool AchvDisplayer::init(){
 			}
 			CCString *collectedInfoText = CCString::createWithFormat("%d/%d",collected,achievmentsNames.size());
 			info=SpriteWithText::createWithSpriteFrameNamee("offButton.png",collectedInfoText->getCString(),ccColor3B{1,1,1});
+			Utils::scaleSprite(info,1.1f,1,true);
 			float infposY = Utils::sreensSize().height + info->getContentSize().height*info->getScale()/2.0;
 			info->setPosition(ccp(posX,infposY));
 	this->addChild(info,2);

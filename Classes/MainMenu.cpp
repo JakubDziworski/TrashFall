@@ -86,6 +86,7 @@ void MainMenu::ShowAchievments(){
 	achvDisplayer->start();
 }
 void MainMenu::disableTouch(){
+	menu->runAction(CCMoveTo::create(0.2f,ccp(-Utils::sreensSize().width/2,menu->getPositionY())));
 	CCLOG("TOUCH DISABLED");
 	this->setTouchEnabled(false);
 	this->setKeypadEnabled(false);
@@ -93,6 +94,7 @@ void MainMenu::disableTouch(){
 	menu->setKeypadEnabled(false);
 }
 void MainMenu::enableTouch(){
+	menu->runAction(CCMoveTo::create(0.2f,ccp(Utils::sreensSize().width/2,menu->getPositionY())));
 	CCLOG("TOUCH ENABLED");
 	this->setTouchEnabled(true);
 	this->setKeypadEnabled(true);

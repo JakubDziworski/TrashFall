@@ -73,7 +73,7 @@ void Game::missed(){
 	missedAmount++;
 	if(missedAmount>21){
 		monitorFallen = false;
-		Utils::getGameOver()->trigger(Utils::getHUD()->getScore(),200);
+		Utils::getGameOver()->trigger(Utils::getHUD()->getScore(),200,missedAmount);
 		return;
 	}
 	Utils::getBackground()->updateMisses(missedAmount);
