@@ -19,12 +19,18 @@ bool GameOver::init(){
 		return true;
 }
 void GameOver::trigger(int scorr,int bestt,int missedAmount){
-	curScore = scorr;
 	CCUserDefault *usrDefault = CCUserDefault::sharedUserDefault();
-	bestScore = usrDefault->getIntegerForKey(HIGH_SCORE,0);
-	int totalScore = usrDefault->getIntegerForKey(STAT_COLLECTED,0);
-	usrDefault->setIntegerForKey(STAT_COLLECTED,totalScore+scorr);
+
+	curScore = scorr;
 	const float accurancy = (float)scorr/(float)(scorr+missedAmount)*100;
+	bestScore = usrDefault->getIntegerForKey(HIGH_SCORE,0);
+	int totalCollected = usrDefault->getIntegerForKey(STAT_COLLECTED,0)+scorr;
+	int sessionsOver = usrDefault->getFloatForKey(STAT_SESOVER,0)+1;
+	float totalAccurancy = (usrDefault->getFloatForKey(STAT_ACCURANCY,0)*(float)sessionsOver-1+accurancy)/(float)sessionsOver;
+	usrDefault->setIntegerForKey(STAT_COLLECTED,totalCollected);
+	usrDefault->setIntegerForKey(STAT_SESOVER,sessionsOver);
+	usrDefault->setFloatForKey(STAT_ACCURANCY,totalAccurancy);
+
 	//
 	Game *g = Utils::getGame();
 				g->pauseSchedulerAndActions();
