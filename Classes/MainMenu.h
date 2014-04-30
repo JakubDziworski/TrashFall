@@ -3,12 +3,14 @@
 #define MAINMENU_H_
 
 #include "Utils.h"
+#include "StatsDisplayer.h"
 #include "ITouchDisablable.h"
 #include "cocos2d.h"
 
 class MainMenu : public ITouchDisablable {
 private:
 	cocos2d::CCMenu *menu;
+	StatsDisplayer *statsDisplayer;
 	AchvDisplayer *achvDisplayer;
 public:
 	void tick();
@@ -22,6 +24,7 @@ public:
 	void ShowAchievments();
 	virtual void disableTouch();
 	virtual void enableTouch();
+	void ShowStats();
 	LAYER_CREATE_FUNC(MainMenu);
 };
 

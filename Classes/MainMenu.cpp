@@ -13,7 +13,7 @@
 #include "SpriteWithText.h"
 #include "AchievmentPopUp.h"
 #include "AchvDisplayer.h"
-
+#include "StatsDisplayer.h"
 
 using namespace cocos2d;
 using namespace CocosDenshion;
@@ -40,14 +40,13 @@ bool MainMenu::init(){
 	 Utils::prepareBackgroundImg(bg);
 	 SpriteWithText *playbtnon = SpriteWithText::createWithSpriteFrameNamee("onButton.png","PLAY",ccColor3B{0,0,0});
 	 SpriteWithText *playbtnoff = SpriteWithText::createWithSpriteFrameNamee("offButton.png","PLAY",ccColor3B{0,0,0});
-	 SpriteWithText *exitbtnoff = SpriteWithText::createWithSpriteFrameNamee("offButton.png","EXIT",ccColor3B{0,0,0});
-	 SpriteWithText *exitbtnon = SpriteWithText::createWithSpriteFrameNamee("onButton.png","EXIT",ccColor3B{0,0,0});
+	 SpriteWithText *exitbtnoff = SpriteWithText::createWithSpriteFrameNamee("offButton.png","STATS",ccColor3B{0,0,0});
+	 SpriteWithText *exitbtnon = SpriteWithText::createWithSpriteFrameNamee("onButton.png","STATS",ccColor3B{0,0,0});
 	 SpriteWithText *achievmentsButtonOn = SpriteWithText::createWithSpriteFrameNamee("onButton.png","REWARDS",ccColor3B{0,0,0});
 	 SpriteWithText *achievmentsButtonOff = SpriteWithText::createWithSpriteFrameNamee("offButton.png","REWARDS",ccColor3B{0,0,0});
 	 CCMenuItemSprite *playBtn = CCMenuItemSprite::create(playbtnon,playbtnoff,this,menu_selector(MainMenu::playGame));
 	 CCMenuItemSprite *exitBtn = CCMenuItemSprite::create(exitbtnon,exitbtnoff,this,menu_selector(MainMenu::keyBackClicked));
-	 CCMenuItemSprite *achvBtn = CCMenuItemSprite::create(achievmentsButtonOn,achievmentsButtonOff,this,menu_selector(MainMenu::ShowAchievments));
-//?
+	 CCMenuItemSprite *achvBtn = CCMenuItemSprite::create(achievmentsButtonOn,achievmentsButtonOff,this,menu_selector(MainMenu::ShowStats));
 	 Utils::scaleButton(achvBtn,mainMenubuttonRatio);
 	 Utils::scaleButton(playBtn,mainMenubuttonRatio);
 	 Utils::scaleButton(exitBtn,mainMenubuttonRatio);
@@ -55,7 +54,11 @@ bool MainMenu::init(){
 			     menu->alignItemsVertically();
 			     this->addChild(menu,3);
 			     this->addChild(bg,-1);
+			     statsDisplayer = StatsDisplayer::create();
 			     achvDisplayer = AchvDisplayer::create();
+			     CCLOG("stworzono achdisplatyer");
+			     this->addChild(statsDisplayer,6);
+			     CCLOG("po storzeniu");
 			     this->addChild(achvDisplayer,6);
 			     //latajace w tle gowna
 			     genFallingTrash(0.1);
@@ -68,6 +71,9 @@ CCScene* MainMenu::scene(){
 	 layer = MainMenu::create();
 	 scene->addChild(layer,1);
 	 return scene;
+}
+void MainMenu::ShowStats(){
+	//statsDisplayer->start();
 }
 void MainMenu::playGame(){
 	SimpleAudioEngine::sharedEngine()->playEffect("buttonClick.wav");
