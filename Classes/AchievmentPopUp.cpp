@@ -50,7 +50,7 @@ void AchievmentPopUp::activate(){
 	r1=true;r2=true;r3=true;r4=true;
 	CCString *toDisplay = CCString::createWithFormat("ACHIEVMENT UNLOCKED!\n%s",Utils::getAchvName(achvName->getCString()).c_str());
 	CCLOG("error1");
-	baseBg->setTextSize(baseBg->getContentSize().height/5);
+	baseBg->setTextSize(baseBg->getContentSize().height/4);
 	baseBg->setTextString(toDisplay->getCString());
 	CCLOG("error1");
 	this->setPosition(Utils::getCorrectPosition(beginPosX,posY));
@@ -63,14 +63,14 @@ void AchievmentPopUp::activateForListing(){
 	this->setPositionX(Utils::getcorrectValue(beginPosX));
 	if(isCollected()){
 		baseBg->setDisplayFrame(CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("onCollected.png"));
-		toDisplay= CCString::createWithFormat("ACHIEVMENT '%s' UNLOCKED\n(%s)",Utils::getAchvName(achvName->getCString()).c_str(),Utils::getAchvDescr(achvName->getCString()).c_str());
+		toDisplay= CCString::createWithFormat("'%s' UNLOCKED\n(%s)",Utils::getAchvName(achvName->getCString()).c_str(),Utils::getAchvDescr(achvName->getCString()).c_str());
 	}
 	else {
 		baseBg->setDisplayFrame(CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("offCollected.png"));
 		toDisplay= CCString::createWithFormat("%s \n TO UNLOCK THIS ACHIEVMENT",Utils::getAchvDescr(achvName->getCString()).c_str());
 	}
 	baseBg->setTextString(toDisplay->getCString());
-	baseBg->setTextSize(baseBg->getContentSize().height/6);
+	baseBg->setTextSize(baseBg->getContentSize().height/4);
 }
 void AchievmentPopUp::animate(float dt){
 	currTime += dt;

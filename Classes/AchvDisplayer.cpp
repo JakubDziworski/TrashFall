@@ -38,20 +38,28 @@ bool AchvDisplayer::init(){
 	achievmentsNames.push_back(ACH_250_SINGLE);
 
 	plane = CCNode::create();
-			const float offset=AchievmentPopUp::createWithSpriteFrameNameee(achievmentsNames[0].c_str(),baza)->getHeight()+Utils::getcorrectValue(0.02,false);
+			const float offset=AchievmentPopUp::createWithSpriteFrameNameee(achievmentsNames[0].c_str(),baza)->getHeight()+Utils::getcorrectValue(0.01,false);
 			CCLOG("%f",offset);
 			posYY = Utils::getcorrectValue(0.9);
 			const float posX = Utils::getcorrectValue(0.5, true);
+			int collected=0;
+			posYY-=offset;
 			for(int i=0;i<achievmentsNames.size();i++){
 				AchievmentPopUp *record;
 				CCLOG("w funkcji achvdisplayer ini %s",achievmentsNames[i].c_str());
 				record = AchievmentPopUp::createWithSpriteFrameNameee(achievmentsNames[i].c_str(),baza);
 				record->setPosition(ccp(posX,posYY));
 				record->activateForListing();
+				if(record->isCollected()) collected++;
 				plane->addChild(record);
 				posYY-=offset;
 				CCLOG("ADDED %s",achievmentsNames[i].c_str());
 			}
+			CCString *collectedInfoText = CCString::createWithFormat("%d/%d",collected,achievmentsNames.size());
+			info=SpriteWithText::createWithSpriteFrameNamee("offButton.png",collectedInfoText->getCString(),ccColor3B{1,1,1});
+			float infposY = Utils::sreensSize().height + info->getContentSize().height*info->getScale()/2.0;
+			info->setPosition(ccp(posX,infposY));
+	this->addChild(info,2);
 	this->addChild(plane);
 	children = plane->getChildren();
 	this->setVisible(false);
@@ -92,6 +100,7 @@ float AchvDisplayer::verifyendPoint(float input){
 	return input;
 }
 void AchvDisplayer::start(){
+		info->runAction(CCMoveTo::create(0.2f,ccp(0.5f*Utils::sreensSize().width,Utils::sreensSize().height-info->getContentSize().height*info->getScale()/2.0f-Utils::getcorrectValue(0.01f))));
 		ITouchDisablable* parent = (ITouchDisablable*) this->getParent();
 		parent->disableTouch();
 		this->setTouchEnabled(true);
@@ -101,6 +110,7 @@ void AchvDisplayer::start(){
 		this->schedule(schedule_selector(AchvDisplayer::jedenPoDrugimIN),0.03f,children->count()-1,0.2f);
 }
 void AchvDisplayer::end(){
+	info->runAction(CCMoveTo::create(0.2f,ccp(0.5f*Utils::sreensSize().width,Utils::sreensSize().height+info->getContentSize().height*info->getScale()/2.0f)));
 	ITouchDisablable* parent = (ITouchDisablable*) this->getParent();
 	parent->enableTouch();
 	this->setTouchEnabled(false);
@@ -120,4 +130,7 @@ void AchvDisplayer::jedenPoDrugimIN(float dt){
 	AchievmentPopUp* popup = (AchievmentPopUp*) children->objectAtIndex(j);
 	popup->startAnimIn();
 	j++;
+}
+void DisplayHint(){
+
 }
