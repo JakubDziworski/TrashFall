@@ -60,6 +60,7 @@ void AchievmentPopUp::activate(){
 }
 void AchievmentPopUp::activateForListing(){
 	CCString *toDisplay;
+	this->setPositionX(Utils::getcorrectValue(beginPosX));
 	if(isCollected()){
 		baseBg->setDisplayFrame(CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("onCollected.png"));
 		toDisplay= CCString::createWithFormat("ACHIEVMENT '%s' UNLOCKED\n(%s)",Utils::getAchvName(achvName->getCString()).c_str(),Utils::getAchvDescr(achvName->getCString()).c_str());
