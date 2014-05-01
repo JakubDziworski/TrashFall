@@ -46,7 +46,7 @@ bool MainMenu::init(){
 	 SpriteWithText *achievmentsButtonOff = SpriteWithText::createWithSpriteFrameNamee("offButton.png","REWARDS",ccColor3B{0,0,0});
 	 CCMenuItemSprite *playBtn = CCMenuItemSprite::create(playbtnon,playbtnoff,this,menu_selector(MainMenu::playGame));
 	 CCMenuItemSprite *exitBtn = CCMenuItemSprite::create(exitbtnon,exitbtnoff,this,menu_selector(MainMenu::keyBackClicked));
-	 CCMenuItemSprite *achvBtn = CCMenuItemSprite::create(achievmentsButtonOn,achievmentsButtonOff,this,menu_selector(MainMenu::ShowStats));
+	 CCMenuItemSprite *achvBtn = CCMenuItemSprite::create(achievmentsButtonOn,achievmentsButtonOff,this,menu_selector(MainMenu::ShowAchievments));
 	 Utils::scaleButton(achvBtn,mainMenubuttonRatio);
 	 Utils::scaleButton(playBtn,mainMenubuttonRatio);
 	 Utils::scaleButton(exitBtn,mainMenubuttonRatio);
@@ -57,7 +57,7 @@ bool MainMenu::init(){
 			     statsDisplayer = StatsDisplayer::create();
 			     achvDisplayer = AchvDisplayer::create();
 			     CCLOG("stworzono achdisplatyer");
-			     this->addChild(statsDisplayer,6);
+			    // this->addChild(statsDisplayer,6);
 			     CCLOG("po storzeniu");
 			     this->addChild(achvDisplayer,6);
 			     //latajace w tle gowna

@@ -123,15 +123,14 @@ void AchvDisplayer::keyBackClicked(){
 	end();
 }
 void AchvDisplayer::jedenPoDrugim(float dt){
-	AchievmentPopUp* popup = (AchievmentPopUp*) children->objectAtIndex(j);
-	popup->startAnimOut();
+	AchievmentPopUp* popup;
+	popup = (AchievmentPopUp*)children->objectAtIndex(j);
+	popup->hide();
 	j++;
 }
 void AchvDisplayer::jedenPoDrugimIN(float dt){
-	AchievmentPopUp* popup = (AchievmentPopUp*) children->objectAtIndex(j);
-	popup->startAnimIn();
+	AchievmentPopUp* popup;
+	popup = (AchievmentPopUp*)children->objectAtIndex(j);
+	popup->show();
 	j++;
-}
-void DisplayHint(){
-
 }

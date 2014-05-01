@@ -5,6 +5,8 @@
  *      Author: Jakub
  */
 #define COCOS2D_DEBUG 2
+#define mystaticYpos 0.5f
+#define beginPosX 1.5f
 #include "StatsDisplayer.h"
 #include "StatsRecords.h"
 #include "Constants.h"
@@ -12,10 +14,9 @@
 #include "Utils.h"
 
 using namespace cocos2d;
-bool StatsDisplayer::init(){
-	if (!CCLayer::init()) {
-				return false;
-			}
+//:Animated(1.5f,0.5f,0.5f,0.5f)
+
+bool StatsDisplayer::init() {
 	CCLOG("weszlo");
 	CCSprite *bg = CCSprite::createWithSpriteFrameName("scoreBoardBG.png");
 	CCUserDefault *usrDefault = CCUserDefault::sharedUserDefault();
@@ -26,9 +27,8 @@ bool StatsDisplayer::init(){
 	int bestScore = usrDefault->getIntegerForKey(HIGH_SCORE,0);
 	CCLOG("zakonczenie pobierania");
 	CCString *wyniki = CCString::createWithFormat("SESSIONS NUMBER:%d\nBEST SCORE:%d\nTRASHES COLLECTED:%d\nTOTAL ACCURANCY%.1f\n",sessions,bestScore,trCollec,accurancy);
-	//CCLabelAtlas *wynikiLab = CCLabelAtlas::create(wyniki->getCString(),FONT_MAIN);
 	CCLOG("stworzenie tekstu");
-	CCLabelTTF *wynikiLab = CCLabelTTF::create(wyniki->getCString(),FONT_MAIN,80);
+	CCLabelTTF *wynikiLab = CCLabelTTF::create(wyniki->getCString(),FONT_MAIN,Utils::getcorrectValue(0.1));
 	CCLOG("stworzenie labela");
 	wynikiLab->setPosition(Utils::getCorrectPosition(0.5,0.5));
 	bg->setPosition(Utils::getCorrectPosition(0.5f,0.5f));
@@ -37,3 +37,5 @@ bool StatsDisplayer::init(){
 	this->addChild(bg);
 	return true;
 }
+
+

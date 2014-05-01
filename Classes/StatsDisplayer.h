@@ -9,8 +9,9 @@
 #define STATSDISPLAYER_H_
 
 #include "cocos2d.h"
+#include "Animated.h"
 
-class StatsDisplayer: public cocos2d::CCLayer {
+class StatsDisplayer: public cocos2d::CCNode{
 public:
 	virtual bool init();
 	LAYER_CREATE_FUNC(StatsDisplayer);

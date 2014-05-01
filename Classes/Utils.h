@@ -48,6 +48,7 @@ public:
 	static cocos2d::CCPoint getCorrectPosition(float xRatio,float yRatio);
 	static float getcorrectValue(float input,bool width=false);
 	static std::string getAchvDescr(std::string input);
+	static float ratioValue(float,bool height);
 	static std::string getAchvName(std::string input);
 	static std::string getAchvTag(std::string input);
 };

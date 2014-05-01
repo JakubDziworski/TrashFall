@@ -136,3 +136,9 @@ std::string Utils::getAchvDescr(std::string input){
 std::string Utils::getAchvTag(std::string input){
 	return input.substr(0,3);
 }
+
+float Utils::ratioValue(float float1,bool h) {
+	if(h)
+	return float1/Utils::sreensSize().height;
+	return float1/Utils::sreensSize().width;
+}
