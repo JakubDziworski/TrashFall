@@ -24,7 +24,7 @@ bool AchievmentPopUp::initWithParams(const char *pszSpriteFrameName,const char *
 	const float popWidth = baseBg->getContentSize().width;
 	const float popHeight = baseBg->getContentSize().height;
 	this->addChild(baseBg);
-	this->setScale(0.77*Utils::sreensSize().width/baseBg->getContentSize().width);
+	this->setScale(0.77*Utils::sreensSize().width/popWidth);
 	return true;
 }
 AchievmentPopUp* AchievmentPopUp::createWithSpriteFrameNameee(const char *inputText,CCUserDefault *savedDat,cocos2d::ccColor3B color,const char *pszSpriteFrameName,const char *additionalImgFrameName){
@@ -46,6 +46,7 @@ void AchievmentPopUp::activate(){
 	baseBg->setTextString(toDisplay->getCString());
 	this->setPosition(Utils::getCorrectPosition(beginPosX,posY));
 	this->startAnimBoth();
+	this->initAnim(beginPosX,0.6f,Utils::ratioValue(this->getPositionY(),true),Utils::ratioValue(this->getPositionY(),true),0.2f,0.4f,0,3);
 }
 void AchievmentPopUp::activateForListing(){
 	CCString *toDisplay;
@@ -60,6 +61,7 @@ void AchievmentPopUp::activateForListing(){
 	}
 	baseBg->setTextString(toDisplay->getCString());
 	baseBg->setTextSize(baseBg->getContentSize().height/4);
+	this->initAnim(beginPosX,0.5f,Utils::ratioValue(this->getPositionY(),true),Utils::ratioValue(this->getPositionY(),true),0.2f,0.4f,0,3);
 }
 
 bool AchievmentPopUp::isCollected(){
@@ -68,20 +70,13 @@ bool AchievmentPopUp::isCollected(){
 }
 
 void AchievmentPopUp::show() {
-	CCLOG("ROZPOCZYNAMY ANIMACJE");
-	zamelduj();
 	this->startAnimIn();
-}
-
-AchievmentPopUp::AchievmentPopUp(): Animated(beginPosX,0.6f,Utils::ratioValue(this->getPositionY(),true),Utils::ratioValue(this->getPositionY(),true),0.3f,0.2f,0,3){
 }
 
 void AchievmentPopUp::hide() {
 	this->startAnimOut();
 }
 
-void AchievmentPopUp::zamelduj() {
-		CCLOG("jestem klasa AchivmentPopUp startposx=%.2f\n endposx=%.2f\n startposy%.2f\n endposy%.2f\n startTiem%.2f\nanimTime%.2f\n",beginnPosX,endPosX,beginPosY,endPosY,nowTime,animTimee);
+void AchievmentPopUp::showAndHide() {
+	this->startAnimBoth();
 }
-
-

@@ -38,8 +38,8 @@ bool AchvDisplayer::init(){
 	achievmentsNames.push_back(ACH_250_SINGLE);
 
 	plane = CCNode::create();
+	info = Animated::create();
 			const float offset=AchievmentPopUp::createWithSpriteFrameNameee(achievmentsNames[0].c_str(),baza)->getHeight()+Utils::getcorrectValue(0.01,false);
-			CCLOG("%f",offset);
 			posYY = Utils::getcorrectValue(0.9);
 			const float posX = Utils::getcorrectValue(0.5, true);
 			int collected=0;
@@ -55,15 +55,17 @@ bool AchvDisplayer::init(){
 				posYY-=offset;
 				CCLOG("ADDED %s",achievmentsNames[i].c_str());
 			}
-			CCString *collectedInfoText = CCString::createWithFormat("%d/%d",collected,achievmentsNames.size());
-			info=SpriteWithText::createWithSpriteFrameNamee("offButton.png",collectedInfoText->getCString(),ccColor3B{1,1,1});
-			Utils::scaleSprite(info,1.1f,1,true);
-			float infposY = Utils::sreensSize().height + info->getContentSize().height*info->getScale()/2.0;
+			CCString *collectedinfoSpriteText = CCString::createWithFormat("%d/%d",collected,achievmentsNames.size());
+			SpriteWithText *infoSprite=SpriteWithText::createWithSpriteFrameNamee("offButton.png",collectedinfoSpriteText->getCString(),ccColor3B{1,1,1});
+			CCLOG("inf pos = %.2f\n",info->getPositionY());
+			info->addChild(infoSprite);
+			info->setScale(0.77*Utils::sreensSize().width/infoSprite->getContentSize().width);
+			float infposY = Utils::sreensSize().height + infoSprite->getContentSize().height*info->getScale()/2.0;
 			info->setPosition(ccp(posX,infposY));
 	this->addChild(info,2);
 	this->addChild(plane);
 	children = plane->getChildren();
-	this->setVisible(false);
+    info->initAnim(0.5,0.5,infposY/Utils::sreensSize().height,0.92f,0.4f,0,0.3f);
 	return true;
 }
 void AchvDisplayer::ccTouchesMoved(cocos2d::CCSet *pTouches,cocos2d::CCEvent *pEvent){
@@ -101,7 +103,7 @@ float AchvDisplayer::verifyendPoint(float input){
 	return input;
 }
 void AchvDisplayer::start(){
-		info->runAction(CCMoveTo::create(0.2f,ccp(0.5f*Utils::sreensSize().width,Utils::sreensSize().height-info->getContentSize().height*info->getScale()/2.0f-Utils::getcorrectValue(0.01f))));
+		info->startAnimIn();
 		ITouchDisablable* parent = (ITouchDisablable*) this->getParent();
 		parent->disableTouch();
 		this->setTouchEnabled(true);
@@ -111,7 +113,7 @@ void AchvDisplayer::start(){
 		this->schedule(schedule_selector(AchvDisplayer::jedenPoDrugimIN),0.03f,children->count()-1,0.2f);
 }
 void AchvDisplayer::end(){
-	info->runAction(CCMoveTo::create(0.2f,ccp(0.5f*Utils::sreensSize().width,Utils::sreensSize().height+info->getContentSize().height*info->getScale()/2.0f)));
+	info->startAnimOut();
 	ITouchDisablable* parent = (ITouchDisablable*) this->getParent();
 	parent->enableTouch();
 	this->setTouchEnabled(false);
@@ -123,6 +125,8 @@ void AchvDisplayer::keyBackClicked(){
 	end();
 }
 void AchvDisplayer::jedenPoDrugim(float dt){
+	CCLOG("info pos = %.2f\n",info->getPositionY());
+	CCLOG("info pos = %.2f\n",((CCNode*)info->getChildren()->objectAtIndex(0))->getPositionY());
 	AchievmentPopUp* popup;
 	popup = (AchievmentPopUp*)children->objectAtIndex(j);
 	popup->hide();

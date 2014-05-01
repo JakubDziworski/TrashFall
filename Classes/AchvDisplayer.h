@@ -11,6 +11,7 @@
 #include <vector>
 #include "SpriteWithText.h"
 #include "cocos2d.h"
+#include "Animated.h"
 
 class AchvDisplayer:public cocos2d::CCLayer {
 	cocos2d::CCNode* plane;
@@ -20,7 +21,7 @@ class AchvDisplayer:public cocos2d::CCLayer {
 	cocos2d::CCUserDefault *baza;
 	std::vector<std::string> achievmentsNames;
 	cocos2d::CCArray* children;
-	SpriteWithText *info;
+	Animated *info;
 	int j;
 public:
 	void ccTouchesMoved(cocos2d::CCSet *pTouches, cocos2d::CCEvent *pEvent);

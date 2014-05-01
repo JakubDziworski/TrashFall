@@ -10,16 +10,10 @@
 #include "AchievmentPopUp.h"
 #include <typeinfo>
 using namespace cocos2d;
-void Animated::startAnimIn(){
-		this->stopAllActions();
-		this->unscheduleAllSelectors();
-		nowTime=0;
-		first=false;second=false;
-		r1=true;r2=true;
-		this->schedule(schedule_selector(Animated::animIn));
-}
 
-Animated::Animated(float bposx, float endpox, float bposy, float eposy,
+
+//INIT
+void Animated::initAnim(float bposx, float endpox, float bposy, float eposy,
 		float aTime, float horAdd, float verAdd, float timeToChill) {
 	animTimee = aTime;
 	nowTime = 0;
@@ -32,44 +26,54 @@ Animated::Animated(float bposx, float endpox, float bposy, float eposy,
 	tToChill = timeToChill;
 }
 
-Animated::~Animated() {
+//START ANIMS
+void Animated::startAnimIn(){
+	this->stopAllActions();
+	this->unscheduleAllSelectors();
+	nowTime =0;
+	first = false;
+	second = false;
+	r1 = true;
+	r2 = true;
+	this->schedule(schedule_selector(Animated::animIn),0.1f);
 }
 
 void Animated::startAnimOut() {
 	this->stopAllActions();
 	this->unscheduleAllSelectors();
-	nowTime=0;
-	first=false;second=false;
-	r1=true;r2=true;
+	nowTime = 0;
+	first = false;
+	second = false;
+	r1 = true;
+	r2 = true;
 	this->schedule(schedule_selector(Animated::animOut));
 }
+void Animated::startAnimBoth() {
+	startAnimIn();
+	this->schedule(schedule_selector(Animated::waitForAnim),0.1,0,tToChill);
+}
+
+//PRIVATE SHEDULDERS
 void Animated::animIn(float dt) {
-	nowTime += dt;
-	CCLOG("animTime= %.2f\n",animTimee);
-	CCLOG("nowTime= %.2f\n",nowTime);
-	if (nowTime > animTimee){
-		this->unscheduleAllSelectors();
-		return;
-	}
-	CCLOG("posx = %.2f",this->getPositionX());
+	if (nowTime > animTimee) return;
+		nowTime += dt;
 		if(first) {this->runAction(CCMoveTo::create(animTimee/2.0,ccp(endPosX+horAddition,endPosY+verAddition)));first = false;}
 		if(second) {this->runAction(CCMoveTo::create(animTimee/2.0,ccp(endPosX,endPosY)));second = false;}
 		if (nowTime < animTimee / 2.0 && r1){
+				CCLOG("pierwsze czasie = %.2f\n",nowTime);
 				first = true;
 				r1=false;
 			}
 			else if (nowTime >= animTimee / 2.0 && r2)
 			{
+				CCLOG("drugie czasie = %.2f\n",nowTime);
 				second = true;
 				r2=false;
 			}
 }
 
 void Animated::animOut(float dt) {
-	if (nowTime > animTimee){
-		this->unscheduleAllSelectors();
-			return;
-		}
+	if (nowTime > animTimee) return;
 			nowTime += dt;
 			if(first) {this->runAction(CCMoveTo::create(animTimee/2.0,ccp(endPosX+horAddition,endPosY+verAddition)));first = false;}
 			if(second) {this->runAction(CCMoveTo::create(animTimee/2.0,ccp(beginnPosX,beginPosY)));second = false;}
@@ -83,15 +87,13 @@ void Animated::animOut(float dt) {
 					r2=false;
 				}
 }
-void Animated::startAnimBoth() {
-	startAnimIn();
-	this->schedule(schedule_selector(Animated::waitForAnim),0.1f,0,tToChill);
-}
 
 void Animated::waitForAnim(float dt) {
 	startAnimOut();
 }
+Animated::~Animated() {
+}
 
-void Animated::zamelduj() {
-	CCLOG("w klasie animated");
+bool Animated::init() {
+	return true;
 }

@@ -18,8 +18,6 @@ public:
 	void setTextSize(float);
 	void setText(const char *inputText,cocos2d::ccColor3B color);
 	void setTextString(const char *txt);
-
-
 	LAYER_CREATE_FUNC (SpriteWithText);
 };
 

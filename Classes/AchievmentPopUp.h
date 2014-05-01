@@ -16,7 +16,6 @@ class AchievmentPopUp:public Animated {
 	cocos2d::CCString *achvName;
 	SpriteWithText *baseBg;
 	public:
-		AchievmentPopUp();
 		cocos2d::CCUserDefault *savedData;
 		bool initWithParams(const char *pszSpriteFrameName,const char *additionalImgFrameName,const char *inputText,cocos2d::ccColor3B color);
 		static AchievmentPopUp* createWithSpriteFrameNameee(const char *inputText,cocos2d::CCUserDefault *savedDat,cocos2d::ccColor3B color=cocos2d::ccColor3B{0,0,0},const char *pszSpriteFrameName="offButton.png",const char *additionalImgFrameName="trophy.png");
@@ -26,7 +25,7 @@ class AchievmentPopUp:public Animated {
 		bool isCollected();
 		void show();
 		void hide();
-		virtual void zamelduj();
+		void showAndHide();
 };
 
 #endif /* ACHIEVMENTPOPUP_H_ */

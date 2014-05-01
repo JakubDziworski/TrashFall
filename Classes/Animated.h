@@ -27,11 +27,12 @@ protected:
 
 public:
 	virtual ~Animated();
-	Animated(float bposx,float endpox,float bposy,float eposy,float aTime=0.3f,float horAdd=0.2f,float verAdd=0,float timeToChill=3);
+	void initAnim(float bposx,float endpox,float bposy,float eposy,float aTime=0.3f,float horAdd=0.3f,float verAdd=0,float timeToChill=3);
 	void startAnimIn();
 	void startAnimBoth();
 	void startAnimOut();
-	virtual void zamelduj();
+	virtual bool init();
+	LAYER_CREATE_FUNC (Animated);
 };
 
 #endif /* ANIMATED_H_ */
