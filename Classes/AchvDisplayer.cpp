@@ -65,7 +65,7 @@ bool AchvDisplayer::init(){
 	this->addChild(info,2);
 	this->addChild(plane);
 	children = plane->getChildren();
-    info->initAnim(0.5,0.5,infposY/Utils::sreensSize().height,0.92f,0.4f,0,0.3f);
+    info->initAnim(0.5,0.5,infposY/Utils::sreensSize().height,0.92f,0.2,0,0.05f,0,0.7f,0.6f);
 	return true;
 }
 void AchvDisplayer::ccTouchesMoved(cocos2d::CCSet *pTouches,cocos2d::CCEvent *pEvent){

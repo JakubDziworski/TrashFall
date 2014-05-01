@@ -45,8 +45,8 @@ void AchievmentPopUp::activate(){
 	baseBg->setTextSize(baseBg->getContentSize().height/4);
 	baseBg->setTextString(toDisplay->getCString());
 	this->setPosition(Utils::getCorrectPosition(beginPosX,posY));
+	this->initAnim(beginPosX,0.6f,Utils::ratioValue(this->getPositionY(),true),Utils::ratioValue(this->getPositionY(),true),0.6,0.3f,0,3);
 	this->startAnimBoth();
-	this->initAnim(beginPosX,0.6f,Utils::ratioValue(this->getPositionY(),true),Utils::ratioValue(this->getPositionY(),true),0.2f,0.4f,0,3);
 }
 void AchievmentPopUp::activateForListing(){
 	CCString *toDisplay;
@@ -61,7 +61,7 @@ void AchievmentPopUp::activateForListing(){
 	}
 	baseBg->setTextString(toDisplay->getCString());
 	baseBg->setTextSize(baseBg->getContentSize().height/4);
-	this->initAnim(beginPosX,0.5f,Utils::ratioValue(this->getPositionY(),true),Utils::ratioValue(this->getPositionY(),true),0.2f,0.4f,0,3);
+	this->initAnim(beginPosX,0.5f,Utils::ratioValue(this->getPositionY(),true),Utils::ratioValue(this->getPositionY(),true),0.24,0.2f);
 }
 
 bool AchievmentPopUp::isCollected(){

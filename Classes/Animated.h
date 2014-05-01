@@ -10,7 +10,6 @@
 #include "cocos2d.h"
 class Animated:public cocos2d::CCNode{
 protected:
-	bool first,second,r1,r2;
 	float beginnPosX;
 	float endPosX;
 	float beginPosY;
@@ -19,15 +18,17 @@ protected:
 	float horAddition;
 	float verAddition;
 	float tToChill;
-	float nowTime;
+	float delayOut;
+	float delayIn;
 	//bool inited;
 	void animIn(float);
+	void animOffset(float);
 	void animOut(float);
 	void waitForAnim(float);
 
 public:
 	virtual ~Animated();
-	void initAnim(float bposx,float endpox,float bposy,float eposy,float aTime=0.3f,float horAdd=0.3f,float verAdd=0,float timeToChill=3);
+	void initAnim(float bposx,float endpox,float bposy,float eposy,float aTime=0.3f,float horAdd=0.3f,float verAdd=0,float timeToChill=3,float delayyin=0,float delayyout=0);
 	void startAnimIn();
 	void startAnimBoth();
 	void startAnimOut();
