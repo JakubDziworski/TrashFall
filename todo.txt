@@ -11,6 +11,8 @@ zebrane
 celnosc
 sesje zakonczone
 
+PODCZAS PAUZY ZAPISYWANIE DANYCH
+
 
 ACHIEVMENTY:
 50

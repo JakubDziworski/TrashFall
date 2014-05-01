@@ -9,6 +9,8 @@
 #include "Utils.h"
 #include "SimpleAudioEngine.h"
 #include "MainMenu.h"
+#include "StatsRecords.h"
+#include "Constants.h"
 using namespace CocosDenshion;
 using namespace cocos2d;
 
@@ -38,7 +40,7 @@ bool Pause::init(){
 	this->addChild(pause);
 	return true;
 }
-void Pause::toggle(){
+void Pause::toggle(int skor,int mis){
 	paused = !paused;
 	Game *g = Utils::getGame();
 	this->setVisible(paused);
@@ -48,6 +50,8 @@ void Pause::toggle(){
 		SimpleAudioEngine::sharedEngine()->resumeBackgroundMusic();
 	}
 	else{
+		curscore = skor;
+		missedAmount = mis;
 		g->setTouchEnabled(false);
 		g->pauseSchedulerAndActions();
 		SimpleAudioEngine::sharedEngine()->pauseBackgroundMusic();
@@ -61,5 +65,15 @@ void Pause::toggle(){
 }
 
 void Pause::goToMainMenu(){
-	CCDirector::sharedDirector()->popScene();
+	if(curscore > 3){
+	CCUserDefault *dane = CCUserDefault::sharedUserDefault();
+	dane->setIntegerForKey(STAT_COLLECTED,dane->getIntegerForKey(STAT_COLLECTED)+curscore);
+	int sessionsOver=dane->getIntegerForKey(STAT_SESOVER)+1;
+	dane->setIntegerForKey(STAT_SESOVER,sessionsOver);
+	if(dane->getIntegerForKey(HIGH_SCORE) < curscore)
+	dane->setIntegerForKey(HIGH_SCORE,curscore);
+	const float accurancy = (float)curscore/(float)(curscore+missedAmount)*100;
+	dane->setFloatForKey(STAT_ACCURANCY,(dane->getFloatForKey(STAT_ACCURANCY,0)*(float)(sessionsOver-1)+accurancy)/(float)sessionsOver);
+	}
+	CCDirector::sharedDirector()->replaceScene(MainMenu::scene());
 }

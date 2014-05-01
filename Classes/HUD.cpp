@@ -71,9 +71,8 @@ void HUD::addToScore(int value,int nomisses){
 	else if (score == 500)  achivsingl = AchievmentPopUp::createWithSpriteFrameNameee(ACH_500.c_str(),savedData);
 	else if (score == 1000) achivsingl = AchievmentPopUp::createWithSpriteFrameNameee(ACH_1000.c_str(),savedData);
 	else if (score == 2000) achivsingl = AchievmentPopUp::createWithSpriteFrameNameee(ACH_2000.c_str(),savedData);
-	if(achivscr !=NULL) {CCLOG("hudrror1");Utils::getBackground()->addChild(achivscr);CCLOG("hudrror2"); achivscr->activate();CCLOG("hudrror3");}
-	if(achivsingl != NULL) {CCLOG("hudrror11");Utils::getBackground()->addChild(achivsingl); CCLOG("hudrror3");achivsingl->activate();CCLOG("hudrror4");}
-
+	if(achivscr !=NULL) {Utils::getBackground()->addChild(achivscr); achivscr->activate();}
+	if(achivsingl != NULL) {Utils::getBackground()->addChild(achivsingl);achivsingl->activate();}
 }
 void HUD::animateText(float dt){
 	if(!animate) return;

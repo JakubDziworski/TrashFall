@@ -21,6 +21,7 @@ class Game: public cocos2d::CCLayer {
 	bool monitorFallen;
 	int missedAmount;
 	int notMissed;
+	int score;
 public:
 //		void tick();
 		void missed();

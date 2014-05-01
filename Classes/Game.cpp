@@ -23,6 +23,7 @@ bool Game::init() {
 	}
 	//BACKGROUND
 	notMissed=0;
+	score = 0;
 	missedAmount = 0;
 	currentTimee=0;
 	resettedTime=0;
@@ -93,6 +94,7 @@ void Game::ccTouchesMoved(cocos2d::CCSet *pTouches,cocos2d::CCEvent *pEvent){
 			SimpleAudioEngine::sharedEngine()->playEffect("buttonClick2.mp3");
 			this->removeChild(trsh,true);
 			notMissed++;
+			score++;
 			Utils::getHUD()->addToScore(1,notMissed);
 		}
 	}
@@ -108,5 +110,5 @@ void Game::ccTouchesEnded(cocos2d::CCSet *pTouches,cocos2d::CCEvent * pEvent){
 	touchTime=0;
 }
 void Game::keyBackClicked() {
-	Utils::getPause()->toggle();
+	Utils::getPause()->toggle(score,missedAmount);
 }

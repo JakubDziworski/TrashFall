@@ -15,6 +15,7 @@ private:
 	StatsDisplayer *statsDisplayer;
 	Animated *menuAnimatorParent;
 	bool statsIsRunning;
+	bool resumed[2];
 public:
 	void tick();
 	virtual bool init();
@@ -26,8 +27,6 @@ public:
 	void ShowAchievments();
 	virtual void disableTouch();
 	virtual void enableTouch();
-	virtual void enablewithoutblockingTouch();
-	virtual void disablewithoutblockingTouch();
 	void ShowStats();
 	LAYER_CREATE_FUNC(MainMenu);
 };

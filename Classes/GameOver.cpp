@@ -82,5 +82,5 @@ void GameOver::playGame(){
 		CCDirector::sharedDirector()->replaceScene(Game::scene());
 }
 void GameOver::keyBackClicked() {
-	CCDirector::sharedDirector()->popScene();
+	CCDirector::sharedDirector()->replaceScene(MainMenu::scene());
 }

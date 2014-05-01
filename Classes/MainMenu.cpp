@@ -55,7 +55,6 @@ bool MainMenu::init(){
 			     this->addChild(bg,-1);
 			     statsIsRunning=false;
 			     menuAnimatorParent = Animated::create();
-			     //menuAnimatorParent->setPosition(Utils::sreensSize().width/2.0,Utils::sreensSize().height/2.0);
 			     menuAnimatorParent->addChild(menu,3);
 			     this->addChild(menuAnimatorParent,4);
 			     statsDisplayer = StatsDisplayer::createe();
@@ -68,7 +67,6 @@ bool MainMenu::init(){
 			     genFallingTrash(0.1);
 			     this->schedule(schedule_selector(MainMenu::genFallingTrash),4.5);
 			     menuAnimatorParent->initAnim(-1,0,0,0,0.2f,-0.1,0,0,0.6,0);
-			     CCLOG("dupa");
 			     return true;
 }
 CCScene* MainMenu::scene(){
@@ -80,7 +78,6 @@ CCScene* MainMenu::scene(){
 }
 
 
-
 void MainMenu::ShowStats() {
 	menuAnimatorParent->startAnimOut();
 	statsDisplayer->show();
@@ -88,7 +85,7 @@ void MainMenu::ShowStats() {
 }
 void MainMenu::playGame(){
 	SimpleAudioEngine::sharedEngine()->playEffect("buttonClick.wav");
-	CCDirector::sharedDirector()->pushScene(Game::scene());
+	CCDirector::sharedDirector()->replaceScene(Game::scene());
 }
 
 void MainMenu::keyBackClicked() {
@@ -125,8 +122,4 @@ void MainMenu::enableTouch(){
 	this->setKeypadEnabled(true);
 	menu->setTouchEnabled(true);
 }
-void MainMenu::enablewithoutblockingTouch() {
-}
 
-void MainMenu::disablewithoutblockingTouch() {
-}

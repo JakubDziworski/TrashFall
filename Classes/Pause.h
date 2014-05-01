@@ -14,9 +14,11 @@
 class Pause: public cocos2d::CCLayer {
 private:
 	bool paused;
+	int curscore;
+	int missedAmount;
 public:
 	virtual bool init();
-	void toggle();
+	void toggle(int,int);
 	void goToMainMenu();
 	LAYER_CREATE_FUNC(Pause);
 };
