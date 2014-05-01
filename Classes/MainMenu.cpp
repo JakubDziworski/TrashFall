@@ -52,8 +52,11 @@ bool MainMenu::init(){
 	 Utils::scaleButton(exitBtn,mainMenubuttonRatio);
 	 menu = CCMenu::create(playBtn,exitBtn,achvBtn,NULL);
 			     menu->alignItemsVertically();
-			     this->addChild(menu,3);
 			     this->addChild(bg,-1);
+			     menuAnimatorParent = Animated::create();
+			     //menuAnimatorParent->setPosition(Utils::sreensSize().width/2.0,Utils::sreensSize().height/2.0);
+			     menuAnimatorParent->addChild(menu,3);
+			     this->addChild(menuAnimatorParent,4);
 			     statsDisplayer = StatsDisplayer::create();
 			     achvDisplayer = AchvDisplayer::create();
 			     CCLOG("stworzono achdisplatyer");
@@ -63,6 +66,7 @@ bool MainMenu::init(){
 			     //latajace w tle gowna
 			     genFallingTrash(0.1);
 			     this->schedule(schedule_selector(MainMenu::genFallingTrash),4.5);
+			     menuAnimatorParent->initAnim(-1,0,0,0,0.2f,-0.1,0,0,0.6,0);
 			     return true;
 }
 CCScene* MainMenu::scene(){
@@ -89,10 +93,12 @@ void MainMenu::genFallingTrash(float dt){
 	this->addChild(obj,Utils::getRandValue(1,3));
 }
 void MainMenu::ShowAchievments(){
+	menuAnimatorParent->unscheduleAllSelectors();
+	menuAnimatorParent->stopAllActions();
 	achvDisplayer->start();
 }
 void MainMenu::disableTouch(){
-	menu->runAction(CCMoveTo::create(0.2f,ccp(-Utils::sreensSize().width/2,menu->getPositionY())));
+	menuAnimatorParent->startAnimOut();
 	CCLOG("TOUCH DISABLED");
 	this->setTouchEnabled(false);
 	this->setKeypadEnabled(false);
@@ -100,7 +106,7 @@ void MainMenu::disableTouch(){
 	menu->setKeypadEnabled(false);
 }
 void MainMenu::enableTouch(){
-	menu->runAction(CCMoveTo::create(0.2f,ccp(Utils::sreensSize().width/2,menu->getPositionY())));
+	menuAnimatorParent->startAnimIn();
 	CCLOG("TOUCH ENABLED");
 	this->setTouchEnabled(true);
 	this->setKeypadEnabled(true);

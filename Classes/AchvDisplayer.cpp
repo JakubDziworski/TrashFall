@@ -103,30 +103,31 @@ float AchvDisplayer::verifyendPoint(float input){
 	return input;
 }
 void AchvDisplayer::start(){
-		info->startAnimIn();
-		ITouchDisablable* parent = (ITouchDisablable*) this->getParent();
-		parent->disableTouch();
-		this->setTouchEnabled(true);
-		this->setKeypadEnabled(true);
-		this->setVisible(true);
-		j=0;
-		this->schedule(schedule_selector(AchvDisplayer::jedenPoDrugimIN),0.03f,children->count()-1,0.2f);
+	ITouchDisablable* parent = (ITouchDisablable*) this->getParent();
+	parent->disableTouch();
+	j = 0;
+	info->startAnimIn();
+	this->schedule(schedule_selector(AchvDisplayer::jedenPoDrugimIN), 0.03f,
+			children->count() - 1, 0.2f);
+	this->setTouchEnabled(true);
+	this->setKeypadEnabled(true);
 }
 void AchvDisplayer::end(){
+	info->unscheduleAllSelectors();
+	info->stopAllActions();
+	this->unscheduleAllSelectors();
 	info->startAnimOut();
 	ITouchDisablable* parent = (ITouchDisablable*) this->getParent();
-	parent->enableTouch();
 	this->setTouchEnabled(false);
 	this->setKeypadEnabled(false);
 	j=0;
 	this->schedule(schedule_selector(AchvDisplayer::jedenPoDrugim),0.03f,children->count()-1,0.2f);
+	parent->enableTouch();
 }
 void AchvDisplayer::keyBackClicked(){
 	end();
 }
 void AchvDisplayer::jedenPoDrugim(float dt){
-	CCLOG("info pos = %.2f\n",info->getPositionY());
-	CCLOG("info pos = %.2f\n",((CCNode*)info->getChildren()->objectAtIndex(0))->getPositionY());
 	AchievmentPopUp* popup;
 	popup = (AchievmentPopUp*)children->objectAtIndex(j);
 	popup->hide();
