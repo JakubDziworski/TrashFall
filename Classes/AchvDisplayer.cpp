@@ -59,7 +59,7 @@ bool AchvDisplayer::init(){
 			SpriteWithText *infoSprite=SpriteWithText::createWithSpriteFrameNamee("offButton.png",collectedinfoSpriteText->getCString(),ccColor3B{1,1,1});
 			CCLOG("inf pos = %.2f\n",info->getPositionY());
 			info->addChild(infoSprite);
-			info->setScale(0.77*Utils::sreensSize().width/infoSprite->getContentSize().width);
+			info->setScale(0.9*Utils::sreensSize().width/infoSprite->getContentSize().width);
 			float infposY = Utils::sreensSize().height + infoSprite->getContentSize().height*info->getScale()/2.0;
 			info->setPosition(ccp(posX,infposY));
 	this->addChild(info,2);

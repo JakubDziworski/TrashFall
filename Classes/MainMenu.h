@@ -11,9 +11,10 @@
 class MainMenu : public ITouchDisablable {
 private:
 	cocos2d::CCMenu *menu;
-	StatsDisplayer *statsDisplayer;
 	AchvDisplayer *achvDisplayer;
+	StatsDisplayer *statsDisplayer;
 	Animated *menuAnimatorParent;
+	bool statsIsRunning;
 public:
 	void tick();
 	virtual bool init();
@@ -22,10 +23,11 @@ public:
 	void playGame();
 	void exitGame();
 	void genFallingTrash(float dt);
-	void cleaner(float dt);
 	void ShowAchievments();
 	virtual void disableTouch();
 	virtual void enableTouch();
+	virtual void enablewithoutblockingTouch();
+	virtual void disablewithoutblockingTouch();
 	void ShowStats();
 	LAYER_CREATE_FUNC(MainMenu);
 };

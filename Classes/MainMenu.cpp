@@ -45,7 +45,7 @@ bool MainMenu::init(){
 	 SpriteWithText *achievmentsButtonOn = SpriteWithText::createWithSpriteFrameNamee("onButton.png","REWARDS",ccColor3B{0,0,0});
 	 SpriteWithText *achievmentsButtonOff = SpriteWithText::createWithSpriteFrameNamee("offButton.png","REWARDS",ccColor3B{0,0,0});
 	 CCMenuItemSprite *playBtn = CCMenuItemSprite::create(playbtnon,playbtnoff,this,menu_selector(MainMenu::playGame));
-	 CCMenuItemSprite *exitBtn = CCMenuItemSprite::create(exitbtnon,exitbtnoff,this,menu_selector(MainMenu::keyBackClicked));
+	 CCMenuItemSprite *exitBtn = CCMenuItemSprite::create(exitbtnon,exitbtnoff,this,menu_selector(MainMenu::ShowStats));
 	 CCMenuItemSprite *achvBtn = CCMenuItemSprite::create(achievmentsButtonOn,achievmentsButtonOff,this,menu_selector(MainMenu::ShowAchievments));
 	 Utils::scaleButton(achvBtn,mainMenubuttonRatio);
 	 Utils::scaleButton(playBtn,mainMenubuttonRatio);
@@ -53,20 +53,22 @@ bool MainMenu::init(){
 	 menu = CCMenu::create(playBtn,exitBtn,achvBtn,NULL);
 			     menu->alignItemsVertically();
 			     this->addChild(bg,-1);
+			     statsIsRunning=false;
 			     menuAnimatorParent = Animated::create();
 			     //menuAnimatorParent->setPosition(Utils::sreensSize().width/2.0,Utils::sreensSize().height/2.0);
 			     menuAnimatorParent->addChild(menu,3);
 			     this->addChild(menuAnimatorParent,4);
-			     statsDisplayer = StatsDisplayer::create();
+			     statsDisplayer = StatsDisplayer::createe();
 			     achvDisplayer = AchvDisplayer::create();
 			     CCLOG("stworzono achdisplatyer");
-			    // this->addChild(statsDisplayer,6);
+			     this->addChild(statsDisplayer,7);
 			     CCLOG("po storzeniu");
 			     this->addChild(achvDisplayer,6);
 			     //latajace w tle gowna
 			     genFallingTrash(0.1);
 			     this->schedule(schedule_selector(MainMenu::genFallingTrash),4.5);
 			     menuAnimatorParent->initAnim(-1,0,0,0,0.2f,-0.1,0,0,0.6,0);
+			     CCLOG("dupa");
 			     return true;
 }
 CCScene* MainMenu::scene(){
@@ -76,8 +78,13 @@ CCScene* MainMenu::scene(){
 	 scene->addChild(layer,1);
 	 return scene;
 }
-void MainMenu::ShowStats(){
-	//statsDisplayer->start();
+
+
+
+void MainMenu::ShowStats() {
+	menuAnimatorParent->startAnimOut();
+	statsDisplayer->show();
+	statsIsRunning=true;
 }
 void MainMenu::playGame(){
 	SimpleAudioEngine::sharedEngine()->playEffect("buttonClick.wav");
@@ -85,6 +92,12 @@ void MainMenu::playGame(){
 }
 
 void MainMenu::keyBackClicked() {
+	if(statsIsRunning){
+		statsDisplayer->hide();
+		menuAnimatorParent->startAnimIn();
+		statsIsRunning=false;
+		return;
+	}
 	SimpleAudioEngine::sharedEngine()->playEffect("buttonClick2.mp3");
 	CCDirector::sharedDirector()->end();
 }
@@ -111,4 +124,9 @@ void MainMenu::enableTouch(){
 	this->setTouchEnabled(true);
 	this->setKeypadEnabled(true);
 	menu->setTouchEnabled(true);
+}
+void MainMenu::enablewithoutblockingTouch() {
+}
+
+void MainMenu::disablewithoutblockingTouch() {
 }

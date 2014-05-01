@@ -11,9 +11,14 @@
 #include "cocos2d.h"
 #include "Animated.h"
 
-class StatsDisplayer: public cocos2d::CCNode{
+class StatsDisplayer: public Animated{
+private:
+	Animated *animatorContainer;
+	cocos2d::CCLabelTTF scrLabel;
 public:
-	virtual bool init();
-	LAYER_CREATE_FUNC(StatsDisplayer);
+	static StatsDisplayer* createe();
+	virtual bool initialize();
+	void show();
+	void hide();
 };
 #endif /* STATSDISPLAYER_H_ */

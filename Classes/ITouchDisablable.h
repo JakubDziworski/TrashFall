@@ -12,5 +12,7 @@ class ITouchDisablable: public cocos2d::CCLayer{
 public:
 	virtual void disableTouch()=0;
 	virtual void enableTouch()=0;
+	virtual void enablewithoutblockingTouch(){}
+	virtual void disablewithoutblockingTouch(){}
 };
 #endif /* ITOUCHDISABLABLE_H_ */
