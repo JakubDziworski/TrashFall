@@ -98,31 +98,33 @@ void Game::ccTouchesMoved(cocos2d::CCSet *pTouches,cocos2d::CCEvent *pEvent){
 			this->removeChild(trsh,true);
 			notMissed++;
 			score++;
+			caught=true;
 			Utils::getHUD()->addToScore(1,notMissed);
 		}
 	}
 }
 void Game::ccTouchesBegan(cocos2d::CCSet *pTouches,cocos2d::CCEvent *pEvent){
 	if(pTouches->count()>1) return;
+	caught=false;
 	fingerDown=true;
 	ccTouchesMoved(pTouches,pEvent);
 }
 void Game::ccTouchesEnded(cocos2d::CCSet *pTouches,cocos2d::CCEvent * pEvent){
 	if(pTouches->count()>1) return;
+	if(!caught) invaildTouch();
 	fingerDown = false;
 	touchTime=0;
 }
 
-void Game::canFalled(float float1) {
-	if(!monitorFallen) return;
-		notMissed=0;
-		missedAmount++;
+void Game::invaildTouch() {
+	SimpleAudioEngine::sharedEngine()->playEffect("missed.mp3");
+		missedAmount+=0.45f;
 		if(missedAmount>21){
 			monitorFallen = false;
 			Utils::getGameOver()->trigger(Utils::getHUD()->getScore(),200,missedAmount);
 			return;
 		}
-		//Utils::getBackground()->updateMisses(missedAmount);
+		Utils::getBackground()->updateMisses(missedAmount);
 }
 
 void Game::keyBackClicked() {
