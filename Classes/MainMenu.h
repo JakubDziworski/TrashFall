@@ -6,6 +6,7 @@
 #include "StatsDisplayer.h"
 #include "ITouchDisablable.h"
 #include "Animated.h"
+#include "Game.h"
 #include "cocos2d.h"
 
 class MainMenu : public ITouchDisablable {
@@ -22,6 +23,10 @@ public:
 	virtual void keyBackClicked();
 	static cocos2d::CCScene* scene();
 	void playGame();
+	void waitToReplace(float dt){
+		cocos2d::CCDirector::sharedDirector()->replaceScene(Game::scene());
+	}
+	void wyrzucPuszki();
 	void exitGame();
 	void genFallingTrash(float dt);
 	void ShowAchievments();

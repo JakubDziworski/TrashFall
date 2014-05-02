@@ -10,6 +10,9 @@ stats:
 zebrane
 celnosc
 sesje zakonczone
+loading
+
+wait after gameOvere
 
 PODCZAS PAUZY ZAPISYWANIE DANYCH
 

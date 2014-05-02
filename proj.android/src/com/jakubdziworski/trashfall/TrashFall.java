@@ -31,10 +31,11 @@ import org.cocos2dx.lib.Cocos2dxRenderer;
 import android.app.ActivityManager;
 import android.content.Context;
 import android.content.pm.ConfigurationInfo;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.FrameLayout;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 
 public class TrashFall extends Cocos2dxActivity{
 	private Cocos2dxGLSurfaceView mGLView;
@@ -73,7 +74,6 @@ public class TrashFall extends Cocos2dxActivity{
 	        mGLView.setEGLContextClientVersion(2);
 	        mGLView.setCocos2dxRenderer(new Cocos2dxRenderer());
             mGLView.setTextField(edittext);
-
             // Set framelayout as the content view
 			setContentView(framelayout);
 		}
@@ -100,7 +100,7 @@ public class TrashFall extends Cocos2dxActivity{
 	     ActivityManager am =
 	            (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
 	     ConfigurationInfo info = am.getDeviceConfigurationInfo();
-	     return (info.reqGlEsVersion >= 0x20000);
+	      return (info.reqGlEsVersion >= 0x20000);
 	 }
 	
      static {

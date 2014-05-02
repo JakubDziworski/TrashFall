@@ -56,7 +56,7 @@ bool MainMenu::init(){
 			     statsIsRunning=false;
 			     menuAnimatorParent = Animated::create();
 			     menuAnimatorParent->addChild(menu,3);
-			     this->addChild(menuAnimatorParent,4);
+			     this->addChild(menuAnimatorParent,3);
 			     statsDisplayer = StatsDisplayer::createe();
 			     achvDisplayer = AchvDisplayer::create();
 			     CCLOG("stworzono achdisplatyer");
@@ -84,10 +84,21 @@ void MainMenu::ShowStats() {
 	statsIsRunning=true;
 }
 void MainMenu::playGame(){
+	menuAnimatorParent->startAnimOut();
+	wyrzucPuszki();
 	SimpleAudioEngine::sharedEngine()->playEffect("buttonClick.wav");
-	CCDirector::sharedDirector()->replaceScene(Game::scene());
+	this->schedule(schedule_selector(MainMenu::waitToReplace),0.1,0,0.8f);
 }
-
+void MainMenu::wyrzucPuszki(){
+	CCArray *arr = this->getChildren();
+	for(int i=0;i<arr->count();i++){
+		Trash *trash = dynamic_cast<Trash*>(arr->objectAtIndex(i));
+		if(trash){
+			trash->stopActionByTag(1);
+			trash->runAction(CCMoveTo::create(0.3f,Utils::getCorrectPosition(1.5f,Utils::ratioValue(trash->getPositionY(),true)-0.1f)));
+		}
+	}
+}
 void MainMenu::keyBackClicked() {
 	if(statsIsRunning){
 		statsDisplayer->hide();

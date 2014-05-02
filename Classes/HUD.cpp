@@ -37,10 +37,15 @@ bool HUD::init() {
 	scoreShadow->setPositionY(scoreLabel->getPositionY()-shadowOffset);
 	scoreShadow->setPositionX(scoreLabel->getPositionX()-shadowOffset);
 	regularScale = scoreLabel->getScale();
-	this->addChild(scoreShadow,-2);
-	this->addChild(scoreLabel,-1);
+	Animated *anim = Animated::create();
+	anim->addChild(scoreLabel,1);
+	anim->addChild(scoreShadow,0);
+	anim->initAnim(-0.1f,0,0,0,0.15f,-0.1f,0,0,1.3f);
+	this->addChild(anim,-2);
 	this->setTouchEnabled(true);
 	this->schedule(schedule_selector(HUD::animateText));
+	anim->setPositionX(Utils::getcorrectValue(-0.1f));
+	anim->startAnimIn();
 	return true;
 }
 
