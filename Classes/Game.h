@@ -23,7 +23,7 @@ class Game: public cocos2d::CCLayer {
 	int notMissed;
 	int score;
 public:
-//		void tick();
+		void canFalled(float);
 		void missed();
 		virtual bool init();
 		static cocos2d::CCScene* scene();

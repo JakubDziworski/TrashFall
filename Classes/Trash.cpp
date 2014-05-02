@@ -17,7 +17,6 @@ bool Trash::init() {
 		{
 			return false;
 		}
-	//default values, later overriden if create used
 	this->setDisplayFrame(Utils::getRandomTrash());
 	autoCheckMissesPoints=false;
 	return true;
@@ -40,7 +39,6 @@ Trash* Trash::create(float speedd,float sizee,float rotTime){
 			trsh->runAction(repeat);
 			trsh->runAction(act);
 			trsh->schedule(schedule_selector(Trash::checkIfFallen));
-			//CCLOG("spped =%.2f\n,endhpos = %.2f\n,sstarthpos = %.2f\n",speedd,Utils::getEndHeight(trsh),Utils::getBeginHeight(trsh));
 			return trsh;
 }
 

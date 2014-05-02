@@ -5,11 +5,15 @@
  *      Author: Jakub
  */
 #define COCOS2D_DEBUG 2
+#define wzrostmnoznik 500
+#define spadekmnoznik 200
 #include "HUD.h"
 #include "Constants.h"
 #include "Utils.h"
 #include "AchvList.h"
 #include "AchievmentPopUp.h"
+#include "SimpleAudioEngine.h"
+using namespace CocosDenshion;
 using namespace cocos2d;
 
 bool HUD::init() {
@@ -21,7 +25,11 @@ bool HUD::init() {
 	extrascale=1;
 	decr = 255;
 	animate = false;
+	stopAnimRed=true;
 	extraAnim = false;
+	effect = CCSprite::createWithSpriteFrameName("trashFallEffect.png");
+	Utils::prepareBackgroundImg(effect);
+	effect->setOpacity(0);
 	savedData = CCUserDefault::sharedUserDefault();
 	bg = Utils::getBackground();
 	scoreLabel = CCLabelTTF::create("0",FONT_MAIN,Utils::getScaledFontSize(75));
@@ -43,6 +51,7 @@ bool HUD::init() {
 	anim->initAnim(-0.1f,0,0,0,0.15f,-0.1f,0,0,1.3f);
 	this->addChild(anim,-2);
 	this->setTouchEnabled(true);
+	this->addChild(effect);
 	this->schedule(schedule_selector(HUD::animateText));
 	anim->setPositionX(Utils::getcorrectValue(-0.1f));
 	anim->startAnimIn();
@@ -111,7 +120,35 @@ void HUD::animateText(float dt){
 				}
 	}
 }
-void HUD::animateReset(){
+
+void HUD::trashFallenEffects() {
+	SimpleAudioEngine::sharedEngine()->playEffect("trashFelt.wav");
+	effect->setOpacity(150);
+	reached250=false;
+	stopAnimRed=false;
+	const unsigned int repeat = 500;
+	const float repeatRate = 0.05f;
+	CCLOG("PRZESKALOWANO");
+	schedule(schedule_selector(HUD::animateTrashFallEffect));
+
+}
+
+void HUD::animateTrashFallEffect(float dt) {
+	if(stopAnimRed) return;
+	int x = effect->getOpacity();
+	CCLOG("opacty = %d",x);
+	if(x<255 && !reached250){
+		if(dt*wzrostmnoznik+x>=255){reached250=true; x=255;}
+		else x+=dt*wzrostmnoznik;
+	}
+	else{
+		if(x-dt*spadekmnoznik<0) {stopAnimRed=true; x=0;}
+		else x-=dt*spadekmnoznik;
+	}
+	effect->setOpacity(x);
+}
+
+void HUD::animateReset() {
 	extrascale=1;
 	decr = 255;
 	animationTime = 0;

@@ -19,14 +19,19 @@ private:
 	float extrascale;
 	float regularScale;
 	float scaleStop;
+	bool  reached250;
+	bool  stopAnimRed;
 	float animationTime;
 	bool animate;
 	bool extraAnim;
 	int decr;
 	int score;
 	Background *bg;
+	cocos2d::CCSprite *effect;
 	cocos2d::CCUserDefault *savedData;
 public:
+			void trashFallenEffects();
+			void animateTrashFallEffect(float);
 			virtual bool init();
 			void addToScore(int value,int nomisses);
 	 	//	virtual void keyBackClicked();

@@ -1,6 +1,5 @@
 to do - wyjscie
 to do - dzwieki (gdy zdobedziemy duzo i przyciski)
-touch
 podmienic placholdery trashy
 przyciski systemowe
 bug z dotykaniem
@@ -14,8 +13,10 @@ loading
 
 wait after gameOvere
 
-PODCZAS PAUZY ZAPISYWANIE DANYCH
 
+POMYS£Y:
+COS ALA draw race
+dentysta hirurg etc
 
 ACHIEVMENTY:
 50

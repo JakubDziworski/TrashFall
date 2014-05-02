@@ -17,15 +17,14 @@ bool Background::init(){
 	maxmovementChmurki = Utils::getcorrectValue(0.025,true);
 	currentTim=0;
 	timeToWait=0;
-	CCLOG("start background init");
-	CCSprite *bg = CCSprite::create("Background.png");
+	CCSprite *bg = CCSprite::createWithSpriteFrameName("Background.png");
 	Utils::prepareBackgroundImg(bg);
-	CCSpriteFrameCache::sharedSpriteFrameCache()->addSpriteFramesWithFile("backgroundImages.plist");
 	sun = CCSprite::createWithSpriteFrameName("Sun.png");
 	chmurka[0] = CCSprite::createWithSpriteFrameName("chmurka1.png");
 	chmurka[1] = CCSprite::createWithSpriteFrameName("chmurka2.png");
 	chmurka[2] = CCSprite::createWithSpriteFrameName("chmurka3.png");
 	buzka = CCSprite::createWithSpriteFrameName("sunFace_00001.png");
+	CCLOG("ENDBG INIT");
 	Utils::scaleSprite(chmurka[0],3.76f,1,true);
 	Utils::scaleSprite(chmurka[1],4.9f,1,true);
 	Utils::scaleSprite(chmurka[2],2.35f,1,true);

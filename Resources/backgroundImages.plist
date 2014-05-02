@@ -7,7 +7,7 @@
             <key>Sun.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{1079,1438},{357,357}}</string>
+                <string>{{1438,1079},{357,357}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -20,7 +20,7 @@
             <key>chmurka1.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{1644,1653},{157,112}}</string>
+                <string>{{1865,2},{157,112}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -33,11 +33,11 @@
             <key>chmurka2.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{1438,1653},{204,97}}</string>
+                <string>{{330,1797},{204,97}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
-                <false/>
+                <true/>
                 <key>sourceColorRect</key>
                 <string>{{0,0},{204,97}}</string>
                 <key>sourceSize</key>
@@ -46,7 +46,7 @@
             <key>chmurka3.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{1438,1438},{326,213}}</string>
+                <string>{{2,1797},{326,213}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -59,7 +59,7 @@
             <key>sunFace_00000.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{720,1438},{357,357}}</string>
+                <string>{{1079,1438},{357,357}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -72,7 +72,7 @@
             <key>sunFace_00001.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{361,1438},{357,357}}</string>
+                <string>{{1079,1079},{357,357}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -85,7 +85,7 @@
             <key>sunFace_00002.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{2,1438},{357,357}}</string>
+                <string>{{1438,720},{357,357}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -98,7 +98,7 @@
             <key>sunFace_00003.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{1438,1079},{357,357}}</string>
+                <string>{{1079,720},{357,357}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -111,7 +111,7 @@
             <key>sunFace_00004.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{1079,1079},{357,357}}</string>
+                <string>{{720,1438},{357,357}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -137,7 +137,7 @@
             <key>sunFace_00006.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{361,1079},{357,357}}</string>
+                <string>{{720,720},{357,357}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -150,7 +150,7 @@
             <key>sunFace_00007.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{2,1079},{357,357}}</string>
+                <string>{{1438,361},{357,357}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -163,7 +163,7 @@
             <key>sunFace_00008.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{1438,720},{357,357}}</string>
+                <string>{{1079,361},{357,357}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -176,7 +176,7 @@
             <key>sunFace_00009.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{1079,720},{357,357}}</string>
+                <string>{{720,361},{357,357}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -189,7 +189,7 @@
             <key>sunFace_00010.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{720,720},{357,357}}</string>
+                <string>{{361,1438},{357,357}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -202,7 +202,7 @@
             <key>sunFace_00011.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{361,720},{357,357}}</string>
+                <string>{{361,1079},{357,357}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -215,7 +215,7 @@
             <key>sunFace_00012.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{2,720},{357,357}}</string>
+                <string>{{361,720},{357,357}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -228,7 +228,7 @@
             <key>sunFace_00013.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{1438,361},{357,357}}</string>
+                <string>{{361,361},{357,357}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -241,7 +241,7 @@
             <key>sunFace_00014.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{1079,361},{357,357}}</string>
+                <string>{{1506,2},{357,357}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -254,7 +254,7 @@
             <key>sunFace_00015.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{720,361},{357,357}}</string>
+                <string>{{1147,2},{357,357}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -267,7 +267,7 @@
             <key>sunFace_00016.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{361,361},{357,357}}</string>
+                <string>{{788,2},{357,357}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -280,7 +280,7 @@
             <key>sunFace_00017.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{2,361},{357,357}}</string>
+                <string>{{429,2},{357,357}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -293,7 +293,7 @@
             <key>sunFace_00018.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{1438,2},{357,357}}</string>
+                <string>{{2,1438},{357,357}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -306,7 +306,7 @@
             <key>sunFace_00019.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{1079,2},{357,357}}</string>
+                <string>{{2,1079},{357,357}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -319,7 +319,7 @@
             <key>sunFace_00020.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{720,2},{357,357}}</string>
+                <string>{{2,720},{357,357}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -332,7 +332,7 @@
             <key>sunFace_00021.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{361,2},{357,357}}</string>
+                <string>{{2,361},{357,357}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -363,9 +363,9 @@
             <key>realTextureFileName</key>
             <string>backgroundImages.png</string>
             <key>size</key>
-            <string>{1803,1797}</string>
+            <string>{2048,2048}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:7451c78f616cfb29562e2bc7db4b3fe3:a67f0503edabb86e47f9aa2ef38abbef:1bc27b4e55d72614b3dbb59f7b9e884c$</string>
+            <string>$TexturePacker:SmartUpdate:7234892db9fffc805b41cbd6f3fb98d6$</string>
             <key>textureFileName</key>
             <string>backgroundImages.png</string>
         </dict>

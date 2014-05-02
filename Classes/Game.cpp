@@ -52,6 +52,7 @@ CCScene* Game::scene() {
 	scene->addChild(hud,1,TAG_HUD);
 	scene->addChild(pause,3,TAG_PAUSE);
 	scene->addChild(gover,4,TAG_GAMEOVER);
+	CCLOG("RESOURCE1");
 	//scene->addChild(achivdispl);
 	CCLOG(CCUserDefault::sharedUserDefault()->getXMLFilePath().c_str());
 	return scene;
@@ -71,6 +72,7 @@ void Game::genFallingTrashes(float dt){
 void Game::missed(){
 	if(!monitorFallen) return;
 	notMissed=0;
+	Utils::getHUD()->trashFallenEffects();
 	missedAmount++;
 	if(missedAmount>21){
 		monitorFallen = false;
@@ -79,6 +81,7 @@ void Game::missed(){
 	}
 	Utils::getBackground()->updateMisses(missedAmount);
 }
+
 void Game::ccTouchesMoved(cocos2d::CCSet *pTouches,cocos2d::CCEvent *pEvent){
 	if(pTouches->count()>1) return;
 	if(touchTime > maxTouchTime) return;
@@ -109,6 +112,19 @@ void Game::ccTouchesEnded(cocos2d::CCSet *pTouches,cocos2d::CCEvent * pEvent){
 	fingerDown = false;
 	touchTime=0;
 }
+
+void Game::canFalled(float float1) {
+	if(!monitorFallen) return;
+		notMissed=0;
+		missedAmount++;
+		if(missedAmount>21){
+			monitorFallen = false;
+			Utils::getGameOver()->trigger(Utils::getHUD()->getScore(),200,missedAmount);
+			return;
+		}
+		//Utils::getBackground()->updateMisses(missedAmount);
+}
+
 void Game::keyBackClicked() {
 	Utils::getPause()->toggle(score,missedAmount);
 }

@@ -31,11 +31,14 @@ bool MainMenu::init(){
 	 SimpleAudioEngine::sharedEngine()->stopBackgroundMusic();
 	 SimpleAudioEngine::sharedEngine()->preloadEffect("buttonClick.wav");
 	 SimpleAudioEngine::sharedEngine()->preloadEffect("buttonClick2.mp3");
+	 SimpleAudioEngine::sharedEngine()->preloadEffect("trashFelt.mp3");
 	 SimpleAudioEngine::sharedEngine()->preloadBackgroundMusic("mainMenu.mp3");
 	 SimpleAudioEngine::sharedEngine()->preloadBackgroundMusic("inGame.mp3");
 	 SimpleAudioEngine::sharedEngine()->playBackgroundMusic("mainMenu.mp3",true);
 	 CCSpriteFrameCache::sharedSpriteFrameCache()->addSpriteFramesWithFile("Buttons.plist");
 	 CCSpriteFrameCache::sharedSpriteFrameCache()->addSpriteFramesWithFile("trashes.plist");
+	 CCSpriteFrameCache::sharedSpriteFrameCache()->addSpriteFramesWithFile("backgroundImages.plist");
+	 CCSpriteFrameCache::sharedSpriteFrameCache()->addSpriteFramesWithFile("Backgrounds.plist");
 	 CCSprite *bg = CCSprite::create("Background.png");
 	 Utils::prepareBackgroundImg(bg);
 	 SpriteWithText *playbtnon = SpriteWithText::createWithSpriteFrameNamee("onButton.png","PLAY",ccColor3B{0,0,0});
