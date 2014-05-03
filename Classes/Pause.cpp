@@ -10,6 +10,8 @@
 #include "SimpleAudioEngine.h"
 #include "MainMenu.h"
 #include "StatsRecords.h"
+#include "AchievmentPopUp.h"
+#include "AchvList.h"
 #include "Constants.h"
 using namespace CocosDenshion;
 using namespace cocos2d;
@@ -75,6 +77,11 @@ void Pause::goToMainMenu(){
 	dane->setIntegerForKey(HIGH_SCORE,curscore);
 	const float accurancy = (float)curscore/(float)(curscore+missedAmount)*100;
 	dane->setFloatForKey(STAT_ACCURANCY,(dane->getFloatForKey(STAT_ACCURANCY,0)*(float)(sessionsOver-1)+accurancy)/(float)sessionsOver);
+	if (sessionsOver == 100) {	//DOOOOOOO ZMIANY
+				AchievmentPopUp * ach = AchievmentPopUp::createWithSpriteFrameNameee(ACH_HARDCORE.c_str(), dane);
+				ach->activate();
+				Utils::getBackground()->addChild(ach);
+		}
 	}
 	CCDirector::sharedDirector()->replaceScene(MainMenu::scene());
 }

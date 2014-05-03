@@ -140,7 +140,6 @@ void MainMenu::genFallingTrash(float dt){
 	this->addChild(obj,Utils::getRandValue(1,3));
 }
 void MainMenu::ShowAchievments(){
-
 	for(int j=0;j<3;j++){
 	menuAnim[j]->unscheduleAllSelectors();
 	menuAnim[j]->stopAllActions();

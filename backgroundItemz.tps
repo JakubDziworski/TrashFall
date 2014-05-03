@@ -683,6 +683,8 @@
             <filename>C:/Users/Jakub/Desktop/doResourca/chmurka1.png</filename>
             <filename>C:/Users/Jakub/Desktop/doResourca/chmurka2.png</filename>
             <filename>C:/Users/Jakub/Desktop/doResourca/chmurka3.png</filename>
+            <filename>Resources/missed.png</filename>
+            <filename>Resources/nailed.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

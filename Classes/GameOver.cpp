@@ -11,6 +11,8 @@
 #include "MainMenu.h"
 #include "ITouchDisablable.h"
 #include "StatsRecords.h"
+#include "AchievmentPopUp.h"
+#include "AchvList.h"
 #include "SimpleAudioEngine.h"
 
 using namespace CocosDenshion;
@@ -33,6 +35,11 @@ void GameOver::trigger(int scorr,int bestt,int missedAmount){
 	usrDefault->setIntegerForKey(STAT_COLLECTED,totalCollected);
 	usrDefault->setIntegerForKey(STAT_SESOVER,sessionsOver);
 	usrDefault->setFloatForKey(STAT_ACCURANCY,totalAccurancy);
+	if (sessionsOver == 100) {	//DOOOOOOO ZMIANY
+			AchievmentPopUp * ach = AchievmentPopUp::createWithSpriteFrameNameee(ACH_HARDCORE.c_str(), usrDefault);
+			ach->activate();
+			Utils::getBackground()->addChild(ach);
+	}
 	anim = Animated::create();
 	anim->initAnim(0,0,1,0,0.2f,0,0.1f);
 	//

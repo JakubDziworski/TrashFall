@@ -26,15 +26,12 @@ private:
 	bool extraAnim;
 	int decr;
 	int score;
+	int beginGlobalScore;
 	Background *bg;
-	cocos2d::CCSprite *trafiony;
-	cocos2d::CCSprite *nietrafiony;
-	bool tr;
-	bool ntr;
 	cocos2d::CCSprite *effect;
 	cocos2d::CCUserDefault *savedData;
 public:
-			void fadeoutTrafiony(float);
+			void checkAchivmets(int miss,int nomisses);
 			void DisplayTrafion(cocos2d::CCPoint,bool);
 			void trashFallenEffects();
 			void animateTrashFallEffect(float);

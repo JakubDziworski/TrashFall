@@ -15,6 +15,8 @@
 #include "AchievmentPopUp.h"
 #include "GameOver.h"
 #include "HUD.h"
+#include "AchvList.h"
+#include "StatsRecords.h"
 using namespace CocosDenshion;
 
 using namespace cocos2d;
@@ -53,9 +55,6 @@ CCScene* Game::scene() {
 	scene->addChild(hud,1,TAG_HUD);
 	scene->addChild(pause,3,TAG_PAUSE);
 	scene->addChild(gover,4,TAG_GAMEOVER);
-	CCLOG("RESOURCE1");
-	//scene->addChild(achivdispl);
-	CCLOG(CCUserDefault::sharedUserDefault()->getXMLFilePath().c_str());
 	return scene;
 }
 void Game::genFallingTrashes(float dt){
@@ -100,8 +99,8 @@ void Game::ccTouchesMoved(cocos2d::CCSet *pTouches,cocos2d::CCEvent *pEvent){
 			this->removeChild(trsh,true);
 			notMissed++;
 			score++;
+			missedInARow=0;
 			caught=true;
-			Utils::getHUD()->DisplayTrafion(location,true);
 			hud->addToScore(1,notMissed);
 		}
 	}
@@ -126,10 +125,16 @@ void Game::ccTouchesEnded(cocos2d::CCSet *pTouches,cocos2d::CCEvent * pEvent){
 void Game::invaildTouch() {
 	SimpleAudioEngine::sharedEngine()->playEffect("missed.mp3");
 		missedAmount+=0.45f;
+		missedInARow++;
 		if(missedAmount>21){
 			monitorFallen = false;
 			Utils::getGameOver()->trigger(Utils::getHUD()->getScore(),200,missedAmount);
 			return;
+		}
+		if(missedInARow == 10){
+			AchievmentPopUp * ach=AchievmentPopUp::createWithSpriteFrameNameee(ACH_BLIND.c_str(),CCUserDefault::sharedUserDefault());
+			ach->activate();
+			Utils::getBackground()->addChild(ach);
 		}
 		Utils::getBackground()->updateMisses(missedAmount);
 }

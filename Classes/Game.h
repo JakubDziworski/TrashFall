@@ -22,6 +22,7 @@ class Game: public cocos2d::CCLayer {
 	bool caught;
 	float missedAmount;
 	int notMissed;
+	int missedInARow;
 	int score;
 public:
 		void invaildTouch();

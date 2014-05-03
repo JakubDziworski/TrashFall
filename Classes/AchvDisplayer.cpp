@@ -22,6 +22,10 @@ bool AchvDisplayer::init(){
 			return false;
 		}
 	baza = CCUserDefault::sharedUserDefault();
+	//miscelanous
+	achievmentsNames.push_back(ACH_BLIND);
+	achievmentsNames.push_back(ACH_HARDCORE);
+	achievmentsNames.push_back(ACH_MASSIVE);
 	achievmentsNames.push_back(ACH_50);
 	achievmentsNames.push_back(ACH_100);
 	achievmentsNames.push_back(ACH_250);
