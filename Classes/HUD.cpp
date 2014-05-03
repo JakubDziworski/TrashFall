@@ -26,7 +26,15 @@ bool HUD::init() {
 	decr = 255;
 	animate = false;
 	stopAnimRed=true;
+	tr=true;
+	ntr=true;
 	extraAnim = false;
+	trafiony = CCSprite::createWithSpriteFrameName("onPaused.png");
+	nietrafiony = CCSprite::createWithSpriteFrameName("offPaused.png");
+	Utils::scaleSprite(trafiony,15,1,true);
+	Utils::scaleSprite(nietrafiony,15,1,true);
+	this->addChild(trafiony);
+	this->addChild(nietrafiony);
 	effect = CCSprite::createWithSpriteFrameName("trashFallEffect.png");
 	Utils::prepareBackgroundImg(effect);
 	effect->setOpacity(0);
@@ -130,7 +138,6 @@ void HUD::trashFallenEffects() {
 	const float repeatRate = 0.05f;
 	CCLOG("PRZESKALOWANO");
 	schedule(schedule_selector(HUD::animateTrashFallEffect));
-
 }
 
 void HUD::animateTrashFallEffect(float dt) {
@@ -146,6 +153,25 @@ void HUD::animateTrashFallEffect(float dt) {
 		else x-=dt*spadekmnoznik;
 	}
 	effect->setOpacity(x);
+}
+
+void HUD::DisplayTrafion(cocos2d::CCPoint point,bool traf) {
+	if(traf){
+		trafiony->runAction(CCFadeIn::create(0.2f));
+		trafiony->setPosition(point);
+		tr=true;
+	}
+	else{
+		nietrafiony->setPosition(point);
+		nietrafiony->runAction(CCFadeIn::create(0.2f));
+		ntr=true;
+	}
+	schedule(schedule_selector(HUD::fadeoutTrafiony),0.21f,0,0.21f);
+}
+
+void HUD::fadeoutTrafiony(float) {
+	if(tr) {trafiony->runAction(CCFadeOut::create(1));tr=false;}
+	if(ntr) {nietrafiony->runAction(CCFadeOut::create(1));ntr=false;}
 }
 
 void HUD::animateReset() {

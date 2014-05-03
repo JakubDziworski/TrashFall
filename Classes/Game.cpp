@@ -14,6 +14,7 @@
 #include "AchvDisplayer.h"
 #include "AchievmentPopUp.h"
 #include "GameOver.h"
+#include "HUD.h"
 using namespace CocosDenshion;
 
 using namespace cocos2d;
@@ -86,6 +87,7 @@ void Game::ccTouchesMoved(cocos2d::CCSet *pTouches,cocos2d::CCEvent *pEvent){
 	if(pTouches->count()>1) return;
 	if(touchTime > maxTouchTime) return;
 	if(this->getChildren() == NULL) return;
+	HUD *hud = Utils::getHUD();
 	CCTouch *touch = (CCTouch*)pTouches->anyObject();
 	CCPoint location = touch->locationInView();
 	location = CCDirector::sharedDirector()->convertToGL(location);
@@ -99,7 +101,8 @@ void Game::ccTouchesMoved(cocos2d::CCSet *pTouches,cocos2d::CCEvent *pEvent){
 			notMissed++;
 			score++;
 			caught=true;
-			Utils::getHUD()->addToScore(1,notMissed);
+			Utils::getHUD()->DisplayTrafion(location,true);
+			hud->addToScore(1,notMissed);
 		}
 	}
 }
@@ -111,7 +114,11 @@ void Game::ccTouchesBegan(cocos2d::CCSet *pTouches,cocos2d::CCEvent *pEvent){
 }
 void Game::ccTouchesEnded(cocos2d::CCSet *pTouches,cocos2d::CCEvent * pEvent){
 	if(pTouches->count()>1) return;
-	if(!caught) invaildTouch();
+	if(!caught){
+		invaildTouch();
+		CCTouch *touch = (CCTouch*)pTouches->anyObject();
+		Utils::getHUD()->DisplayTrafion(CCDirector::sharedDirector()->convertToGL(touch->locationInView()),false);
+	}
 	fingerDown = false;
 	touchTime=0;
 }

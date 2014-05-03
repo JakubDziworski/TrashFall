@@ -5,10 +5,6 @@ przyciski systemowe
 bug z dotykaniem
 loading screen
 poziom trudnosci
-stats:
-zebrane
-celnosc
-sesje zakonczone
 loading
 
 wait after gameOvere
