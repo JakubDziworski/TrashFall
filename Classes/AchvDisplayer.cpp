@@ -108,7 +108,7 @@ void AchvDisplayer::start(){
 	j = 0;
 	info->startAnimIn();
 	this->schedule(schedule_selector(AchvDisplayer::jedenPoDrugimIN), 0.03f,
-			children->count() - 1, 0.2f);
+			children->count() - 1, 0.5f);
 	this->setTouchEnabled(true);
 	this->setKeypadEnabled(true);
 }

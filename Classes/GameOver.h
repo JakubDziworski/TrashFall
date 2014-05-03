@@ -10,6 +10,7 @@
 
 #include "cocos2d.h"
 #include "SpriteWithText.h"
+#include "Animated.h"
 class GameOver: public cocos2d::CCLayer {
 private:
 	SpriteWithText *currentScore;
@@ -17,13 +18,17 @@ private:
 	SpriteWithText *newScoreSet;
 	cocos2d::CCSprite *ok;
 	cocos2d::CCSprite *scoreBoardBg;
+	cocos2d::CCMenu *menu;
+	Animated *anim;
 	int curScore;
 	int bestScore;
+
 public:
 	virtual bool init();
 	void trigger(int scorr,int bestt,int);
 	void playGame();
 	void keyBackClicked();
+	void enableTouchAfterWait(float);
 	LAYER_CREATE_FUNC(GameOver);
 };
 

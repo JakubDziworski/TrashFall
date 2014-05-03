@@ -37,7 +37,7 @@ bool StatsDisplayer::initialize() {
 	Utils::scaleSprite(bg,1.1,1,true);
 	this->addChild(bg,-1);
 	this->setPosition(Utils::getCorrectPosition(1.5f,0.5f));
-	this->initAnim(1.5f,0.5,0.5,0.5,0.3f,0.1f,0,0,0.3f,0);
+	this->initAnim(1.5f,0.5,0.5,0.5,0.3f,0.1f,0,0,0.7f,0);
 	return true;
 }
 

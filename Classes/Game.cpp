@@ -74,7 +74,7 @@ void Game::missed(){
 	notMissed=0;
 	Utils::getHUD()->trashFallenEffects();
 	missedAmount++;
-	if(missedAmount>21){
+	if(missedAmount>0){
 		monitorFallen = false;
 		Utils::getGameOver()->trigger(Utils::getHUD()->getScore(),200,missedAmount);
 		return;

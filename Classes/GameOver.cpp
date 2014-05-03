@@ -30,12 +30,12 @@ void GameOver::trigger(int scorr,int bestt,int missedAmount){
 	usrDefault->setIntegerForKey(STAT_COLLECTED,totalCollected);
 	usrDefault->setIntegerForKey(STAT_SESOVER,sessionsOver);
 	usrDefault->setFloatForKey(STAT_ACCURANCY,totalAccurancy);
-
+	anim = Animated::create();
+	anim->initAnim(0,0,1,0,0.2f,0,0.1f);
 	//
 	Game *g = Utils::getGame();
 				g->pauseSchedulerAndActions();
 				g->setKeypadEnabled(false);
-				this->setKeypadEnabled(true);
 				g->setTouchEnabled(false);
 	//
 	CCLabelTTF *GAMEOVER = CCLabelTTF::create("GAME OVER", FONT_MAIN,Utils::getScaledFontSize(125));
@@ -50,15 +50,16 @@ void GameOver::trigger(int scorr,int bestt,int missedAmount){
 					CCSprite *carryOff = CCSprite::createWithSpriteFrameName("offPaused.png");
 					CCMenuItemSprite *carryOnBtn = CCMenuItemSprite::create(carryOn,carryOff,this,menu_selector(GameOver::playGame));
 					Utils::scaleButton(carryOnBtn,4);
-					CCMenu *menu = CCMenu::create(carryOnBtn,NULL);
+					menu = CCMenu::create(carryOnBtn,NULL);
 					menu->setPosition(Utils::getCorrectPosition(0.5,0.37));
+					menu->setTouchEnabled(false);
 	CCString *accStr = CCString::createWithFormat("ACCURANCY:%.1f\%%",accurancy);
 	CCLabelTTF *accurancyLab= CCLabelTTF::create(accStr->getCString(),FONT_MAIN,Utils::getScaledFontSize(75));
-	this->addChild(scoreBoardBg,-1);
-	this->addChild(GAMEOVER,1);
-	this->addChild(menu,1);
+	anim->addChild(scoreBoardBg,-1);
+	anim->addChild(GAMEOVER,1);
+	anim->addChild(menu,1);
 	accurancyLab->setPosition(Utils::getCorrectPosition(0.5,0.52));
-	this->addChild(accurancyLab,1);
+	anim->addChild(accurancyLab,1);
 	if(scorr > bestScore){
 		CCString *tmpNewRecotd = CCString::createWithFormat("NEW RECORD:%d",curScore);
 		CCLabelTTF *newRecord= CCLabelTTF::create(tmpNewRecotd->getCString(),FONT_MAIN,Utils::getScaledFontSize(75));
@@ -74,13 +75,20 @@ void GameOver::trigger(int scorr,int bestt,int missedAmount){
 	CCLabelTTF *bestScoree = CCLabelTTF::create(tmpbestScoreStr->getCString(),FONT_MAIN,Utils::getScaledFontSize(75));
 	currscor->setPosition(Utils::getCorrectPosition(0.5,0.62));
 	bestScoree->setPosition(Utils::getCorrectPosition(0.5,0.57));
-	this->addChild(currscor,1);
-	this->addChild(bestScoree,1);
+	anim->addChild(currscor,1);
+	anim->addChild(bestScoree,1);
+	anim->startAnimIn();
+	anim->setPosition(Utils::getCorrectPosition(0,1));
+	this->addChild(anim);
+	this->schedule(schedule_selector(GameOver::enableTouchAfterWait),0.1f,0,1.4f);
 }
-
+void GameOver::enableTouchAfterWait(float dt){
+	menu->setTouchEnabled(true);
+}
 void GameOver::playGame(){
 		CCDirector::sharedDirector()->replaceScene(Game::scene());
 }
 void GameOver::keyBackClicked() {
-	CCDirector::sharedDirector()->replaceScene(MainMenu::scene());
+	//CCDirector::sharedDirector()->replaceScene(MainMenu::scene());
+
 }

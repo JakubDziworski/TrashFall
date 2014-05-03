@@ -11,11 +11,14 @@
 
 class MainMenu : public ITouchDisablable {
 private:
-	cocos2d::CCMenu *menu;
+	cocos2d::CCMenu *menu[3];
 	AchvDisplayer *achvDisplayer;
 	StatsDisplayer *statsDisplayer;
-	Animated *menuAnimatorParent;
+	Animated *menuAnim[3];
+	void menuAnimSchedulerIN(float);
+	void menuAnimSchedulerOUT(float);
 	bool statsIsRunning;
+	int i;
 	bool resumed[2];
 public:
 	void tick();

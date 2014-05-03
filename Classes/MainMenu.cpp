@@ -14,6 +14,7 @@
 #include "AchievmentPopUp.h"
 #include "AchvDisplayer.h"
 #include "StatsDisplayer.h"
+#define odstepMiedzyPrzyciskami 0.15f
 
 using namespace cocos2d;
 using namespace CocosDenshion;
@@ -53,23 +54,27 @@ bool MainMenu::init(){
 	 Utils::scaleButton(achvBtn,mainMenubuttonRatio);
 	 Utils::scaleButton(playBtn,mainMenubuttonRatio);
 	 Utils::scaleButton(exitBtn,mainMenubuttonRatio);
-	 menu = CCMenu::create(playBtn,exitBtn,achvBtn,NULL);
-			     menu->alignItemsVertically();
+	 menu[0] = CCMenu::create(playBtn, NULL);
+	 menu[1] = CCMenu::create(exitBtn, NULL);
+	 menu[2] = CCMenu::create(achvBtn, NULL);
 			     this->addChild(bg,-1);
 			     statsIsRunning=false;
-			     menuAnimatorParent = Animated::create();
-			     menuAnimatorParent->addChild(menu,3);
-			     this->addChild(menuAnimatorParent,3);
 			     statsDisplayer = StatsDisplayer::createe();
 			     achvDisplayer = AchvDisplayer::create();
-			     CCLOG("stworzono achdisplatyer");
 			     this->addChild(statsDisplayer,7);
-			     CCLOG("po storzeniu");
 			     this->addChild(achvDisplayer,6);
 			     //latajace w tle gowna
 			     genFallingTrash(0.1);
 			     this->schedule(schedule_selector(MainMenu::genFallingTrash),4.5);
-			     menuAnimatorParent->initAnim(-1,0,0,0,0.2f,-0.1,0,0,0.6,0);
+			     for(int j=0;j<3;j++){
+			    	 menuAnim[j] = Animated::create();
+			    	 menuAnim[j]->addChild(menu[j],NULL);
+			    	 menuAnim[j]->setPosition(Utils::getCorrectPosition(-1,0.2-0.2*j));
+			    	 menuAnim[j]->initAnim(-1,0,0.2-0.2*j,0.2-0.2*j,0.2f,-0.1,0,0,0.6,0);
+			    	 this->addChild(menuAnim[j],2);
+			     }
+			     i=0;
+			     this->schedule(schedule_selector(MainMenu::menuAnimSchedulerIN),odstepMiedzyPrzyciskami,2,0);
 			     return true;
 }
 CCScene* MainMenu::scene(){
@@ -81,20 +86,33 @@ CCScene* MainMenu::scene(){
 }
 
 
+void MainMenu::menuAnimSchedulerIN(float) {
+	if(i==3) i=0;
+	menuAnim[i]->startAnimIn();
+	i++;
+}
+
+void MainMenu::menuAnimSchedulerOUT(float) {
+	if(i==3) i=0;
+	menuAnim[i]->startAnimOut();
+	i++;
+}
+
 void MainMenu::ShowStats() {
-	menuAnimatorParent->startAnimOut();
+	this->schedule(schedule_selector(MainMenu::menuAnimSchedulerOUT),odstepMiedzyPrzyciskami,2,0);
 	statsDisplayer->show();
 	statsIsRunning=true;
+	for(int j=0;j<3;j++) menu[j]->setTouchEnabled(false);
 }
 void MainMenu::playGame(){
-	menuAnimatorParent->startAnimOut();
+	this->schedule(schedule_selector(MainMenu::menuAnimSchedulerOUT),odstepMiedzyPrzyciskami,2,0);
 	wyrzucPuszki();
 	SimpleAudioEngine::sharedEngine()->playEffect("buttonClick.wav");
 	this->schedule(schedule_selector(MainMenu::waitToReplace),0.1,0,0.8f);
 }
 void MainMenu::wyrzucPuszki(){
 	CCArray *arr = this->getChildren();
-	for(int i=0;i<arr->count();i++){
+	for(int j=0;j<arr->count();j++){
 		Trash *trash = dynamic_cast<Trash*>(arr->objectAtIndex(i));
 		if(trash){
 			trash->stopActionByTag(1);
@@ -105,8 +123,9 @@ void MainMenu::wyrzucPuszki(){
 void MainMenu::keyBackClicked() {
 	if(statsIsRunning){
 		statsDisplayer->hide();
-		menuAnimatorParent->startAnimIn();
+		this->schedule(schedule_selector(MainMenu::menuAnimSchedulerIN),odstepMiedzyPrzyciskami,2,0);
 		statsIsRunning=false;
+		for(int j=0;j<3;j++) menu[j]->setTouchEnabled(true);
 		return;
 	}
 	SimpleAudioEngine::sharedEngine()->playEffect("buttonClick2.mp3");
@@ -117,23 +136,30 @@ void MainMenu::genFallingTrash(float dt){
 	this->addChild(obj,Utils::getRandValue(1,3));
 }
 void MainMenu::ShowAchievments(){
-	menuAnimatorParent->unscheduleAllSelectors();
-	menuAnimatorParent->stopAllActions();
+	for(int j=0;j<3;j++){
+	menuAnim[j]->unscheduleAllSelectors();
+	menuAnim[j]->stopAllActions();
+	}
 	achvDisplayer->start();
 }
 void MainMenu::disableTouch(){
-	menuAnimatorParent->startAnimOut();
+	 this->schedule(schedule_selector(MainMenu::menuAnimSchedulerOUT),odstepMiedzyPrzyciskami,2,0);
 	CCLOG("TOUCH DISABLED");
 	this->setTouchEnabled(false);
 	this->setKeypadEnabled(false);
-	menu->setTouchEnabled(false);
-	menu->setKeypadEnabled(false);
+	for(int j=0;j<3;j++){
+	menu[j]->setTouchEnabled(false);
+	menu[j]->setKeypadEnabled(false);
+	}
 }
 void MainMenu::enableTouch(){
-	menuAnimatorParent->startAnimIn();
+	this->schedule(schedule_selector(MainMenu::menuAnimSchedulerIN),odstepMiedzyPrzyciskami,2,0);
 	CCLOG("TOUCH ENABLED");
 	this->setTouchEnabled(true);
 	this->setKeypadEnabled(true);
-	menu->setTouchEnabled(true);
+	for(int j=0;j<3;j++){
+		menu[j]->setTouchEnabled(true);
+		menu[j]->setKeypadEnabled(true);
+		}
 }
 
