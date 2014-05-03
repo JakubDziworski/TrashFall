@@ -66,6 +66,7 @@ void Animated::animOffset(float dt) {
 	this->runAction(CCMoveTo::create(animTimee,ccp(endPosX-horAddition,endPosY-verAddition)));
 }
 
+
 bool Animated::init() {
 	return true;
 }

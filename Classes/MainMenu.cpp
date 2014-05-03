@@ -35,7 +35,7 @@ bool MainMenu::init(){
 	 SimpleAudioEngine::sharedEngine()->preloadEffect("trashFelt.mp3");
 	 SimpleAudioEngine::sharedEngine()->preloadBackgroundMusic("mainMenu.mp3");
 	 SimpleAudioEngine::sharedEngine()->preloadBackgroundMusic("inGame.mp3");
-	 SimpleAudioEngine::sharedEngine()->playBackgroundMusic("mainMenu.mp3",true);
+	 SimpleAudioEngine::sharedEngine()->playBackgroundMusic("inGame.mp3",true);
 	 CCSpriteFrameCache::sharedSpriteFrameCache()->addSpriteFramesWithFile("Buttons.plist");
 	 CCSpriteFrameCache::sharedSpriteFrameCache()->addSpriteFramesWithFile("trashes.plist");
 	 CCSpriteFrameCache::sharedSpriteFrameCache()->addSpriteFramesWithFile("backgroundImages.plist");
@@ -71,7 +71,7 @@ bool MainMenu::init(){
 			    	 menuAnim[j]->addChild(menu[j],NULL);
 			    	 menuAnim[j]->setPosition(Utils::getCorrectPosition(-1,0.2-0.2*j));
 			    	 menuAnim[j]->initAnim(-1,0,0.2-0.2*j,0.2-0.2*j,0.2f,-0.1,0,0,0.6,0);
-			    	 this->addChild(menuAnim[j],2);
+			    	 this->addChild(menuAnim[j],3);
 			     }
 			     i=0;
 			     this->schedule(schedule_selector(MainMenu::menuAnimSchedulerIN),odstepMiedzyPrzyciskami,2,0);
@@ -99,21 +99,24 @@ void MainMenu::menuAnimSchedulerOUT(float) {
 }
 
 void MainMenu::ShowStats() {
+	SimpleAudioEngine::sharedEngine()->playEffect("buttonClick.wav");
 	this->schedule(schedule_selector(MainMenu::menuAnimSchedulerOUT),odstepMiedzyPrzyciskami,2,0);
 	statsDisplayer->show();
 	statsIsRunning=true;
 	for(int j=0;j<3;j++) menu[j]->setTouchEnabled(false);
 }
 void MainMenu::playGame(){
+	SimpleAudioEngine::sharedEngine()->playEffect("buttonClick.wav");
+	this->unscheduleAllSelectors();
+	this->stopAllActions();
 	this->schedule(schedule_selector(MainMenu::menuAnimSchedulerOUT),odstepMiedzyPrzyciskami,2,0);
 	wyrzucPuszki();
-	SimpleAudioEngine::sharedEngine()->playEffect("buttonClick.wav");
-	this->schedule(schedule_selector(MainMenu::waitToReplace),0.1,0,0.8f);
+	this->schedule(schedule_selector(MainMenu::waitToReplace),0.1,0,1);
 }
 void MainMenu::wyrzucPuszki(){
 	CCArray *arr = this->getChildren();
 	for(int j=0;j<arr->count();j++){
-		Trash *trash = dynamic_cast<Trash*>(arr->objectAtIndex(i));
+		Trash *trash = dynamic_cast<Trash*>(arr->objectAtIndex(j));
 		if(trash){
 			trash->stopActionByTag(1);
 			trash->runAction(CCMoveTo::create(0.3f,Utils::getCorrectPosition(1.5f,Utils::ratioValue(trash->getPositionY(),true)-0.1f)));
@@ -122,13 +125,14 @@ void MainMenu::wyrzucPuszki(){
 }
 void MainMenu::keyBackClicked() {
 	if(statsIsRunning){
+		SimpleAudioEngine::sharedEngine()->playEffect("buttonClick.wav");
 		statsDisplayer->hide();
 		this->schedule(schedule_selector(MainMenu::menuAnimSchedulerIN),odstepMiedzyPrzyciskami,2,0);
 		statsIsRunning=false;
 		for(int j=0;j<3;j++) menu[j]->setTouchEnabled(true);
 		return;
 	}
-	SimpleAudioEngine::sharedEngine()->playEffect("buttonClick2.mp3");
+	SimpleAudioEngine::sharedEngine()->playEffect("buttonClick.wav");
 	CCDirector::sharedDirector()->end();
 }
 void MainMenu::genFallingTrash(float dt){
@@ -136,6 +140,7 @@ void MainMenu::genFallingTrash(float dt){
 	this->addChild(obj,Utils::getRandValue(1,3));
 }
 void MainMenu::ShowAchievments(){
+
 	for(int j=0;j<3;j++){
 	menuAnim[j]->unscheduleAllSelectors();
 	menuAnim[j]->stopAllActions();
@@ -143,6 +148,7 @@ void MainMenu::ShowAchievments(){
 	achvDisplayer->start();
 }
 void MainMenu::disableTouch(){
+	SimpleAudioEngine::sharedEngine()->playEffect("buttonClick.wav");
 	 this->schedule(schedule_selector(MainMenu::menuAnimSchedulerOUT),odstepMiedzyPrzyciskami,2,0);
 	CCLOG("TOUCH DISABLED");
 	this->setTouchEnabled(false);
@@ -153,6 +159,7 @@ void MainMenu::disableTouch(){
 	}
 }
 void MainMenu::enableTouch(){
+	SimpleAudioEngine::sharedEngine()->playEffect("buttonClick.wav");
 	this->schedule(schedule_selector(MainMenu::menuAnimSchedulerIN),odstepMiedzyPrzyciskami,2,0);
 	CCLOG("TOUCH ENABLED");
 	this->setTouchEnabled(true);

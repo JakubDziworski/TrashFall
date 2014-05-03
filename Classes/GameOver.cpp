@@ -11,6 +11,9 @@
 #include "MainMenu.h"
 #include "ITouchDisablable.h"
 #include "StatsRecords.h"
+#include "SimpleAudioEngine.h"
+
+using namespace CocosDenshion;
 using namespace cocos2d;
 bool GameOver::init(){
 	if (!CCLayer::init()) {
@@ -86,9 +89,10 @@ void GameOver::enableTouchAfterWait(float dt){
 	menu->setTouchEnabled(true);
 }
 void GameOver::playGame(){
+	SimpleAudioEngine::sharedEngine()->playEffect("buttonClick.wav");
 		CCDirector::sharedDirector()->replaceScene(Game::scene());
 }
 void GameOver::keyBackClicked() {
-	//CCDirector::sharedDirector()->replaceScene(MainMenu::scene());
-
+	SimpleAudioEngine::sharedEngine()->playEffect("buttonClick.wav");
+	CCDirector::sharedDirector()->replaceScene(MainMenu::scene());
 }

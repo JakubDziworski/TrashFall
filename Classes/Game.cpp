@@ -31,7 +31,7 @@ bool Game::init() {
 	spread=1;
 	fingerDown = false;
 	monitorFallen = true;
-	SimpleAudioEngine::sharedEngine()->playBackgroundMusic("inGame.mp3",true);
+	//SimpleAudioEngine::sharedEngine()->playBackgroundMusic("inGame.mp3",true);
 	Utils::setDifficulty(mSpeed,currentTimee,atOnce);
 	this->setTouchEnabled(true);
 	this->setKeypadEnabled(true);

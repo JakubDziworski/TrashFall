@@ -42,6 +42,7 @@ bool Pause::init(){
 }
 void Pause::toggle(int skor,int mis){
 	paused = !paused;
+	SimpleAudioEngine::sharedEngine()->playEffect("buttonClick.wav");
 	Game *g = Utils::getGame();
 	this->setVisible(paused);
 	if(!paused){
