@@ -45,8 +45,9 @@ void GameOver::trigger(int scorr,int missedAmount){
 	//
 	Game *g = Utils::getGame();
 				g->pauseSchedulerAndActions();
-				g->setKeypadEnabled(false);
 				g->setTouchEnabled(false);
+				g->setKeypadEnabled(false);
+				this->setKeypadEnabled(true);
 	//
 	CCLabelTTF *GAMEOVER = CCLabelTTF::create("GAME OVER", FONT_MAIN,Utils::getScaledFontSize(125));
 	GAMEOVER->setColor(ccColor3B { 255, 15, 15 });
@@ -95,7 +96,6 @@ void GameOver::trigger(int scorr,int missedAmount){
 }
 void GameOver::enableTouchAfterWait(float dt){
 	menu->setTouchEnabled(true);
-	this->setKeypadEnabled(true);
 }
 void GameOver::playGame(){
 	SimpleAudioEngine::sharedEngine()->playEffect("buttonClick.wav");

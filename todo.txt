@@ -1,12 +1,7 @@
 to do - wyjscie
 podmienic placholdery trashy
-przyciski systemowe
 loading screen
 poziom trudnosci
-loading
-
-wait after gameOvere
-
 
 POMYS£Y:
 COS ALA draw race

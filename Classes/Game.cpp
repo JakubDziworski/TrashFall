@@ -74,7 +74,7 @@ void Game::missed(){
 	notMissed=0;
 	Utils::getHUD()->trashFallenEffects();
 	missedAmount++;
-	if(missedAmount>0){
+	if(missedAmount>21){
 		monitorFallen = false;
 		Utils::getGameOver()->trigger(Utils::getHUD()->getScore(),missedAmount);
 		return;
@@ -124,7 +124,7 @@ void Game::ccTouchesEnded(cocos2d::CCSet *pTouches,cocos2d::CCEvent * pEvent){
 
 void Game::invaildTouch() {
 	SimpleAudioEngine::sharedEngine()->playEffect("missed.mp3");
-		missedAmount+=0.45f;
+		missedAmount+=1;
 		missedInARow++;
 		if(missedAmount>21){
 			monitorFallen = false;

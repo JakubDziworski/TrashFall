@@ -10,6 +10,7 @@
 #include "AchvDisplayer.h"
 #include <string.h>
 #include "Constants.h"
+#include <math.h>
 
 using namespace cocos2d;
 CCSize Utils::sreensSize(){
@@ -67,7 +68,6 @@ void Utils::setDifficulty(float& speed,float timeEl,float& atO){
 		if(timeEl >= difficulties[i].timeElapse){
 			speed = difficulties[i].speed;
 			atO = difficulties[i].atOnce;
-			CCLOG("difficulty : %d",i);
 			break;
 		}
 	}
@@ -127,14 +127,14 @@ float Utils::getcorrectValue(float input,bool width){
 }
 std::string Utils::getAchvName(std::string input){
 	unsigned pos = input.find(",");
-	return input.substr(0,pos);
+	return input.substr(2,pos-2);
 }
 std::string Utils::getAchvDescr(std::string input){
 	unsigned pos = input.find(",");
 	return input.substr(pos+1);
 }
 std::string Utils::getAchvTag(std::string input){
-	return input.substr(0,3);
+	return input.substr(0,2);
 }
 
 float Utils::ratioValue(float float1,bool h) {
