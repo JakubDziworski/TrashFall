@@ -76,7 +76,7 @@ void Game::missed(){
 	missedAmount++;
 	if(missedAmount>0){
 		monitorFallen = false;
-		Utils::getGameOver()->trigger(Utils::getHUD()->getScore(),200,missedAmount);
+		Utils::getGameOver()->trigger(Utils::getHUD()->getScore(),missedAmount);
 		return;
 	}
 	Utils::getBackground()->updateMisses(missedAmount);
@@ -128,13 +128,13 @@ void Game::invaildTouch() {
 		missedInARow++;
 		if(missedAmount>21){
 			monitorFallen = false;
-			Utils::getGameOver()->trigger(Utils::getHUD()->getScore(),200,missedAmount);
+			Utils::getGameOver()->trigger(Utils::getHUD()->getScore(),missedAmount);
 			return;
 		}
 		if(missedInARow == 10){
 			AchievmentPopUp * ach=AchievmentPopUp::createWithSpriteFrameNameee(ACH_BLIND.c_str(),CCUserDefault::sharedUserDefault());
-			ach->activate();
 			Utils::getBackground()->addChild(ach);
+			ach->activate();
 		}
 		Utils::getBackground()->updateMisses(missedAmount);
 }

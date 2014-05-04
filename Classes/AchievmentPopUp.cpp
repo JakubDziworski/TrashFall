@@ -27,8 +27,10 @@ bool AchievmentPopUp::initWithParams(const char *pszSpriteFrameName,const char *
 	this->setScale(0.77*Utils::sreensSize().width/popWidth);
 	return true;
 }
-AchievmentPopUp* AchievmentPopUp::createWithSpriteFrameNameee(const char *inputText,CCUserDefault *savedDat,cocos2d::ccColor3B color,const char *pszSpriteFrameName,const char *additionalImgFrameName){
-	CCLOG("w AchievmentPopUp::createWithSpriteFrameNameee %s",inputText);
+AchievmentPopUp* AchievmentPopUp::createWithSpriteFrameNameee(const char *inputText,CCUserDefault *savedDat,bool whileRunning,cocos2d::ccColor3B color,const char *pszSpriteFrameName,const char *additionalImgFrameName){
+	if(whileRunning){
+		if(savedDat->getBoolForKey(inputText)) return NULL;
+	}
 	AchievmentPopUp *achv = new AchievmentPopUp();
 	achv->savedData = savedDat;
 	achv->initWithParams(pszSpriteFrameName,additionalImgFrameName,inputText,color);

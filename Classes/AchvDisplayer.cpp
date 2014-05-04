@@ -37,7 +37,6 @@ bool AchvDisplayer::init(){
 	achievmentsNames.push_back(ACH_20_SINGLE);
 	achievmentsNames.push_back(ACH_50_SINGLE);
 	achievmentsNames.push_back(ACH_100_SINGLE);
-	achievmentsNames.push_back(ACH_250_SINGLE);
 	achievmentsNames.push_back(ACH_150_SINGLE);
 	achievmentsNames.push_back(ACH_250_SINGLE);
 

@@ -31,7 +31,7 @@ private:
 	cocos2d::CCSprite *effect;
 	cocos2d::CCUserDefault *savedData;
 public:
-			void checkAchivmets(int miss,int nomisses);
+			void checkAchivmets(int nomisses);
 			void DisplayTrafion(cocos2d::CCPoint,bool);
 			void trashFallenEffects();
 			void animateTrashFallEffect(float);

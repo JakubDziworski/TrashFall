@@ -18,7 +18,7 @@ class AchievmentPopUp:public Animated {
 	public:
 		cocos2d::CCUserDefault *savedData;
 		bool initWithParams(const char *pszSpriteFrameName,const char *additionalImgFrameName,const char *inputText,cocos2d::ccColor3B color);
-		static AchievmentPopUp* createWithSpriteFrameNameee(const char *inputText,cocos2d::CCUserDefault *savedDat,cocos2d::ccColor3B color=cocos2d::ccColor3B{0,0,0},const char *pszSpriteFrameName="offButton.png",const char *additionalImgFrameName="trophy.png");
+		static AchievmentPopUp* createWithSpriteFrameNameee(const char *inputText,cocos2d::CCUserDefault *savedDat,bool whileRunning = false,cocos2d::ccColor3B color=cocos2d::ccColor3B{0,0,0},const char *pszSpriteFrameName="offButton.png",const char *additionalImgFrameName="trophy.png");
 		void activate();
 		float getHeight();
 		void activateForListing();

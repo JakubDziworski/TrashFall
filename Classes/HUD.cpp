@@ -64,11 +64,12 @@ bool HUD::init() {
 void HUD::addToScore(int value,int nomisses){
 	score+=value;
 	beginGlobalScore+=value;
-	if(beginGlobalScore == 10000){
-					AchievmentPopUp * ach=AchievmentPopUp::createWithSpriteFrameNameee(ACH_MASSIVE.c_str(),savedData);
+	if(beginGlobalScore > 10000 && score>3){
+					AchievmentPopUp * ach=AchievmentPopUp::createWithSpriteFrameNameee(ACH_MASSIVE.c_str(),savedData,true);
 					ach->activate();
 					Utils::getBackground()->addChild(ach);
 	}
+	checkAchivmets(nomisses);
 	scoreLabel->setString(CCString::createWithFormat("%d",score)->getCString());
 	scoreShadow->setString(scoreLabel->getString());
 	if(score%10 == 0){
@@ -149,24 +150,24 @@ void HUD::DisplayTrafion(cocos2d::CCPoint point,bool traf) {
 		ntraf->runAction(CCFadeOut::create(0.9f));
 }
 
-void HUD::checkAchivmets(int missed,int nomisses) {
+void HUD::checkAchivmets(int nomisses) {
 		AchievmentPopUp *generalScore=NULL;
 		AchievmentPopUp *inArowScore = NULL;
 		switch(nomisses){
-		case 10:	inArowScore = AchievmentPopUp::createWithSpriteFrameNameee(ACH_10_SINGLE.c_str(),savedData);
-		case 20:    inArowScore = AchievmentPopUp::createWithSpriteFrameNameee(ACH_20_SINGLE.c_str(),savedData);
-		case 50:	inArowScore = AchievmentPopUp::createWithSpriteFrameNameee(ACH_50_SINGLE.c_str(),savedData);
-		case 100:	inArowScore = AchievmentPopUp::createWithSpriteFrameNameee(ACH_100_SINGLE.c_str(),savedData);
-		case 150:	inArowScore= AchievmentPopUp::createWithSpriteFrameNameee(ACH_150_SINGLE.c_str(),savedData);
-		case 250:	inArowScore= AchievmentPopUp::createWithSpriteFrameNameee(ACH_250_SINGLE.c_str(),savedData);
+		case 10:	inArowScore = AchievmentPopUp::createWithSpriteFrameNameee(ACH_10_SINGLE.c_str(),savedData,true);break;
+		case 20:    inArowScore = AchievmentPopUp::createWithSpriteFrameNameee(ACH_20_SINGLE.c_str(),savedData,true);break;
+		case 50:	inArowScore = AchievmentPopUp::createWithSpriteFrameNameee(ACH_50_SINGLE.c_str(),savedData,true);break;
+		case 100:	inArowScore = AchievmentPopUp::createWithSpriteFrameNameee(ACH_100_SINGLE.c_str(),savedData,true);break;
+		case 150:	inArowScore= AchievmentPopUp::createWithSpriteFrameNameee(ACH_150_SINGLE.c_str(),savedData,true);break;
+		case 250:	inArowScore= AchievmentPopUp::createWithSpriteFrameNameee(ACH_250_SINGLE.c_str(),savedData,true);break;
 		}
 		switch(score){
-		case 50:	generalScore= AchievmentPopUp::createWithSpriteFrameNameee(ACH_50.c_str(),savedData);
-		case 100:    generalScore = AchievmentPopUp::createWithSpriteFrameNameee(ACH_100.c_str(),savedData);
-		case 250:   generalScore = AchievmentPopUp::createWithSpriteFrameNameee(ACH_250.c_str(),savedData);
-		case 500:   generalScore = AchievmentPopUp::createWithSpriteFrameNameee(ACH_500.c_str(),savedData);
-		case 1000:  generalScore = AchievmentPopUp::createWithSpriteFrameNameee(ACH_1000.c_str(),savedData);
-		case 2000:  generalScore = AchievmentPopUp::createWithSpriteFrameNameee(ACH_2000.c_str(),savedData);
+		case 50:	generalScore= AchievmentPopUp::createWithSpriteFrameNameee(ACH_50.c_str(),savedData,true);break;
+		case 100:    generalScore = AchievmentPopUp::createWithSpriteFrameNameee(ACH_100.c_str(),savedData,true);break;
+		case 250:   generalScore = AchievmentPopUp::createWithSpriteFrameNameee(ACH_250.c_str(),savedData,true);break;
+		case 500:   generalScore = AchievmentPopUp::createWithSpriteFrameNameee(ACH_500.c_str(),savedData,true);break;
+		case 1000:  generalScore = AchievmentPopUp::createWithSpriteFrameNameee(ACH_1000.c_str(),savedData,true);break;
+		case 2000:  generalScore = AchievmentPopUp::createWithSpriteFrameNameee(ACH_2000.c_str(),savedData,true);break;
 		}
 		if(inArowScore !=NULL) {Utils::getBackground()->addChild(inArowScore); inArowScore->activate();}
 		if(generalScore != NULL) {Utils::getBackground()->addChild(generalScore);generalScore->activate();}

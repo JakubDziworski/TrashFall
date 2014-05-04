@@ -23,7 +23,7 @@ bool GameOver::init(){
 		}
 		return true;
 }
-void GameOver::trigger(int scorr,int bestt,int missedAmount){
+void GameOver::trigger(int scorr,int missedAmount){
 	CCUserDefault *usrDefault = CCUserDefault::sharedUserDefault();
 
 	curScore = scorr;
@@ -35,8 +35,8 @@ void GameOver::trigger(int scorr,int bestt,int missedAmount){
 	usrDefault->setIntegerForKey(STAT_COLLECTED,totalCollected);
 	usrDefault->setIntegerForKey(STAT_SESOVER,sessionsOver);
 	usrDefault->setFloatForKey(STAT_ACCURANCY,totalAccurancy);
-	if (sessionsOver == 100) {	//DOOOOOOO ZMIANY
-			AchievmentPopUp * ach = AchievmentPopUp::createWithSpriteFrameNameee(ACH_HARDCORE.c_str(), usrDefault);
+	if (sessionsOver == 100) {
+			AchievmentPopUp * ach = AchievmentPopUp::createWithSpriteFrameNameee(ACH_HARDCORE.c_str(), usrDefault,true);
 			ach->activate();
 			Utils::getBackground()->addChild(ach);
 	}
@@ -75,10 +75,10 @@ void GameOver::trigger(int scorr,int bestt,int missedAmount){
 		CCLabelTTF *newRecord= CCLabelTTF::create(tmpNewRecotd->getCString(),FONT_MAIN,Utils::getScaledFontSize(75));
 		newRecord->setColor(ccColor3B{255,15,15});
 		newRecord->setPosition(Utils::getCorrectPosition(0.5,0.57));
-		this->addChild(newRecord);
-		CCUserDefault::sharedUserDefault()->setIntegerForKey(HIGH_SCORE,scorr);
-		return;
+		anim->addChild(newRecord);
+		usrDefault->setIntegerForKey(HIGH_SCORE,scorr);
 	}
+	else{
 	CCString *tmpCurrScoreStr = CCString::createWithFormat("SCORE:%d",curScore);
 	CCString *tmpbestScoreStr = CCString::createWithFormat("BEST:%d",bestScore);
 	CCLabelTTF *currscor= CCLabelTTF::create(tmpCurrScoreStr->getCString(),FONT_MAIN,Utils::getScaledFontSize(75));
@@ -87,6 +87,7 @@ void GameOver::trigger(int scorr,int bestt,int missedAmount){
 	bestScoree->setPosition(Utils::getCorrectPosition(0.5,0.57));
 	anim->addChild(currscor,1);
 	anim->addChild(bestScoree,1);
+	}
 	anim->startAnimIn();
 	anim->setPosition(Utils::getCorrectPosition(0,1));
 	this->addChild(anim);
@@ -94,6 +95,7 @@ void GameOver::trigger(int scorr,int bestt,int missedAmount){
 }
 void GameOver::enableTouchAfterWait(float dt){
 	menu->setTouchEnabled(true);
+	this->setKeypadEnabled(true);
 }
 void GameOver::playGame(){
 	SimpleAudioEngine::sharedEngine()->playEffect("buttonClick.wav");
