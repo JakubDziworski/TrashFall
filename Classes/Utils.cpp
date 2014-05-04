@@ -126,15 +126,17 @@ float Utils::getcorrectValue(float input,bool width){
 	return input*CCDirector::sharedDirector()->getWinSize().height;
 }
 std::string Utils::getAchvName(std::string input){
-	unsigned pos = input.find(",");
-	return input.substr(2,pos-2);
+	unsigned posbeg = input.find("_");
+	unsigned posend = input.find(",")-posbeg-1;
+	return input.substr(posbeg+1,posend);
 }
 std::string Utils::getAchvDescr(std::string input){
 	unsigned pos = input.find(",");
 	return input.substr(pos+1);
 }
 std::string Utils::getAchvTag(std::string input){
-	return input.substr(0,2);
+	unsigned pos = input.find("_");
+	return input.substr(0,pos);
 }
 
 float Utils::ratioValue(float float1,bool h) {
