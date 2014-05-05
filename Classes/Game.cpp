@@ -132,7 +132,7 @@ void Game::invaildTouch() {
 			return;
 		}
 		if(missedInARow == 10){
-			AchievmentPopUp * ach=AchievmentPopUp::createWithSpriteFrameNameee(ACH_BLIND.c_str(),CCUserDefault::sharedUserDefault());
+			AchievmentPopUp * ach=AchievmentPopUp::createWithSpriteFrameNameee(ACH_BLIND.c_str(),CCUserDefault::sharedUserDefault(),true);
 			if(ach){
 			ach->activate();
 			Utils::getBackground()->addChild(ach);
