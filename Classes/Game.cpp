@@ -65,7 +65,7 @@ void Game::genFallingTrashes(float dt){
 	resettedTime = 0;
 	Utils::setDifficulty(mSpeed,currentTimee,atOnce);
 	spread=mSpeed/4.0f;
-	Trash *obj = Trash::create(Utils::getRandValueF(mSpeed,mSpeed+spread),Utils::getRandValueF(1,4),monitorFallen);
+	Trash *obj = Trash::create(Utils::getRandValueF(mSpeed,mSpeed+spread),Utils::getRandValueF(1,2.5f),monitorFallen);
 	obj->setAutoCheckMissesPoints(true);
 	this->addChild(obj,Utils::getRandValue(1,3));
 }
@@ -133,8 +133,10 @@ void Game::invaildTouch() {
 		}
 		if(missedInARow == 10){
 			AchievmentPopUp * ach=AchievmentPopUp::createWithSpriteFrameNameee(ACH_BLIND.c_str(),CCUserDefault::sharedUserDefault());
-			Utils::getBackground()->addChild(ach);
+			if(ach){
 			ach->activate();
+			Utils::getBackground()->addChild(ach);
+			}
 		}
 		Utils::getBackground()->updateMisses(missedAmount);
 }

@@ -29,7 +29,7 @@ bool AchievmentPopUp::initWithParams(const char *pszSpriteFrameName,const char *
 }
 AchievmentPopUp* AchievmentPopUp::createWithSpriteFrameNameee(const char *inputText,CCUserDefault *savedDat,bool whileRunning,cocos2d::ccColor3B color,const char *pszSpriteFrameName,const char *additionalImgFrameName){
 	if(whileRunning){
-		if(savedDat->getBoolForKey(inputText)) return NULL;
+		if(savedDat->getBoolForKey(Utils::getAchvTag(inputText).c_str())) return NULL;
 	}
 	AchievmentPopUp *achv = new AchievmentPopUp();
 	achv->savedData = savedDat;

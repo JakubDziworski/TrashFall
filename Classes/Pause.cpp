@@ -79,8 +79,11 @@ void Pause::goToMainMenu(){
 	dane->setFloatForKey(STAT_ACCURANCY,(dane->getFloatForKey(STAT_ACCURANCY,0)*(float)(sessionsOver-1)+accurancy)/(float)sessionsOver);
 	if (sessionsOver == 100) {	//DOOOOOOO ZMIANY
 				AchievmentPopUp * ach = AchievmentPopUp::createWithSpriteFrameNameee(ACH_HARDCORE.c_str(), dane);
+				if(ach)
+				{
 				ach->activate();
 				Utils::getBackground()->addChild(ach);
+				}
 		}
 	}
 	CCDirector::sharedDirector()->replaceScene(MainMenu::scene());

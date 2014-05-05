@@ -64,10 +64,12 @@ bool HUD::init() {
 void HUD::addToScore(int value,int nomisses){
 	score+=value;
 	beginGlobalScore+=value;
-	if(beginGlobalScore > 10000 && score>3){
+	if(beginGlobalScore >=10000 &&beginGlobalScore < 10005 && score>3){
 					AchievmentPopUp * ach=AchievmentPopUp::createWithSpriteFrameNameee(ACH_MASSIVE.c_str(),savedData,true);
-					ach->activate();
+					if(ach){
 					Utils::getBackground()->addChild(ach);
+					ach->activate();
+					}
 	}
 	checkAchivmets(nomisses);
 	scoreLabel->setString(CCString::createWithFormat("%d",score)->getCString());

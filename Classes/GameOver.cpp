@@ -37,8 +37,10 @@ void GameOver::trigger(int scorr,int missedAmount){
 	usrDefault->setFloatForKey(STAT_ACCURANCY,totalAccurancy);
 	if (sessionsOver == 100) {
 			AchievmentPopUp * ach = AchievmentPopUp::createWithSpriteFrameNameee(ACH_HARDCORE.c_str(), usrDefault,true);
+			if(ach){
 			ach->activate();
 			Utils::getBackground()->addChild(ach);
+			}
 	}
 	anim = Animated::create();
 	anim->initAnim(0,0,1,0,0.2f,0,0.1f);
