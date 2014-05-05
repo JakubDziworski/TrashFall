@@ -14,6 +14,8 @@
 #include "AchievmentPopUp.h"
 #include "AchvList.h"
 #include "SimpleAudioEngine.h"
+#include "LoadingNode.h"
+
 
 using namespace CocosDenshion;
 using namespace cocos2d;
@@ -43,7 +45,7 @@ void GameOver::trigger(int scorr,int missedAmount){
 			}
 	}
 	anim = Animated::create();
-	anim->initAnim(0,0,1,0,0.2f,0,0.1f);
+	anim->initAnim(0,0,1,0,0.2f,0,0.2f);
 	//
 	Game *g = Utils::getGame();
 				g->pauseSchedulerAndActions();
@@ -96,7 +98,12 @@ void GameOver::trigger(int scorr,int missedAmount){
 	this->addChild(anim);
 	this->schedule(schedule_selector(GameOver::enableTouchAfterWait),0.1f,0,1.4f);
 }
-void GameOver::enableTouchAfterWait(float dt){
+
+void GameOver::lateMainMenu(float float1) {
+	CCDirector::sharedDirector()->replaceScene(MainMenu::scene());
+}
+
+void GameOver::enableTouchAfterWait(float dt) {
 	menu->setTouchEnabled(true);
 }
 void GameOver::playGame(){
@@ -104,6 +111,9 @@ void GameOver::playGame(){
 		CCDirector::sharedDirector()->replaceScene(Game::scene());
 }
 void GameOver::keyBackClicked() {
+	LoadingNode *nd = LoadingNode::create();
+	this->addChild(nd);
+	anim->startAnimOut();
 	SimpleAudioEngine::sharedEngine()->playEffect("buttonClick.wav");
-	CCDirector::sharedDirector()->replaceScene(MainMenu::scene());
+	this->scheduleOnce(schedule_selector(GameOver::lateMainMenu),0.45f);
 }

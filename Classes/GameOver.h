@@ -25,6 +25,7 @@ private:
 
 public:
 	virtual bool init();
+	void lateMainMenu(float);
 	void trigger(int scorr,int);
 	void playGame();
 	void keyBackClicked();

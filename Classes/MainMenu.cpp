@@ -29,7 +29,6 @@ bool MainMenu::init(){
 	 //sounds
 	 const float posx = CCDirector::sharedDirector()->getWinSize().width/2;
 	 const float posy = CCDirector::sharedDirector()->getWinSize().height/2;
-	 SimpleAudioEngine::sharedEngine()->playBackgroundMusic("inGame.mp3",true);
 	 CCSprite *bg = CCSprite::createWithSpriteFrameName("Background.png");
 	 Utils::prepareBackgroundImg(bg);
 	 SpriteWithText *playbtnon = SpriteWithText::createWithSpriteFrameNamee("onButton.png","PLAY",ccColor3B{0,0,0});

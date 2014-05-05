@@ -49,18 +49,15 @@ bool AchvDisplayer::init(){
 			posYY-=offset;
 			for(int i=0;i<achievmentsNames.size();i++){
 				AchievmentPopUp *record;
-				CCLOG("w funkcji achvdisplayer ini %s",achievmentsNames[i].c_str());
 				record = AchievmentPopUp::createWithSpriteFrameNameee(achievmentsNames[i].c_str(),baza);
 				record->setPosition(ccp(posX,posYY));
 				record->activateForListing();
 				if(record->isCollected()) collected++;
 				plane->addChild(record);
 				posYY-=offset;
-				CCLOG("ADDED %s",achievmentsNames[i].c_str());
 			}
 			CCString *collectedinfoSpriteText = CCString::createWithFormat("%d/%d",collected,achievmentsNames.size());
 			SpriteWithText *infoSprite=SpriteWithText::createWithSpriteFrameNamee("offButton.png",collectedinfoSpriteText->getCString(),ccColor3B{1,1,1});
-			CCLOG("inf pos = %.2f\n",info->getPositionY());
 			info->addChild(infoSprite);
 			info->setScale(0.9*Utils::sreensSize().width/infoSprite->getContentSize().width);
 			float infposY = Utils::sreensSize().height + infoSprite->getContentSize().height*info->getScale()/2.0;

@@ -24,7 +24,7 @@ bool LoadingNode::init() {
 		Animated *animthis = Animated::create();
 		animthis->addChild(baseLoadingText);
 		animthis->setPosition(Utils::getCorrectPosition(1,0));
-		animthis->initAnim(1,0,0,0,0.2f,0,0,0,0);
+		animthis->initAnim(1,0,0,0,0.2f,0.1f,0,0,0);
 		animthis->startAnimIn();
 		this->addChild(animthis,1);
 	return true;
@@ -34,14 +34,15 @@ void LoadingNode::replace(float dt) {
 	SimpleAudioEngine::sharedEngine()->stopBackgroundMusic();
 	SimpleAudioEngine::sharedEngine()->preloadEffect("buttonClick.wav");
 	SimpleAudioEngine::sharedEngine()->preloadEffect("buttonClick2.mp3");
-	SimpleAudioEngine::sharedEngine()->preloadEffect("trashFelt.mp3");
-	SimpleAudioEngine::sharedEngine()->preloadBackgroundMusic("mainMenu.mp3");
+	SimpleAudioEngine::sharedEngine()->preloadEffect("trashFelt.wav");
+	SimpleAudioEngine::sharedEngine()->preloadEffect("missed.mp3");
 	SimpleAudioEngine::sharedEngine()->preloadBackgroundMusic("inGame.mp3");
 	CCSpriteFrameCache::sharedSpriteFrameCache()->addSpriteFramesWithFile(
 			"trashes.plist");
 	CCSpriteFrameCache::sharedSpriteFrameCache()->addSpriteFramesWithFile(
 			"backgroundImages.plist");
 	CCDirector::sharedDirector()->replaceScene(MainMenu::scene());
+	SimpleAudioEngine::sharedEngine()->playBackgroundMusic("inGame.mp3",true);
 }
 
 void LoadingNode::onEnter() {

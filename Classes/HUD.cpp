@@ -97,7 +97,6 @@ void HUD::animateText(float dt){
 	dx = 254.0*(2.0*dt/animationStop);
 	if(animationTime < animationStop/2 && decr > dx+1){
 		decr-=dx;
-		CCLOG("zmniejszanie %d",decr);
 		scoreLabel->setColor(ccColor3B{255,decr,decr});
 		if(extraAnim && extrascale < scaleStop){
 			extrascale+=scaleStop*(2.0*dt/animationStop);
@@ -107,7 +106,6 @@ void HUD::animateText(float dt){
 	}
 	else if(decr < 254-dx){
 		decr+=dx;
-		CCLOG("zwiekszaniee %d",decr);
 		scoreLabel->setColor(ccColor3B{255,decr,decr});
 		if(extraAnim && extrascale > regularScale){
 					extrascale-=scaleStop*(2.0*dt/animationStop);
@@ -124,14 +122,12 @@ void HUD::trashFallenEffects() {
 	stopAnimRed=false;
 	const unsigned int repeat = 500;
 	const float repeatRate = 0.05f;
-	CCLOG("PRZESKALOWANO");
 	schedule(schedule_selector(HUD::animateTrashFallEffect));
 }
 
 void HUD::animateTrashFallEffect(float dt) {
 	if(stopAnimRed) return;
 	int x = effect->getOpacity();
-	CCLOG("opacty = %d",x);
 	if(x<255 && !reached250){
 		if(dt*wzrostmnoznik+x>=255){reached250=true; x=255;}
 		else x+=dt*wzrostmnoznik;
