@@ -27,6 +27,7 @@ bool MainMenu::init(){
 	    }
 	 this->setKeypadEnabled(true);
 	 //sounds
+	 doubleClicked=false;
 	 const float posx = CCDirector::sharedDirector()->getWinSize().width/2;
 	 const float posy = CCDirector::sharedDirector()->getWinSize().height/2;
 	 CCSprite *bg = CCSprite::createWithSpriteFrameName("Background.png");
@@ -88,6 +89,10 @@ void MainMenu::menuAnimSchedulerOUT(float) {
 	i++;
 }
 
+void MainMenu::notdoubleClicked(float) {
+	doubleClicked=false;
+}
+
 void MainMenu::ShowStats() {
 	SimpleAudioEngine::sharedEngine()->playEffect("buttonClick.wav");
 	this->schedule(schedule_selector(MainMenu::menuAnimSchedulerOUT),odstepMiedzyPrzyciskami,2,0);
@@ -122,7 +127,10 @@ void MainMenu::keyBackClicked() {
 		for(int j=0;j<3;j++) menu[j]->setTouchEnabled(true);
 		return;
 	}
-	SimpleAudioEngine::sharedEngine()->playEffect("buttonClick.wav");
+	if(!doubleClicked){ doubleClicked=true;
+		scheduleOnce(schedule_selector(MainMenu::notdoubleClicked),0.5f);
+		return;
+	}
 	CCDirector::sharedDirector()->end();
 }
 void MainMenu::genFallingTrash(float dt){

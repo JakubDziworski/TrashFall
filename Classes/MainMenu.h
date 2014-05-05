@@ -20,8 +20,10 @@ private:
 	bool statsIsRunning;
 	int i;
 	bool resumed[2];
+	bool doubleClicked;
 public:
 	void tick();
+	void notdoubleClicked(float);
 	virtual bool init();
 	void loadingPopDown();
 	virtual void keyBackClicked();
