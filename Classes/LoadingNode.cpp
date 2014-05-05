@@ -38,8 +38,6 @@ void LoadingNode::replace(float dt) {
 	SimpleAudioEngine::sharedEngine()->preloadEffect("missed.mp3");
 	SimpleAudioEngine::sharedEngine()->preloadBackgroundMusic("inGame.mp3");
 	CCSpriteFrameCache::sharedSpriteFrameCache()->addSpriteFramesWithFile(
-			"trashes.plist");
-	CCSpriteFrameCache::sharedSpriteFrameCache()->addSpriteFramesWithFile(
 			"backgroundImages.plist");
 	CCDirector::sharedDirector()->replaceScene(MainMenu::scene());
 	SimpleAudioEngine::sharedEngine()->playBackgroundMusic("inGame.mp3",true);
