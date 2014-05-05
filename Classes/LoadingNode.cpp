@@ -8,24 +8,56 @@
 #include "LoadingNode.h"
 #include "SpriteWithText.h"
 #include "Utils.h"
+#include "SimpleAudioEngine.h"
 #include "MainMenu.h"
+
+using namespace CocosDenshion;
 using namespace cocos2d;
 
 bool LoadingNode::init() {
+	if (!CCLayer::init())
+		return false;
+	CCLOG("wywolano init");
+	CCSpriteFrameCache::sharedSpriteFrameCache()->addSpriteFramesWithFile("Buttons.plist");
+	SpriteWithText *baseLoadingText = SpriteWithText::createWithSpriteFrameNamee("offButton.png","LOADING", ccColor3B { 0, 0, 0 });
+		baseLoadingText->setPosition(Utils::getCorrectPosition(0.5, 0.5));
+		Animated *animthis = Animated::create();
+		animthis->addChild(baseLoadingText);
+		animthis->setPosition(Utils::getCorrectPosition(1,0));
+		animthis->initAnim(1,0,0,0,0.2f,0,0,0,0);
+		animthis->startAnimIn();
+		this->addChild(animthis,1);
 	return true;
 }
-void LoadingNode::onEnter(){
-		CCSpriteFrameCache::sharedSpriteFrameCache()->addSpriteFramesWithFile("Buttons.plist");
-		SpriteWithText *baseLoadingText = SpriteWithText::createWithSpriteFrameNamee("offButton.png","LOADING",ccColor3B{0,0,0});
-		baseLoadingText->setPosition(Utils::getCorrectPosition(0.5,0.5));
-		this->addChild(baseLoadingText);
-		this->schedule(schedule_selector(LoadingNode::show),0.1,0,0.2);
-}
-void LoadingNode::show(float dt) {
+
+void LoadingNode::replace(float dt) {
+	SimpleAudioEngine::sharedEngine()->stopBackgroundMusic();
+	SimpleAudioEngine::sharedEngine()->preloadEffect("buttonClick.wav");
+	SimpleAudioEngine::sharedEngine()->preloadEffect("buttonClick2.mp3");
+	SimpleAudioEngine::sharedEngine()->preloadEffect("trashFelt.mp3");
+	SimpleAudioEngine::sharedEngine()->preloadBackgroundMusic("mainMenu.mp3");
+	SimpleAudioEngine::sharedEngine()->preloadBackgroundMusic("inGame.mp3");
+	CCSpriteFrameCache::sharedSpriteFrameCache()->addSpriteFramesWithFile(
+			"trashes.plist");
+	CCSpriteFrameCache::sharedSpriteFrameCache()->addSpriteFramesWithFile(
+			"backgroundImages.plist");
 	CCDirector::sharedDirector()->replaceScene(MainMenu::scene());
 }
 
-void LoadingNode::hide() {
+void LoadingNode::onEnter() {
+		CCLayer::onEnter();
+		this->scheduleOnce(schedule_selector(LoadingNode::replace),0.45f);
 }
+CCScene* LoadingNode::scene() {
+	CCScene *scene = CCScene::create();
+	CCSpriteFrameCache::sharedSpriteFrameCache()->addSpriteFramesWithFile("Backgrounds.plist");
+	CCSprite *bg = CCSprite::createWithSpriteFrameName("Background.png");
+	Utils::prepareBackgroundImg(bg);
+	LoadingNode *tad = LoadingNode::create();
+	tad->addChild(bg,-1);
+	scene->addChild(tad);
+	return scene;
+}
+
 
 

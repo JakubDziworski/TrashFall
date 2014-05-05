@@ -23,6 +23,7 @@ private:
 public:
 	void tick();
 	virtual bool init();
+	void loadingPopDown();
 	virtual void keyBackClicked();
 	static cocos2d::CCScene* scene();
 	void playGame();

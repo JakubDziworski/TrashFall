@@ -29,18 +29,8 @@ bool MainMenu::init(){
 	 //sounds
 	 const float posx = CCDirector::sharedDirector()->getWinSize().width/2;
 	 const float posy = CCDirector::sharedDirector()->getWinSize().height/2;
-	 SimpleAudioEngine::sharedEngine()->stopBackgroundMusic();
-	 SimpleAudioEngine::sharedEngine()->preloadEffect("buttonClick.wav");
-	 SimpleAudioEngine::sharedEngine()->preloadEffect("buttonClick2.mp3");
-	 SimpleAudioEngine::sharedEngine()->preloadEffect("trashFelt.mp3");
-	 SimpleAudioEngine::sharedEngine()->preloadBackgroundMusic("mainMenu.mp3");
-	 SimpleAudioEngine::sharedEngine()->preloadBackgroundMusic("inGame.mp3");
 	 SimpleAudioEngine::sharedEngine()->playBackgroundMusic("inGame.mp3",true);
-	 CCSpriteFrameCache::sharedSpriteFrameCache()->addSpriteFramesWithFile("Buttons.plist");
-	 CCSpriteFrameCache::sharedSpriteFrameCache()->addSpriteFramesWithFile("trashes.plist");
-	 CCSpriteFrameCache::sharedSpriteFrameCache()->addSpriteFramesWithFile("backgroundImages.plist");
-	 CCSpriteFrameCache::sharedSpriteFrameCache()->addSpriteFramesWithFile("Backgrounds.plist");
-	 CCSprite *bg = CCSprite::create("Background.png");
+	 CCSprite *bg = CCSprite::createWithSpriteFrameName("Background.png");
 	 Utils::prepareBackgroundImg(bg);
 	 SpriteWithText *playbtnon = SpriteWithText::createWithSpriteFrameNamee("onButton.png","PLAY",ccColor3B{0,0,0});
 	 SpriteWithText *playbtnoff = SpriteWithText::createWithSpriteFrameNamee("offButton.png","PLAY",ccColor3B{0,0,0});
@@ -74,6 +64,7 @@ bool MainMenu::init(){
 			    	 this->addChild(menuAnim[j],3);
 			     }
 			     i=0;
+			     loadingPopDown();
 			     this->schedule(schedule_selector(MainMenu::menuAnimSchedulerIN),odstepMiedzyPrzyciskami,2,0);
 			     return true;
 }
@@ -167,5 +158,14 @@ void MainMenu::enableTouch(){
 		menu[j]->setTouchEnabled(true);
 		menu[j]->setKeypadEnabled(true);
 		}
+}
+void MainMenu::loadingPopDown(){
+	SpriteWithText *baseLoadingText = SpriteWithText::createWithSpriteFrameNamee("offButton.png","LOADING", ccColor3B { 0, 0, 0 });
+	baseLoadingText->setPosition(Utils::getCorrectPosition(0.5, 0.5));
+	Animated *animthis = Animated::create();
+	animthis->initAnim(1,0,0,0,0.3f,0.1f,0,0,0);
+	animthis->addChild(baseLoadingText);
+	animthis->startAnimOut();
+	this->addChild(animthis);
 }
 

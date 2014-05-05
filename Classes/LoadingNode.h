@@ -11,13 +11,14 @@
 #include "Animated.h"
 #include "cocos2d.h"
 
-class LoadingNode: public cocos2d::CCScene {
+class LoadingNode: public cocos2d::CCLayer {
 public:
 	bool init();
+	void replace(float);
 	void onEnter();
-	void show(float);
-	void hide();
-	SCENE_CREATE_FUNC(LoadingNode);
+	static cocos2d::CCScene* scene();
+	//static LoadingNode* create();
+	LAYER_CREATE_FUNC(LoadingNode);
 };
 
 #endif /* LOADINGNODE_H_ */

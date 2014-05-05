@@ -23,6 +23,7 @@ protected:
 	//bool inited;
 	void animIn(float);
 	void animOffset(float);
+	void AnimOffsetback(float);
 	void animOut(float);
 	void waitForAnim(float);
 

@@ -13,6 +13,7 @@
 #include "AchievmentPopUp.h"
 #include "AchvList.h"
 #include "Constants.h"
+#include "LoadingNode.h"
 using namespace CocosDenshion;
 using namespace cocos2d;
 
@@ -36,23 +37,31 @@ bool Pause::init(){
 	menuContinue->setPosition(Utils::getCorrectPosition(0.5,0.5));
 	menuMainMenu->setPosition(Utils::getCorrectPosition(0.5,0.3));
 	paused = false;
-	this->setVisible(false);
-	this->addChild(menuMainMenu);
-	this->addChild(menuContinue);
-	this->addChild(pause);
+	anim = Animated::create();
+	anim->addChild(menuMainMenu);
+	anim->addChild(menuContinue);
+	anim->addChild(pause);
+	anim->setPosition(Utils::getCorrectPosition(0,1));
+	anim->initAnim(0,0,1,0,0.2f,0,0.2f,0,0,0);
+	this->addChild(anim);
 	return true;
 }
 void Pause::toggle(int skor,int mis){
 	paused = !paused;
 	SimpleAudioEngine::sharedEngine()->playEffect("buttonClick.wav");
 	Game *g = Utils::getGame();
-	this->setVisible(paused);
 	if(!paused){
+		anim->unscheduleAllSelectors();
+		anim->stopAllActions();
+		anim->startAnimOut();
 		g->setTouchEnabled(true);
 		g->resumeSchedulerAndActions();
 		SimpleAudioEngine::sharedEngine()->resumeBackgroundMusic();
 	}
 	else{
+		anim->unscheduleAllSelectors();
+		anim->stopAllActions();
+		anim->startAnimIn();
 		curscore = skor;
 		missedAmount = mis;
 		g->setTouchEnabled(false);
@@ -86,5 +95,13 @@ void Pause::goToMainMenu(){
 				}
 		}
 	}
+	anim->unscheduleAllSelectors();
+	anim->stopAllActions();
+	anim->startAnimOut();
+	LoadingNode *node = LoadingNode::create();
+	this->addChild(node);
+	this->scheduleOnce(schedule_selector(Pause::lateGoToMenu),0.45f);
+}
+void Pause::lateGoToMenu(float dt){
 	CCDirector::sharedDirector()->replaceScene(MainMenu::scene());
 }

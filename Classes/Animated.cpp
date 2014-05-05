@@ -31,19 +31,19 @@ void Animated::initAnim(float bposx, float endpox, float bposy, float eposy,
 void Animated::startAnimIn(){
 	this->stopAllActions();
 	this->unscheduleAllSelectors();
-	this->schedule(schedule_selector(Animated::animOffset),0.05,0,delayIn);
-	this->schedule(schedule_selector(Animated::animIn),0.05,0,animTimee+delayIn);
+	this->scheduleOnce(schedule_selector(Animated::animOffset),delayIn);
+	this->scheduleOnce(schedule_selector(Animated::animIn),animTimee+delayIn);
 }
 
 void Animated::startAnimOut() {
 	this->stopAllActions();
 	this->unscheduleAllSelectors();
-	this->schedule(schedule_selector(Animated::animOffset),0.05,0,delayOut);
-	this->schedule(schedule_selector(Animated::animOut),0.05,0,animTimee+delayOut);
+	this->scheduleOnce(schedule_selector(Animated::animOffset),delayOut);
+	this->scheduleOnce(schedule_selector(Animated::animOut),animTimee+delayOut);
 }
 void Animated::startAnimBoth() {
 	startAnimIn();
-	this->schedule(schedule_selector(Animated::waitForAnim),0.1,0,animTimee+tToChill+delayIn);
+	this->scheduleOnce(schedule_selector(Animated::waitForAnim),animTimee+tToChill+delayIn);
 }
 
 //PRIVATE SHEDULDERS
@@ -62,10 +62,12 @@ Animated::~Animated() {
 }
 
 void Animated::animOffset(float dt) {
-	CCLOG("poruszanieY %.2f\  PORUSZANIEX %.2f\"",this->getPositionY(),this->getPositionX());
 	this->runAction(CCMoveTo::create(animTimee,ccp(endPosX-horAddition,endPosY-verAddition)));
 }
 
+void Animated::AnimOffsetback(float st) {
+	this->runAction(CCMoveTo::create(animTimee,ccp(beginnPosX+horAddition,beginPosY+verAddition)));
+}
 
 bool Animated::init() {
 	return true;
