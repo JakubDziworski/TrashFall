@@ -688,6 +688,8 @@
             <filename>Resources/trash1.png</filename>
             <filename>Resources/trash2.png</filename>
             <filename>Resources/trash3.png</filename>
+            <filename>Resources/particl.png</filename>
+            <filename>Resources/bomba.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

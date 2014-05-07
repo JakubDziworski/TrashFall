@@ -17,6 +17,7 @@
 #include "HUD.h"
 #include "AchvList.h"
 #include "StatsRecords.h"
+#include "Bomb.h"
 using namespace CocosDenshion;
 
 using namespace cocos2d;
@@ -26,6 +27,7 @@ bool Game::init() {
 	}
 	//BACKGROUND
 	notMissed=0;
+	bombsCollected = 0;
 	score = 0;
 	missedAmount = 0;
 	currentTimee=0;
@@ -65,7 +67,10 @@ void Game::genFallingTrashes(float dt){
 	resettedTime = 0;
 	Utils::setDifficulty(mSpeed,currentTimee,atOnce);
 	spread=mSpeed/4.0f;
-	Trash *obj = Trash::create(Utils::getRandValueF(mSpeed,mSpeed+spread),Utils::getRandValueF(1,2.5f),monitorFallen);
+	const int czyBomba = Utils::getRandValue(0,8);
+	Trash *obj;
+	if(czyBomba == 5) obj = Bomb::createe(Utils::getRandValueF(mSpeed,mSpeed+spread),Utils::getRandValueF(1,2.5f),monitorFallen);
+	else obj = Trash::create(Utils::getRandValueF(mSpeed,mSpeed+spread),Utils::getRandValueF(1,2.5f),monitorFallen);
 	obj->setAutoCheckMissesPoints(true);
 	this->addChild(obj,Utils::getRandValue(1,3));
 }
@@ -76,6 +81,7 @@ void Game::missed(){
 	missedAmount++;
 	if(missedAmount>21){
 		monitorFallen = false;
+		Utils::getBackground()->updateMisses(21);
 		Utils::getGameOver()->trigger(Utils::getHUD()->getScore(),missedAmount);
 		return;
 	}
@@ -86,7 +92,6 @@ void Game::ccTouchesMoved(cocos2d::CCSet *pTouches,cocos2d::CCEvent *pEvent){
 	if(pTouches->count()>1) return;
 	if(touchTime > maxTouchTime) return;
 	if(this->getChildren() == NULL) return;
-	HUD *hud = Utils::getHUD();
 	CCTouch *touch = (CCTouch*)pTouches->anyObject();
 	CCPoint location = touch->locationInView();
 	location = CCDirector::sharedDirector()->convertToGL(location);
@@ -95,13 +100,7 @@ void Game::ccTouchesMoved(cocos2d::CCSet *pTouches,cocos2d::CCEvent *pEvent){
 	for(int i=0;i<arr->count();i++){
 		Trash *trsh = (Trash*) arr->objectAtIndex(i);
 		if(CCRect::CCRectContainsPoint(trsh->boundingBox(),location)){
-			SimpleAudioEngine::sharedEngine()->playEffect("buttonClick2.mp3");
-			this->removeChild(trsh,true);
-			notMissed++;
-			score++;
-			missedInARow=0;
-			caught=true;
-			hud->addToScore(1,notMissed);
+			trsh->dotkniety();
 		}
 	}
 }
@@ -139,6 +138,20 @@ void Game::invaildTouch() {
 			}
 		}
 		Utils::getBackground()->updateMisses(missedAmount);
+}
+
+void Game::caughtExplosive() {
+	bombsCollected++;
+	missedAmount+=5;
+	notMissed=0;
+	if (missedAmount > 21) {
+		monitorFallen = false;
+		Utils::getBackground()->updateMisses(21);
+		Utils::getGameOver()->trigger(Utils::getHUD()->getScore(),
+				missedAmount);
+		return;
+	}
+	Utils::getBackground()->updateMisses(missedAmount);
 }
 
 void Game::keyBackClicked() {

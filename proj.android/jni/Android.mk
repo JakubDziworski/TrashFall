@@ -23,7 +23,8 @@ LOCAL_SRC_FILES := helloworld/main.cpp \
 				  ../../Classes/AchvDisplayer.cpp \
 				  ../../Classes/StatsDisplayer.cpp \
 				 ../../Classes/Animated.cpp \
-				 ../../Classes/LoadingNode.cpp
+				 ../../Classes/LoadingNode.cpp \
+				 ../../Classes/Bomb.cpp
 
                    
 LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../Classes                   

@@ -9,10 +9,12 @@
 #include "Constants.h"
 #include "Utils.h"
 #include "Game.h"
+#include "SimpleAudioEngine.h"
+#include "HUD.h"
+using namespace CocosDenshion;
 using namespace cocos2d;
 
 bool Trash::init() {
-
 	if ( !CCSprite::init() )
 		{
 			return false;
@@ -22,8 +24,19 @@ bool Trash::init() {
 	return true;
 }
 
-Trash* Trash::create(float speedd,float sizee,float rotTime){
+void Trash::dotkniety() {
+	SimpleAudioEngine::sharedEngine()->playEffect("buttonClick2.mp3");
+	Game *g = Utils::getGame();
+	HUD *h = Utils::getHUD();
+	g->notMissed++;
+	g->score++;
+	g->missedInARow=0;
+	g->caught=true;
+	h->addToScore(1,g->notMissed);
+	this->removeFromParentAndCleanup(true);
+}
 
+Trash* Trash::create(float speedd,float sizee,float rotTime){
 			Trash *trsh = Trash::create();
 			CCSize scrSize = Utils::sreensSize();
 			const int angle = Utils::getRandValue(-360,360);
@@ -41,13 +54,13 @@ Trash* Trash::create(float speedd,float sizee,float rotTime){
 			trsh->schedule(schedule_selector(Trash::checkIfFallen));
 			return trsh;
 }
-
 void Trash::checkIfFallen(float dt){
 	if(this->getPositionY() <= endposY+1){
 	if(autoCheckMissesPoints) Utils::getGame()->missed();
 	this->removeFromParentAndCleanup(true);
 	}
 }
+
 void Trash::setAutoCheckMissesPoints(bool input){
 	autoCheckMissesPoints = input;
 }

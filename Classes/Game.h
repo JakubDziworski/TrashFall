@@ -19,13 +19,15 @@ class Game: public cocos2d::CCLayer {
 	float touchTime;
 	bool  fingerDown;
 	bool monitorFallen;
+public:
+	int  bombsCollected;
 	bool caught;
 	float missedAmount;
 	int notMissed;
 	int missedInARow;
 	int score;
-public:
 		void invaildTouch();
+		void caughtExplosive();
 		void missed();
 		virtual bool init();
 		static cocos2d::CCScene* scene();

@@ -26,6 +26,7 @@ bool AchvDisplayer::init(){
 	achievmentsNames.push_back(ACH_BLIND);
 	achievmentsNames.push_back(ACH_HARDCORE);
 	achievmentsNames.push_back(ACH_MASSIVE);
+	achievmentsNames.push_back(ACH_AVOIDER);
 	achievmentsNames.push_back(ACH_50);
 	achievmentsNames.push_back(ACH_100);
 	achievmentsNames.push_back(ACH_250);

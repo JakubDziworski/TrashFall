@@ -1,7 +1,8 @@
 to do - wyjscie
 podmienic placholdery trashy
-loading screen
 poziom trudnosci
+
+
 
 POMYS£Y:
 COS ALA draw race

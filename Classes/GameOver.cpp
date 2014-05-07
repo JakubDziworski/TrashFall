@@ -93,6 +93,13 @@ void GameOver::trigger(int scorr,int missedAmount){
 	anim->addChild(currscor,1);
 	anim->addChild(bestScoree,1);
 	}
+	if(g->bombsCollected == 0){
+			AchievmentPopUp * ach = AchievmentPopUp::createWithSpriteFrameNameee(ACH_AVOIDER.c_str(), usrDefault,true);
+						if(ach){
+						ach->activate();
+						Utils::getBackground()->addChild(ach);
+						}
+		}
 	anim->startAnimIn();
 	anim->setPosition(Utils::getCorrectPosition(0,1));
 	this->addChild(anim);
