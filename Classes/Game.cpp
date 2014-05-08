@@ -69,8 +69,9 @@ void Game::genFallingTrashes(float dt){
 	spread=mSpeed/4.0f;
 	const int czyBomba = Utils::getRandValue(0,8);
 	Trash *obj;
-	if(czyBomba == 5) obj = Bomb::createe(Utils::getRandValueF(mSpeed,mSpeed+spread),Utils::getRandValueF(1,2.5f),monitorFallen);
-	else obj = Trash::create(Utils::getRandValueF(mSpeed,mSpeed+spread),Utils::getRandValueF(1,2.5f),monitorFallen);
+//	if(czyBomba == 5)
+	 obj = Bomb::createe(Utils::getRandValueF(mSpeed,mSpeed+spread),Utils::getRandValueF(1,2.5f),monitorFallen);
+	//else obj = Trash::create(Utils::getRandValueF(mSpeed,mSpeed+spread),Utils::getRandValueF(1,2.5f),monitorFallen);
 	obj->setAutoCheckMissesPoints(true);
 	this->addChild(obj,Utils::getRandValue(1,3));
 }
@@ -101,6 +102,7 @@ void Game::ccTouchesMoved(cocos2d::CCSet *pTouches,cocos2d::CCEvent *pEvent){
 		Trash *trsh = (Trash*) arr->objectAtIndex(i);
 		if(CCRect::CCRectContainsPoint(trsh->boundingBox(),location)){
 			trsh->dotkniety();
+			CCLOG("dotkniety");
 		}
 	}
 }
@@ -144,6 +146,7 @@ void Game::caughtExplosive() {
 	bombsCollected++;
 	missedAmount+=5;
 	notMissed=0;
+	caught=true;
 	if (missedAmount > 21) {
 		monitorFallen = false;
 		Utils::getBackground()->updateMisses(21);
@@ -153,6 +156,7 @@ void Game::caughtExplosive() {
 	}
 	Utils::getBackground()->updateMisses(missedAmount);
 }
+
 
 void Game::keyBackClicked() {
 	Utils::getPause()->toggle(score,missedAmount);

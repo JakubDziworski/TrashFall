@@ -4,7 +4,7 @@
  *  Created on: 06-05-2014
  *      Author: Jakub
  */
-
+#define COCOS2D_DEBUG 2
 #include "Bomb.h"
 #include "Utils.h"
 
@@ -18,8 +18,7 @@ void Bomb::dotkniety() {
 	//SimpleAudioEngine::sharedEngine()->playEffect("buttonClick2.mp3");
 	Game *g = Utils::getGame();
 	g->caughtExplosive();
-	g->caught=true;
-	this->removeFromParentAndCleanup(true);
+	//this->removeFromParentAndCleanup(true);
 }
 
 void Bomb::checkIfFallen(float dt) {
@@ -29,13 +28,28 @@ void Bomb::checkIfFallen(float dt) {
 }
 
 void Bomb::WYBUCHSPRITE() {
-//		wybuch = new CCParticleSystemQuad();
-//		wybuch = CCParticleFire::create();
-//		wybuch->setEmitterMode(kCCParticleModeRadius);
-//		wybuch->setPosition(ccp(this->getContentSize().width * this->getAnchorPoint().x,
-//				this->getContentSize().height * this->getAnchorPoint().y));
-//		wybuch->setTexture(CCTextureCache::sharedTextureCache()->addImage("particl.png"));
-//		this->addChild(wybuch);
+		CCSprite *animation = CCSprite::create();
+		CCArray *frames = CCArray::create();
+		for(int i = 1; i <= 63; i++)
+		{
+			CCString *frame = CCString::createWithFormat("explosion_%d.png", i);
+			CCSpriteFrame *spr = CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName(frame->getCString());
+			frames->addObject(spr);
+		}
+		CCLOG("tutaj1");
+		const CCPoint currpos = this->getPosition();
+		CCLOG("posy = %.2f",this->getPosition().y);
+		CCLOG("posx = %.2f",this->getPositionX());
+		CCLOG("tutaj2");
+		animation->setPosition(currpos);
+		CCLOG("tutaj3");
+		this->getParent()->addChild(animation);
+		CCLOG("tutaj4");
+		this->setVisible(false);
+		CCLOG("tutaj5");
+		//animation->setScale(5);
+		animation->runAction(CCAnimate::create(CCAnimation::create(frames,.15)));
+		CCLOG("tutaj6");
 }
 
 Bomb* Bomb::createe(float speedd, float sizee, float rotTime) {
