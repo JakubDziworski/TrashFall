@@ -22,7 +22,7 @@ public:
 	virtual bool init();
 	void lateGoToMenu(float);
 	void toggle(cocos2d::CCObject*);
-	void goToMainMenu();
+	void goToMainMenu(cocos2d::CCObject*);
 	LAYER_CREATE_FUNC(Pause)
 	bool isPaused() const {
 		return paused;

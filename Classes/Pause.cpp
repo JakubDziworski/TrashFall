@@ -74,7 +74,7 @@ void Pause::toggle(cocos2d::CCObject*){
 	}
 }
 
-void Pause::goToMainMenu(){
+void Pause::goToMainMenu(cocos2d::CCObject*){
 	anim->unscheduleAllSelectors();
 	anim->stopAllActions();
 	anim->startAnimOut();

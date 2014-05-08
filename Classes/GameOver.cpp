@@ -27,7 +27,6 @@ bool GameOver::init(){
 }
 void GameOver::trigger(int scorr,int missedAmount){
 	CCUserDefault *usrDefault = CCUserDefault::sharedUserDefault();
-
 	curScore = scorr;
 	const float accurancy = (float)scorr/(float)(scorr+missedAmount)*100;
 	bestScore = usrDefault->getIntegerForKey(HIGH_SCORE,0);
@@ -59,8 +58,12 @@ void GameOver::trigger(int scorr,int missedAmount){
 	//
 	scoreBoardBg = CCSprite::create("scoreBoardBG.png");
 	Utils::scaleSprite(scoreBoardBg,1.1,1,true);
-	scoreBoardBg->setPosition(Utils::getCorrectPosition(0.5,0.5));
+	scoreBoardBg->setPosition(Utils::getCorrectPosition(0.5, 0.5));
 	//
+	SpriteWithText *rateME = SpriteWithText::createWithSpriteFrameNamee("offButton.png", "RATEME", ccColor3B{ 1, 1, 1 });
+	rateME->setPosition(Utils::getCorrectPosition(0.5f, 0.2f));
+	Utils::scaleSprite(rateME, 1.1f, 1, true);
+	this->addChild(rateME);
 	CCSprite *carryOn = CCSprite::createWithSpriteFrameName("onPaused.png");
 					CCSprite *carryOff = CCSprite::createWithSpriteFrameName("offPaused.png");
 					CCMenuItemSprite *carryOnBtn = CCMenuItemSprite::create(carryOn,carryOff,this,menu_selector(GameOver::playGame));
