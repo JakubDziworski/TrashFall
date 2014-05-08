@@ -163,10 +163,31 @@ void Game::caughtExplosive() {
 
 
 void Game::keyBackClicked() {
-	Utils::getPause()->toggle(score,missedAmount);
+	Utils::getPause()->toggle(NULL);
 }
 
 void Game::removeAnim(CCNode* sender)
 {
 	Utils::getGame()->animacjeLayer->removeChild(sender, true);
+}
+
+void Game::saveBeforLeaving() {
+	if(score > 3){
+		CCUserDefault *dane = CCUserDefault::sharedUserDefault();
+		dane->setIntegerForKey(STAT_COLLECTED,dane->getIntegerForKey(STAT_COLLECTED)+score);
+		int sessionsOver=dane->getIntegerForKey(STAT_SESOVER)+1;
+		dane->setIntegerForKey(STAT_SESOVER,sessionsOver);
+		if(dane->getIntegerForKey(HIGH_SCORE) < score)
+		dane->setIntegerForKey(HIGH_SCORE,score);
+		const float accurancy = (float)score/(float)(score+missedAmount)*100;
+		dane->setFloatForKey(STAT_ACCURANCY,(dane->getFloatForKey(STAT_ACCURANCY,0)*(float)(sessionsOver-1)+accurancy)/(float)sessionsOver);
+		if (sessionsOver == 100) {
+					AchievmentPopUp * ach = AchievmentPopUp::createWithSpriteFrameNameee(ACH_HARDCORE.c_str(), dane);
+					if(ach)
+					{
+					ach->activate();
+					Utils::getBackground()->addChild(ach);
+					}
+			}
+		}
 }

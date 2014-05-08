@@ -46,7 +46,7 @@ bool Pause::init(){
 	this->addChild(anim);
 	return true;
 }
-void Pause::toggle(int skor,int mis){
+void Pause::toggle(cocos2d::CCObject*){
 	paused = !paused;
 	SimpleAudioEngine::sharedEngine()->playEffect("buttonClick.wav");
 	Game *g = Utils::getGame();
@@ -62,8 +62,6 @@ void Pause::toggle(int skor,int mis){
 		anim->unscheduleAllSelectors();
 		anim->stopAllActions();
 		anim->startAnimIn();
-		curscore = skor;
-		missedAmount = mis;
 		g->setTouchEnabled(false);
 		g->pauseSchedulerAndActions();
 		SimpleAudioEngine::sharedEngine()->pauseBackgroundMusic();
@@ -77,27 +75,10 @@ void Pause::toggle(int skor,int mis){
 }
 
 void Pause::goToMainMenu(){
-	if(curscore > 3){
-	CCUserDefault *dane = CCUserDefault::sharedUserDefault();
-	dane->setIntegerForKey(STAT_COLLECTED,dane->getIntegerForKey(STAT_COLLECTED)+curscore);
-	int sessionsOver=dane->getIntegerForKey(STAT_SESOVER)+1;
-	dane->setIntegerForKey(STAT_SESOVER,sessionsOver);
-	if(dane->getIntegerForKey(HIGH_SCORE) < curscore)
-	dane->setIntegerForKey(HIGH_SCORE,curscore);
-	const float accurancy = (float)curscore/(float)(curscore+missedAmount)*100;
-	dane->setFloatForKey(STAT_ACCURANCY,(dane->getFloatForKey(STAT_ACCURANCY,0)*(float)(sessionsOver-1)+accurancy)/(float)sessionsOver);
-	if (sessionsOver == 100) {	//DOOOOOOO ZMIANY
-				AchievmentPopUp * ach = AchievmentPopUp::createWithSpriteFrameNameee(ACH_HARDCORE.c_str(), dane);
-				if(ach)
-				{
-				ach->activate();
-				Utils::getBackground()->addChild(ach);
-				}
-		}
-	}
 	anim->unscheduleAllSelectors();
 	anim->stopAllActions();
 	anim->startAnimOut();
+	Utils::getGame()->saveBeforLeaving();
 	LoadingNode *node = LoadingNode::create();
 	this->addChild(node);
 	this->scheduleOnce(schedule_selector(Pause::lateGoToMenu),0.45f);

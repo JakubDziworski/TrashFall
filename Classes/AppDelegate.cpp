@@ -2,8 +2,7 @@
 #include "MainMenu.h"
 #include "LoadingNode.h"
 #include "SimpleAudioEngine.h"
-#include "Game.h"
-
+#include "Pause.h"
 using namespace CocosDenshion;
 USING_NS_CC;
 
@@ -42,14 +41,25 @@ bool AppDelegate::applicationDidFinishLaunching() {
 
 // This function will be called when the app is inactive. When comes a phone call,it's be invoked too
 void AppDelegate::applicationDidEnterBackground() {
-	Game *gra = Utils::getGame();
-	if(gra) gra->keyBackClicked();
     CCDirector::sharedDirector()->stopAnimation();
     SimpleAudioEngine::sharedEngine()->pauseBackgroundMusic();
+	Pause *paus = Utils::getPause();
+	if(paus){
+		if(!paus->isPaused())
+		paus->toggle(NULL);
+	}
+    SimpleAudioEngine::sharedEngine()->pauseAllEffects();
 }
 
 // this function will be called when the app is active again
 void AppDelegate::applicationWillEnterForeground() {
     CCDirector::sharedDirector()->startAnimation();
+    Pause *paus = Utils::getPause();
+    	if(paus){
+    		if(paus->isPaused())
+    			SimpleAudioEngine::sharedEngine()->resumeAllEffects();
+    			return;
+    	}
+    	else
      SimpleAudioEngine::sharedEngine()->resumeBackgroundMusic();
 }

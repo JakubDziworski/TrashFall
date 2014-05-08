@@ -39,6 +39,7 @@ public:
  		virtual void keyBackClicked();
 		void cleaner(float dt);
 		void removeAnim(CCNode* sender);
+		void saveBeforLeaving();
 		LAYER_CREATE_FUNC(Game);
 };
 

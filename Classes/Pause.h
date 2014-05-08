@@ -21,9 +21,12 @@ private:
 public:
 	virtual bool init();
 	void lateGoToMenu(float);
-	void toggle(int,int);
+	void toggle(cocos2d::CCObject*);
 	void goToMainMenu();
-	LAYER_CREATE_FUNC(Pause);
+	LAYER_CREATE_FUNC(Pause)
+	bool isPaused() const {
+		return paused;
+	}
 };
 
 #endif /* PAUSE_H_ */
