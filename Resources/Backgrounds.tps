@@ -145,6 +145,36 @@
             <filename>trashFallEffect.png</filename>
             <filename>Background.png</filename>
             <filename>trashFallEffect.png</filename>
+            <filename>../../TrashFall/eksplozje/explosion_3.png</filename>
+            <filename>../../TrashFall/eksplozje/explosion_5.png</filename>
+            <filename>../../TrashFall/eksplozje/explosion_7.png</filename>
+            <filename>../../TrashFall/eksplozje/explosion_9.png</filename>
+            <filename>../../TrashFall/eksplozje/explosion_11.png</filename>
+            <filename>../../TrashFall/eksplozje/explosion_13.png</filename>
+            <filename>../../TrashFall/eksplozje/explosion_15.png</filename>
+            <filename>../../TrashFall/eksplozje/explosion_17.png</filename>
+            <filename>../../TrashFall/eksplozje/explosion_19.png</filename>
+            <filename>../../TrashFall/eksplozje/explosion_21.png</filename>
+            <filename>../../TrashFall/eksplozje/explosion_23.png</filename>
+            <filename>../../TrashFall/eksplozje/explosion_25.png</filename>
+            <filename>../../TrashFall/eksplozje/explosion_27.png</filename>
+            <filename>../../TrashFall/eksplozje/explosion_29.png</filename>
+            <filename>../../TrashFall/eksplozje/explosion_31.png</filename>
+            <filename>../../TrashFall/eksplozje/explosion_33.png</filename>
+            <filename>../../TrashFall/eksplozje/explosion_35.png</filename>
+            <filename>../../TrashFall/eksplozje/explosion_37.png</filename>
+            <filename>../../TrashFall/eksplozje/explosion_39.png</filename>
+            <filename>../../TrashFall/eksplozje/explosion_41.png</filename>
+            <filename>../../TrashFall/eksplozje/explosion_43.png</filename>
+            <filename>../../TrashFall/eksplozje/explosion_45.png</filename>
+            <filename>../../TrashFall/eksplozje/explosion_47.png</filename>
+            <filename>../../TrashFall/eksplozje/explosion_49.png</filename>
+            <filename>../../TrashFall/eksplozje/explosion_51.png</filename>
+            <filename>../../TrashFall/eksplozje/explosion_53.png</filename>
+            <filename>../../TrashFall/eksplozje/explosion_55.png</filename>
+            <filename>../../TrashFall/eksplozje/explosion_57.png</filename>
+            <filename>../../TrashFall/eksplozje/explosion_59.png</filename>
+            <filename>../../TrashFall/eksplozje/explosion_61.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

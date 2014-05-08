@@ -93,14 +93,14 @@ void MainMenu::notdoubleClicked(float) {
 	doubleClicked=false;
 }
 
-void MainMenu::ShowStats() {
+void MainMenu::ShowStats(cocos2d::CCObject* pObject) {
 	SimpleAudioEngine::sharedEngine()->playEffect("buttonClick.wav");
 	this->schedule(schedule_selector(MainMenu::menuAnimSchedulerOUT),odstepMiedzyPrzyciskami,2,0);
 	statsDisplayer->show();
 	statsIsRunning=true;
 	for(int j=0;j<3;j++) menu[j]->setTouchEnabled(false);
 }
-void MainMenu::playGame(){
+void MainMenu::playGame(cocos2d::CCObject* pObject){
 	SimpleAudioEngine::sharedEngine()->playEffect("buttonClick.wav");
 	this->unscheduleAllSelectors();
 	this->stopAllActions();
@@ -137,7 +137,7 @@ void MainMenu::genFallingTrash(float dt){
 	Trash *obj = Trash::create(Utils::getRandValueF(4,8),Utils::getRandValueF(2,4),3);
 	this->addChild(obj,Utils::getRandValue(1,3));
 }
-void MainMenu::ShowAchievments(){
+void MainMenu::ShowAchievments(cocos2d::CCObject* pObject){
 	for(int j=0;j<3;j++){
 	menuAnim[j]->unscheduleAllSelectors();
 	menuAnim[j]->stopAllActions();

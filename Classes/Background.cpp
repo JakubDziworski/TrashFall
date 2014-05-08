@@ -15,8 +15,8 @@ bool Background::init(){
 			return false;
 		}
 	maxmovementChmurki = Utils::getcorrectValue(0.025,true);
-	currentTim=0;
 	timeToWait=0;
+	currentTim=0;
 	CCSprite *bg = CCSprite::createWithSpriteFrameName("Background.png");
 	Utils::prepareBackgroundImg(bg);
 	sun = CCSprite::createWithSpriteFrameName("Sun.png");

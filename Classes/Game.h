@@ -20,6 +20,7 @@ class Game: public cocos2d::CCLayer {
 	bool  fingerDown;
 	bool monitorFallen;
 public:
+	cocos2d::CCLayer *animacjeLayer;
 	int  bombsCollected;
 	bool caught;
 	float missedAmount;
@@ -37,6 +38,7 @@ public:
  		void genFallingTrashes(float dt);
  		virtual void keyBackClicked();
 		void cleaner(float dt);
+		void removeAnim(CCNode* sender);
 		LAYER_CREATE_FUNC(Game);
 };
 

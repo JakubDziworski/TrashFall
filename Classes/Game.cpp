@@ -36,8 +36,10 @@ bool Game::init() {
 	spread=1;
 	fingerDown = false;
 	monitorFallen = true;
+	animacjeLayer = CCLayer::create();
 	//SimpleAudioEngine::sharedEngine()->playBackgroundMusic("inGame.mp3",true);
 	Utils::setDifficulty(mSpeed,currentTimee,atOnce);
+	this->addChild(animacjeLayer);
 	this->setTouchEnabled(true);
 	this->setKeypadEnabled(true);
 	this->schedule(schedule_selector(Game::genFallingTrashes));
@@ -69,9 +71,9 @@ void Game::genFallingTrashes(float dt){
 	spread=mSpeed/4.0f;
 	const int czyBomba = Utils::getRandValue(0,8);
 	Trash *obj;
-//	if(czyBomba == 5)
+	if(czyBomba == 5)
 	 obj = Bomb::createe(Utils::getRandValueF(mSpeed,mSpeed+spread),Utils::getRandValueF(1,2.5f),monitorFallen);
-	//else obj = Trash::create(Utils::getRandValueF(mSpeed,mSpeed+spread),Utils::getRandValueF(1,2.5f),monitorFallen);
+	else obj = Trash::create(Utils::getRandValueF(mSpeed,mSpeed+spread),Utils::getRandValueF(1,2.5f),monitorFallen);
 	obj->setAutoCheckMissesPoints(true);
 	this->addChild(obj,Utils::getRandValue(1,3));
 }
@@ -98,8 +100,9 @@ void Game::ccTouchesMoved(cocos2d::CCSet *pTouches,cocos2d::CCEvent *pEvent){
 	location = CCDirector::sharedDirector()->convertToGL(location);
 	CCArray *arr = this->getChildren();
 	arr->retain();
-	for(int i=0;i<arr->count();i++){
-		Trash *trsh = (Trash*) arr->objectAtIndex(i);
+	for(int i=1;i<arr->count();i++){
+		Trash *trsh = (Trash*)(arr->objectAtIndex(i));
+		if (trsh)
 		if(CCRect::CCRectContainsPoint(trsh->boundingBox(),location)){
 			trsh->dotkniety();
 			CCLOG("dotkniety");
@@ -136,6 +139,7 @@ void Game::invaildTouch() {
 			AchievmentPopUp * ach=AchievmentPopUp::createWithSpriteFrameNameee(ACH_BLIND.c_str(),CCUserDefault::sharedUserDefault(),true);
 			if(ach){
 			ach->activate();
+			
 			Utils::getBackground()->addChild(ach);
 			}
 		}
@@ -144,7 +148,7 @@ void Game::invaildTouch() {
 
 void Game::caughtExplosive() {
 	bombsCollected++;
-	missedAmount+=5;
+	missedAmount += 4;
 	notMissed=0;
 	caught=true;
 	if (missedAmount > 21) {
@@ -160,4 +164,9 @@ void Game::caughtExplosive() {
 
 void Game::keyBackClicked() {
 	Utils::getPause()->toggle(score,missedAmount);
+}
+
+void Game::removeAnim(CCNode* sender)
+{
+	Utils::getGame()->animacjeLayer->removeChild(sender, true);
 }

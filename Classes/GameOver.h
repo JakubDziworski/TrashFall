@@ -27,7 +27,7 @@ public:
 	virtual bool init();
 	void lateMainMenu(float);
 	void trigger(int scorr,int);
-	void playGame();
+	void playGame(cocos2d::CCObject* pObject);
 	void keyBackClicked();
 	void enableTouchAfterWait(float);
 	LAYER_CREATE_FUNC(GameOver);

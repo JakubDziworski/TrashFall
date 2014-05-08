@@ -28,17 +28,17 @@ public:
 	void loadingPopDown();
 	virtual void keyBackClicked();
 	static cocos2d::CCScene* scene();
-	void playGame();
+	void playGame(cocos2d::CCObject* pObject);
 	void waitToReplace(float dt){
 		cocos2d::CCDirector::sharedDirector()->replaceScene(Game::scene());
 	}
 	void wyrzucPuszki();
 	void exitGame();
 	void genFallingTrash(float dt);
-	void ShowAchievments();
+	void ShowAchievments(cocos2d::CCObject* pObject);
 	virtual void disableTouch();
 	virtual void enableTouch();
-	void ShowStats();
+	void ShowStats(cocos2d::CCObject* pObject);
 	LAYER_CREATE_FUNC(MainMenu);
 };
 

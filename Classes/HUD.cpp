@@ -29,7 +29,8 @@ bool HUD::init() {
 	stopAnimRed=true;
 	extraAnim = false;
 	effect = CCSprite::createWithSpriteFrameName("trashFallEffect.png");
-	Utils::prepareBackgroundImg(effect);
+	effect->setAnchorPoint(ccp(0, 0));
+	Utils::scaleSprite(effect, 1, 1, true);
 	effect->setOpacity(0);
 	savedData = CCUserDefault::sharedUserDefault();
 	beginGlobalScore = savedData->getIntegerForKey(STAT_COLLECTED);

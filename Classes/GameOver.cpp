@@ -113,7 +113,7 @@ void GameOver::lateMainMenu(float float1) {
 void GameOver::enableTouchAfterWait(float dt) {
 	menu->setTouchEnabled(true);
 }
-void GameOver::playGame(){
+void GameOver::playGame(cocos2d::CCObject* pObject){
 	SimpleAudioEngine::sharedEngine()->playEffect("buttonClick.wav");
 		CCDirector::sharedDirector()->replaceScene(Game::scene());
 }

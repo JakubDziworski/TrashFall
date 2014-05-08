@@ -7,7 +7,8 @@
 #define COCOS2D_DEBUG 2
 #include "Bomb.h"
 #include "Utils.h"
-
+#include "SimpleAudioEngine.h"
+using namespace CocosDenshion;
 using namespace cocos2d;
 
 
@@ -15,10 +16,9 @@ void Bomb::dotkniety() {
 	this->stopAllActions();
 	this->unscheduleAllSelectors();
 	WYBUCHSPRITE();
-	//SimpleAudioEngine::sharedEngine()->playEffect("buttonClick2.mp3");
 	Game *g = Utils::getGame();
 	g->caughtExplosive();
-	//this->removeFromParentAndCleanup(true);
+	this->removeFromParentAndCleanup(true);
 }
 
 void Bomb::checkIfFallen(float dt) {
@@ -28,28 +28,23 @@ void Bomb::checkIfFallen(float dt) {
 }
 
 void Bomb::WYBUCHSPRITE() {
-		CCSprite *animation = CCSprite::create();
+		SimpleAudioEngine::sharedEngine()->playEffect("bomb2.mp3");
+		CCSprite *animation = CCSprite::createWithSpriteFrameName("explosion_3.png");
+		const float scalerate = 2*this->getContentSize().height*this->getScale() / animation->getContentSize().height;
 		CCArray *frames = CCArray::create();
-		for(int i = 1; i <= 63; i++)
+		for(int i = 3; i <= 59; i=i+2)
 		{
 			CCString *frame = CCString::createWithFormat("explosion_%d.png", i);
 			CCSpriteFrame *spr = CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName(frame->getCString());
 			frames->addObject(spr);
 		}
-		CCLOG("tutaj1");
 		const CCPoint currpos = this->getPosition();
-		CCLOG("posy = %.2f",this->getPosition().y);
-		CCLOG("posx = %.2f",this->getPositionX());
-		CCLOG("tutaj2");
 		animation->setPosition(currpos);
-		CCLOG("tutaj3");
-		this->getParent()->addChild(animation);
-		CCLOG("tutaj4");
-		this->setVisible(false);
-		CCLOG("tutaj5");
-		//animation->setScale(5);
-		animation->runAction(CCAnimate::create(CCAnimation::create(frames,.15)));
-		CCLOG("tutaj6");
+		animation->setScale(scalerate);
+		((Game*)this->getParent())->animacjeLayer->addChild(animation);
+		CCAnimate *animuj = CCAnimate::create(CCAnimation::create(frames, .04));
+		CCCallFuncN * zniszcz = CCCallFuncN::create(animation, callfuncN_selector(Game::removeAnim));
+		animation->runAction(CCSequence::create(animuj, zniszcz, NULL));
 }
 
 Bomb* Bomb::createe(float speedd, float sizee, float rotTime) {
