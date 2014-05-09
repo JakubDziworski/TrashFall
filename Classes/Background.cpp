@@ -20,6 +20,8 @@ bool Background::init(){
 	CCSprite *bg = CCSprite::createWithSpriteFrameName("Background.png");
 	Utils::prepareBackgroundImg(bg);
 	sun = CCSprite::createWithSpriteFrameName("Sun.png");
+	sunHurt = CCSprite::createWithSpriteFrameName("SunHurt.png");
+	sunHurt->setOpacity(0);
 	chmurka[0] = CCSprite::createWithSpriteFrameName("chmurka1.png");
 	chmurka[1] = CCSprite::createWithSpriteFrameName("chmurka2.png");
 	chmurka[2] = CCSprite::createWithSpriteFrameName("chmurka3.png");
@@ -29,11 +31,13 @@ bool Background::init(){
 	Utils::scaleSprite(chmurka[1],4.9f,1,true);
 	Utils::scaleSprite(chmurka[2],2.35f,1,true);
 	Utils::scaleSprite(sun,3.4,1,false);
+	Utils::scaleSprite(sunHurt, 3.4, 1, false);
 	Utils::scaleSprite(buzka,3.4,1,false);
 	orignalchmuraPos[1] = Utils::getCorrectPosition(0.53,0.75);
 	orignalchmuraPos[2] = Utils::getCorrectPosition(0.74,0.89);
 	orignalchmuraPos[0] = Utils::getCorrectPosition(0.80,0.71);
 	this->addChild(sun);
+	this->addChild(sunHurt);
 	this->addChild(chmurka[0]);
 	this->addChild(chmurka[1]);
 	this->addChild(chmurka[2]);
@@ -41,7 +45,10 @@ bool Background::init(){
 	this->addChild(buzka);
 	CCRepeatForever *repeat = CCRepeatForever::create(
 				CCRotateBy::create(rotationDuration, 15));
+	CCRepeatForever *repeat2 = CCRepeatForever::create(
+		CCRotateBy::create(rotationDuration, 15));
 	sun->runAction(repeat);
+	sunHurt->runAction(repeat2);
 	beginAnimTime=1;
 	beginAnimation();
 	this->schedule(schedule_selector(Background::moveChmurkiRandom),1);
@@ -66,6 +73,9 @@ void Background::moveChmurkiRandom(float dt){
 
 void Background::updateMisses(int missesAmount){
 	CCLOG("sunFace_%05d.png",missesAmount);
+	CCFadeIn *fadeIn = CCFadeIn::create(0.2f);
+	CCFadeOut *fadeOut = CCFadeOut::create(1.0f);
+	sunHurt->runAction(CCSequence::create(fadeIn, fadeOut, NULL));
 	CCString *name = CCString::createWithFormat("sunFace_%05d.png",missesAmount);
 	buzka->setDisplayFrame(CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName(name->getCString()));
 }
@@ -82,6 +92,7 @@ void Background::beginAnimation(){
 	for(int i=0;i<3;i++){
 		chmurka[i]->runAction(CCMoveTo::create(chmSpeed[i],orignalchmuraPos[i]));
 	}
+	sunHurt->setPosition(Utils::getCorrectPosition(0.26, 0.793));
 	sun->runAction(CCMoveTo::create(sunSpeed,Utils::getCorrectPosition(0.26,0.793)));
 	buzka->runAction(CCMoveTo::create(sunSpeed,Utils::getCorrectPosition(0.26,0.793)));
 }

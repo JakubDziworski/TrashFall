@@ -20,6 +20,7 @@ private:
 	float beginAnimTime;
 	float currentTim;
 	float timeToWait;
+	cocos2d::CCSprite* sunHurt;
 public:
 			virtual bool init();
 			void updateMisses(int);

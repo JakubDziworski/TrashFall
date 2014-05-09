@@ -690,6 +690,7 @@
             <filename>Resources/trash3.png</filename>
             <filename>Resources/particl.png</filename>
             <filename>Resources/bomba.png</filename>
+            <filename>C:/Users/Jakub/Desktop/doResourca/SunHurt.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>
