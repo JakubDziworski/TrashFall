@@ -4,9 +4,10 @@
  *  Created on: 24-04-2014
  *      Author: Jakub
  */
+
+
 #define COCOS2D_DEBUG 2
-#define wzrostmnoznik 500
-#define spadekmnoznik 200
+
 #include "HUD.h"
 #include "Constants.h"
 #include "Utils.h"
@@ -14,6 +15,15 @@
 #include "AchievmentPopUp.h"
 #include "SimpleAudioEngine.h"
 #include "StatsRecords.h"
+
+#define animationStop 0.5f
+#define tintoRed CCTintTo::create(animationStop / 2.0f, 254, 15, 15)
+#define tintoNormal CCTintTo::create(animationStop / 2.0f, 254, 254, 254)
+#define scaleToMax CCScaleTo::create(animationStop / 2.0f, 3)
+#define scaleToMegaMax CCScaleTo::create(animationStop / 2.0f, 5)
+#define scaleToNormal CCScaleTo::create(animationStop / 2.0f, regularScale)
+#define pokazISchowajCzerwone CCSequence::create(CCFadeIn::create(0.2f), CCFadeOut::create(0.8f), CCCallFuncN::create(this, callfuncN_selector(HUD::hideRedEffect)), NULL)
+
 using namespace CocosDenshion;
 using namespace cocos2d;
 
@@ -22,16 +32,11 @@ bool HUD::init() {
 		return false;
 	}
 	score =0;
-	animationTime=0;
-	extrascale=1;
-	decr = 255;
-	animate = false;
-	stopAnimRed=true;
-	extraAnim = false;
 	effect = CCSprite::createWithSpriteFrameName("trashFallEffect.png");
 	effect->setAnchorPoint(ccp(0, 0));
-	Utils::scaleSprite(effect, 1, 1, true);
 	effect->setOpacity(0);
+	Utils::scaleSprite(effect, 1, 1, true);
+	effect->setVisible(false);
 	savedData = CCUserDefault::sharedUserDefault();
 	beginGlobalScore = savedData->getIntegerForKey(STAT_COLLECTED);
 	bg = Utils::getBackground();
@@ -55,89 +60,44 @@ bool HUD::init() {
 	this->addChild(anim,-2);
 	this->setTouchEnabled(true);
 	this->addChild(effect);
-	this->schedule(schedule_selector(HUD::animateText));
 	anim->setPositionX(Utils::getcorrectValue(-0.1f));
 	anim->startAnimIn();
 	return true;
 }
 
 
-void HUD::addToScore(int value,int nomisses){
-	score+=value;
-	beginGlobalScore+=value;
-	if(beginGlobalScore >=10000 &&beginGlobalScore < 10005 && score>3){
-					AchievmentPopUp * ach=AchievmentPopUp::createWithSpriteFrameNameee(ACH_MASSIVE.c_str(),savedData,true);
-					if(ach){
-					Utils::getBackground()->addChild(ach);
-					ach->activate();
-					}
-	}
-	checkAchivmets(nomisses);
-	scoreLabel->setString(CCString::createWithFormat("%d",score)->getCString());
-	scoreShadow->setString(scoreLabel->getString());
-	if(score%10 == 0){
-	animateReset();
-	scaleStop = 3;
-	animate = true;
-	extraAnim = true;
-	}
-	if(score%20 == 0){
-		scaleStop = 10;
-	}
-}
-void HUD::animateText(float dt){
-	if(!animate) return;
-	animationTime+=dt;
-
-	if(animationTime>animationStop){
-		animate = false;
-		extraAnim = false;
-		animateReset();
-		return;
-	}
-	dx = 254.0*(2.0*dt/animationStop);
-	if(animationTime < animationStop/2 && decr > dx+1){
-		decr-=dx;
-		scoreLabel->setColor(ccColor3B{255,decr,decr});
-		if(extraAnim && extrascale < scaleStop){
-			extrascale+=scaleStop*(2.0*dt/animationStop);
-			scoreLabel->setScale(extrascale);
-			scoreShadow->setScale(extrascale);
+void HUD::addToScore(int value, int nomisses){
+	score += value;
+	beginGlobalScore += value;
+	if (beginGlobalScore >= 10000 && beginGlobalScore < 10005 && score>3){
+		AchievmentPopUp * ach = AchievmentPopUp::createWithSpriteFrameNameee(ACH_MASSIVE.c_str(), savedData, true);
+		if (ach){
+			Utils::getBackground()->addChild(ach);
+			ach->activate();
 		}
 	}
-	else if(decr < 254-dx){
-		decr+=dx;
-		scoreLabel->setColor(ccColor3B{255,decr,decr});
-		if(extraAnim && extrascale > regularScale){
-					extrascale-=scaleStop*(2.0*dt/animationStop);
-					scoreLabel->setScale(extrascale);
-					scoreShadow->setScale(extrascale);
-				}
+	checkAchivmets(nomisses);
+	scoreLabel->setString(CCString::createWithFormat("%d", score)->getCString());
+	scoreShadow->setString(scoreLabel->getString());
+	if (score % 10 == 0){
+		scoreLabel->runAction(CCSequence::create(tintoRed, tintoNormal, NULL));
+
+		if (score % 20 == 0){
+			scoreLabel->runAction(CCSequence::create(scaleToMegaMax, scaleToNormal, NULL));
+			scoreShadow->runAction(CCSequence::create(scaleToMegaMax, scaleToNormal, NULL));
+		}
+		else{
+			scoreLabel->runAction(CCSequence::create(scaleToMax, scaleToNormal, NULL));
+			scoreShadow->runAction(CCSequence::create(scaleToMax, scaleToNormal, NULL));
+		}
 	}
 }
 
 void HUD::trashFallenEffects() {
 	SimpleAudioEngine::sharedEngine()->playEffect("trashFelt.wav");
-	effect->setOpacity(150);
-	reached250=false;
-	stopAnimRed=false;
-	const unsigned int repeat = 500;
-	const float repeatRate = 0.05f;
-	schedule(schedule_selector(HUD::animateTrashFallEffect));
-}
-
-void HUD::animateTrashFallEffect(float dt) {
-	if(stopAnimRed) return;
-	int x = effect->getOpacity();
-	if(x<255 && !reached250){
-		if(dt*wzrostmnoznik+x>=255){reached250=true; x=255;}
-		else x+=dt*wzrostmnoznik;
-	}
-	else{
-		if(x-dt*spadekmnoznik<0) {stopAnimRed=true; x=0;}
-		else x-=dt*spadekmnoznik;
-	}
-	effect->setOpacity(x);
+	effect->setVisible(true);
+	effect->stopAllActions();
+	effect->runAction(pokazISchowajCzerwone);
 }
 
 void HUD::DisplayTrafion(cocos2d::CCPoint point,bool traf) {
@@ -146,8 +106,10 @@ void HUD::DisplayTrafion(cocos2d::CCPoint point,bool traf) {
 		this->addChild(ntraf);
 		ntraf->setOpacity(255);
 		ntraf->setPosition(point);
-		ntraf->runAction(CCFadeOut::create(0.9f));
+		ntraf->runAction(CCSequence::create(CCFadeOut::create(0.9f), CCCallFuncN::create(ntraf, callfuncN_selector(HUD::deleteMissed)), NULL));
 }
+
+
 
 void HUD::checkAchivmets(int nomisses) {
 		AchievmentPopUp *generalScore=NULL;
@@ -172,11 +134,12 @@ void HUD::checkAchivmets(int nomisses) {
 		if(generalScore != NULL) {Utils::getBackground()->addChild(generalScore);generalScore->activate();}
 }
 
-void HUD::animateReset() {
-	extrascale=1;
-	decr = 255;
-	animationTime = 0;
-	scoreLabel->setScale(regularScale);
-	scoreShadow->setScale(regularScale);
-	scoreLabel->setColor(ccColor3B{255,255,255});
+void HUD::deleteMissed(cocos2d::CCNode* inp)
+{
+	inp->removeFromParentAndCleanup(true);
+}
+
+void HUD::hideRedEffect(cocos2d::CCNode* inp)
+{
+	effect->setVisible(false);
 }

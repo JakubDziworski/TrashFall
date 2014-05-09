@@ -21,7 +21,7 @@ bool Trash::init() {
 		}
 	this->setDisplayFrame(Utils::getRandomTrash());
 	autoCheckMissesPoints=false;
-	schedule(schedule_selector(Trash::checkIfFallen),0.2f);
+	schedule(schedule_selector(Trash::checkIfFallen),0.1f);
 	return true;
 }
 
