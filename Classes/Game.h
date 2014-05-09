@@ -26,6 +26,8 @@ public:
 	float missedAmount;
 	int notMissed;
 	int missedInARow;
+	bool isOver;
+	bool getisOver() const { return isOver; }
 	int score;
 		void invaildTouch();
 		void caughtExplosive();
@@ -37,7 +39,6 @@ public:
 		void ccTouchesEnded(cocos2d::CCSet *pTouches,cocos2d::CCEvent * pEvent);
  		void genFallingTrashes(float dt);
  		virtual void keyBackClicked();
-		void cleaner(float dt);
 		void removeAnim(CCNode* sender);
 		void saveBeforLeaving();
 		LAYER_CREATE_FUNC(Game);

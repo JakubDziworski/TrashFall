@@ -3,6 +3,7 @@
 #include "LoadingNode.h"
 #include "SimpleAudioEngine.h"
 #include "Pause.h"
+#include "Game.h"
 using namespace CocosDenshion;
 USING_NS_CC;
 
@@ -30,7 +31,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
     // pDirector->enableRetinaDisplay(true);
 
     // turn on display FPS
-    pDirector->setDisplayStats(false);
+    pDirector->setDisplayStats(true);
 
     // set FPS. the default value is 1.0/60 if you don't call this
     pDirector->setAnimationInterval(1.0 / 60);
@@ -48,7 +49,8 @@ void AppDelegate::applicationDidEnterBackground() {
     CCDirector::sharedDirector()->stopAnimation();
     SimpleAudioEngine::sharedEngine()->pauseBackgroundMusic();
 	Pause *paus = Utils::getPause();
-	if(paus){
+	Game *g = Utils::getGame();
+	if (paus && !(g->getisOver())){
 		if(!paus->isPaused())
 		paus->toggle(NULL);
 	}

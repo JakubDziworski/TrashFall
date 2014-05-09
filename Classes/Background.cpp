@@ -51,7 +51,7 @@ bool Background::init(){
 	sunHurt->runAction(repeat2);
 	beginAnimTime=1;
 	beginAnimation();
-	this->schedule(schedule_selector(Background::moveChmurkiRandom),1);
+	//this->schedule(schedule_selector(Background::moveChmurkiRandom),1);
 	return true;
 }
 void Background::moveChmurkiRandom(float dt){

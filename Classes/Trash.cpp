@@ -21,6 +21,7 @@ bool Trash::init() {
 		}
 	this->setDisplayFrame(Utils::getRandomTrash());
 	autoCheckMissesPoints=false;
+	schedule(schedule_selector(Trash::checkIfFallen),0.2f);
 	return true;
 }
 
@@ -72,7 +73,6 @@ Trash* Trash::create(float speedd,float sizee,float rotTime){
 			CCRotateBy::create(rotTime, angle));
 			trsh->runAction(repeat);
 			trsh->runAction(act);
-			trsh->schedule(schedule_selector(Trash::checkIfFallen));
 			return trsh;
 }
 void Trash::checkIfFallen(float dt){

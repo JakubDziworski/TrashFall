@@ -26,6 +26,7 @@ bool Game::init() {
 		return false;
 	}
 	//BACKGROUND
+	isOver = false;
 	notMissed=0;
 	bombsCollected = 0;
 	score = 0;
@@ -75,7 +76,7 @@ void Game::genFallingTrashes(float dt){
 	 obj = Bomb::createe(Utils::getRandValueF(mSpeed,mSpeed+spread),Utils::getRandValueF(1,2.5f),monitorFallen);
 	else obj = Trash::create(Utils::getRandValueF(mSpeed,mSpeed+spread),Utils::getRandValueF(1,2.5f),monitorFallen);
 	obj->setAutoCheckMissesPoints(true);
-	this->addChild(obj,Utils::getRandValue(1,3));
+	this->addChild(obj,1);
 }
 void Game::missed(){
 	if(!monitorFallen) return;
@@ -84,6 +85,7 @@ void Game::missed(){
 	missedAmount++;
 	if(missedAmount>21){
 		monitorFallen = false;
+		isOver = true;
 		Utils::getBackground()->updateMisses(21);
 		Utils::getGameOver()->trigger(Utils::getHUD()->getScore(),missedAmount);
 		return;
@@ -105,7 +107,6 @@ void Game::ccTouchesMoved(cocos2d::CCSet *pTouches,cocos2d::CCEvent *pEvent){
 		if (trsh)
 		if(CCRect::CCRectContainsPoint(trsh->boundingBox(),location)){
 			trsh->dotkniety();
-			CCLOG("dotkniety");
 		}
 	}
 }
