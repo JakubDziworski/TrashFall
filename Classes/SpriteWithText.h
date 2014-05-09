@@ -11,7 +11,8 @@
 #include "cocos2d.h"
 
 class SpriteWithText: public cocos2d::CCSprite {
-	cocos2d::CCLabelTTF *label;
+	cocos2d::CCLabelBMFont *label;
+	float fontsize;
 public:
 	virtual bool init();
 	static SpriteWithText* createWithSpriteFrameNamee(const char *pszSpriteFrameName,const char *inputText,cocos2d::ccColor3B color);

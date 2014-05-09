@@ -35,8 +35,8 @@ bool HUD::init() {
 	savedData = CCUserDefault::sharedUserDefault();
 	beginGlobalScore = savedData->getIntegerForKey(STAT_COLLECTED);
 	bg = Utils::getBackground();
-	scoreLabel = CCLabelTTF::create("0",FONT_MAIN,Utils::getScaledFontSize(75));
-	scoreShadow = CCLabelTTF::create("0",FONT_MAIN,Utils::getScaledFontSize(75));
+	scoreLabel = CCLabelBMFont::create("0", "font.fnt", -1.0F, kCCTextAlignmentLeft);
+	scoreShadow = CCLabelBMFont::create("0", "font.fnt", -1.0F, kCCTextAlignmentLeft);
 	scoreShadow->setColor(ccColor3B{0,0,0});
 	scoreLabel->setAnchorPoint(ccp(0,1));
 	scoreShadow->setAnchorPoint(ccp(0,1));

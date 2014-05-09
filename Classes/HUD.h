@@ -13,8 +13,8 @@
 
 class HUD: public cocos2d::CCLayer {
 private:
-	cocos2d::CCLabelTTF* scoreLabel;
-	cocos2d::CCLabelTTF* scoreShadow;
+	cocos2d::CCLabelBMFont*  scoreLabel;
+	cocos2d::CCLabelBMFont* scoreShadow;
 	float dx;
 	float extrascale;
 	float regularScale;
