@@ -26,6 +26,7 @@ bool Trash::init() {
 
 void Trash::dotkniety() {
 	SimpleAudioEngine::sharedEngine()->playEffect("buttonClick2.mp3");
+	WYBUCHSPRITE();
 	Game *g = Utils::getGame();
 	HUD *h = Utils::getHUD();
 	g->notMissed++;
@@ -34,6 +35,26 @@ void Trash::dotkniety() {
 	g->caught=true;
 	h->addToScore(1,g->notMissed);
 	this->removeFromParentAndCleanup(true);
+}
+void Trash::WYBUCHSPRITE() {
+	CCSprite *animation = CCSprite::createWithSpriteFrameName("collected_00000.png");
+	const float scalerate = 1.4f*this->getContentSize().height*this->getScale() / animation->getContentSize().height;
+	CCArray *frames = CCArray::create();
+	for (int i = 0; i <= 15; i++)
+	{
+		CCString *frame;
+		if (i<10) frame = CCString::createWithFormat("collected_0000%d.png", i);
+		else frame = CCString::createWithFormat("collected_000%d.png", i);
+		CCSpriteFrame *spr = CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName(frame->getCString());
+		frames->addObject(spr);
+	}
+	const CCPoint currpos = this->getPosition();
+	animation->setPosition(currpos);
+	animation->setScale(scalerate);
+	((Game*)this->getParent())->animacjeLayer->addChild(animation);
+	CCAnimate *animuj = CCAnimate::create(CCAnimation::create(frames, .04));
+	CCCallFuncN * zniszcz = CCCallFuncN::create(animation, callfuncN_selector(Game::removeAnim));
+	animation->runAction(CCSequence::create(animuj, zniszcz, NULL));
 }
 
 Trash* Trash::create(float speedd,float sizee,float rotTime){

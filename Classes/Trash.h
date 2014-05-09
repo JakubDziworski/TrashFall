@@ -27,6 +27,7 @@ public:
 	virtual void dotkniety();
 	static Trash* create(float speed,float size,float rotTime=rotationDuration);
 	LAYER_CREATE_FUNC (Trash);
+	void WYBUCHSPRITE();
 };
 
 #endif /* TRASH_H_ */

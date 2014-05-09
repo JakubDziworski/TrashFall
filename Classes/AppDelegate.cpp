@@ -17,10 +17,14 @@ AppDelegate::~AppDelegate()
 bool AppDelegate::applicationDidFinishLaunching() {
     // initialize director
 	srand(time(NULL));
+
+#if (CC_TARGET_PLATFORM==CC_PLATFORM_WIN32)
+	CCEGLView::sharedOpenGLView().setDesignResolutionSize(768, 1148);
+#endif
+	
     CCDirector *pDirector = CCDirector::sharedDirector();
 
     pDirector->setOpenGLView(&CCEGLView::sharedOpenGLView());
-
 
     // enable High Resource Mode(2x, such as iphone4) and maintains low resource on other devices.
     // pDirector->enableRetinaDisplay(true);
