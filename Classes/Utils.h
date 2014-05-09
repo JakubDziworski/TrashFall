@@ -20,7 +20,7 @@
 #include "GameOver.h"
 class Utils {
 public:
-	static const int trashAmount = 4;
+	static const int trashAmount = 6;
 	cocos2d::CCLayer* layer;
 	static HUD* getHUD();
 	static Game* getGame();
