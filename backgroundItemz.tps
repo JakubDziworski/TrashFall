@@ -674,15 +674,6 @@
             <filename>C:/Users/Jakub/Desktop/doResourca/sunFaces/sunFace_00020.png</filename>
             <filename>C:/Users/Jakub/Desktop/doResourca/sunFaces/sunFace_00021.png</filename>
             <filename>C:/Users/Jakub/Desktop/doResourca/sunFaces/sunFace_00022.png</filename>
-            <filename>C:/Users/Jakub/Desktop/doResourca/chmurka1.png</filename>
-            <filename>C:/Users/Jakub/Desktop/doResourca/chmurka2.png</filename>
-            <filename>C:/Users/Jakub/Desktop/doResourca/chmurka3.png</filename>
-            <filename>C:/Users/Jakub/Desktop/doResourca/chmurka1.png</filename>
-            <filename>C:/Users/Jakub/Desktop/doResourca/chmurka2.png</filename>
-            <filename>C:/Users/Jakub/Desktop/doResourca/chmurka3.png</filename>
-            <filename>C:/Users/Jakub/Desktop/doResourca/chmurka1.png</filename>
-            <filename>C:/Users/Jakub/Desktop/doResourca/chmurka2.png</filename>
-            <filename>C:/Users/Jakub/Desktop/doResourca/chmurka3.png</filename>
             <filename>Resources/missed.png</filename>
             <filename>Resources/trash4.png</filename>
             <filename>Resources/trash1.png</filename>
@@ -691,6 +682,9 @@
             <filename>Resources/particl.png</filename>
             <filename>Resources/bomba.png</filename>
             <filename>C:/Users/Jakub/Desktop/doResourca/SunHurt.png</filename>
+            <filename>C:/Users/Jakub/Desktop/doResourca/chmurka3.png</filename>
+            <filename>C:/Users/Jakub/Desktop/doResourca/chmurka1.png</filename>
+            <filename>C:/Users/Jakub/Desktop/doResourca/chmurka2.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>
