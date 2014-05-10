@@ -56,7 +56,7 @@ bool HUD::init() {
 	anim = Animated::create();
 	anim->addChild(scoreLabel,1);
 	anim->addChild(scoreShadow,0);
-	anim->initAnim(-0.1f,0,0,0,0.15f,-0.1f,0,0,1.0f,0.8f);
+	anim->initAnim(-0.3f,0,0,0,0.15f,-0.1f,0,0,1.0f,0.8f);
 	this->addChild(anim,-2);
 	this->setTouchEnabled(true);
 	this->addChild(effect);

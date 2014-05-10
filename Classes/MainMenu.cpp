@@ -64,7 +64,6 @@ bool MainMenu::init(){
 			    	 this->addChild(menuAnim[j],3);
 			     }
 			     i=0;
-			     loadingPopDown();
 			     this->schedule(schedule_selector(MainMenu::menuAnimSchedulerIN),odstepMiedzyPrzyciskami,2,0);
 			     return true;
 }
@@ -165,14 +164,5 @@ void MainMenu::enableTouch(){
 		menu[j]->setTouchEnabled(true);
 		menu[j]->setKeypadEnabled(true);
 		}
-}
-void MainMenu::loadingPopDown(){
-	SpriteWithText *baseLoadingText = SpriteWithText::createWithSpriteFrameNamee("offButton.png","LOADING", ccColor3B { 0, 0, 0 });
-	baseLoadingText->setPosition(Utils::getCorrectPosition(0.5, 0.5));
-	Animated *animthis = Animated::create();
-	animthis->initAnim(1,0,0,0,0.3f,0.1f,0,0,0);
-	animthis->addChild(baseLoadingText);
-	animthis->startAnimOut();
-	this->addChild(animthis);
 }
 

@@ -14,10 +14,10 @@ bool Background::init(){
 	if (!CCLayer::init()) {
 			return false;
 		}
-	maxmovementChmurki = Utils::getcorrectValue(0.025,true);
+	maxmovementChmurki = Utils::getcorrectValue(0.03,true);
 	timeToWait=0;
 	currentTim=0;
-	
+	beginAnimTime = timeToShowBGItemz;
 	//initsprites
 	sun = CCSprite::createWithSpriteFrameName("Sun.png");
 	sunHurt = CCSprite::createWithSpriteFrameName("SunHurt.png");
@@ -59,15 +59,15 @@ bool Background::init(){
 	Utils::scaleSprite(buzka,3.4,1,false);
 	this->addChild(bg,-1);
 	for (int i = 0; i < 3; i++)
-	this->addChild(chmurkaMover[i], 1);
-	this->addChild(sunMover, 1);
+	this->addChild(chmurkaMover[i], 0);
+	this->addChild(sunMover, 0);
 	CCRepeatForever *repeat = CCRepeatForever::create(
 				CCRotateBy::create(rotationDuration, 15));
 	CCRepeatForever *repeat2 = CCRepeatForever::create(
 		CCRotateBy::create(rotationDuration, 15));
 	sun->runAction(repeat);
 	sunHurt->runAction(repeat2);
-	//this->schedule(schedule_selector(Background::moveChmurkiRandom),1);
+	this->schedule(schedule_selector(Background::moveChmurkiRandom),1);
 	sunMover->startAnimIn();
 	for (int i = 0; i < 3; i++) chmurkaMover[i]->startAnimIn();
 
@@ -97,18 +97,6 @@ void Background::updateMisses(int missesAmount){
 	sunHurt->runAction(CCSequence::create(fadeIn, fadeOut, NULL));
 	CCString *name = CCString::createWithFormat("sunFace_%05d.png",missesAmount);
 	buzka->setDisplayFrame(CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName(name->getCString()));
-}
-void Background::beginAnimation(){
-	const int sunSpeed = 1;
-	const int chmSpeed[3] = {1.5,1.5,1.5};
-	beginAnimTime=1.5;
-	for(int i=0;i<3;i++) chmurka[i]->setPosition(orignalchmuraPos[i]);
-	for(int i=0;i<3;i++){
-		chmurka[i]->runAction(CCMoveTo::create(chmSpeed[i],orignalchmuraPos[i]));
-	}
-	sunHurt->setPosition(Utils::getCorrectPosition(0.26, 0.793));
-	sun->runAction(CCMoveTo::create(sunSpeed,Utils::getCorrectPosition(0.26,0.793)));
-	buzka->runAction(CCMoveTo::create(sunSpeed,Utils::getCorrectPosition(0.26,0.793)));
 }
 
 void Background::wywalChmuriIslonce(){

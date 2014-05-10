@@ -15,8 +15,8 @@ const float mainMenubuttonRatio = 1.1f;
 const float rotationDuration = 0.5f;
 const float scoreLabelRatio = 9;
 const float maxTouchTime = 0.35f;
-const float timeToHideBgItemz =1.1f;
-const float timeToShowBGItemz = 0.9f;
+const float timeToHideBgItemz =1.4f;
+const float timeToShowBGItemz = 1.3f;
 #define FONT_MAIN "TrashCinemaBB.ttf"
 #define HIGH_SCORE "highscore"
 //achievments

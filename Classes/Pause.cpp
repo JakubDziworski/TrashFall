@@ -85,6 +85,7 @@ void Pause::goToMainMenu(cocos2d::CCObject*){
 	anim->startAnimOut();
 	Utils::getGame()->saveBeforLeaving();
 	Utils::getBackground()->wywalChmuriIslonce();
+	SimpleAudioEngine::sharedEngine()->resumeBackgroundMusic();
 	this->scheduleOnce(schedule_selector(Pause::lateGoToMenu), timeToHideBgItemz);
 }
 void Pause::lateGoToMenu(float dt){
@@ -96,8 +97,10 @@ void Pause::restartGame(cocos2d::CCObject*){
 	anim->startAnimOut();
 	Utils::getGame()->saveBeforLeaving();
 	Utils::getBackground()->wywalChmuriIslonce();
+	SimpleAudioEngine::sharedEngine()->resumeBackgroundMusic();
 	this->scheduleOnce(schedule_selector(Pause::lateRestartGame), timeToHideBgItemz);
 }
 void Pause::lateRestartGame(float){
+
 	CCDirector::sharedDirector()->replaceScene(Game::scene());
 }
