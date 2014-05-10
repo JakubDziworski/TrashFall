@@ -20,6 +20,7 @@ private:
 	cocos2d::CCSprite *effect;
 	cocos2d::CCUserDefault *savedData;
 	float regularScale;
+	Animated *anim;
 public:
 			void checkAchivmets(int nomisses);
 			void DisplayTrafion(cocos2d::CCPoint,bool);
@@ -30,7 +31,7 @@ public:
 			int getScore(){return score;}
 			void hideRedEffect(cocos2d::CCNode*);
 			void deleteMissed(cocos2d::CCNode*);
-
+			void hideScore();
 };
 
 #endif /* HUD_H_ */

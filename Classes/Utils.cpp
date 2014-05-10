@@ -72,6 +72,11 @@ void Utils::setDifficulty(float& speed,float timeEl,float& atO){
 		}
 	}
 }
+int Utils::getdifficulty(float time){
+	for (int i = 0; i < diffNumber; i++){
+		if (time >= difficulties[i].timeElapse) return i;
+	}
+}
 HUD* Utils::getHUD(){
 	if(CCDirector::sharedDirector()->getRunningScene()->getTag() == TAG_GAMESCENE)
 	return (HUD*)CCDirector::sharedDirector()->getRunningScene()->getChildByTag(TAG_HUD);
@@ -143,4 +148,26 @@ float Utils::ratioValue(float float1,bool h) {
 	if(h)
 	return float1/Utils::sreensSize().height;
 	return float1/Utils::sreensSize().width;
+}
+std::string Utils::losujTIP(){
+	int los = Utils::getRandValue(0, 3);
+	std::string toReturn = "TIP:";
+	switch (los)
+	{
+	case 0:
+		return toReturn + "SWIPE INSTEAD OF TAPPING! THIS WILL INCREASE YOUR CHANCE TO GRAB TRASHES!";
+		break;
+	case 1:
+		return toReturn + "KEEP YOUR HAND LOW! YOU WILL HAVE MORE TIME TO CATCH TRASHES!";
+		break;
+	case 2:
+		return toReturn + "CHECK OUT 'REWARDS' IN MAIN MENU! COLLECT THEM ALL!";
+		break;
+	case 3:
+		return toReturn + "CHECK OUT STATISTICS IN MAIN MENU!";
+		break;
+	default:
+		return "CHECK OUT STATISTICS IN MAIN MENU!";
+		break;
+	}
 }

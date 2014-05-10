@@ -9,6 +9,7 @@
 #define GAME_H_
 
 #include "cocos2d.h"
+#include "SpriteWithText.h"
 
 class Game: public cocos2d::CCLayer {
 	float mSpeed;
@@ -29,7 +30,7 @@ public:
 	bool isOver;
 	bool getisOver() const { return isOver; }
 	int score;
-		void invaildTouch();
+	void invaildTouch();
 		void caughtExplosive();
 		void missed();
 		virtual bool init();
@@ -42,6 +43,7 @@ public:
 		void removeAnim(CCNode* sender);
 		void saveBeforLeaving();
 		LAYER_CREATE_FUNC(Game);
+		void wyrzucPuszki();
 };
 
 #endif /* GAME_H_ */

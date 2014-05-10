@@ -16,6 +16,7 @@ class SpriteWithText: public cocos2d::CCSprite {
 public:
 	virtual bool init();
 	static SpriteWithText* createWithSpriteFrameNamee(const char *pszSpriteFrameName,const char *inputText,cocos2d::ccColor3B color);
+	void setTextMaxInLine(float amount);
 	void setTextSize(float);
 	void setText(const char *inputText,cocos2d::ccColor3B color);
 	void setTextString(const char *txt);

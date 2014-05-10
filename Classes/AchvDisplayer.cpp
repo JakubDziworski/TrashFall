@@ -27,19 +27,19 @@ bool AchvDisplayer::init(){
 	achievmentsNames.push_back(ACH_HARDCORE);
 	achievmentsNames.push_back(ACH_MASSIVE);
 	achievmentsNames.push_back(ACH_AVOIDER);
+	achievmentsNames.push_back(ACH_25);
 	achievmentsNames.push_back(ACH_50);
 	achievmentsNames.push_back(ACH_100);
-	achievmentsNames.push_back(ACH_250);
+	achievmentsNames.push_back(ACH_175);
+	achievmentsNames.push_back(ACH_300);
 	achievmentsNames.push_back(ACH_500);
-	achievmentsNames.push_back(ACH_1000);
-	achievmentsNames.push_back(ACH_2000);
 	//pod rzad
 	achievmentsNames.push_back(ACH_10_SINGLE);
 	achievmentsNames.push_back(ACH_20_SINGLE);
+	achievmentsNames.push_back(ACH_35_SINGLE);
 	achievmentsNames.push_back(ACH_50_SINGLE);
-	achievmentsNames.push_back(ACH_100_SINGLE);
+	achievmentsNames.push_back(ACH_75_SINGLE);
 	achievmentsNames.push_back(ACH_150_SINGLE);
-	achievmentsNames.push_back(ACH_250_SINGLE);
 
 	plane = CCNode::create();
 	info = Animated::create();

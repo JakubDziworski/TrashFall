@@ -191,6 +191,16 @@
             <filename>C:/Users/Jakub/SkyDrive/Dokumenty/particlezbieranie/collected_00013.png</filename>
             <filename>C:/Users/Jakub/SkyDrive/Dokumenty/particlezbieranie/collected_00014.png</filename>
             <filename>C:/Users/Jakub/SkyDrive/Dokumenty/particlezbieranie/collected_00015.png</filename>
+            <filename>scoreBoardBG.png</filename>
+            <filename>goBackOff.png</filename>
+            <filename>goBackOn.png</filename>
+            <filename>offButton.png</filename>
+            <filename>offCollected.png</filename>
+            <filename>offPaused.png</filename>
+            <filename>onButton.png</filename>
+            <filename>onCollected.png</filename>
+            <filename>onPaused.png</filename>
+            <filename>onReturn.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

@@ -51,5 +51,7 @@ public:
 	static float ratioValue(float,bool height);
 	static std::string getAchvName(std::string input);
 	static std::string getAchvTag(std::string input);
+	static int getdifficulty(float time);
+	static std::string losujTIP();
 };
 #endif /* UTILS_H_ */

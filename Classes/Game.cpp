@@ -38,7 +38,6 @@ bool Game::init() {
 	fingerDown = false;
 	monitorFallen = true;
 	animacjeLayer = CCLayer::create();
-	//SimpleAudioEngine::sharedEngine()->playBackgroundMusic("inGame.mp3",true);
 	Utils::setDifficulty(mSpeed,currentTimee,atOnce);
 	this->addChild(animacjeLayer);
 	this->setTouchEnabled(true);
@@ -54,6 +53,7 @@ CCScene* Game::scene() {
 	Pause *pause = Pause::create();
 	Background *bgLayer = Background::create();
 	GameOver *gover = GameOver::create();
+	
 	//AchvDisplayer *achivdispl = AchvDisplayer::create();
 	scene->addChild(bgLayer,-1,TAG_BACKGROUND);
 	scene->addChild(layer,0,TAG_GAMELayer);
@@ -103,10 +103,13 @@ void Game::ccTouchesMoved(cocos2d::CCSet *pTouches,cocos2d::CCEvent *pEvent){
 	CCArray *arr = this->getChildren();
 	arr->retain();
 	for(int i=1;i<arr->count();i++){
-		Trash *trsh = (Trash*)(arr->objectAtIndex(i));
-		if (trsh)
+		CCLOG("before");
+		Trash *trsh = dynamic_cast<Trash*>(arr->objectAtIndex(i));
+		if (trsh){CCLOG("after");
 		if(CCRect::CCRectContainsPoint(trsh->boundingBox(),location)){
 			trsh->dotkniety();
+
+		}
 		}
 	}
 }
@@ -191,4 +194,15 @@ void Game::saveBeforLeaving() {
 					}
 			}
 		}
+}
+void Game::wyrzucPuszki(){
+	CCArray *arr = this->getChildren();
+	for (int j = 0; j < arr->count(); j++){
+		Trash *trash = dynamic_cast<Trash*>(arr->objectAtIndex(j));
+		if (trash){
+			trash->resumeSchedulerAndActions();
+			trash->stopActionByTag(1);
+			trash->runAction(CCMoveTo::create(0.3f, Utils::getCorrectPosition(1.5f, Utils::ratioValue(trash->getPositionY(), true) - 0.1f)));
+		}
+	}
 }

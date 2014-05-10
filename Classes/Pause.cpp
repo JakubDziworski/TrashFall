@@ -26,12 +26,17 @@ bool Pause::init(){
 	SpriteWithText *mainMenuOff = SpriteWithText::createWithSpriteFrameNamee("offButton.png","MENU",ccColor3B{0,0,0});
 	CCSprite *resumeOn = CCSprite::createWithSpriteFrameName("onPaused.png");
 	CCSprite *resumeOff = CCSprite::createWithSpriteFrameName("offPaused.png");
+	CCSprite *goBackOn = CCSprite::createWithSpriteFrameName("goBackOn.png");
+	CCSprite *goBackOff = CCSprite::createWithSpriteFrameName("goBackOff.png");
+	CCMenuItemSprite *restartBtn = CCMenuItemSprite::create(goBackOn, goBackOff, this, menu_selector(Pause::restartGame));
 	CCMenuItemSprite *resumeBtn = CCMenuItemSprite::create(resumeOn,resumeOff,this,menu_selector(Pause::toggle));
 	CCMenuItemSprite *mainMenuBtn = CCMenuItemSprite::create(mainMenuOn,mainMenuOff,this,menu_selector(Pause::goToMainMenu));
-	Utils::scaleButton(resumeBtn,2);
+	Utils::scaleButton(restartBtn,2.1f);
+	Utils::scaleButton(resumeBtn,2.1);
 	Utils::scaleButton(mainMenuBtn,1.7);
 	Utils::scaleSprite(pause,1.1,1,true);
-	CCMenu *menuContinue = CCMenu::create(resumeBtn,NULL);
+	CCMenu *menuContinue = CCMenu::create(restartBtn,resumeBtn,NULL);
+	menuContinue->alignItemsHorizontally();
 	CCMenu *menuMainMenu = CCMenu::create(mainMenuBtn,NULL);
 	pause->setPosition(Utils::getCorrectPosition(0.5,0.8));
 	menuContinue->setPosition(Utils::getCorrectPosition(0.5,0.5));
@@ -79,10 +84,20 @@ void Pause::goToMainMenu(cocos2d::CCObject*){
 	anim->stopAllActions();
 	anim->startAnimOut();
 	Utils::getGame()->saveBeforLeaving();
-	LoadingNode *node = LoadingNode::create();
-	this->addChild(node);
-	this->scheduleOnce(schedule_selector(Pause::lateGoToMenu),0.45f);
+	Utils::getBackground()->wywalChmuriIslonce();
+	this->scheduleOnce(schedule_selector(Pause::lateGoToMenu), timeToHideBgItemz);
 }
 void Pause::lateGoToMenu(float dt){
 	CCDirector::sharedDirector()->replaceScene(MainMenu::scene());
+}
+void Pause::restartGame(cocos2d::CCObject*){
+	anim->unscheduleAllSelectors();
+	anim->stopAllActions();
+	anim->startAnimOut();
+	Utils::getGame()->saveBeforLeaving();
+	Utils::getBackground()->wywalChmuriIslonce();
+	this->scheduleOnce(schedule_selector(Pause::lateRestartGame), timeToHideBgItemz);
+}
+void Pause::lateRestartGame(float){
+	CCDirector::sharedDirector()->replaceScene(Game::scene());
 }

@@ -18,9 +18,10 @@ bool LoadingNode::init() {
 	if (!CCLayer::init())
 		return false;
 	CCLOG("wywolano init");
-	CCSpriteFrameCache::sharedSpriteFrameCache()->addSpriteFramesWithFile("Buttons.plist");
+	CCSpriteFrameCache::sharedSpriteFrameCache()->addSpriteFramesWithFile("Backgrounds.plist");
 	SpriteWithText *baseLoadingText = SpriteWithText::createWithSpriteFrameNamee("offButton.png","LOADING", ccColor3B { 0, 0, 0 });
 		baseLoadingText->setPosition(Utils::getCorrectPosition(0.5, 0.5));
+		Utils::scaleSprite(baseLoadingText,1.1f,1,true);
 		Animated *animthis = Animated::create();
 		animthis->addChild(baseLoadingText);
 		animthis->setPosition(Utils::getCorrectPosition(1,0));

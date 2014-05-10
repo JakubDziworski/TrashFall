@@ -38,3 +38,8 @@ void SpriteWithText::setTextSize(float wielkosc){
 void SpriteWithText::setTextString(const char *txt){
 	label->setString(txt);
 }
+
+void SpriteWithText::setTextMaxInLine(float amount)
+{
+	label->setWidth(amount);
+}

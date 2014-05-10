@@ -27,6 +27,8 @@ public:
 	bool isPaused() const {
 		return paused;
 	}
+	void restartGame(cocos2d::CCObject*);
+	void lateRestartGame(float);
 };
 
 #endif /* PAUSE_H_ */

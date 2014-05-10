@@ -31,6 +31,7 @@ public:
 	void keyBackClicked();
 	void enableTouchAfterWait(float);
 	LAYER_CREATE_FUNC(GameOver);
+	void latePlayGame(float);
 };
 
 #endif /* GAMEOVER_H_ */

@@ -60,12 +60,18 @@ void GameOver::trigger(int scorr,int missedAmount){
 	Utils::scaleSprite(scoreBoardBg,1.1,1,true);
 	scoreBoardBg->setPosition(Utils::getCorrectPosition(0.5, 0.5));
 	//
+	SpriteWithText *tip = SpriteWithText::createWithSpriteFrameNamee("onButton.png", Utils::losujTIP().c_str(), ccColor3B{ 1, 1, 1 });
+	tip->setTextSize(0.25f);
+	tip->setTextMaxInLine(0.8f*this->getContentSize().width);
+    Utils::scaleSprite(tip, 1.1F,1,true);
+	tip->setPosition(Utils::getCorrectPosition(0.5f, 0.13f));
+	//
 	SpriteWithText *rateMEon = SpriteWithText::createWithSpriteFrameNamee("offButton.png", "RATE", ccColor3B{ 1, 1, 1 });
 	SpriteWithText *rateMEoff = SpriteWithText::createWithSpriteFrameNamee("onButton.png", "RATE", ccColor3B{ 1, 1, 1 });
 	CCMenuItemSprite *rateBtn = CCMenuItemSprite::create(rateMEon,rateMEoff,this,menu_selector(GameOver::playGame));
 	Utils::scaleSprite(rateBtn, 2.5f, 1, true);
-	CCSprite *carryOn = CCSprite::createWithSpriteFrameName("onPaused.png");
-					CCSprite *carryOff = CCSprite::createWithSpriteFrameName("offPaused.png");
+	CCSprite *carryOn = CCSprite::createWithSpriteFrameName("goBackOn.png");
+					CCSprite *carryOff = CCSprite::createWithSpriteFrameName("goBackOff.png");
 					CCMenuItemSprite *carryOnBtn = CCMenuItemSprite::create(carryOn,carryOff,this,menu_selector(GameOver::playGame));
 					Utils::scaleButton(carryOnBtn,4);
 					menu = CCMenu::create(carryOnBtn,rateBtn,NULL);
@@ -77,6 +83,7 @@ void GameOver::trigger(int scorr,int missedAmount){
 	anim->addChild(scoreBoardBg,-1);
 	anim->addChild(GAMEOVER,1);
 	anim->addChild(menu,1);
+	anim->addChild(tip, 1);
 	accurancyLab->setPosition(Utils::getCorrectPosition(0.5,0.52));
 	anim->addChild(accurancyLab,1);
 	if(scorr > bestScore){
@@ -97,7 +104,7 @@ void GameOver::trigger(int scorr,int missedAmount){
 	anim->addChild(currscor,1);
 	anim->addChild(bestScoree,1);
 	}
-	if(g->bombsCollected == 0){
+	if(g->bombsCollected == 0 && curScore>100){
 			AchievmentPopUp * ach = AchievmentPopUp::createWithSpriteFrameNameee(ACH_AVOIDER.c_str(), usrDefault,true);
 						if(ach){
 						ach->activate();
@@ -118,13 +125,21 @@ void GameOver::enableTouchAfterWait(float dt) {
 	menu->setTouchEnabled(true);
 }
 void GameOver::playGame(cocos2d::CCObject* pObject){
-	SimpleAudioEngine::sharedEngine()->playEffect("buttonClick.wav");
-		CCDirector::sharedDirector()->replaceScene(Game::scene());
-}
-void GameOver::keyBackClicked() {
-	LoadingNode *nd = LoadingNode::create();
-	this->addChild(nd);
+	anim->unscheduleAllSelectors();
+	anim->stopAllActions();
 	anim->startAnimOut();
 	SimpleAudioEngine::sharedEngine()->playEffect("buttonClick.wav");
-	this->scheduleOnce(schedule_selector(GameOver::lateMainMenu),0.45f);
+	Utils::getBackground()->wywalChmuriIslonce();
+	this->scheduleOnce(schedule_selector(GameOver::latePlayGame),timeToHideBgItemz);
+}
+void GameOver::latePlayGame(float){
+	CCDirector::sharedDirector()->replaceScene(Game::scene());
+}
+void GameOver::keyBackClicked() {
+	anim->unscheduleAllSelectors();
+	anim->stopAllActions();
+	anim->startAnimOut();
+	SimpleAudioEngine::sharedEngine()->playEffect("buttonClick.wav");
+	Utils::getBackground()->wywalChmuriIslonce();
+	this->scheduleOnce(schedule_selector(GameOver::lateMainMenu), timeToHideBgItemz);
 }
