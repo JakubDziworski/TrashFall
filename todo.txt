@@ -1,11 +1,7 @@
 
-poziom trudnosci =>achievmenty
 reklamy
-setvisble !
+poczetek + ikonka
 1024x1024
-rate
-dzwiek zebrania
-
 
 POMYS£Y:
 COS ALA draw race

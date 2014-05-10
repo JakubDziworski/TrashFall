@@ -35,7 +35,7 @@ cocos2d::CCSpriteFrame* Utils::getRandomTrash(){
 	return CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName(trashName->getCString());
 }
 float Utils::getRandomXPos(){
-	return rand()%((int)Utils::sreensSize().width+1);
+	return rand()%((int)(0.9f*Utils::sreensSize().width))+Utils::sreensSize().width*0.05f;
 }
 int Utils::getRandValue(int min,int max){
 	return rand()%(max-min+1)+min;

@@ -186,7 +186,7 @@ void Game::saveBeforLeaving() {
 		const float accurancy = (float)score/(float)(score+missedAmount)*100;
 		dane->setFloatForKey(STAT_ACCURANCY,(dane->getFloatForKey(STAT_ACCURANCY,0)*(float)(sessionsOver-1)+accurancy)/(float)sessionsOver);
 		if (sessionsOver == 100) {
-					AchievmentPopUp * ach = AchievmentPopUp::createWithSpriteFrameNameee(ACH_HARDCORE.c_str(), dane);
+					AchievmentPopUp * ach = AchievmentPopUp::createWithSpriteFrameNameee(ACH_HARDCORE.c_str(), dane,true);
 					if(ach)
 					{
 					ach->activate();
