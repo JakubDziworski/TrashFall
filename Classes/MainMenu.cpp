@@ -28,6 +28,7 @@ bool MainMenu::init(){
 	 this->setKeypadEnabled(true);
 	 //sounds
 	 doubleClicked=false;
+	 usrDef = CCUserDefault::sharedUserDefault();
 	 const float posx = CCDirector::sharedDirector()->getWinSize().width/2;
 	 const float posy = CCDirector::sharedDirector()->getWinSize().height/2;
 	 CCSprite *bg = CCSprite::createWithSpriteFrameName("Background.png");
@@ -62,9 +63,10 @@ bool MainMenu::init(){
 			    	 menuAnim[j]->setPosition(Utils::getCorrectPosition(-1,0.2-0.2*j));
 			    	 menuAnim[j]->initAnim(-1,0,0.2-0.2*j,0.2-0.2*j,0.2f,-0.1,0,0,0.6,0);
 			    	 this->addChild(menuAnim[j],3);
-			     }
+				 } 
+				 prepareSoundButt();
 			     i=0;
-			     this->schedule(schedule_selector(MainMenu::menuAnimSchedulerIN),odstepMiedzyPrzyciskami,2,0);
+			     this->schedule(schedule_selector(MainMenu::menuAnimSchedulerIN),odstepMiedzyPrzyciskami,3,0);
 			     return true;
 }
 CCScene* MainMenu::scene(){
@@ -77,13 +79,13 @@ CCScene* MainMenu::scene(){
 
 
 void MainMenu::menuAnimSchedulerIN(float) {
-	if(i==3) i=0;
+	if(i==4) i=0;
 	menuAnim[i]->startAnimIn();
 	i++;
 }
 
 void MainMenu::menuAnimSchedulerOUT(float) {
-	if(i==3) i=0;
+	if(i==4) i=0;
 	menuAnim[i]->startAnimOut();
 	i++;
 }
@@ -94,7 +96,7 @@ void MainMenu::notdoubleClicked(float) {
 
 void MainMenu::ShowStats(cocos2d::CCObject* pObject) {
 	SimpleAudioEngine::sharedEngine()->playEffect("buttonClick.wav");
-	this->schedule(schedule_selector(MainMenu::menuAnimSchedulerOUT),odstepMiedzyPrzyciskami,2,0);
+	this->schedule(schedule_selector(MainMenu::menuAnimSchedulerOUT),odstepMiedzyPrzyciskami,3,0);
 	statsDisplayer->show();
 	statsIsRunning=true;
 	for(int j=0;j<3;j++) menu[j]->setTouchEnabled(false);
@@ -103,7 +105,7 @@ void MainMenu::playGame(cocos2d::CCObject* pObject){
 	SimpleAudioEngine::sharedEngine()->playEffect("buttonClick.wav");
 	this->unscheduleAllSelectors();
 	this->stopAllActions();
-	this->schedule(schedule_selector(MainMenu::menuAnimSchedulerOUT),odstepMiedzyPrzyciskami,2,0);
+	this->schedule(schedule_selector(MainMenu::menuAnimSchedulerOUT),odstepMiedzyPrzyciskami,3,0);
 	wyrzucPuszki();
 	this->schedule(schedule_selector(MainMenu::waitToReplace),0.1,0,1);
 }
@@ -121,7 +123,7 @@ void MainMenu::keyBackClicked() {
 	if(statsIsRunning){
 		SimpleAudioEngine::sharedEngine()->playEffect("buttonClick.wav");
 		statsDisplayer->hide();
-		this->schedule(schedule_selector(MainMenu::menuAnimSchedulerIN),odstepMiedzyPrzyciskami,2,0);
+		this->schedule(schedule_selector(MainMenu::menuAnimSchedulerIN),odstepMiedzyPrzyciskami,3,0);
 		statsIsRunning=false;
 		for(int j=0;j<3;j++) menu[j]->setTouchEnabled(true);
 		return;
@@ -145,7 +147,7 @@ void MainMenu::ShowAchievments(cocos2d::CCObject* pObject){
 }
 void MainMenu::disableTouch(){
 	SimpleAudioEngine::sharedEngine()->playEffect("buttonClick.wav");
-	 this->schedule(schedule_selector(MainMenu::menuAnimSchedulerOUT),odstepMiedzyPrzyciskami,2,0);
+	 this->schedule(schedule_selector(MainMenu::menuAnimSchedulerOUT),odstepMiedzyPrzyciskami,3,0);
 	CCLOG("TOUCH DISABLED");
 	this->setTouchEnabled(false);
 	this->setKeypadEnabled(false);
@@ -156,7 +158,7 @@ void MainMenu::disableTouch(){
 }
 void MainMenu::enableTouch(){
 	SimpleAudioEngine::sharedEngine()->playEffect("buttonClick.wav");
-	this->schedule(schedule_selector(MainMenu::menuAnimSchedulerIN),odstepMiedzyPrzyciskami,2,0);
+	this->schedule(schedule_selector(MainMenu::menuAnimSchedulerIN),odstepMiedzyPrzyciskami,3,0);
 	CCLOG("TOUCH ENABLED");
 	this->setTouchEnabled(true);
 	this->setKeypadEnabled(true);
@@ -164,5 +166,44 @@ void MainMenu::enableTouch(){
 		menu[j]->setTouchEnabled(true);
 		menu[j]->setKeypadEnabled(true);
 		}
+}
+void MainMenu::prepareSoundButt(){
+	CCSprite *onsoundSpr = CCSprite::createWithSpriteFrameName("soundOn.png");
+	CCSprite *offsoundSpr = CCSprite::createWithSpriteFrameName("soundOff.png");
+	CCSprite *onsoundSpr2 = CCSprite::createWithSpriteFrameName("soundOn.png");
+	CCSprite *offsoundSpr2 = CCSprite::createWithSpriteFrameName("soundOff.png");
+
+	CCMenuItemSprite *musicOn = CCMenuItemSprite::create(onsoundSpr, offsoundSpr);
+	CCMenuItemSprite *musicOff = CCMenuItemSprite::create(offsoundSpr2, onsoundSpr2);
+	Utils::scaleButton(musicOn, 8);
+	Utils::scaleButton(musicOff, 8);
+	CCMenuItemToggle *toggle = CCMenuItemToggle::create(this, menu_selector(MainMenu::toggleSound), musicOn, musicOff, NULL);
+	CCMenu *turnSound = CCMenu::create(toggle, NULL);
+	turnSound->setPosition(Utils::getCorrectPosition(0.9f, 0.95f));
+	menuAnim[3] = Animated::create();
+	menuAnim[3]->addChild(turnSound, NULL);
+	menuAnim[3]->setPosition(Utils::getCorrectPosition(0, 0.4f));
+	menuAnim[3]->initAnim(0, 0, 0.4f, 0, 0.2f, 0, 0.05f, 0, 0.2f);
+	if (usrDef->getBoolForKey(SOUND_ENABLED, true))
+		toggle->setSelectedIndex(0);
+	else{
+		toggle->setSelectedIndex(1);
+		SimpleAudioEngine::sharedEngine()->setEffectsVolume(0);
+		SimpleAudioEngine::sharedEngine()->setBackgroundMusicVolume(0);
+	}
+	this->addChild(menuAnim[3],3);
+}
+void MainMenu::toggleSound(cocos2d::CCObject* pObject){
+	bool curr = usrDef->getBoolForKey(SOUND_ENABLED);
+	curr = !curr;
+	usrDef->setBoolForKey(SOUND_ENABLED, curr);
+	if (curr){
+		SimpleAudioEngine::sharedEngine()->setEffectsVolume(1);
+		SimpleAudioEngine::sharedEngine()->setBackgroundMusicVolume(1);
+	}
+	else{
+		SimpleAudioEngine::sharedEngine()->setEffectsVolume(0);
+		SimpleAudioEngine::sharedEngine()->setBackgroundMusicVolume(0);
+	}
 }
 

@@ -14,13 +14,14 @@ private:
 	cocos2d::CCMenu *menu[3];
 	AchvDisplayer *achvDisplayer;
 	StatsDisplayer *statsDisplayer;
-	Animated *menuAnim[3];
+	Animated *menuAnim[4];
 	void menuAnimSchedulerIN(float);
 	void menuAnimSchedulerOUT(float);
 	bool statsIsRunning;
 	int i;
 	bool resumed[2];
 	bool doubleClicked;
+	cocos2d::CCUserDefault *usrDef;
 public:
 	void tick();
 	void notdoubleClicked(float);
@@ -40,6 +41,8 @@ public:
 	virtual void enableTouch();
 	void ShowStats(cocos2d::CCObject* pObject);
 	LAYER_CREATE_FUNC(MainMenu);
+	void toggleSound(cocos2d::CCObject* pObject);
+	void prepareSoundButt();
 };
 
 #endif /* MAINMENU_H_ */

@@ -19,6 +19,7 @@ const float timeToHideBgItemz =1.4f;
 const float timeToShowBGItemz = 1.3f;
 #define FONT_MAIN "TrashCinemaBB.ttf"
 #define HIGH_SCORE "highscore"
+#define SOUND_ENABLED "SOUND"
 //achievments
 
 typedef enum{

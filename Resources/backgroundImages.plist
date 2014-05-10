@@ -33,7 +33,7 @@
             <key>bomba.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{592,1797},{213,256}}</string>
+                <string>{{1124,1797},{213,256}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -46,7 +46,7 @@
             <key>chmurka1.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{1797,2},{164,117}}</string>
+                <string>{{1797,672},{164,117}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -59,11 +59,11 @@
             <key>chmurka2.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{1366,1877},{210,99}}</string>
+                <string>{{1797,258},{210,99}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
-                <false/>
+                <true/>
                 <key>sourceColorRect</key>
                 <string>{{0,0},{210,99}}</string>
                 <key>sourceSize</key>
@@ -85,7 +85,7 @@
             <key>missed.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{1310,1978},{64,64}}</string>
+                <string>{{1866,470},{64,64}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -107,6 +107,32 @@
                 <string>{{0,0},{32,32}}</string>
                 <key>sourceSize</key>
                 <string>{32,32}</string>
+            </dict>
+            <key>soundOff.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{600,1797},{264,237}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{264,237}}</string>
+                <key>sourceSize</key>
+                <string>{264,237}</string>
+            </dict>
+            <key>soundOn.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{334,1797},{264,237}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{264,237}}</string>
+                <key>sourceSize</key>
+                <string>{264,237}</string>
             </dict>
             <key>sunFace_00000.png</key>
             <dict>
@@ -410,7 +436,7 @@
             <key>trash1.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{334,1797},{231,256}}</string>
+                <string>{{866,1797},{231,256}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -423,7 +449,7 @@
             <key>trash2.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{1108,1797},{136,256}}</string>
+                <string>{{1640,1797},{136,256}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -436,7 +462,7 @@
             <key>trash3.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{1366,1797},{78,256}}</string>
+                <string>{{1640,1935},{78,256}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -449,7 +475,7 @@
             <key>trash4.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{850,1797},{209,256}}</string>
+                <string>{{1382,1797},{209,256}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -462,11 +488,11 @@
             <key>trash5.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{1108,1935},{67,200}}</string>
+                <string>{{1797,470},{67,200}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
-                <true/>
+                <false/>
                 <key>sourceColorRect</key>
                 <string>{{0,0},{67,200}}</string>
                 <key>sourceSize</key>
@@ -475,11 +501,11 @@
             <key>trash6.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{1624,1797},{254,187}}</string>
+                <string>{{1797,2},{254,187}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
-                <false/>
+                <true/>
                 <key>sourceColorRect</key>
                 <string>{{0,0},{254,187}}</string>
                 <key>sourceSize</key>
@@ -495,7 +521,7 @@
             <key>size</key>
             <string>{2048,2048}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:88c05906c659aace5c4abc35ac414a8e$</string>
+            <string>$TexturePacker:SmartUpdate:92e8bec0cecb1eab030e724c8ee96113$</string>
             <key>textureFileName</key>
             <string>backgroundImages.png</string>
         </dict>
