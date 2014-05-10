@@ -30,6 +30,10 @@ public:
 	bool isOver;
 	bool getisOver() const { return isOver; }
 	int score;
+	cocos2d::CCArray *trashAnimFramez;
+	cocos2d::CCArray *bombAnimFramez;
+	cocos2d::CCArray *getBombAnimFramez() { return bombAnimFramez; }
+	cocos2d::CCArray *getTrashAnimFramez() { return trashAnimFramez; }
 	void invaildTouch();
 		void caughtExplosive();
 		void missed();
@@ -44,6 +48,8 @@ public:
 		void saveBeforLeaving();
 		LAYER_CREATE_FUNC(Game);
 		void wyrzucPuszki();
+		void prepareTrashAnimFramez();
+		void prepareBombAnim();
 };
 
 #endif /* GAME_H_ */

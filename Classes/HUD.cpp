@@ -78,6 +78,14 @@ void HUD::addToScore(int value, int nomisses){
 			ach->activate();
 		}
 	}
+	if (Utils::getGame()->bombsCollected == 0 && score == 100){
+		AchievmentPopUp * ach = AchievmentPopUp::createWithSpriteFrameNameee(ACH_AVOIDER.c_str(), savedData, true);
+		if (ach){
+			ach->activate();
+			Utils::getBackground()->addChild(ach);
+		}
+	}
+
 	checkAchivmets(nomisses);
 	scoreLabel->setString(CCString::createWithFormat("%d", score)->getCString());
 	scoreShadow->setString(scoreLabel->getString());

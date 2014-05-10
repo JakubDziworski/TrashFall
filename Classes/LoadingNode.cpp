@@ -19,10 +19,11 @@ bool LoadingNode::init() {
 		return false;
 	CCLOG("wywolano init");
 	CCSpriteFrameCache::sharedSpriteFrameCache()->addSpriteFramesWithFile("Backgrounds.plist");
-	SpriteWithText *baseLoadingText = SpriteWithText::createWithSpriteFrameNamee("offButton.png","LOADING", ccColor3B { 0, 0, 0 });
+	SpriteWithText *baseLoadingText = SpriteWithText::createWithSpriteFrameNamee("offButton.png","TO DO:\nSPLASH SCREEN", ccColor3B { 0, 0, 0 });
+	baseLoadingText->setTextSize(0.5f);
 		baseLoadingText->setPosition(Utils::getCorrectPosition(0.5, 0.5));
 		Utils::scaleSprite(baseLoadingText,1.1f,1,true);
-		Animated *animthis = Animated::create();
+		animthis = Animated::create();
 		animthis->addChild(baseLoadingText);
 		animthis->setPosition(Utils::getCorrectPosition(1,0));
 		animthis->initAnim(1,0,0,0,0.2f,0.1f,0,0,0);
@@ -42,8 +43,8 @@ void LoadingNode::replace(float dt) {
 	SimpleAudioEngine::sharedEngine()->preloadBackgroundMusic("inGame.mp3");
 	CCSpriteFrameCache::sharedSpriteFrameCache()->addSpriteFramesWithFile(
 			"backgroundImages.plist");
-	CCDirector::sharedDirector()->replaceScene(MainMenu::scene());
-	SimpleAudioEngine::sharedEngine()->playBackgroundMusic("inGame.mp3",true);
+	animthis->startAnimOut();
+	this->scheduleOnce(schedule_selector(LoadingNode::lateGoToMainMenu), 0.45f);
 }
 
 void LoadingNode::onEnter() {
@@ -60,6 +61,7 @@ CCScene* LoadingNode::scene() {
 	scene->addChild(tad);
 	return scene;
 }
-
-
-
+void LoadingNode::lateGoToMainMenu(float){
+	CCDirector::sharedDirector()->replaceScene(MainMenu::scene());
+	SimpleAudioEngine::sharedEngine()->playBackgroundMusic("inGame.mp3", true);
+}

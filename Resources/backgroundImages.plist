@@ -33,7 +33,7 @@
             <key>bomba.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{334,1797},{213,256}}</string>
+                <string>{{592,1797},{213,256}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -98,7 +98,7 @@
             <key>particl.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{1310,1935},{32,32}}</string>
+                <string>{{2,2014},{32,32}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -410,15 +410,15 @@
             <key>trash1.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{850,1797},{194,256}}</string>
+                <string>{{334,1797},{231,256}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
                 <true/>
                 <key>sourceColorRect</key>
-                <string>{{0,0},{194,256}}</string>
+                <string>{{0,0},{231,256}}</string>
                 <key>sourceSize</key>
-                <string>{194,256}</string>
+                <string>{231,256}</string>
             </dict>
             <key>trash2.png</key>
             <dict>
@@ -449,7 +449,7 @@
             <key>trash4.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{592,1797},{209,256}}</string>
+                <string>{{850,1797},{209,256}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -495,7 +495,7 @@
             <key>size</key>
             <string>{2048,2048}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:7ea06692f6242fbd8dbcaaa6f96e22a9$</string>
+            <string>$TexturePacker:SmartUpdate:88c05906c659aace5c4abc35ac414a8e$</string>
             <key>textureFileName</key>
             <string>backgroundImages.png</string>
         </dict>

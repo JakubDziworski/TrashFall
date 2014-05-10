@@ -53,8 +53,6 @@ CCScene* Game::scene() {
 	Pause *pause = Pause::create();
 	Background *bgLayer = Background::create();
 	GameOver *gover = GameOver::create();
-	
-	//AchvDisplayer *achivdispl = AchvDisplayer::create();
 	scene->addChild(bgLayer,-1,TAG_BACKGROUND);
 	scene->addChild(layer,0,TAG_GAMELayer);
 	scene->addChild(hud,1,TAG_HUD);
@@ -103,13 +101,9 @@ void Game::ccTouchesMoved(cocos2d::CCSet *pTouches,cocos2d::CCEvent *pEvent){
 	CCArray *arr = this->getChildren();
 	arr->retain();
 	for(int i=1;i<arr->count();i++){
-		CCLOG("before");
-		Trash *trsh = dynamic_cast<Trash*>(arr->objectAtIndex(i));
-		if (trsh){CCLOG("after");
+		Trash *trsh = (Trash*)(arr->objectAtIndex(i));
 		if(CCRect::CCRectContainsPoint(trsh->boundingBox(),location)){
 			trsh->dotkniety();
-
-		}
 		}
 	}
 }

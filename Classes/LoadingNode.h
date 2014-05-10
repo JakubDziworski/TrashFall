@@ -19,6 +19,8 @@ public:
 	static cocos2d::CCScene* scene();
 	//static LoadingNode* create();
 	LAYER_CREATE_FUNC(LoadingNode);
+	void lateGoToMainMenu(float);
+	Animated *animthis;
 };
 
 #endif /* LOADINGNODE_H_ */

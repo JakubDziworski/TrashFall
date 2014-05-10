@@ -33,6 +33,7 @@ bool Background::init(){
 	chmurka[0]->setPosition(Utils::getCorrectPosition(1.6, 0.70));
 	chmurka[1]->setPosition(Utils::getCorrectPosition(1.5, 0.73));
 	chmurka[2]->setPosition(Utils::getCorrectPosition(1.4, 0.9));
+	for (int i = 0; i < 3; i++) orignalchmuraPos[i] = chmurka[i]->getPosition();
 	//animatecreate
 	sunMover = Animated::create();
 	for (int i = 0; i < 3; i++)
@@ -78,7 +79,6 @@ void Background::moveChmurkiRandom(float dt){
 	if(currentTim<beginAnimTime) return;
 	const int i =((int)currentTim)%3;
 	float posX, posY;
-	CCLOG("%d triggered",i);
 	if (chmurka[i]->getPositionX() >= orignalchmuraPos[i].x)
 		posX = chmurka[i]->getPositionX() + Utils::getRandValue(-maxmovementChmurki, 0);
 	else

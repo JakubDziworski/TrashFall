@@ -100,7 +100,8 @@ public class TrashFall extends Cocos2dxActivity{
 	     ActivityManager am =
 	            (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
 	     ConfigurationInfo info = am.getDeviceConfigurationInfo();
-	      return (info.reqGlEsVersion >= 0x20000);
+	      return (info.reqGlEsVersion >= 0x20000 || Build.FINGERPRINT.startsWith("generic"));
+	    
 	 }
 	
      static {

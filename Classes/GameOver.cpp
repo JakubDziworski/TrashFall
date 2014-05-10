@@ -62,12 +62,12 @@ void GameOver::trigger(int scorr,int missedAmount){
 	//
 	SpriteWithText *tip = SpriteWithText::createWithSpriteFrameNamee("onButton.png", Utils::losujTIP().c_str(), ccColor3B{ 1, 1, 1 });
 	tip->setTextSize(0.25f);
-	tip->setTextMaxInLine(0.8f*this->getContentSize().width);
+	tip->setTextMaxInLine(0.93f*this->getContentSize().width);
     Utils::scaleSprite(tip, 1.1F,1,true);
 	tip->setPosition(Utils::getCorrectPosition(0.5f, 0.13f));
 	//
-	SpriteWithText *rateMEon = SpriteWithText::createWithSpriteFrameNamee("offButton.png", "RATE", ccColor3B{ 1, 1, 1 });
-	SpriteWithText *rateMEoff = SpriteWithText::createWithSpriteFrameNamee("onButton.png", "RATE", ccColor3B{ 1, 1, 1 });
+	SpriteWithText *rateMEon = SpriteWithText::createWithSpriteFrameNamee("offButton.png", "REVIEW", ccColor3B{ 1, 1, 1 });
+	SpriteWithText *rateMEoff = SpriteWithText::createWithSpriteFrameNamee("onButton.png", "REVIEW", ccColor3B{ 1, 1, 1 });
 	CCMenuItemSprite *rateBtn = CCMenuItemSprite::create(rateMEon,rateMEoff,this,menu_selector(GameOver::playGame));
 	Utils::scaleSprite(rateBtn, 2.5f, 1, true);
 	CCSprite *carryOn = CCSprite::createWithSpriteFrameName("goBackOn.png");
@@ -104,13 +104,6 @@ void GameOver::trigger(int scorr,int missedAmount){
 	anim->addChild(currscor,1);
 	anim->addChild(bestScoree,1);
 	}
-	if(g->bombsCollected == 0 && curScore>100){
-			AchievmentPopUp * ach = AchievmentPopUp::createWithSpriteFrameNameee(ACH_AVOIDER.c_str(), usrDefault,true);
-						if(ach){
-						ach->activate();
-						Utils::getBackground()->addChild(ach);
-						}
-		}
 	anim->startAnimIn();
 	anim->setPosition(Utils::getCorrectPosition(0,1));
 	this->addChild(anim);
