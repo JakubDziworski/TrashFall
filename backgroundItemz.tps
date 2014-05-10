@@ -687,6 +687,8 @@
             <filename>C:/Users/Jakub/Desktop/doResourca/chmurka2.png</filename>
             <filename>Resources/trash6.png</filename>
             <filename>Resources/trash5.png</filename>
+            <filename>Resources/soundOff.png</filename>
+            <filename>Resources/soundOn.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>
