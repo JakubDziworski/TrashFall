@@ -80,6 +80,7 @@ void Pause::toggle(cocos2d::CCObject*){
 }
 
 void Pause::goToMainMenu(cocos2d::CCObject*){
+	SimpleAudioEngine::sharedEngine()->playEffect("buttonClick.wav");
 	anim->unscheduleAllSelectors();
 	anim->stopAllActions();
 	anim->startAnimOut();
@@ -92,6 +93,7 @@ void Pause::lateGoToMenu(float dt){
 	CCDirector::sharedDirector()->replaceScene(MainMenu::scene());
 }
 void Pause::restartGame(cocos2d::CCObject*){
+	SimpleAudioEngine::sharedEngine()->playEffect("buttonClick.wav");
 	anim->unscheduleAllSelectors();
 	anim->stopAllActions();
 	anim->startAnimOut();

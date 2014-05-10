@@ -205,5 +205,6 @@ void MainMenu::toggleSound(cocos2d::CCObject* pObject){
 		SimpleAudioEngine::sharedEngine()->setEffectsVolume(0);
 		SimpleAudioEngine::sharedEngine()->setBackgroundMusicVolume(0);
 	}
+	SimpleAudioEngine::sharedEngine()->playEffect("buttonClick.wav");
 }
 
