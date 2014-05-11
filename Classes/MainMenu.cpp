@@ -183,7 +183,7 @@ void MainMenu::prepareSoundButt(){
 	menuAnim[3] = Animated::create();
 	menuAnim[3]->addChild(turnSound, NULL);
 	menuAnim[3]->setPosition(Utils::getCorrectPosition(0, 0.4f));
-	menuAnim[3]->initAnim(0, 0, 0.4f, 0, 0.2f, 0, 0.05f, 0, 0.4f,0.06f);
+	menuAnim[3]->initAnim(0, 0, 0.15f, 0, 0.2f, 0, 0.05f, 0, 0.4f,0.06f);
 	if (usrDef->getBoolForKey(SOUND_ENABLED, true))
 		toggle->setSelectedIndex(0);
 	else{

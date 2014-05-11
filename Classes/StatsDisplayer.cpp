@@ -24,13 +24,15 @@ bool StatsDisplayer::initialize() {
 		float accurancy = usrDefault->getFloatForKey(STAT_ACCURANCY,0);
 		int bestScore = usrDefault->getIntegerForKey(HIGH_SCORE,0);
 	//GUI
-	CCLabelTTF *labelTitle = CCLabelTTF::create("STATS",FONT_MAIN,Utils::getScaledFontSize(115));
+	CCLabelBMFont *labelTitle = CCLabelBMFont::create("STATS","font.fnt",1000,kCCTextAlignmentCenter);
+	Utils::scaleSprite(labelTitle,12,1,false);
 	labelTitle->setColor(ccColor3B{0,0,0});
 	CCSprite *bg = CCSprite::createWithSpriteFrameName("scoreBoardBG.png");
 	CCString *wyniki = CCString::createWithFormat("SESSIONS NUMBER:%d\nBEST SCORE:%d\nTRASHES COLLECTED:%d\nAVERAGE ACCURANCY:%.1f\%%",sessions,bestScore,trCollec,accurancy);
-	CCLabelTTF *wynikiLab = CCLabelTTF::create(wyniki->getCString(),FONT_MAIN,Utils::getScaledFontSize(45));
+	CCLabelBMFont *wynikiLab = CCLabelBMFont::create(wyniki->getCString(),"font.fnt",10000,kCCTextAlignmentCenter);
 	wynikiLab->setColor(ccColor3B{0,0,0});
 	labelTitle->setPositionY(Utils::getcorrectValue(0.2f));
+	Utils::scaleSprite(wynikiLab,7,1,false);
 	this->addChild(labelTitle);
 	this->addChild(wynikiLab);
 	this->setPosition(Utils::getCorrectPosition(0.5f,0.5f));
