@@ -110,12 +110,8 @@ public class TrashFall extends Cocos2dxActivity{
             // ...add to FrameLayout
 	        framelayout.addView(edittext);
             framelayout.addView(mGLView);
-            final TelephonyManager tm =(TelephonyManager)getBaseContext().getSystemService(Context.TELEPHONY_SERVICE);
-            String deviceid = tm.getDeviceId();
-            
             AdRequest adRequest = new AdRequest.Builder()
-            .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
-            .addTestDevice(deviceid)
+            .addTestDevice("51811170E1DCAFF84F4A72E88C453812")
             .build();
         // Start loading the ad in the background.
 	        mGLView.setEGLContextClientVersion(2);
@@ -146,9 +142,17 @@ public class TrashFall extends Cocos2dxActivity{
 			finish();
 		}
 	}
-	
-	
-	
+	@Override
+	 protected void onPause() {
+	     super.onPause();
+	     mGLView.onPause();
+	 }
+
+	 @Override
+	 protected void onResume() {
+	     super.onResume();
+	     mGLView.onResume();
+	 }
 	 private boolean detectOpenGLES20() 
 	 {
 	     ActivityManager am =
@@ -161,4 +165,7 @@ public class TrashFall extends Cocos2dxActivity{
      static {
          System.loadLibrary("game");
      }
+     
 }
+
+

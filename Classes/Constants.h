@@ -42,7 +42,7 @@ const difficulty LVL7 =  {0.84f,42,20};
 const difficulty LVL8 =  {0.78f,50,22};
 const difficulty LVL9 =  {0.75f,65,25};
 const difficulty LVL10 = {0.75f,80,26};
-const difficulty LVL11 = {0.75f,100,27};
+const difficulty LVL11 = {0.73f,100,28};
 const difficulty difficulties[diffNumber]  ={LVL11,LVL10,LVL9,LVL8,LVL7,LVL6,LVL5,LVL4,LVL3,LVL2,LVL1};
 
 #endif

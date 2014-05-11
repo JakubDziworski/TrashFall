@@ -18,8 +18,8 @@
 
 #define animationStop 0.5f
 #define tintoRed CCTintTo::create(animationStop / 2.0f, 254, 15, 15)
-#define tintoNormal CCTintTo::create(animationStop / 2.0f, 254, 254, 254)
-#define scaleToMax CCScaleTo::create(animationStop / 2.0f, 3)
+#define tintoNormal CCTintTo::create(animationStop / 3.0f, 254, 254, 254)
+#define scaleToMax CCScaleTo::create(animationStop / 3.0f, regularScale+0.3f)
 #define scaleToNormal CCScaleTo::create(animationStop / 2.0f, regularScale)
 #define pokazISchowajCzerwone CCSequence::create(CCFadeIn::create(0.2f), CCFadeOut::create(0.8f), CCCallFuncN::create(this, callfuncN_selector(HUD::hideRedEffect)), NULL)
 
@@ -39,8 +39,8 @@ bool HUD::init() {
 	savedData = CCUserDefault::sharedUserDefault();
 	beginGlobalScore = savedData->getIntegerForKey(STAT_COLLECTED);
 	bg = Utils::getBackground();
-	scoreLabel = CCLabelBMFont::create("0", "font.fnt", -1.0F, kCCTextAlignmentLeft);
-	scoreShadow = CCLabelBMFont::create("0", "font.fnt", -1.0F, kCCTextAlignmentLeft);
+	scoreLabel = CCLabelBMFont::create("0", "font.fnt");
+	scoreShadow = CCLabelBMFont::create("0", "font.fnt");
 	scoreShadow->setColor(ccColor3B{0,0,0});
 	scoreLabel->setAnchorPoint(ccp(0,1));
 	scoreShadow->setAnchorPoint(ccp(0,1));

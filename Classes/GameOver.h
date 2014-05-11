@@ -32,6 +32,8 @@ public:
 	void enableTouchAfterWait(float);
 	LAYER_CREATE_FUNC(GameOver);
 	void latePlayGame(float);
+	bool visiblu;
+	bool isVisiblee();
     void rateME(cocos2d::CCObject*);
 };
 

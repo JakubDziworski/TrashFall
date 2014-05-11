@@ -27,7 +27,6 @@ bool Game::init() {
 		return false;
 	}
 	//BACKGROUND
-	isOver = false;
 	notMissed=0;
 	bombsCollected = 0;
 	score = 0;
@@ -85,7 +84,6 @@ void Game::missed(){
 	missedAmount++;
 	if(missedAmount>21){
 		monitorFallen = false;
-		isOver = true;
 		Utils::getBackground()->updateMisses(21);
 		Utils::getGameOver()->trigger(Utils::getHUD()->getScore(),missedAmount);
 		return;

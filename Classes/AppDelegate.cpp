@@ -1,9 +1,11 @@
+#define COCOS2D_DEBUG
 #include "AppDelegate.h"
 #include "MainMenu.h"
 #include "LoadingNode.h"
 #include "SimpleAudioEngine.h"
 #include "Pause.h"
 #include "Game.h"
+#include "GameOver.h"
 #include "Constants.h"
 using namespace CocosDenshion;
 USING_NS_CC;
@@ -21,7 +23,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
 	srand(time(NULL));
 
 #if (CC_TARGET_PLATFORM==CC_PLATFORM_WIN32)
-	CCEGLView::sharedOpenGLView().setDesignResolutionSize(768, 1148);
+	CCEGLView::sharedOpenGLView().setDesignResolutionSize(320, 480);
 #endif
 	
     CCDirector *pDirector = CCDirector::sharedDirector();
@@ -49,24 +51,29 @@ bool AppDelegate::applicationDidFinishLaunching() {
 void AppDelegate::applicationDidEnterBackground() {
     CCDirector::sharedDirector()->stopAnimation();
 	Pause *paus = Utils::getPause();
-    SimpleAudioEngine::sharedEngine()->pauseBackgroundMusic();
-	Game *g = Utils::getGame();
-	if (paus && !(g->getisOver())){
-		if(!paus->isPaused())
-		paus->toggle(NULL);
+	SimpleAudioEngine::sharedEngine()->pauseAllEffects();
+	SimpleAudioEngine::sharedEngine()->pauseBackgroundMusic();
+	GameOver *g = Utils::getGameOver();
+	if (g && paus){
+		if (paus->isPaused() == false){
+			if(g->isVisiblee() == false)
+			paus->toggle(NULL);
+		}
 	}
-    SimpleAudioEngine::sharedEngine()->pauseAllEffects();
 }
 
 // this function will be called when the app is active again
 void AppDelegate::applicationWillEnterForeground() {
     CCDirector::sharedDirector()->startAnimation();
+	SimpleAudioEngine::sharedEngine()->resumeAllEffects();
     Pause *paus = Utils::getPause();
-    	if(paus){
-    		if(paus->isPaused())
-    			SimpleAudioEngine::sharedEngine()->resumeAllEffects();
-    			return;
-    	}
-    	else
-     SimpleAudioEngine::sharedEngine()->resumeBackgroundMusic();
+	GameOver *g = Utils::getGameOver();
+	if (paus && g){
+		if (paus->isPaused()){
+			return;
+		}
+		else if(g->isVisiblee() == false) paus->toggle(NULL);
+		else SimpleAudioEngine::sharedEngine()->resumeBackgroundMusic();
+	}
+	else SimpleAudioEngine::sharedEngine()->resumeBackgroundMusic();
 }

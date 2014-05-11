@@ -56,7 +56,7 @@ void Pause::toggle(cocos2d::CCObject*){
 	paused = !paused;
 	SimpleAudioEngine::sharedEngine()->playEffect("buttonClick.wav");
 	Game *g = Utils::getGame();
-	if(!paused){
+	if(paused==false){
 		hideAd();
 		anim->unscheduleAllSelectors();
 		anim->stopAllActions();

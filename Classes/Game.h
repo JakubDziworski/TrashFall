@@ -27,8 +27,6 @@ public:
 	float missedAmount;
 	int notMissed;
 	int missedInARow;
-	bool isOver;
-	bool getisOver() const { return isOver; }
 	int score;
 	cocos2d::CCArray *trashAnimFramez;
 	cocos2d::CCArray *bombAnimFramez;

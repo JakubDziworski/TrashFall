@@ -24,9 +24,11 @@ bool GameOver::init(){
 	if (!CCLayer::init()) {
 			return false;
 		}
+		visiblu=false;
 		return true;
 }
 void GameOver::trigger(int scorr,int missedAmount){
+	visiblu = true;
 	CCUserDefault *usrDefault = CCUserDefault::sharedUserDefault();
 	curScore = scorr;
 	const float accurancy = (float)scorr/(float)(scorr+missedAmount)*100;
@@ -143,6 +145,11 @@ void GameOver::keyBackClicked() {
 	Utils::getBackground()->wywalChmuriIslonce();
 	this->scheduleOnce(schedule_selector(GameOver::lateMainMenu), timeToHideBgItemz);
 }
-void GameOver::rateME(cocos2d::CCObject*){
+
+bool GameOver::isVisiblee() {
+	return visiblu;
+}
+
+void GameOver::rateME(cocos2d::CCObject*) {
 	openURLJNI("http://www.google.pl");
 }
