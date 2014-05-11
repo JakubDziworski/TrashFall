@@ -36,7 +36,6 @@ bool LoadingNode::init() {
 
 void LoadingNode::replace(float dt) {
 	SimpleAudioEngine::sharedEngine()->stopBackgroundMusic();
-	SimpleAudioEngine::sharedEngine()->preloadEffect("bomb1.mp3");
 	SimpleAudioEngine::sharedEngine()->preloadEffect("bomb2.mp3");
 	SimpleAudioEngine::sharedEngine()->preloadEffect("buttonClick.wav");
 	SimpleAudioEngine::sharedEngine()->preloadEffect("buttonClick2.mp3");

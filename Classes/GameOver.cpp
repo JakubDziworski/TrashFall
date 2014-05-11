@@ -56,7 +56,7 @@ void GameOver::trigger(int scorr,int missedAmount){
 	GAMEOVER->setColor(ccColor3B { 255, 15, 15 });
 	GAMEOVER->setPosition(Utils::getCorrectPosition(0.5,0.68));
 	//
-	scoreBoardBg = CCSprite::create("scoreBoardBG.png");
+	scoreBoardBg = CCSprite::createWithSpriteFrameName("scoreBoardBG.png");
 	Utils::scaleSprite(scoreBoardBg,1.1,1,true);
 	scoreBoardBg->setPosition(Utils::getCorrectPosition(0.5, 0.5));
 	//
