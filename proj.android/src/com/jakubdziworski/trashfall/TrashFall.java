@@ -131,7 +131,6 @@ public class TrashFall extends Cocos2dxActivity{
                     Gravity.BOTTOM |Gravity.CENTER_HORIZONTAL);
             addContentView(adView, adParams);
             adView.setBackgroundColor(0);
-           
             }
             catch(Exception e){
             	Log.d("","ADMOB error: " + e);

@@ -197,7 +197,7 @@ void MainMenu::prepareSoundButt(){
 	this->addChild(menuAnim[3],3);
 }
 void MainMenu::toggleSound(cocos2d::CCObject* pObject){
-	bool curr = usrDef->getBoolForKey(SOUND_ENABLED);
+	bool curr = usrDef->getBoolForKey(SOUND_ENABLED,true);
 	curr = !curr;
 	usrDef->setBoolForKey(SOUND_ENABLED, curr);
 	if (curr){
