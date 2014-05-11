@@ -20,7 +20,6 @@
 #define tintoRed CCTintTo::create(animationStop / 2.0f, 254, 15, 15)
 #define tintoNormal CCTintTo::create(animationStop / 2.0f, 254, 254, 254)
 #define scaleToMax CCScaleTo::create(animationStop / 2.0f, 3)
-#define scaleToMegaMax CCScaleTo::create(animationStop / 2.0f, 5)
 #define scaleToNormal CCScaleTo::create(animationStop / 2.0f, regularScale)
 #define pokazISchowajCzerwone CCSequence::create(CCFadeIn::create(0.2f), CCFadeOut::create(0.8f), CCCallFuncN::create(this, callfuncN_selector(HUD::hideRedEffect)), NULL)
 
@@ -91,15 +90,8 @@ void HUD::addToScore(int value, int nomisses){
 	scoreShadow->setString(scoreLabel->getString());
 	if (score % 10 == 0){
 		scoreLabel->runAction(CCSequence::create(tintoRed, tintoNormal, NULL));
-
-		if (score % 20 == 0){
-			scoreLabel->runAction(CCSequence::create(scaleToMegaMax, scaleToNormal, NULL));
-			scoreShadow->runAction(CCSequence::create(scaleToMegaMax, scaleToNormal, NULL));
-		}
-		else{
 			scoreLabel->runAction(CCSequence::create(scaleToMax, scaleToNormal, NULL));
 			scoreShadow->runAction(CCSequence::create(scaleToMax, scaleToNormal, NULL));
-		}
 	}
 }
 
