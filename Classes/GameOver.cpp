@@ -52,7 +52,8 @@ void GameOver::trigger(int scorr,int missedAmount){
 				g->setKeypadEnabled(false);
 				this->setKeypadEnabled(true);
 	//
-	CCLabelTTF *GAMEOVER = CCLabelTTF::create("GAME OVER", FONT_MAIN,Utils::getScaledFontSize(125));
+	CCLabelBMFont *GAMEOVER = CCLabelBMFont::create("GAME OVER","font.fnt");
+	Utils::scaleSprite(GAMEOVER,10,1,false);
 	GAMEOVER->setColor(ccColor3B { 255, 15, 15 });
 	GAMEOVER->setPosition(Utils::getCorrectPosition(0.5,0.68));
 	//
@@ -79,17 +80,19 @@ void GameOver::trigger(int scorr,int missedAmount){
 					menu->setTouchEnabled(false);
 					menu->alignItemsVertically();
 	CCString *accStr = CCString::createWithFormat("ACCURANCY:%.1f\%%",accurancy);
-	CCLabelTTF *accurancyLab= CCLabelTTF::create(accStr->getCString(),FONT_MAIN,Utils::getScaledFontSize(75));
+	CCLabelBMFont *accurancyLab= CCLabelBMFont::create(accStr->getCString(),"font.fnt");
 	anim->addChild(scoreBoardBg,-1);
 	anim->addChild(GAMEOVER,1);
 	anim->addChild(menu,1);
 	anim->addChild(tip, 1);
+	Utils::scaleSprite(accurancyLab,15,1,false);
 	accurancyLab->setPosition(Utils::getCorrectPosition(0.5,0.52));
 	anim->addChild(accurancyLab,1);
 	if(scorr > bestScore){
 		CCString *tmpNewRecotd = CCString::createWithFormat("NEW RECORD:%d",curScore);
-		CCLabelTTF *newRecord= CCLabelTTF::create(tmpNewRecotd->getCString(),FONT_MAIN,Utils::getScaledFontSize(75));
-		newRecord->setColor(ccColor3B{255,15,15});
+		CCLabelBMFont *newRecord= CCLabelBMFont::create(tmpNewRecotd->getCString(),"font.fnt");
+		Utils::scaleSprite(newRecord,15,1,false);
+		newRecord->setColor(ccColor3B{255,20,15});
 		newRecord->setPosition(Utils::getCorrectPosition(0.5,0.57));
 		anim->addChild(newRecord);
 		usrDefault->setIntegerForKey(HIGH_SCORE,scorr);
@@ -97,8 +100,10 @@ void GameOver::trigger(int scorr,int missedAmount){
 	else{
 	CCString *tmpCurrScoreStr = CCString::createWithFormat("SCORE:%d",curScore);
 	CCString *tmpbestScoreStr = CCString::createWithFormat("BEST:%d",bestScore);
-	CCLabelTTF *currscor= CCLabelTTF::create(tmpCurrScoreStr->getCString(),FONT_MAIN,Utils::getScaledFontSize(75));
-	CCLabelTTF *bestScoree = CCLabelTTF::create(tmpbestScoreStr->getCString(),FONT_MAIN,Utils::getScaledFontSize(75));
+	CCLabelBMFont *currscor= CCLabelBMFont::create(tmpCurrScoreStr->getCString(),"font.fnt");
+	CCLabelBMFont *bestScoree = CCLabelBMFont::create(tmpbestScoreStr->getCString(),"font.fnt");
+	Utils::scaleSprite(currscor,15,1,false);
+	Utils::scaleSprite(bestScoree,15,1,false);
 	currscor->setPosition(Utils::getCorrectPosition(0.5,0.62));
 	bestScoree->setPosition(Utils::getCorrectPosition(0.5,0.57));
 	anim->addChild(currscor,1);
