@@ -39,10 +39,12 @@ import org.cocos2dx.lib.Cocos2dxRenderer;
 import android.app.ActivityManager;
 import android.content.Context;
 import android.content.pm.ConfigurationInfo;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.telephony.TelephonyManager;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
@@ -77,12 +79,15 @@ public class TrashFall extends Cocos2dxActivity{
             edittext.setLayoutParams(edittext_layout_params);
 
             // ...add to FrameLayout
-            framelayout.addView(edittext);
-
+            adView.setLayoutParams(new FrameLayout.LayoutParams(
+                    FrameLayout.LayoutParams.WRAP_CONTENT, 
+                    FrameLayout.LayoutParams.WRAP_CONTENT, 
+                    Gravity.BOTTOM |Gravity.CENTER_HORIZONTAL));
             // Cocos2dxGLSurfaceView
 	        mGLView = new Cocos2dxGLSurfaceView(this);
 
             // ...add to FrameLayout
+	        framelayout.addView(edittext);
             framelayout.addView(mGLView);
             framelayout.addView(adView);
             final TelephonyManager tm =(TelephonyManager)getBaseContext().getSystemService(Context.TELEPHONY_SERVICE);
@@ -92,19 +97,21 @@ public class TrashFall extends Cocos2dxActivity{
             .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
             .addTestDevice(deviceid)
             .build();
-
         // Start loading the ad in the background.
-        adView.loadAd(adRequest);
 	        mGLView.setEGLContextClientVersion(2);
 	        mGLView.setCocos2dxRenderer(new Cocos2dxRenderer());
             mGLView.setTextField(edittext);
             // Set framelayout as the content view
 			setContentView(framelayout);
+			adView.loadAd(adRequest);
+			
 		}
 		else {
 			Log.d("activity", "don't support gles2.0");
 			finish();
-		}	
+		}
+		adView.setVisibility(AdView.VISIBLE);
+		//adView.setBackgroundColor(Color.BLACK);
 	}
 	
 	 @Override
