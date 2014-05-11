@@ -24,7 +24,7 @@ SpriteWithText* SpriteWithText::createWithSpriteFrameNamee(const char *pszSprite
 		return nowy;
 }
 void SpriteWithText::setText(const char *inputText,ccColor3B color){
-	label = CCLabelBMFont::create(inputText,"font.fnt",-1,kCCTextAlignmentCenter,ccp(0,0));
+	label = CCLabelBMFont::create(inputText,"font.fnt");
 	fontsize = ((CCSprite*) label->getChildByTag(0))->getContentSize().height;
 	label->setPosition(this->getContentSize().width / 2, this->getContentSize().height / 2 - fontsize*0.08f);
 	label->setScale(0.65f*this->getContentSize().height*this->getScale() / fontsize);

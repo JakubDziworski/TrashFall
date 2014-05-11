@@ -155,19 +155,19 @@ std::string Utils::losujTIP(){
 	switch (los)
 	{
 	case 0:
-		return toReturn + "SWIPE INSTEAD OF TAPPING! THIS WILL INCREASE YOUR CHANCE TO GRAB TRASHES!";
+		return toReturn + "SWIPE INSTEAD OF TAPPING!\nTHIS WILL INCREASE YOUR\nCHANCE TO GRAB TRASHES!";
 		break;
 	case 1:
-		return toReturn + "KEEP YOUR HAND LOW! YOU WILL HAVE MORE TIME TO CATCH TRASHES!";
+		return toReturn + "KEEP YOUR HAND LOW!\nYOU WILL HAVE MORE TIME\n TO CATCH TRASHES!";
 		break;
 	case 2:
-		return toReturn + "CHECK OUT 'REWARDS' IN MAIN MENU! COLLECT THEM ALL!";
+		return toReturn + "CHECK OUT 'REWARDS' IN\nMAIN MENU! COLLECT THEM ALL!";
 		break;
 	case 3:
-		return toReturn + "CHECK OUT STATISTICS IN MAIN MENU!";
+		return toReturn + "CHECK OUT STATISTICS\nIN MAIN MENU!";
 		break;
 	default:
-		return "CHECK OUT STATISTICS IN MAIN MENU!";
+		return "CHECK OUT STATISTICS\nIN MAIN MENU!";
 		break;
 	}
 }

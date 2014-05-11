@@ -28,11 +28,11 @@ bool StatsDisplayer::initialize() {
 	Utils::scaleSprite(labelTitle,12,1,false);
 	labelTitle->setColor(ccColor3B{0,0,0});
 	CCSprite *bg = CCSprite::createWithSpriteFrameName("scoreBoardBG.png");
-	CCString *wyniki = CCString::createWithFormat("SESSIONS NUMBER:%d\nBEST SCORE:%d\nTRASHES COLLECTED:%d\nAVERAGE ACCURANCY:%.1f\%%",sessions,bestScore,trCollec,accurancy);
+	CCString *wyniki = CCString::createWithFormat("SESSIONS NUMBER:%d\nBEST SCORE:%d\nTRASHES COLLECTED:%d\nAVERAGE ACCURACY:%.1f\%%",sessions,bestScore,trCollec,accurancy);
 	CCLabelBMFont *wynikiLab = CCLabelBMFont::create(wyniki->getCString(),"font.fnt",10000,kCCTextAlignmentCenter);
 	wynikiLab->setColor(ccColor3B{0,0,0});
 	labelTitle->setPositionY(Utils::getcorrectValue(0.2f));
-	Utils::scaleSprite(wynikiLab,7,1,false);
+	Utils::scaleSprite(wynikiLab,6,1,false);
 	this->addChild(labelTitle);
 	this->addChild(wynikiLab);
 	this->setPosition(Utils::getCorrectPosition(0.5f,0.5f));

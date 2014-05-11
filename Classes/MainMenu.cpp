@@ -14,6 +14,7 @@
 #include "AchievmentPopUp.h"
 #include "AchvDisplayer.h"
 #include "StatsDisplayer.h"
+#include "Utils.h"
 #define odstepMiedzyPrzyciskami 0.15f
 
 using namespace cocos2d;
@@ -175,11 +176,13 @@ void MainMenu::prepareSoundButt(){
 
 	CCMenuItemSprite *musicOn = CCMenuItemSprite::create(onsoundSpr, offsoundSpr);
 	CCMenuItemSprite *musicOff = CCMenuItemSprite::create(offsoundSpr2, onsoundSpr2);
-	Utils::scaleButton(musicOn, 8);
-	Utils::scaleButton(musicOff, 8);
 	CCMenuItemToggle *toggle = CCMenuItemToggle::create(this, menu_selector(MainMenu::toggleSound), musicOn, musicOff, NULL);
 	CCMenu *turnSound = CCMenu::create(toggle, NULL);
-	turnSound->setPosition(Utils::getCorrectPosition(0.9f, 0.95f));
+	turnSound->setAnchorPoint(ccp(0,0));
+	turnSound->setScale(0.1f*Utils::sreensSize().height/offsoundSpr->getContentSize().height);
+	const float marginn = Utils::getcorrectValue(0.1f,true);
+	turnSound->setPositionY(Utils::getcorrectValue(1,false)-marginn);
+	turnSound->setPositionX(Utils::getcorrectValue(1,true)-marginn);
 	menuAnim[3] = Animated::create();
 	menuAnim[3]->addChild(turnSound, NULL);
 	menuAnim[3]->setPosition(Utils::getCorrectPosition(0, 0.4f));

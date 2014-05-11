@@ -66,7 +66,7 @@ void GameOver::trigger(int scorr,int missedAmount){
 	//
 	SpriteWithText *tip = SpriteWithText::createWithSpriteFrameNamee("onButton.png", Utils::losujTIP().c_str(), ccColor3B{ 1, 1, 1 });
 	tip->setTextSize(0.25f);
-	tip->setTextMaxInLine(0.93f*this->getContentSize().width);
+	tip->label->setAlignment(kCCTextAlignmentCenter);
     Utils::scaleSprite(tip, 1.1F,1,true);
 	tip->setPosition(Utils::getCorrectPosition(0.5f, 0.13f));
 	//

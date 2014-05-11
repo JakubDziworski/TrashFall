@@ -41,7 +41,7 @@ bool Pause::init(){
 	CCMenu *menuMainMenu = CCMenu::create(mainMenuBtn,NULL);
 	pause->setPosition(Utils::getCorrectPosition(0.5,0.8));
 	menuContinue->setPosition(Utils::getCorrectPosition(0.5,0.5));
-	menuMainMenu->setPosition(Utils::getCorrectPosition(0.5,0.3));
+	menuMainMenu->setPosition(Utils::getCorrectPosition(0.5,0.26));
 	paused = false;
 	anim = Animated::create();
 	anim->addChild(menuMainMenu);
