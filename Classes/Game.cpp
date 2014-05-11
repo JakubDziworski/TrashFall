@@ -18,6 +18,7 @@
 #include "AchvList.h"
 #include "StatsRecords.h"
 #include "Bomb.h"
+#include "JniAdManager.h"
 using namespace CocosDenshion;
 
 using namespace cocos2d;
@@ -43,6 +44,7 @@ bool Game::init() {
 	this->setTouchEnabled(true);
 	this->setKeypadEnabled(true);
 	this->schedule(schedule_selector(Game::genFallingTrashes));
+	hideAd();
 	return true;
 }
 CCScene* Game::scene() {

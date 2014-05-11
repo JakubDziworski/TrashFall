@@ -24,10 +24,13 @@ LOCAL_SRC_FILES := helloworld/main.cpp \
 				  ../../Classes/StatsDisplayer.cpp \
 				 ../../Classes/Animated.cpp \
 				 ../../Classes/LoadingNode.cpp \
-				 ../../Classes/Bomb.cpp
+				 ../../Classes/Bomb.cpp \
+				 ../../../cocos2dx/platform/android/jni/JniURL.cpp \
+				 ../../../cocos2dx/platform/android/jni/JniAdManager.cpp
 
                    
-LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../Classes                   
+LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../Classes \
+					$(LOCAL_PATH)/../../../cocos2dx/platform/android/jni
 
 LOCAL_WHOLE_STATIC_LIBRARIES := cocos2dx_static cocosdenshion_static
 

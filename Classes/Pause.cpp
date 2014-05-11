@@ -14,6 +14,7 @@
 #include "AchvList.h"
 #include "Constants.h"
 #include "LoadingNode.h"
+#include "JniAdManager.h"
 using namespace CocosDenshion;
 using namespace cocos2d;
 
@@ -56,6 +57,7 @@ void Pause::toggle(cocos2d::CCObject*){
 	SimpleAudioEngine::sharedEngine()->playEffect("buttonClick.wav");
 	Game *g = Utils::getGame();
 	if(!paused){
+		hideAd();
 		anim->unscheduleAllSelectors();
 		anim->stopAllActions();
 		anim->startAnimOut();
@@ -64,6 +66,7 @@ void Pause::toggle(cocos2d::CCObject*){
 		SimpleAudioEngine::sharedEngine()->resumeBackgroundMusic();
 	}
 	else{
+		showAd();
 		anim->unscheduleAllSelectors();
 		anim->stopAllActions();
 		anim->startAnimIn();

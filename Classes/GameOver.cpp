@@ -15,7 +15,8 @@
 #include "AchvList.h"
 #include "SimpleAudioEngine.h"
 #include "LoadingNode.h"
-
+#include "JniURL.h"
+#include "JniAdManager.h"
 
 using namespace CocosDenshion;
 using namespace cocos2d;
@@ -44,7 +45,7 @@ void GameOver::trigger(int scorr,int missedAmount){
 			}
 	}
 	anim = Animated::create();
-	anim->initAnim(0,0,1,0,0.2f,0,0.2f);
+	anim->initAnim(0,0,1,0.05f,0.2f,0,0.2f);
 	//
 	Game *g = Utils::getGame();
 				g->pauseSchedulerAndActions();
@@ -69,7 +70,7 @@ void GameOver::trigger(int scorr,int missedAmount){
 	//
 	SpriteWithText *rateMEon = SpriteWithText::createWithSpriteFrameNamee("offButton.png", "REVIEW", ccColor3B{ 1, 1, 1 });
 	SpriteWithText *rateMEoff = SpriteWithText::createWithSpriteFrameNamee("onButton.png", "REVIEW", ccColor3B{ 1, 1, 1 });
-	CCMenuItemSprite *rateBtn = CCMenuItemSprite::create(rateMEon,rateMEoff,this,menu_selector(GameOver::playGame));
+	CCMenuItemSprite *rateBtn = CCMenuItemSprite::create(rateMEon,rateMEoff,this,menu_selector(GameOver::rateME));
 	Utils::scaleSprite(rateBtn, 2.5f, 1, true);
 	CCSprite *carryOn = CCSprite::createWithSpriteFrameName("goBackOn.png");
 					CCSprite *carryOff = CCSprite::createWithSpriteFrameName("goBackOff.png");
@@ -113,6 +114,7 @@ void GameOver::trigger(int scorr,int missedAmount){
 	anim->setPosition(Utils::getCorrectPosition(0,1));
 	this->addChild(anim);
 	this->schedule(schedule_selector(GameOver::enableTouchAfterWait),0.1f,0,1.4f);
+	showAd();
 }
 
 void GameOver::lateMainMenu(float float1) {
@@ -140,4 +142,7 @@ void GameOver::keyBackClicked() {
 	SimpleAudioEngine::sharedEngine()->playEffect("buttonClick.wav");
 	Utils::getBackground()->wywalChmuriIslonce();
 	this->scheduleOnce(schedule_selector(GameOver::lateMainMenu), timeToHideBgItemz);
+}
+void GameOver::rateME(cocos2d::CCObject*){
+	openURLJNI("http://www.google.pl");
 }

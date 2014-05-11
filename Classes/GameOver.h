@@ -32,6 +32,7 @@ public:
 	void enableTouchAfterWait(float);
 	LAYER_CREATE_FUNC(GameOver);
 	void latePlayGame(float);
+    void rateME(cocos2d::CCObject*);
 };
 
 #endif /* GAMEOVER_H_ */

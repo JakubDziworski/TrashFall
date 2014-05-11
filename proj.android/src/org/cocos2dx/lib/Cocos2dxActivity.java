@@ -28,9 +28,11 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -47,11 +49,23 @@ public class Cocos2dxActivity extends Activity{
     private static String packageName;
 
     private static native void nativeSetPaths(String apkPath);
-
+    
+    //MOJE
+    private static Activity me = null;
+    public static void openURL(String url){
+    	Intent i = new Intent(Intent.ACTION_VIEW);
+    	i.setData(Uri.parse(url));
+    	me.startActivity(i);
+    }
+    
+  //MOJE
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         
+        //moje
+        me = this;
+        //moje
         // get frame size
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);

@@ -28,6 +28,7 @@ import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
 
 import android.app.Activity;
+import android.net.Uri;
 import android.os.Bundle;
 import android.widget.LinearLayout;
 
@@ -38,6 +39,7 @@ import org.cocos2dx.lib.Cocos2dxRenderer;
 
 import android.app.ActivityManager;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.ConfigurationInfo;
 import android.graphics.Color;
 import android.os.Build;
@@ -47,18 +49,42 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.app.Activity;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.Gravity;
+import android.view.View;
+import android.view.ViewGroup.LayoutParams;
+
 
 public class TrashFall extends Cocos2dxActivity{
 	private Cocos2dxGLSurfaceView mGLView;
-	private AdView adView;
+	 //MOJE
+    static Activity me = null;
+    static AdView adView;
 	private static final String AD_UNIT_ID = "ca-app-pub-5237730302123518/6004792589";
+
+    static void showAdmobJNI(){
+		me.runOnUiThread(new Runnable() {
+			@Override
+			public void run() {
+				adView.setVisibility(View.VISIBLE);
+			}
+		});
+	}
+    static void hideAdmobJNI(){
+		me.runOnUiThread(new Runnable() {
+			@Override
+			public void run() {
+				adView.setVisibility(View.INVISIBLE);
+			}
+		});
+    }
+  //MOJE
+	
 	protected void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
-		
-		adView = new AdView(this);
-	    adView.setAdSize(AdSize.BANNER);
-	    adView.setAdUnitId(AD_UNIT_ID);
-	    
+		me = this;
 		if (detectOpenGLES20()) {
 			// get the packageName,it's used to set the resource path
 			String packageName = getApplication().getPackageName();
@@ -78,18 +104,12 @@ public class TrashFall extends Cocos2dxActivity{
             Cocos2dxEditText edittext = new Cocos2dxEditText(this);
             edittext.setLayoutParams(edittext_layout_params);
 
-            // ...add to FrameLayout
-            adView.setLayoutParams(new FrameLayout.LayoutParams(
-                    FrameLayout.LayoutParams.WRAP_CONTENT, 
-                    FrameLayout.LayoutParams.WRAP_CONTENT, 
-                    Gravity.BOTTOM |Gravity.CENTER_HORIZONTAL));
             // Cocos2dxGLSurfaceView
 	        mGLView = new Cocos2dxGLSurfaceView(this);
 
             // ...add to FrameLayout
 	        framelayout.addView(edittext);
             framelayout.addView(mGLView);
-            framelayout.addView(adView);
             final TelephonyManager tm =(TelephonyManager)getBaseContext().getSystemService(Context.TELEPHONY_SERVICE);
             String deviceid = tm.getDeviceId();
             
@@ -102,36 +122,33 @@ public class TrashFall extends Cocos2dxActivity{
 	        mGLView.setCocos2dxRenderer(new Cocos2dxRenderer());
             mGLView.setTextField(edittext);
             // Set framelayout as the content view
+            try{
+            adView = new AdView(this);
+    	    adView.setAdSize(AdSize.BANNER);
+    	    adView.setAdUnitId(AD_UNIT_ID);
 			setContentView(framelayout);
 			adView.loadAd(adRequest);
+			adView.setBackgroundColor(Color.BLACK);
+            adView.setLayoutParams(new FrameLayout.LayoutParams(
+                    FrameLayout.LayoutParams.WRAP_CONTENT, 
+                    FrameLayout.LayoutParams.WRAP_CONTENT, 
+                    Gravity.BOTTOM |Gravity.CENTER_HORIZONTAL));
+            adView.setBackgroundColor(0);
+            framelayout.addView(adView);
+            }
+            catch(Exception e){
+            	Log.d("","ADMOB error: " + e);
+            }
 			
 		}
 		else {
 			Log.d("activity", "don't support gles2.0");
 			finish();
 		}
-		adView.setVisibility(AdView.VISIBLE);
-		//adView.setBackgroundColor(Color.BLACK);
 	}
 	
-	 @Override
-	 protected void onPause() {
-	     super.onPause();
-	     if (adView != null) {
-	         adView.pause();
-	       }
-	     mGLView.onPause();
-	 }
-
-	 @Override
-	 protected void onResume() {
-	     super.onResume();
-	     mGLView.onResume();
-	     if (adView != null) {
-	         adView.resume();
-	       }
-	 }
-	 
+	
+	
 	 private boolean detectOpenGLES20() 
 	 {
 	     ActivityManager am =
