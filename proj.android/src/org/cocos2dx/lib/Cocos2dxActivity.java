@@ -62,9 +62,9 @@ public class Cocos2dxActivity extends Activity{
     private static Activity me = null;
     public static void openURL(String url){
     	Intent i = new Intent(Intent.ACTION_VIEW);
-    	i.setData(Uri.parse("market://details?id=com.jakubdziworski.trashfall"));
+    	i.setData(Uri.parse("market://details?id=com.jakubdziworski.trashfalll"));
     	if(checkActv(i)==false){
-    		i.setData(Uri.parse("https://play.google.com/store/apps/details?id=com.jakubdziworski.trashfall"));
+    		i.setData(Uri.parse("https://play.google.com/store/apps/details?id=com.jakubdziworski.trashfalll"));
     		if(checkActv(i) == false){
     		}
     	}
