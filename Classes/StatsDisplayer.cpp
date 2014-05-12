@@ -4,7 +4,7 @@
  *  Created on: 30-04-2014
  *      Author: Jakub
  */
-#define COCOS2D_DEBUG 2
+ 
 #define mystaticYpos 0.5f
 #define beginPosX 1.5f
 #include "StatsDisplayer.h"
@@ -44,7 +44,6 @@ bool StatsDisplayer::initialize() {
 }
 
 StatsDisplayer* StatsDisplayer::createe() {
-		CCLOG("Po zainacializowaniu");
 		StatsDisplayer *sts = new StatsDisplayer();
 		sts->initialize();
 		sts->autorelease();

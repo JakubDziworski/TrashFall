@@ -4,7 +4,7 @@
  *  Created on: 22-04-2014
  *      Author: Jakub
  */
-#define COCOS2D_DEBUG 2
+ 
 #include "MainMenu.h"
 #include "SimpleAudioEngine.h"
 #include "Trash.h"
@@ -149,7 +149,6 @@ void MainMenu::ShowAchievments(cocos2d::CCObject* pObject){
 void MainMenu::disableTouch(){
 	SimpleAudioEngine::sharedEngine()->playEffect("buttonClick.wav");
 	 this->schedule(schedule_selector(MainMenu::menuAnimSchedulerOUT),odstepMiedzyPrzyciskami,3,0);
-	CCLOG("TOUCH DISABLED");
 	this->setTouchEnabled(false);
 	this->setKeypadEnabled(false);
 	for(int j=0;j<3;j++){
@@ -160,7 +159,6 @@ void MainMenu::disableTouch(){
 void MainMenu::enableTouch(){
 	SimpleAudioEngine::sharedEngine()->playEffect("buttonClick.wav");
 	this->schedule(schedule_selector(MainMenu::menuAnimSchedulerIN),odstepMiedzyPrzyciskami,3,0);
-	CCLOG("TOUCH ENABLED");
 	this->setTouchEnabled(true);
 	this->setKeypadEnabled(true);
 	for(int j=0;j<3;j++){

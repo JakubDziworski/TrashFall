@@ -6,7 +6,7 @@
  */
 
 
-#define COCOS2D_DEBUG 2
+ 
 
 #include "HUD.h"
 #include "Constants.h"

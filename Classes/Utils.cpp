@@ -4,7 +4,7 @@
  *  Created on: 22-04-2014
  *      Author: Jakub
  */
-#define COCOS2D_DEBUG 2
+ 
 #include "Utils.h"
 #include "Trash.h"
 #include "AchvDisplayer.h"

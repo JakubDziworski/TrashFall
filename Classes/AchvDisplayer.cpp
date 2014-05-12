@@ -4,7 +4,7 @@
  *  Created on: 28-04-2014
  *      Author: Jakub
  */
-#define COCOS2D_DEBUG 2
+ 
 #include "AchvDisplayer.h"
 #include "AchievmentPopUp.h"
 #include "Utils.h"

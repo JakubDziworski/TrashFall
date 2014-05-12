@@ -4,7 +4,7 @@
  *  Created on: 30-04-2014
  *      Author: Jakub
  */
-#define COCOS2D_DEBUG 2
+ 
 #include "Animated.h"
 #include "Utils.h"
 #include "AchievmentPopUp.h"

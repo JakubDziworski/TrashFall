@@ -4,7 +4,7 @@
  *  Created on: 23-04-2014
  *      Author: Jakub
  */
-#define COCOS2D_DEBUG 2
+ 
 #include "Trash.h"
 #include "Constants.h"
 #include "Utils.h"

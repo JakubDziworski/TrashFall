@@ -4,7 +4,7 @@
  *  Created on: 25-04-2014
  *      Author: Jakub
  */
-#define COCOS2D_DEBUG 2
+ 
 #include "SpriteWithText.h"
 #include "Utils.h"
 #include "Constants.h"

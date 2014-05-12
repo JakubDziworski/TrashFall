@@ -4,7 +4,7 @@
  *  Created on: 26-04-2014
  *      Author: Jakub
  */
-#define COCOS2D_DEBUG 2
+ 
 #define beginPosX 1.4f
 #define posY 0.92f
 #include "AchievmentPopUp.h"
@@ -45,6 +45,7 @@ void AchievmentPopUp::activate(){
 	savedData->setBoolForKey(Utils::getAchvTag(achvName->getCString()).c_str(),true);
 	CCString *toDisplay = CCString::createWithFormat("ACHIEVMENT UNLOCKED!\n%s",Utils::getAchvName(achvName->getCString()).c_str());
 	baseBg->setTextSize(0.25f);
+	baseBg->label->setAlignment(kCCTextAlignmentCenter);
 	baseBg->setTextString(toDisplay->getCString());
 	this->setPosition(Utils::getCorrectPosition(beginPosX,posY));
 	this->initAnim(beginPosX,0.6f,Utils::ratioValue(this->getPositionY(),true),Utils::ratioValue(this->getPositionY(),true),0.24,0.3f,0,3);
@@ -63,6 +64,7 @@ void AchievmentPopUp::activateForListing(){
 	}
 	baseBg->setTextString(toDisplay->getCString());
 	baseBg->setTextSize(0.25f);
+	baseBg->label->setAlignment(kCCTextAlignmentCenter);
 	this->initAnim(beginPosX,0.5f,Utils::ratioValue(this->getPositionY(),true),Utils::ratioValue(this->getPositionY(),true),0.24,0.2f);
 }
 

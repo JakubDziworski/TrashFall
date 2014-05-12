@@ -4,7 +4,7 @@
  *  Created on: 24-04-2014
  *      Author: Jakub
  */
-#define COCOS2D_DEBUG 2
+ 
 #include "Background.h"
 #include "Utils.h"
 #include "Constants.h"
@@ -51,7 +51,6 @@ bool Background::init(){
 
 	CCSprite *bg = CCSprite::createWithSpriteFrameName("Background.png");
 	Utils::prepareBackgroundImg(bg);
-	CCLOG("ENDBG INIT");
 	Utils::scaleSprite(chmurka[0],3.76f,1,true);
 	Utils::scaleSprite(chmurka[1],4.9f,1,true);
 	Utils::scaleSprite(chmurka[2],2.35f,1,true);
@@ -91,7 +90,6 @@ void Background::moveChmurkiRandom(float dt){
 }
 
 void Background::updateMisses(int missesAmount){
-	CCLOG("sunFace_%05d.png",missesAmount);
 	CCFadeIn *fadeIn = CCFadeIn::create(0.2f);
 	CCFadeOut *fadeOut = CCFadeOut::create(1.0f);
 	sunHurt->runAction(CCSequence::create(fadeIn, fadeOut, NULL));

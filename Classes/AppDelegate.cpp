@@ -1,4 +1,3 @@
-#define COCOS2D_DEBUG
 #include "AppDelegate.h"
 #include "MainMenu.h"
 #include "LoadingNode.h"

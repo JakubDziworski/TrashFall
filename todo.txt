@@ -1,8 +1,7 @@
-
-reklamy
-poczetek + ikonka
-1024x1024
-
+1.0.1:
+-wysrodkowane achievmenty
+-api
+-
 POMYS£Y:
 COS ALA draw race
 dentysta hirurg etc

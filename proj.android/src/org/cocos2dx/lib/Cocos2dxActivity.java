@@ -49,16 +49,26 @@ public class Cocos2dxActivity extends Activity{
     private static String packageName;
 
     private static native void nativeSetPaths(String apkPath);
-    
     //MOJE
+    private static boolean checkActv(Intent aint){
+    	try{
+    		me.startActivity(aint);
+    		return true;
+    	}
+    	catch(Exception e){
+    		 return false;
+    	}
+    }
     private static Activity me = null;
     public static void openURL(String url){
     	Intent i = new Intent(Intent.ACTION_VIEW);
-    	i.setData(Uri.parse(url));
-    	me.startActivity(i);
+    	i.setData(Uri.parse("market://details?id=com.jakubdziworski.trashfall"));
+    	if(checkActv(i)==false){
+    		i.setData(Uri.parse("https://play.google.com/store/apps/details?id=com.jakubdziworski.trashfall"));
+    		if(checkActv(i) == false){
+    		}
+    	}
     }
-    
-  //MOJE
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

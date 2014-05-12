@@ -4,7 +4,7 @@
  *  Created on: 06-05-2014
  *      Author: Jakub
  */
-#define COCOS2D_DEBUG 2
+ 
 #include "Bomb.h"
 #include "Utils.h"
 #include "SimpleAudioEngine.h"
