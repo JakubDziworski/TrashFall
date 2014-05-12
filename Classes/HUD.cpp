@@ -119,18 +119,18 @@ void HUD::checkAchivmets(int nomisses) {
 		switch(nomisses){
 		case 10:	inArowScore = AchievmentPopUp::createWithSpriteFrameNameee(ACH_10_SINGLE.c_str(),savedData,true);break;
 		case 20:    inArowScore = AchievmentPopUp::createWithSpriteFrameNameee(ACH_20_SINGLE.c_str(),savedData,true);break;
-		case 50:	inArowScore = AchievmentPopUp::createWithSpriteFrameNameee(ACH_35_SINGLE.c_str(),savedData,true);break;
-		case 100:	inArowScore = AchievmentPopUp::createWithSpriteFrameNameee(ACH_50_SINGLE.c_str(),savedData,true);break;
-		case 150:	inArowScore= AchievmentPopUp::createWithSpriteFrameNameee(ACH_75_SINGLE.c_str(),savedData,true);break;
-		case 250:	inArowScore= AchievmentPopUp::createWithSpriteFrameNameee(ACH_150_SINGLE.c_str(),savedData,true);break;
+		case 35:	inArowScore = AchievmentPopUp::createWithSpriteFrameNameee(ACH_35_SINGLE.c_str(),savedData,true);break;
+		case 50:	inArowScore = AchievmentPopUp::createWithSpriteFrameNameee(ACH_50_SINGLE.c_str(),savedData,true);break;
+		case 75:	inArowScore= AchievmentPopUp::createWithSpriteFrameNameee(ACH_75_SINGLE.c_str(),savedData,true);break;
+		case 150:	inArowScore= AchievmentPopUp::createWithSpriteFrameNameee(ACH_150_SINGLE.c_str(),savedData,true);break;
 		}
 		switch(score){
-		case 50:	generalScore= AchievmentPopUp::createWithSpriteFrameNameee(ACH_25.c_str(),savedData,true);break;
-		case 100:    generalScore = AchievmentPopUp::createWithSpriteFrameNameee(ACH_50.c_str(),savedData,true);break;
-		case 250:   generalScore = AchievmentPopUp::createWithSpriteFrameNameee(ACH_100.c_str(),savedData,true);break;
-		case 500:   generalScore = AchievmentPopUp::createWithSpriteFrameNameee(ACH_175.c_str(),savedData,true);break;
-		case 1000:  generalScore = AchievmentPopUp::createWithSpriteFrameNameee(ACH_300.c_str(),savedData,true);break;
-		case 2000:  generalScore = AchievmentPopUp::createWithSpriteFrameNameee(ACH_500.c_str(),savedData,true);break;
+		case 25:	generalScore= AchievmentPopUp::createWithSpriteFrameNameee(ACH_25.c_str(),savedData,true);break;
+		case 50:    generalScore = AchievmentPopUp::createWithSpriteFrameNameee(ACH_50.c_str(),savedData,true);break;
+		case 100:   generalScore = AchievmentPopUp::createWithSpriteFrameNameee(ACH_100.c_str(),savedData,true);break;
+		case 175:   generalScore = AchievmentPopUp::createWithSpriteFrameNameee(ACH_175.c_str(),savedData,true);break;
+		case 300:  generalScore = AchievmentPopUp::createWithSpriteFrameNameee(ACH_300.c_str(),savedData,true);break;
+		case 500:  generalScore = AchievmentPopUp::createWithSpriteFrameNameee(ACH_500.c_str(),savedData,true);break;
 		}
 		if(inArowScore !=NULL) {Utils::getBackground()->addChild(inArowScore); inArowScore->activate();}
 		if(generalScore != NULL) {Utils::getBackground()->addChild(generalScore);generalScore->activate();}
