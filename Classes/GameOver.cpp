@@ -47,7 +47,7 @@ void GameOver::trigger(int scorr,int missedAmount){
 			}
 	}
 	anim = Animated::create();
-	anim->initAnim(0,0,1,0.05f,0.2f,0,0.2f);
+	anim->initAnim(0,0,1,0.1f,0.2f,0,0.2f);
 	//
 	Game *g = Utils::getGame();
 				g->pauseSchedulerAndActions();
@@ -82,7 +82,7 @@ void GameOver::trigger(int scorr,int missedAmount){
 					menu->setPosition(Utils::getCorrectPosition(0.5,0.37));
 					menu->setTouchEnabled(false);
 					menu->alignItemsVertically();
-	CCString *accStr = CCString::createWithFormat("ACCURANCY:%.1f\%%",accurancy);
+	CCString *accStr = CCString::createWithFormat("ACCURACY:%.1f\%%",accurancy);
 	CCLabelBMFont *accurancyLab= CCLabelBMFont::create(accStr->getCString(),"font.fnt");
 	anim->addChild(scoreBoardBg,-1);
 	anim->addChild(GAMEOVER,1);
