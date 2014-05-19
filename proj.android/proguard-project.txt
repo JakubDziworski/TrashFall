@@ -34,3 +34,4 @@
 -keepnames class * implements android.os.Parcelable {
     public static final ** CREATOR;
 }
+-dontwarn org.apache.commons.codec.binary.Base64

@@ -43,7 +43,6 @@ bool Game::init() {
 	this->setTouchEnabled(true);
 	this->setKeypadEnabled(true);
 	this->schedule(schedule_selector(Game::genFallingTrashes));
-	hideAd();
 	return true;
 }
 CCScene* Game::scene() {

@@ -116,7 +116,6 @@ void GameOver::trigger(int scorr,int missedAmount){
 	anim->setPosition(Utils::getCorrectPosition(0,1));
 	this->addChild(anim);
 	this->schedule(schedule_selector(GameOver::enableTouchAfterWait),0.1f,0,1.4f);
-	showAd();
 }
 
 void GameOver::lateMainMenu(float float1) {
@@ -124,6 +123,7 @@ void GameOver::lateMainMenu(float float1) {
 }
 
 void GameOver::enableTouchAfterWait(float dt) {
+	showAd();
 	menu->setTouchEnabled(true);
 }
 void GameOver::playGame(cocos2d::CCObject* pObject){
