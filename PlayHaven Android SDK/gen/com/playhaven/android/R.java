@@ -5,7 +5,7 @@
  * should not be modified by hand.
  */
 
-package com.jakubdziworski.trashfalll;
+package com.playhaven.android;
 
 public final class R {
     public static final class attr {
@@ -18,7 +18,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static final int badgeTextColor=0x7f010002;
+        public static int badgeTextColor=0x7f010002;
         /** 
         Show something immediately. ORable options.
         
@@ -34,7 +34,7 @@ containing a value of this type.
 <tr><td><code>animation</code></td><td>0x04</td><td> Show a loading animation </td></tr>
 </table>
          */
-        public static final int cuDisplayOptions=0x7f010001;
+        public static int cuDisplayOptions=0x7f010001;
         /**  The placement tag as defined in the Dashboard 
          <p>Must be a string value, using '\\;' to escape characters such as '\\n' or '\\uxxxx' for a unicode character.
 <p>This may also be a reference to a resource (in the form
@@ -43,47 +43,45 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static final int placementTag=0x7f010000;
+        public static int placementTag=0x7f010000;
     }
     public static final class drawable {
-        public static final int ic_launcher=0x7f020000;
-        public static final int playhaven=0x7f020001;
-        public static final int playhaven_badge=0x7f020002;
-        public static final int playhaven_overlay=0x7f020003;
+        public static int playhaven=0x7f020000;
+        public static int playhaven_badge=0x7f020001;
+        public static int playhaven_overlay=0x7f020002;
     }
     public static final class id {
-        public static final int animation=0x7f040003;
-        public static final int auto=0x7f040000;
-        public static final int com_playhaven_android_view_Exit=0x7f040006;
-        public static final int com_playhaven_android_view_Exit_button=0x7f040007;
-        public static final int com_playhaven_android_view_LoadingAnimation=0x7f040008;
-        public static final int com_playhaven_android_view_Overlay=0x7f040009;
-        public static final int none=0x7f040001;
-        public static final int overlay=0x7f040002;
-        public static final int playhaven_activity_view=0x7f040004;
-        public static final int playhaven_dialog_view=0x7f040005;
+        public static int animation=0x7f040003;
+        public static int auto=0x7f040000;
+        public static int com_playhaven_android_view_Exit=0x7f040006;
+        public static int com_playhaven_android_view_Exit_button=0x7f040007;
+        public static int com_playhaven_android_view_LoadingAnimation=0x7f040008;
+        public static int com_playhaven_android_view_Overlay=0x7f040009;
+        public static int none=0x7f040001;
+        public static int overlay=0x7f040002;
+        public static int playhaven_activity_view=0x7f040004;
+        public static int playhaven_dialog_view=0x7f040005;
     }
     public static final class layout {
-        public static final int playhaven_activity=0x7f030000;
-        public static final int playhaven_dialog=0x7f030001;
-        public static final int playhaven_exit=0x7f030002;
-        public static final int playhaven_loadinganim=0x7f030003;
-        public static final int playhaven_overlay=0x7f030004;
+        public static int playhaven_activity=0x7f030000;
+        public static int playhaven_dialog=0x7f030001;
+        public static int playhaven_exit=0x7f030002;
+        public static int playhaven_loadinganim=0x7f030003;
+        public static int playhaven_overlay=0x7f030004;
     }
     public static final class string {
-        public static final int app_name=0x7f050008;
-        public static final int playhaven_public_api_server=0x7f050000;
-        public static final int playhaven_request_content=0x7f050003;
-        public static final int playhaven_request_event=0x7f050007;
-        public static final int playhaven_request_iap_tracking=0x7f050005;
-        public static final int playhaven_request_open_v3=0x7f050001;
-        public static final int playhaven_request_open_v4=0x7f050002;
-        public static final int playhaven_request_push=0x7f050006;
-        public static final int playhaven_request_subcontent=0x7f050004;
+        public static int playhaven_public_api_server=0x7f050000;
+        public static int playhaven_request_content=0x7f050003;
+        public static int playhaven_request_event=0x7f050007;
+        public static int playhaven_request_iap_tracking=0x7f050005;
+        public static int playhaven_request_open_v3=0x7f050001;
+        public static int playhaven_request_open_v4=0x7f050002;
+        public static int playhaven_request_push=0x7f050006;
+        public static int playhaven_request_subcontent=0x7f050004;
     }
     public static final class style {
-        public static final int com_playhaven_android_view_LoadingAnimation_indicator=0x7f060001;
-        public static final int com_playhaven_android_view_LoadingAnimation_layout=0x7f060000;
+        public static int com_playhaven_android_view_LoadingAnimation_indicator=0x7f060001;
+        public static int com_playhaven_android_view_LoadingAnimation_layout=0x7f060000;
     }
     public static final class styleable {
         /** Attributes that can be used with a com_playhaven_android_view_Badge.
@@ -92,8 +90,8 @@ containing a value of this type.
            <colgroup align="left" />
            <colgroup align="left" />
            <tr><th>Attribute</th><th>Description</th></tr>
-           <tr><td><code>{@link #com_playhaven_android_view_Badge_badgeTextColor com.jakubdziworski.trashfalll:badgeTextColor}</code></td><td> Numeric text color </td></tr>
-           <tr><td><code>{@link #com_playhaven_android_view_Badge_placementTag com.jakubdziworski.trashfalll:placementTag}</code></td><td> The placement tag as defined in the Dashboard </td></tr>
+           <tr><td><code>{@link #com_playhaven_android_view_Badge_badgeTextColor com.playhaven.android:badgeTextColor}</code></td><td> Numeric text color </td></tr>
+           <tr><td><code>{@link #com_playhaven_android_view_Badge_placementTag com.playhaven.android:placementTag}</code></td><td> The placement tag as defined in the Dashboard </td></tr>
            </table>
            @see #com_playhaven_android_view_Badge_badgeTextColor
            @see #com_playhaven_android_view_Badge_placementTag
@@ -115,7 +113,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name com.jakubdziworski.trashfalll:badgeTextColor
+          @attr name com.playhaven.android:badgeTextColor
         */
         public static final int com_playhaven_android_view_Badge_badgeTextColor = 1;
         /**
@@ -131,7 +129,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name com.jakubdziworski.trashfalll:placementTag
+          @attr name com.playhaven.android:placementTag
         */
         public static final int com_playhaven_android_view_Badge_placementTag = 0;
         /** Attributes that can be used with a com_playhaven_android_view_PlayHavenView.
@@ -140,9 +138,9 @@ containing a value of this type.
            <colgroup align="left" />
            <colgroup align="left" />
            <tr><th>Attribute</th><th>Description</th></tr>
-           <tr><td><code>{@link #com_playhaven_android_view_PlayHavenView_cuDisplayOptions com.jakubdziworski.trashfalll:cuDisplayOptions}</code></td><td>
+           <tr><td><code>{@link #com_playhaven_android_view_PlayHavenView_cuDisplayOptions com.playhaven.android:cuDisplayOptions}</code></td><td>
         Show something immediately.</td></tr>
-           <tr><td><code>{@link #com_playhaven_android_view_PlayHavenView_placementTag com.jakubdziworski.trashfalll:placementTag}</code></td><td> The placement tag as defined in the Dashboard </td></tr>
+           <tr><td><code>{@link #com_playhaven_android_view_PlayHavenView_placementTag com.playhaven.android:placementTag}</code></td><td> The placement tag as defined in the Dashboard </td></tr>
            </table>
            @see #com_playhaven_android_view_PlayHavenView_cuDisplayOptions
            @see #com_playhaven_android_view_PlayHavenView_placementTag
@@ -170,7 +168,7 @@ containing a value of this type.
 <tr><td><code>animation</code></td><td>0x04</td><td> Show a loading animation </td></tr>
 </table>
           <p>This is a private symbol.
-          @attr name com.jakubdziworski.trashfalll:cuDisplayOptions
+          @attr name com.playhaven.android:cuDisplayOptions
         */
         public static final int com_playhaven_android_view_PlayHavenView_cuDisplayOptions = 1;
         /**
@@ -186,7 +184,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name com.jakubdziworski.trashfalll:placementTag
+          @attr name com.playhaven.android:placementTag
         */
         public static final int com_playhaven_android_view_PlayHavenView_placementTag = 0;
     };
