@@ -47,6 +47,10 @@ import android.widget.Toast;
 import com.chartboost.sdk.*;
 import com.chartboost.sdk.Model.CBError.CBClickError;
 import com.chartboost.sdk.Model.CBError.CBImpressionError;
+import com.heyzap.sdk.ads.HeyzapAds;
+import com.heyzap.sdk.ads.HeyzapAds.OnStatusListener;
+import com.heyzap.sdk.ads.HeyzapInterstitialActivity;
+import com.heyzap.sdk.ads.InterstitialAd;
 
 import com.playhaven.android.Placement;
 import com.playhaven.android.PlacementListener;
@@ -71,11 +75,7 @@ public class TrashFall extends Cocos2dxActivity implements PlayHavenListener,Pla
 		me.runOnUiThread(new Runnable() {
 			@Override
 			public void run() {
-				//me.startActivity(FullScreen.createIntent(me, me.placement));
-				//me.cb.showInterstitial(); 
-				//me.cb.showMoreApps();
-				dialog = new Windowed(me,me.placement);
-				dialog.show();
+				InterstitialAd.display(me);
 			}
 		});
 	}
@@ -83,6 +83,8 @@ public class TrashFall extends Cocos2dxActivity implements PlayHavenListener,Pla
 		me.runOnUiThread(new Runnable() {
 			@Override
 			public void run() {
+				me.cb.startSession();
+				me.cb.onStart(me);
 			}
 		});
     }
@@ -122,6 +124,48 @@ public class TrashFall extends Cocos2dxActivity implements PlayHavenListener,Pla
 	        mGLView.setCocos2dxRenderer(new Cocos2dxRenderer());
             mGLView.setTextField(edittext);
            //REKAMY
+            //heyzap
+            HeyzapAds.start(me);
+            HeyzapAds.setOnStatusListener(new OnStatusListener() {
+                @Override
+                public void onShow(String tag) {
+                    // Close!
+                }
+
+                @Override
+                public void onClick(String tag) {
+                    // Yay!
+                }
+
+                @Override
+                public void onHide(String tag) {
+                }
+
+                @Override
+                public void onFailedToShow(String tag) {
+                	me.cb.showMoreApps();
+                }
+
+                @Override
+                public void onAvailable(String tag) {
+                    // An ad has been successfully fetched
+                }
+
+                @Override
+                public void onFailedToFetch(String tag) {
+                	me.cb.showMoreApps();
+                }
+
+                @Override
+                public void onAudioStarted() {
+                    // The ad about to be shown will require audio. Any background audio should be muted.
+                }
+
+                @Override
+                public void onAudioFinished() {
+                    // The ad being shown no longer requires audio. Any background audio can be resumed.
+                }
+            });
           //Configure UpSight
             try {
                 PlayHaven.configure(this, "e4e702715ca44093b4e8252c6868a9a0", "552556b1064e4e99a004e876a5cc8986");
@@ -137,8 +181,9 @@ public class TrashFall extends Cocos2dxActivity implements PlayHavenListener,Pla
             this.cb = Chartboost.sharedChartboost();
             String appId = "537a029889b0bb644bb33177";
             String appSignature = "17e5feea52e85552f80947909583bec1b7000f9b";
-            this.cb.onCreate(this, appId, appSignature,  null);
+            this.cb.onCreate(this, appId, appSignature,  this.chartBoostDelegate);
             this.cb.startSession();
+            this.cb.cacheMoreApps();
             CBPreferences.getInstance().setImpressionsUseActivities(true);
             //REKLAMY
             // Set framelayout as the content view
@@ -149,7 +194,129 @@ public class TrashFall extends Cocos2dxActivity implements PlayHavenListener,Pla
 			finish();
 		}	
 	}
+	private ChartboostDelegate chartBoostDelegate = new ChartboostDelegate() {
 
+		@Override
+		public void didCacheInterstitial(String arg0) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void didCacheMoreApps() {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void didClickInterstitial(String arg0) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void didClickMoreApps() {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void didCloseInterstitial(String arg0) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void didCloseMoreApps() {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void didDismissInterstitial(String arg0) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void didDismissMoreApps() {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void didFailToLoadInterstitial(String arg0,
+				CBImpressionError arg1) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void didFailToLoadMoreApps(CBImpressionError arg0) {
+			me.startActivity(FullScreen.createIntent(me, me.placement));
+		}
+
+		@Override
+		public void didFailToRecordClick(String arg0, CBClickError arg1) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void didShowInterstitial(String arg0) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void didShowMoreApps() {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public boolean shouldDisplayInterstitial(String arg0) {
+			// TODO Auto-generated method stub
+			return false;
+		}
+
+		@Override
+		public boolean shouldDisplayLoadingViewForMoreApps() {
+			// TODO Auto-generated method stub
+			return false;
+		}
+
+		@Override
+		public boolean shouldDisplayMoreApps() {
+			// TODO Auto-generated method stub
+			return false;
+		}
+
+		@Override
+		public boolean shouldPauseClickForConfirmation(
+				CBAgeGateConfirmation arg0) {
+			// TODO Auto-generated method stub
+			return false;
+		}
+
+		@Override
+		public boolean shouldRequestInterstitial(String arg0) {
+			// TODO Auto-generated method stub
+			return false;
+		}
+
+		@Override
+		public boolean shouldRequestInterstitialsInFirstSession() {
+			// TODO Auto-generated method stub
+			return false;
+		}
+
+		@Override
+		public boolean shouldRequestMoreApps() {
+			// TODO Auto-generated method stub
+			return false;
+		}
+	};
 	 @Override
 	 protected void onPause() {
 	     super.onPause();
