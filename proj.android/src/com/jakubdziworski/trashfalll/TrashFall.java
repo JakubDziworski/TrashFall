@@ -72,8 +72,10 @@ public class TrashFall extends Cocos2dxActivity implements PlayHavenListener,Pla
 			@Override
 			public void run() {
 				//me.startActivity(FullScreen.createIntent(me, me.placement));
-				me.cb.showInterstitial(); 
-				//dialog.show();
+				//me.cb.showInterstitial(); 
+				//me.cb.showMoreApps();
+				dialog = new Windowed(me,me.placement);
+				dialog.show();
 			}
 		});
 	}
