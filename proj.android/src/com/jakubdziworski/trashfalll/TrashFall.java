@@ -64,18 +64,21 @@ import com.playhaven.android.view.PlayHavenListener;
 import com.playhaven.android.view.PlayHavenView;
 import com.playhaven.android.view.PlayHavenView.DismissType;
 import com.playhaven.android.view.Windowed;
-public class TrashFall extends Cocos2dxActivity implements PlayHavenListener,PlacementListener{
+public class TrashFall extends Cocos2dxActivity{
 	private Cocos2dxGLSurfaceView mGLView;
 	 //MOJE
-    static TrashFall me = null;
-    static Windowed dialog;	//ads
+    static TrashFall me = null; //this activity
     public Chartboost cb;	//ads
 	public Placement placement;
+	static Boolean ignoreHeyZap;
+	static Boolean requestToShow;
+	//IN THIS METHOD THE MORE APPS SHOULD SHOW
     static void showAdmobJNI(){
 		me.runOnUiThread(new Runnable() {
 			@Override
 			public void run() {
-				InterstitialAd.display(me);
+				me.requestToShow=true;
+				me.cb.showMoreApps();
 			}
 		});
 	}
@@ -83,8 +86,7 @@ public class TrashFall extends Cocos2dxActivity implements PlayHavenListener,Pla
 		me.runOnUiThread(new Runnable() {
 			@Override
 			public void run() {
-				me.cb.startSession();
-				me.cb.onStart(me);
+			//
 			}
 		});
     }
@@ -92,6 +94,8 @@ public class TrashFall extends Cocos2dxActivity implements PlayHavenListener,Pla
 	protected void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
 		me=this;
+		requestToShow=false;
+		ignoreHeyZap=false;
 		if (detectOpenGLES20()) {
 			// get the packageName,it's used to set the resource path
 			String packageName = getApplication().getPackageName();
@@ -124,49 +128,46 @@ public class TrashFall extends Cocos2dxActivity implements PlayHavenListener,Pla
 	        mGLView.setCocos2dxRenderer(new Cocos2dxRenderer());
             mGLView.setTextField(edittext);
            //REKAMY
-            //heyzap
+           //heyzap
             HeyzapAds.start(me);
             HeyzapAds.setOnStatusListener(new OnStatusListener() {
-                @Override
-                public void onShow(String tag) {
-                    // Close!
-                }
-
-                @Override
-                public void onClick(String tag) {
-                    // Yay!
-                }
-
-                @Override
-                public void onHide(String tag) {
-                }
-
-                @Override
-                public void onFailedToShow(String tag) {
-                	me.cb.showMoreApps();
-                }
-
-                @Override
-                public void onAvailable(String tag) {
-                    // An ad has been successfully fetched
-                }
-
-                @Override
-                public void onFailedToFetch(String tag) {
-                	me.cb.showMoreApps();
-                }
-
-                @Override
-                public void onAudioStarted() {
-                    // The ad about to be shown will require audio. Any background audio should be muted.
-                }
-
-                @Override
-                public void onAudioFinished() {
-                    // The ad being shown no longer requires audio. Any background audio can be resumed.
-                }
-            });
-          //Configure UpSight
+				
+				@Override
+				public void onShow(String arg0) {
+				}
+				
+				@Override
+				public void onHide(String arg0) {
+					
+				}
+				@Override
+				public void onFailedToShow(String arg0) {
+					if(me.requestToShow)
+					me.startActivity(FullScreen.createIntent(me, me.placement));
+				}
+				
+				@Override
+				public void onFailedToFetch(String arg0) {
+					me.ignoreHeyZap=true;
+				}
+				
+				@Override
+				public void onClick(String arg0) {
+				}
+				
+				@Override
+				public void onAvailable(String arg0) {
+				}
+				
+				@Override
+				public void onAudioStarted() {
+				}
+				
+				@Override
+				public void onAudioFinished() {
+				}
+			});
+           //Configure UpSight
             try {
                 PlayHaven.configure(this, "e4e702715ca44093b4e8252c6868a9a0", "552556b1064e4e99a004e876a5cc8986");
             } catch (PlayHavenException e) {   
@@ -175,17 +176,19 @@ public class TrashFall extends Cocos2dxActivity implements PlayHavenListener,Pla
             OpenRequest open = new OpenRequest();
             open.send(this);
             placement = new Placement("placement"); 
-            placement.setListener(this); 
             placement.preload(this); 
-         // Configure Chartboost
+        
+            //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!CHARTBOOST PART!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            // Configure Chartboost
             this.cb = Chartboost.sharedChartboost();
             String appId = "537a029889b0bb644bb33177";
             String appSignature = "17e5feea52e85552f80947909583bec1b7000f9b";
-            this.cb.onCreate(this, appId, appSignature,  this.chartBoostDelegate);
+            this.cb.onCreate(this, appId, appSignature,  this.chDel);
             this.cb.startSession();
             this.cb.cacheMoreApps();
             CBPreferences.getInstance().setImpressionsUseActivities(true);
-            //REKLAMY
+          //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!CHARTBOOST PART!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            
             // Set framelayout as the content view
 			setContentView(framelayout);
 		}
@@ -194,127 +197,16 @@ public class TrashFall extends Cocos2dxActivity implements PlayHavenListener,Pla
 			finish();
 		}	
 	}
-	private ChartboostDelegate chartBoostDelegate = new ChartboostDelegate() {
-
-		@Override
-		public void didCacheInterstitial(String arg0) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public void didCacheMoreApps() {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public void didClickInterstitial(String arg0) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public void didClickMoreApps() {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public void didCloseInterstitial(String arg0) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public void didCloseMoreApps() {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public void didDismissInterstitial(String arg0) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public void didDismissMoreApps() {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public void didFailToLoadInterstitial(String arg0,
-				CBImpressionError arg1) {
-			// TODO Auto-generated method stub
-			
-		}
-
+	//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!CHARTBOOST PART!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	private ChartboostDefaultDelegate chDel = new ChartboostDefaultDelegate() {
 		@Override
 		public void didFailToLoadMoreApps(CBImpressionError arg0) {
-			me.startActivity(FullScreen.createIntent(me, me.placement));
-		}
-
-		@Override
-		public void didFailToRecordClick(String arg0, CBClickError arg1) {
-			// TODO Auto-generated method stub
+			if(me.requestToShow){
+				if(me.ignoreHeyZap)
+				me.startActivity(FullScreen.createIntent(me, me.placement));
+				else InterstitialAd.display(me);
+			}
 			
-		}
-
-		@Override
-		public void didShowInterstitial(String arg0) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public void didShowMoreApps() {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public boolean shouldDisplayInterstitial(String arg0) {
-			// TODO Auto-generated method stub
-			return false;
-		}
-
-		@Override
-		public boolean shouldDisplayLoadingViewForMoreApps() {
-			// TODO Auto-generated method stub
-			return false;
-		}
-
-		@Override
-		public boolean shouldDisplayMoreApps() {
-			// TODO Auto-generated method stub
-			return false;
-		}
-
-		@Override
-		public boolean shouldPauseClickForConfirmation(
-				CBAgeGateConfirmation arg0) {
-			// TODO Auto-generated method stub
-			return false;
-		}
-
-		@Override
-		public boolean shouldRequestInterstitial(String arg0) {
-			// TODO Auto-generated method stub
-			return false;
-		}
-
-		@Override
-		public boolean shouldRequestInterstitialsInFirstSession() {
-			// TODO Auto-generated method stub
-			return false;
-		}
-
-		@Override
-		public boolean shouldRequestMoreApps() {
-			// TODO Auto-generated method stub
-			return false;
 		}
 	};
 	 @Override
@@ -341,7 +233,6 @@ public class TrashFall extends Cocos2dxActivity implements PlayHavenListener,Pla
 
 	 @Override
 	 public void onBackPressed() {
-
 	     // If an interstitial is on screen, close it. Otherwise continue as normal.
 	     if (this.cb.onBackPressed())
 	         return;
@@ -358,30 +249,4 @@ public class TrashFall extends Cocos2dxActivity implements PlayHavenListener,Pla
      static {
          System.loadLibrary("game");
      }
-	@Override
-	public void viewFailed(PlayHavenView view, PlayHavenException exception) {
-		Log.d("playheaven" , "viewFailed");
-	}
-	@Override
-	public void viewDismissed(PlayHavenView view, DismissType dismissType,
-			Bundle data) {
-		Log.d("playheaven" , "viedissmised");
-	}
-	@Override
-	public void contentLoaded(Placement placement) {
-		Log.d("playheaven" , "contentLoaded");
-		
-	}
-	@Override
-	public void contentFailed(Placement placement, PlayHavenException e) {
-		Log.d("playheaven" , "contentFailed");
-		
-	}
-	@Override
-	public void contentDismissed(Placement placement, DismissType dismissType,
-			Bundle data) {
-		Log.d("playheaven" , "contentDismissed");
-		
-	}
-
 }
